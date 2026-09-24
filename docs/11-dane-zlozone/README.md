@@ -1,8 +1,3 @@
----
-layout: default
-title: 11 - Dane złożone
----
-
 # 11 - Dane złożone
 
 ## Status

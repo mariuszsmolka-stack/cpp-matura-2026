@@ -1,8 +1,3 @@
----
-layout: default
-title: 00 - Informacje o kursie
----
-
 # 00 - Informacje o kursie
 
 ## Status

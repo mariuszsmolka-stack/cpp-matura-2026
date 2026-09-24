@@ -1,8 +1,3 @@
----
-layout: default
-title: 04 - Debugger w Code::Blocks
----
-
 # 04 - Debugger w Code::Blocks
 
 ## Status

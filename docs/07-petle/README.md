@@ -1,8 +1,3 @@
----
-layout: default
-title: 07 - Pętle
----
-
 # 07 - Pętle
 
 ## Status

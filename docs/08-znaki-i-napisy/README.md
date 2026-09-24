@@ -1,8 +1,3 @@
----
-layout: default
-title: 08 - Znaki i napisy
----
-
 # 08 - Znaki i napisy
 
 ## Status

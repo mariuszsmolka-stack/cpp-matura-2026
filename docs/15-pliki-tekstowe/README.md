@@ -1,8 +1,3 @@
----
-layout: default
-title: 15 - Pliki tekstowe
----
-
 # 15 - Pliki tekstowe
 
 ## Status

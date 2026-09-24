@@ -1,8 +1,3 @@
----
-layout: default
-title: 09 - Zakres zmiennych i funkcje
----
-
 # 09 - Zakres zmiennych i funkcje
 
 ## Status

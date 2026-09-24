@@ -1,8 +1,3 @@
----
-layout: default
-title: 14 - Podstawowe algorytmy
----
-
 # 14 - Podstawowe algorytmy
 
 ## Status

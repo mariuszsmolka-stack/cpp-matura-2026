@@ -1,8 +1,3 @@
----
-layout: default
-title: 12 - vector
----
-
 # 12 - vector
 
 ## Status

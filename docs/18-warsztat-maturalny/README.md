@@ -1,8 +1,3 @@
----
-layout: default
-title: 18 - Analiza i warsztat maturalny
----
-
 # 18 - Analiza i warsztat maturalny
 
 ## Status

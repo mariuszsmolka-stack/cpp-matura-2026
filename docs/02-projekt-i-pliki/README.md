@@ -1,8 +1,3 @@
----
-layout: default
-title: 02 - Projekt konsolowy i pliki
----
-
 # 02 - Projekt konsolowy i pliki
 
 ## Status

@@ -1,8 +1,3 @@
----
-layout: default
-title: 16 - Rekurencja i algorytmy maturalne
----
-
 # 16 - Rekurencja i algorytmy maturalne
 
 ## Status

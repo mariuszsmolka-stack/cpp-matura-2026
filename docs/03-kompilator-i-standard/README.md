@@ -1,8 +1,3 @@
----
-layout: default
-title: 03 - Kompilator i standard C++
----
-
 # 03 - Kompilator i standard C++
 
 ## Status

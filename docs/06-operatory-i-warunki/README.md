@@ -1,8 +1,3 @@
----
-layout: default
-title: 06 - Operatory i instrukcje warunkowe
----
-
 # 06 - Operatory i instrukcje warunkowe
 
 ## Status

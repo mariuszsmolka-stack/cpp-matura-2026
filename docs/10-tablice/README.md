@@ -1,8 +1,3 @@
----
-layout: default
-title: 10 - Tablice
----
-
 # 10 - Tablice
 
 ## Status

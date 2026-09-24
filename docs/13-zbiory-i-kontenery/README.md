@@ -1,8 +1,3 @@
----
-layout: default
-title: 13 - Zbiory i kontenery asocjacyjne
----
-
 # 13 - Zbiory i kontenery asocjacyjne
 
 ## Status

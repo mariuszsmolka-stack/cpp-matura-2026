@@ -1,8 +1,3 @@
----
-layout: default
-title: 17 - Techniki i struktury algorytmiczne
----
-
 # 17 - Techniki i struktury algorytmiczne
 
 ## Status

@@ -1,8 +1,3 @@
----
-layout: default
-title: 05 - Podstawy języka C++
----
-
 # 05 - Podstawy języka C++
 
 ## Status

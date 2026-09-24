@@ -1,8 +1,3 @@
----
-layout: default
-title: 01 - Instalacja Code::Blocks
----
-
 # 01 - Instalacja Code::Blocks
 
 ## Status
