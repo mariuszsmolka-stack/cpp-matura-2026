@@ -7,30 +7,61 @@ title: Konwersje typów
 
 ## Cel lekcji
 
-Zrozumiesz konwersję niejawną, konwersję jawną, `static_cast` oraz problem dzielenia liczb całkowitych.
+Zrozumiesz, czym jest konwersja typu w C++ i kiedy trzeba świadomie zmienić sposób traktowania wartości.
 
-## Krótkie wprowadzenie do problemu
+Po tej lekcji będziesz umieć:
 
-Czasem program ma wartość jednego typu, ale do obliczenia potrzebuje innego typu. Na przykład dwie liczby całkowite mają dać wynik rzeczywisty.
+- wyjaśnić, czym jest konwersja typu,
+- odróżnić konwersję niejawną od jawnego rzutowania,
+- użyć prostego zapisu `(double)` oraz `(int)`,
+- wyjaśnić problem dzielenia `int / int`,
+- zamienić wynik dzielenia liczb całkowitych na wynik rzeczywisty,
+- przewidzieć, co stanie się po zamianie `double` na `int`.
 
-Konwersja to przepisanie wartości do innego rodzaju reprezentacji.
+## Czym jest konwersja typu?
 
-## Wyjaśnienie idei
+Konwersja typu oznacza zmianę sposobu traktowania wartości przez program.
 
-Konwersja może być niejawna albo jawna.
+Przykład z życia: liczba `17` może oznaczać liczbę punktów. Ale gdy liczymy średnią, często potrzebujemy wyniku z częścią po kropce, na przykład `4.25`. Wtedy program musi potraktować jedną z wartości jak liczbę rzeczywistą.
 
-Konwersja niejawna dzieje się automatycznie. Kompilator sam decyduje, że może zamienić typ.
+W C++ trzeba uważać, bo typ wartości wpływa na wynik działania.
 
-Konwersja jawna oznacza, że programista wyraźnie pisze, jakiego typu chce użyć. W C++ czytelnym sposobem jest `static_cast`.
+## Konwersja niejawna
 
-## Składnia
+Konwersja niejawna dzieje się automatycznie. Programista jej nie zapisuje, ale kompilator może ją wykonać.
+
+Przykład:
 
 ```cpp
 int liczba = 5;
-double wynik = static_cast<double>(liczba);
+double wynik = liczba;
 ```
 
-## Pełny przykład programu
+Zmienna `liczba` ma typ `int`. Zmienna `wynik` ma typ `double`. C++ może automatycznie zapisać liczbę całkowitą jako liczbę rzeczywistą.
+
+Wynik będzie wyglądał tak, jakby `5` stało się `5.0`.
+
+## Jawne rzutowanie
+
+Jawne rzutowanie oznacza, że programista wyraźnie pisze, jakiego typu chce użyć.
+
+W tej lekcji używamy prostego zapisu:
+
+```cpp
+(double)wartosc
+(int)wartosc
+```
+
+Czytamy to tak:
+
+- potraktuj `wartosc` jako `double`,
+- albo potraktuj `wartosc` jako `int`.
+
+Taki zapis przydaje się wtedy, gdy chcemy jasno pokazać, że w tym miejscu zmieniamy typ wartości.
+
+## Problem dzielenia liczb całkowitych
+
+Popatrz na program:
 
 ```cpp
 #include <iostream>
@@ -39,18 +70,12 @@ using namespace std;
 
 int main()
 {
-    int punkty = 7;
-    int maksimum = 2;
+    int sumaPunktow = 17;
+    int liczbaOcen = 4;
 
-    int wynikCalkowity = punkty / maksimum;
-    double wynikRzeczywisty = static_cast<double>(punkty) / maksimum;
+    double srednia = sumaPunktow / liczbaOcen;
 
-    double cena = 19.99;
-    int cenaBezGroszy = static_cast<int>(cena);
-
-    cout << "Dzielenie int / int: " << wynikCalkowity << "\n";
-    cout << "Dzielenie z konwersja: " << wynikRzeczywisty << "\n";
-    cout << "Cena po konwersji na int: " << cenaBezGroszy << "\n";
+    cout << "Srednia: " << srednia << "\n";
 
     return 0;
 }
@@ -60,50 +85,32 @@ int main()
 <summary>Pokaż wynik</summary>
 
 ```text
-Dzielenie int / int: 3
-Dzielenie z konwersja: 3.5
-Cena po konwersji na int: 19
+Srednia: 4
 ```
 
 </details>
 
-## Omówienie programu krok po kroku
+Można się spodziewać wyniku `4.25`, ale program wypisze `4`.
 
-`punkty / maksimum` to dzielenie dwóch wartości typu `int`. Wynik też jest całkowity, więc część ułamkowa znika.
+Dlaczego?
 
-`static_cast<double>(punkty)` zamienia `punkty` na `double` przed dzieleniem.
+```text
+17 / 4 => 4
+```
 
-Dzięki temu wynik dzielenia może mieć część ułamkową.
+Najpierw wykonywane jest dzielenie dwóch liczb typu `int`. Wynik tego dzielenia też jest traktowany jak liczba całkowita. Część po kropce znika. Dopiero potem wynik `4` trafia do zmiennej `srednia` typu `double`.
 
-`static_cast<int>(cena)` zamienia `double` na `int`. Część ułamkowa zostaje utracona.
+Samo zapisanie wyniku w zmiennej `double` nie wystarczy, jeśli wcześniej wykonano dzielenie całkowite.
 
-## Utrata danych
+## Poprawne dzielenie z wynikiem rzeczywistym
 
-Konwersja z `double` na `int` nie zaokrągla w zwykłym sensie. Część po kropce jest odcinana. Dlatego trzeba robić to świadomie.
+Trzeba sprawić, aby przynajmniej jedna wartość w dzieleniu była typu `double`.
 
-## Kiedy tego użyć?
+```cpp
+double srednia = (double)sumaPunktow / liczbaOcen;
+```
 
-Użyj `static_cast`, gdy chcesz jasno pokazać, że zmieniasz typ wartości. Szczególnie przy dzieleniu liczb całkowitych, gdy oczekujesz wyniku rzeczywistego.
-
-## Kiedy wybrać coś innego?
-
-Jeżeli od początku pracujesz na wartościach rzeczywistych, możesz użyć typu `double` dla zmiennych wejściowych. Nie omawiamy tu jeszcze konwersji napisów na liczby.
-
-## Ćwiczenia
-
-1. Wczytaj dwie liczby całkowite i oblicz ich średnią jako liczbę rzeczywistą.
-2. Sprawdź, co stanie się po konwersji `double` o wartości `8.75` na `int`.
-3. Oblicz wynik dzielenia `5 / 2` jako `int` i jako `double`.
-
-<details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
-
-Średnią oblicz przez podzielenie sumy przez `2.0`, aby otrzymać wynik typu `double`.
-
-</details>
-
-<details markdown="1">
-<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
+Pełny program:
 
 ```cpp
 #include <iostream>
@@ -112,13 +119,171 @@ using namespace std;
 
 int main()
 {
-    int a = 0;
-    int b = 0;
+    int sumaPunktow = 17;
+    int liczbaOcen = 4;
 
-    cout << "Podaj dwie liczby: ";
-    cin >> a >> b;
+    double srednia = (double)sumaPunktow / liczbaOcen;
 
-    double srednia = (a + b) / 2.0;
+    cout << "Srednia: " << srednia << "\n";
+
+    return 0;
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wynik</summary>
+
+```text
+Srednia: 4.25
+```
+
+</details>
+
+Teraz działanie wygląda tak:
+
+```text
+17.0 / 4 => 4.25
+```
+
+Zapis `(double)sumaPunktow` mówi: przed dzieleniem potraktuj `sumaPunktow` jak liczbę rzeczywistą.
+
+## Konwersja z double na int
+
+Czasem chcemy zamienić liczbę rzeczywistą na całkowitą.
+
+Przykład:
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    double cena = 19.99;
+    int pelneZlote = (int)cena;
+
+    cout << "Cena: " << cena << "\n";
+    cout << "Pelne zlote: " << pelneZlote << "\n";
+
+    return 0;
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wynik</summary>
+
+```text
+Cena: 19.99
+Pelne zlote: 19
+```
+
+</details>
+
+Konwersja działa tak:
+
+```text
+19.99 => 19
+```
+
+Ważne: to nie jest zaokrąglanie. Wynik nie będzie równy `20`. Część po kropce zostaje odcięta.
+
+## Utrata danych
+
+Przy konwersji z `double` na `int` można stracić część informacji.
+
+`19.99` zawiera grosze. Po konwersji na `int` zostaje tylko `19`.
+
+Dlatego taką konwersję trzeba robić świadomie. Jest przydatna, ale może zmienić wynik programu.
+
+## Kiedy rzutowanie jest naprawdę potrzebne?
+
+Rzutowanie jest potrzebne wtedy, gdy bez niego C++ wykona działanie inaczej, niż oczekujemy.
+
+Najczęstszy przykład na tym poziomie to dzielenie dwóch liczb całkowitych, gdy chcemy otrzymać wynik rzeczywisty.
+
+Nie trzeba rzutować wszystkiego. Jeżeli od początku używasz typu `double`, rzutowanie często nie jest potrzebne.
+
+## Jak czytać taki kod?
+
+Kod:
+
+```cpp
+double srednia = (double)sumaPunktow / liczbaOcen;
+```
+
+Można przeczytać tak:
+
+Najpierw potraktuj `sumaPunktow` jako liczbę rzeczywistą. Potem podziel przez `liczbaOcen`. Wynik zapisz w zmiennej `srednia`.
+
+Kod:
+
+```cpp
+int pelneZlote = (int)cena;
+```
+
+Można przeczytać tak:
+
+Potraktuj `cena` jako liczbę całkowitą i zapisz wynik w zmiennej `pelneZlote`.
+
+## Typowe błędy
+
+- Oczekiwanie, że `17 / 4` da `4.25`.
+- Myślenie, że typ zmiennej po lewej stronie zawsze decyduje o całym działaniu.
+- Rzutowanie w złym miejscu, na przykład dopiero po wykonaniu dzielenia.
+- Myślenie, że `(int)19.99` daje `20`.
+- Brak świadomości, że przy zamianie `double` na `int` tracimy część po kropce.
+- Używanie rzutowania tam, gdzie wystarczy dobrze dobrać typ zmiennej.
+- Mylenie konwersji typu z formatowaniem liczby na ekranie.
+
+## Ćwiczenia
+
+### 1. Średnia dwóch liczb całkowitych
+
+Wczytaj dwie liczby całkowite. Oblicz ich średnią jako liczbę rzeczywistą.
+
+Dla danych:
+
+```text
+5
+8
+```
+
+wynik powinien zawierać wartość:
+
+```text
+6.5
+```
+
+<details markdown="1">
+<summary>Pokaż wskazówkę</summary>
+
+Najpierw oblicz sumę liczb. Potem spraw, aby dzielenie nie było dzieleniem całkowitym. Możesz użyć `(double)` przy sumie.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int pierwszaLiczba;
+    int drugaLiczba;
+
+    cout << "Podaj pierwsza liczbe: ";
+    cin >> pierwszaLiczba;
+
+    cout << "Podaj druga liczbe: ";
+    cin >> drugaLiczba;
+
+    int suma = pierwszaLiczba + drugaLiczba;
+    double srednia = (double)suma / 2;
+
     cout << "Srednia: " << srednia << "\n";
 
     return 0;
@@ -127,15 +292,68 @@ int main()
 
 </details>
 
-<details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+### 2. Cena jednej sztuki
 
-Użyj `static_cast<int>(wartosc)` i zobacz, że część po kropce zostaje odcięta.
+Wczytaj całkowity koszt zakupów oraz liczbę sztuk. Oblicz cenę jednej sztuki jako liczbę rzeczywistą.
+
+Dla danych:
+
+```text
+100
+6
+```
+
+program powinien pokazać wynik z częścią ułamkową.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę</summary>
+
+Jeżeli obie wartości są typu `int`, zwykłe dzielenie odetnie część po kropce. Przed dzieleniem zamień koszt na `double`.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
+<summary>Pokaż rozwiązanie</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int kosztCalkowity;
+    int liczbaSztuk;
+
+    cout << "Podaj calkowity koszt: ";
+    cin >> kosztCalkowity;
+
+    cout << "Podaj liczbe sztuk: ";
+    cin >> liczbaSztuk;
+
+    double cenaJednejSztuki = (double)kosztCalkowity / liczbaSztuk;
+
+    cout << "Cena jednej sztuki: " << cenaJednejSztuki << "\n";
+
+    return 0;
+}
+```
+
+</details>
+
+### 3. Zamiana double na int
+
+Utwórz zmienną typu `double` z wartością `8.75`. Zamień ją na `int` i przewidź wynik.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę</summary>
+
+Zapis `(int)wartosc` odcina część po kropce. Nie zaokrągla liczby.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie</summary>
 
 ```cpp
 #include <iostream>
@@ -145,7 +363,7 @@ using namespace std;
 int main()
 {
     double wartosc = 8.75;
-    int poKonwersji = static_cast<int>(wartosc);
+    int poKonwersji = (int)wartosc;
 
     cout << "Przed konwersja: " << wartosc << "\n";
     cout << "Po konwersji: " << poKonwersji << "\n";
@@ -157,44 +375,15 @@ int main()
 </details>
 
 <details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+<summary>Pokaż wynik</summary>
 
-Dla wyniku rzeczywistego zamień jedną z liczb na `double` przed dzieleniem.
-
-</details>
-
-<details markdown="1">
-<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
-
-```cpp
-#include <iostream>
-
-using namespace std;
-
-int main()
-{
-    int a = 5;
-    int b = 2;
-
-    int wynikInt = a / b;
-    double wynikDouble = static_cast<double>(a) / b;
-
-    cout << "Wynik int: " << wynikInt << "\n";
-    cout << "Wynik double: " << wynikDouble << "\n";
-
-    return 0;
-}
+```text
+Przed konwersja: 8.75
+Po konwersji: 8
 ```
 
 </details>
-## Typowe błędy
-
-- Oczekiwanie, że `7 / 2` da `3.5`.
-- Konwersja na `int` bez świadomości utraty części ułamkowej.
-- Stosowanie starego zapisu rzutowania zamiast czytelnego `static_cast`.
-- Konwersja w złym miejscu działania.
-- Mylenie konwersji typów z formatowaniem wyniku.
 
 ## Podsumowanie
 
-Konwersja zmienia sposób traktowania wartości przez program. `static_cast` jest czytelnym sposobem jawnej konwersji. Przy dzieleniu dwóch `int` trzeba uważać na wynik całkowity.
+Konwersja typu zmienia sposób traktowania wartości przez program. Przy dzieleniu dwóch liczb całkowitych wynik jest całkowity. Jeżeli chcesz otrzymać wynik rzeczywisty, trzeba przed dzieleniem potraktować jedną z wartości jako `double`. Konwersja z `double` na `int` odcina część po kropce i może spowodować utratę danych.
