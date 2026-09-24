@@ -6,106 +6,118 @@ sections:
         url: "index.md"
       - title: "Licencja"
         url: "licencja.md"
+      - title: "Informacje o kursie"
+        url: "00-informacje/README.md"
       - title: "Organizacja kursu"
-        url: "00-organizacja/README.md"
-      - title: "Jak pracujemy"
-        url: "00-organizacja/jak-pracujemy.md"
-      - title: "Środowisko programistyczne"
-        url: "00-organizacja/srodowisko-programistyczne.md"
-      - title: "Kompilacja i uruchamianie"
-        url: "00-organizacja/kompilacja-i-uruchamianie.md"
-      - title: "Standard kodu"
-        url: "00-organizacja/standard-kodu.md"
+        url: "00-informacje/organizacja-kursu.md"
       - title: "Status kursu"
-        url: "00-organizacja/status-kursu.md"
-  - title: "01 - Pierwsze programy"
-    url: "01-pierwsze-programy/README.md"
+        url: "00-informacje/status-kursu.md"
+  - title: "01 - Instalacja Code::Blocks"
+    url: "01-instalacja-codeblocks/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "01-pierwsze-programy/README.md"
+        url: "01-instalacja-codeblocks/README.md"
 
-  - title: "02 - Zmienne, wejście i wyjście"
-    url: "02-zmienne-wejscie-wyjscie/README.md"
+  - title: "02 - Projekt konsolowy i pliki"
+    url: "02-projekt-i-pliki/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "02-zmienne-wejscie-wyjscie/README.md"
+        url: "02-projekt-i-pliki/README.md"
 
-  - title: "03 - Instrukcje warunkowe"
-    url: "03-instrukcje-warunkowe/README.md"
+  - title: "03 - Kompilator i standard C++"
+    url: "03-kompilator-i-standard/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "03-instrukcje-warunkowe/README.md"
+        url: "03-kompilator-i-standard/README.md"
 
-  - title: "04 - Pętle"
-    url: "04-petle/README.md"
+  - title: "04 - Debugger w Code::Blocks"
+    url: "04-debugger/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "04-petle/README.md"
+        url: "04-debugger/README.md"
 
-  - title: "05 - Tablice jednowymiarowe"
-    url: "05-tablice-jednowymiarowe/README.md"
+  - title: "05 - Podstawy języka C++"
+    url: "05-podstawy-jezyka/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "05-tablice-jednowymiarowe/README.md"
+        url: "05-podstawy-jezyka/README.md"
 
-  - title: "06 - Napisy"
-    url: "06-napisy/README.md"
+  - title: "06 - Operatory i instrukcje warunkowe"
+    url: "06-operatory-i-warunki/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "06-napisy/README.md"
+        url: "06-operatory-i-warunki/README.md"
 
-  - title: "07 - Funkcje"
-    url: "07-funkcje/README.md"
+  - title: "07 - Pętle"
+    url: "07-petle/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "07-funkcje/README.md"
+        url: "07-petle/README.md"
 
-  - title: "08 - Pliki tekstowe"
-    url: "08-pliki-tekstowe/README.md"
+  - title: "08 - Znaki i napisy"
+    url: "08-znaki-i-napisy/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "08-pliki-tekstowe/README.md"
+        url: "08-znaki-i-napisy/README.md"
 
-  - title: "09 - Wyszukiwanie i sortowanie"
-    url: "09-wyszukiwanie-i-sortowanie/README.md"
+  - title: "09 - Zakres zmiennych i funkcje"
+    url: "09-zakres-i-funkcje/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "09-wyszukiwanie-i-sortowanie/README.md"
+        url: "09-zakres-i-funkcje/README.md"
 
-  - title: "10 - Algorytmy liczbowe"
-    url: "10-algorytmy-liczbowe/README.md"
+  - title: "10 - Tablice"
+    url: "10-tablice/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "10-algorytmy-liczbowe/README.md"
+        url: "10-tablice/README.md"
 
-  - title: "11 - Tablice dwuwymiarowe"
-    url: "11-tablice-dwuwymiarowe/README.md"
+  - title: "11 - Dane złożone"
+    url: "11-dane-zlozone/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "11-tablice-dwuwymiarowe/README.md"
+        url: "11-dane-zlozone/README.md"
 
-  - title: "12 - Rekurencja"
-    url: "12-rekurencja/README.md"
+  - title: "12 - vector"
+    url: "12-vector/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "12-rekurencja/README.md"
+        url: "12-vector/README.md"
 
-  - title: "13 - Struktury danych i STL"
-    url: "13-struktury-danych-stl/README.md"
+  - title: "13 - Zbiory i kontenery asocjacyjne"
+    url: "13-zbiory-i-kontenery/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "13-struktury-danych-stl/README.md"
+        url: "13-zbiory-i-kontenery/README.md"
 
-  - title: "14 - Złożoność i poprawność"
-    url: "14-zlozonosc-i-poprawnosc/README.md"
+  - title: "14 - Podstawowe algorytmy"
+    url: "14-algorytmy-podstawowe/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "14-zlozonosc-i-poprawnosc/README.md"
+        url: "14-algorytmy-podstawowe/README.md"
 
-  - title: "15 - Zadania maturalne"
-    url: "15-zadania-maturalne/README.md"
+  - title: "15 - Pliki tekstowe"
+    url: "15-pliki-tekstowe/README.md"
     lessons:
       - title: "Wprowadzenie"
-        url: "15-zadania-maturalne/README.md"
+        url: "15-pliki-tekstowe/README.md"
+
+  - title: "16 - Rekurencja i algorytmy maturalne"
+    url: "16-rekurencja-i-algorytmy-maturalne/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "16-rekurencja-i-algorytmy-maturalne/README.md"
+
+  - title: "17 - Techniki i struktury algorytmiczne"
+    url: "17-techniki-i-struktury-algorytmiczne/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "17-techniki-i-struktury-algorytmiczne/README.md"
+
+  - title: "18 - Analiza i warsztat maturalny"
+    url: "18-warsztat-maturalny/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "18-warsztat-maturalny/README.md"
 
 
