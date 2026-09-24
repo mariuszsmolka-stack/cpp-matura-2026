@@ -1,0 +1,9 @@
+_site/
+.sass-cache/
+.jekyll-cache/
+.bundle/
+tmp/
+output/
+*.log
+.DS_Store
+Thumbs.db

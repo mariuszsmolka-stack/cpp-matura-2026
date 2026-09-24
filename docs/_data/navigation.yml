@@ -1,0 +1,111 @@
+sections:
+  - title: "Informacje"
+    url: "index.md"
+    lessons:
+      - title: "Strona główna"
+        url: "index.md"
+      - title: "Licencja"
+        url: "licencja.md"
+      - title: "Organizacja kursu"
+        url: "00-organizacja/README.md"
+      - title: "Jak pracujemy"
+        url: "00-organizacja/jak-pracujemy.md"
+      - title: "Środowisko programistyczne"
+        url: "00-organizacja/srodowisko-programistyczne.md"
+      - title: "Kompilacja i uruchamianie"
+        url: "00-organizacja/kompilacja-i-uruchamianie.md"
+      - title: "Standard kodu"
+        url: "00-organizacja/standard-kodu.md"
+      - title: "Status kursu"
+        url: "00-organizacja/status-kursu.md"
+  - title: "01 - Pierwsze programy"
+    url: "01-pierwsze-programy/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "01-pierwsze-programy/README.md"
+
+  - title: "02 - Zmienne, wejście i wyjście"
+    url: "02-zmienne-wejscie-wyjscie/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "02-zmienne-wejscie-wyjscie/README.md"
+
+  - title: "03 - Instrukcje warunkowe"
+    url: "03-instrukcje-warunkowe/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "03-instrukcje-warunkowe/README.md"
+
+  - title: "04 - Pętle"
+    url: "04-petle/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "04-petle/README.md"
+
+  - title: "05 - Tablice jednowymiarowe"
+    url: "05-tablice-jednowymiarowe/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "05-tablice-jednowymiarowe/README.md"
+
+  - title: "06 - Napisy"
+    url: "06-napisy/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "06-napisy/README.md"
+
+  - title: "07 - Funkcje"
+    url: "07-funkcje/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "07-funkcje/README.md"
+
+  - title: "08 - Pliki tekstowe"
+    url: "08-pliki-tekstowe/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "08-pliki-tekstowe/README.md"
+
+  - title: "09 - Wyszukiwanie i sortowanie"
+    url: "09-wyszukiwanie-i-sortowanie/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "09-wyszukiwanie-i-sortowanie/README.md"
+
+  - title: "10 - Algorytmy liczbowe"
+    url: "10-algorytmy-liczbowe/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "10-algorytmy-liczbowe/README.md"
+
+  - title: "11 - Tablice dwuwymiarowe"
+    url: "11-tablice-dwuwymiarowe/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "11-tablice-dwuwymiarowe/README.md"
+
+  - title: "12 - Rekurencja"
+    url: "12-rekurencja/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "12-rekurencja/README.md"
+
+  - title: "13 - Struktury danych i STL"
+    url: "13-struktury-danych-stl/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "13-struktury-danych-stl/README.md"
+
+  - title: "14 - Złożoność i poprawność"
+    url: "14-zlozonosc-i-poprawnosc/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "14-zlozonosc-i-poprawnosc/README.md"
+
+  - title: "15 - Zadania maturalne"
+    url: "15-zadania-maturalne/README.md"
+    lessons:
+      - title: "Wprowadzenie"
+        url: "15-zadania-maturalne/README.md"
+
+

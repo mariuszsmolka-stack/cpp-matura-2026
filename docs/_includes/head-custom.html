@@ -1,0 +1,24 @@
+﻿<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: "default"
+  });
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    document.querySelectorAll("pre > code.language-mermaid").forEach((code) => {
+      const pre = code.parentElement;
+      const diagram = document.createElement("div");
+
+      diagram.className = "mermaid";
+      diagram.textContent = code.textContent;
+
+      pre.replaceWith(diagram);
+    });
+
+    await mermaid.run({
+      querySelector: ".mermaid"
+    });
+  });
+</script>
