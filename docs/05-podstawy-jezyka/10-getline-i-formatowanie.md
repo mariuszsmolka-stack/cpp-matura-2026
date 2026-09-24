@@ -66,7 +66,7 @@ int main()
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>Pokaż wynik</summary>
 
 ```text
@@ -103,15 +103,46 @@ Jeżeli potrzebujesz tylko jednego słowa bez spacji, `cin >> tekst` jest prosts
 2. Wczytaj nazwę produktu i cenę, a potem wypisz cenę z dwoma miejscami po kropce.
 3. Wypisz wartość logiczną raz normalnie, a raz z `boolalpha`.
 
-<details>
-<summary>Pokaż wskazówkę</summary>
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Do tekstu ze spacjami użyj `getline(cin >> ws, nazwa)`. Do ceny dodaj `fixed << setprecision(2)` przed wypisaniem.
+Do tekstu ze spacją użyj `getline(cin >> ws, imieINazwisko)`.
 
 </details>
 
-<details>
-<summary>Pokaż rozwiązanie</summary>
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string imieINazwisko;
+
+    cout << "Podaj imie i nazwisko: ";
+    getline(cin >> ws, imieINazwisko);
+
+    cout << "Witaj, " << imieINazwisko << "\n";
+
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Do dwóch miejsc po kropce użyj `fixed` i `setprecision(2)` z nagłówka `<iomanip>`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
 
 ```cpp
 #include <iostream>
@@ -122,19 +153,18 @@ using namespace std;
 
 int main()
 {
-    string imieINazwisko;
+    string produkt;
     double cena = 0.0;
 
-    cout << "Podaj imie i nazwisko: ";
-    getline(cin >> ws, imieINazwisko);
+    cout << "Podaj nazwe produktu: ";
+    getline(cin >> ws, produkt);
 
     cout << "Podaj cene: ";
     cin >> cena;
 
-    cout << "Witaj, " << imieINazwisko << "\n";
+    cout << "Produkt: " << produkt << "\n";
     cout << fixed << setprecision(2);
     cout << "Cena: " << cena << " zl\n";
-    cout << boolalpha << "Czy cena jest zapisana: " << true << "\n";
 
     return 0;
 }
@@ -142,6 +172,34 @@ int main()
 
 </details>
 
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Najpierw wypisz `bool` zwyczajnie, potem dodaj `boolalpha` przed kolejnym wypisaniem.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    bool gotowe = true;
+
+    cout << "Bez boolalpha: " << gotowe << "\n";
+    cout << boolalpha;
+    cout << "Z boolalpha: " << gotowe << "\n";
+
+    return 0;
+}
+```
+
+</details>
 ## Typowe błędy
 
 - Użycie `cin >> tekst` do tekstu ze spacjami.

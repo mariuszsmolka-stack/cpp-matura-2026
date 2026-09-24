@@ -44,7 +44,7 @@ int main()
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>Pokaż wynik</summary>
 
 ```text
@@ -83,15 +83,15 @@ W większych programach kod dzieli się na wiele funkcji i plików. Ten temat po
 2. Przewidź kolejność wypisania trzech komunikatów, a potem uruchom program.
 3. Zmień kolejność instrukcji i sprawdź zmianę wyniku.
 
-<details>
-<summary>Pokaż wskazówkę</summary>
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Każdą instrukcję wypisywania umieść wewnątrz `main` i zakończ średnikiem.
+W funkcji `main` wpisz trzy osobne instrukcje `std::cout`. Każda może kończyć się `\n`.
 
 </details>
 
-<details>
-<summary>Pokaż rozwiązanie</summary>
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
 
 ```cpp
 #include <iostream>
@@ -108,6 +108,55 @@ int main()
 
 </details>
 
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Czytaj instrukcje od góry do dołu. Wynik pojawi się w tej samej kolejności.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    std::cout << "Pierwszy komunikat\n";
+    std::cout << "Drugi komunikat\n";
+    std::cout << "Trzeci komunikat\n";
+
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Zamień miejscami dwie instrukcje `std::cout` i ponownie uruchom program.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    std::cout << "Trzeci komunikat\n";
+    std::cout << "Pierwszy komunikat\n";
+    std::cout << "Drugi komunikat\n";
+
+    return 0;
+}
+```
+
+</details>
 ## Typowe błędy
 
 - Brak średnika po instrukcji.

@@ -56,7 +56,7 @@ int main()
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>Pokaż wynik</summary>
 
 ```text
@@ -99,33 +99,27 @@ Jeżeli chcesz wczytać cały tekst ze spacjami, na przykład imię i nazwisko w
 2. Wczytaj długość i szerokość prostokąta, a potem wypisz pole.
 3. Wczytaj imię bez spacji i wypisz powitanie.
 
-<details>
-<summary>Pokaż wskazówkę</summary>
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Przed `std::cin` wypisz komunikat. Wynik obliczenia zapisz w osobnej zmiennej.
+Utwórz dwie zmienne typu `int`, wczytaj je przez `std::cin`, a potem wypisz `a + b`.
 
 </details>
 
-<details>
-<summary>Pokaż rozwiązanie</summary>
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
 
 ```cpp
 #include <iostream>
-#include <string>
 
 int main()
 {
-    std::string imie;
     int a = 0;
     int b = 0;
-
-    std::cout << "Podaj imie: ";
-    std::cin >> imie;
 
     std::cout << "Podaj dwie liczby: ";
     std::cin >> a >> b;
 
-    std::cout << "Witaj, " << imie << "\n";
     std::cout << "Suma: " << a + b << "\n";
 
     return 0;
@@ -134,6 +128,67 @@ int main()
 
 </details>
 
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Długość i szerokość mogą być typu `double`. Pole to iloczyn tych dwóch wartości.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    double dlugosc = 0.0;
+    double szerokosc = 0.0;
+
+    std::cout << "Podaj dlugosc: ";
+    std::cin >> dlugosc;
+
+    std::cout << "Podaj szerokosc: ";
+    std::cin >> szerokosc;
+
+    double pole = dlugosc * szerokosc;
+    std::cout << "Pole: " << pole << "\n";
+
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Do imienia bez spacji wystarczy `std::cin >> imie`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main()
+{
+    std::string imie;
+
+    std::cout << "Podaj imie: ";
+    std::cin >> imie;
+
+    std::cout << "Witaj, " << imie << "\n";
+
+    return 0;
+}
+```
+
+</details>
 ## Typowe błędy
 
 - Użycie `std::cout` zamiast `std::cin` przy wczytywaniu.

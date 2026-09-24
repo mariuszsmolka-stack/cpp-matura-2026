@@ -46,7 +46,7 @@ int main()
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>Pokaż wynik</summary>
 
 ```text
@@ -85,15 +85,15 @@ Do wczytywania danych użyjesz `std::cin`. Do zapisu do pliku służą inne stru
 2. Wypisz tekst `C++ jest "dokładny"`.
 3. Wypisz działanie `5 + 3 = 8` w jednej instrukcji.
 
-<details>
-<summary>Pokaż wskazówkę</summary>
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Możesz łączyć kilka elementów, dopisując kolejne operatory `<<`.
+Użyj kilku instrukcji `std::cout`. Nową linię możesz zapisać jako `\n`.
 
 </details>
 
-<details>
-<summary>Pokaż rozwiązanie</summary>
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
 
 ```cpp
 #include <iostream>
@@ -102,9 +102,9 @@ int main()
 {
     std::cout << "Imie: Jan\n";
     std::cout << "Klasa: 1A\n";
-    std::cout << "Matematyka\nInformatyka\nFizyka\n";
-    std::cout << "C++ jest \"dokladny\"\n";
-    std::cout << "5 + 3 = " << 8 << "\n";
+    std::cout << "Matematyka\n";
+    std::cout << "Informatyka\n";
+    std::cout << "Fizyka\n";
 
     return 0;
 }
@@ -112,6 +112,51 @@ int main()
 
 </details>
 
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Cudzysłów wewnątrz napisu zapisz jako `\"`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    std::cout << "C++ jest \"dokladny\"\n";
+
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Połącz tekst i liczbę kilkoma operatorami `<<`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    std::cout << "5 + 3 = " << 8 << "\n";
+
+    return 0;
+}
+```
+
+</details>
 ## Typowe błędy
 
 - Użycie `>>` zamiast `<<`.

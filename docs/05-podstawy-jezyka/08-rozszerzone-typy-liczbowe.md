@@ -56,7 +56,7 @@ int main()
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>Pokaż wynik</summary>
 
 ```text
@@ -94,15 +94,42 @@ Do zwykłych liczników i małych liczb użyj `int`. Do liczb z częścią ułam
 2. Sprawdź największą wartość typu `long long`.
 3. Utwórz zmienną `long long` przechowującą wynik mnożenia dwóch dużych liczb.
 
-<details>
-<summary>Pokaż wskazówkę</summary>
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Do zakresów użyj `numeric_limits`, a do rozmiaru typu użyj `sizeof`.
+Do rozmiaru typu użyj `sizeof(typ)`.
 
 </details>
 
-<details>
-<summary>Pokaż rozwiązanie</summary>
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    cout << "Rozmiar int: " << sizeof(int) << "\n";
+    cout << "Rozmiar long long: " << sizeof(long long) << "\n";
+    cout << "Rozmiar double: " << sizeof(double) << "\n";
+
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Do największej wartości typu użyj `numeric_limits<long long>::max()` i nagłówka `<limits>`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
 
 ```cpp
 #include <iostream>
@@ -112,14 +139,7 @@ using namespace std;
 
 int main()
 {
-    long long a = 1000000LL;
-    long long b = 3000000LL;
-    long long wynik = a * b;
-
-    cout << "Rozmiar int: " << sizeof(int) << "\n";
-    cout << "Rozmiar long long: " << sizeof(long long) << "\n";
     cout << "Najwiekszy long long: " << numeric_limits<long long>::max() << "\n";
-    cout << "Wynik: " << wynik << "\n";
 
     return 0;
 }
@@ -127,6 +147,34 @@ int main()
 
 </details>
 
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Dopisz `LL` przy dużych stałych liczbowych, aby były traktowane jako `long long`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    long long a = 1000000LL;
+    long long b = 3000000LL;
+    long long wynik = a * b;
+
+    cout << "Wynik: " << wynik << "\n";
+
+    return 0;
+}
+```
+
+</details>
 ## Typowe błędy
 
 - Użycie `int` do wyniku, który może być za duży.

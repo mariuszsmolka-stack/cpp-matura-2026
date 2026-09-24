@@ -53,7 +53,7 @@ int main()
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>Pokaż wynik</summary>
 
 ```text
@@ -92,15 +92,15 @@ Jeżeli liczby całkowite mogą być bardzo duże, użyjesz później `long long
 2. Utwórz `cena`, `liczbaSztuk` i oblicz koszt.
 3. Sprawdź, co wypisze `bool` ustawiony na `false`.
 
-<details>
-<summary>Pokaż wskazówkę</summary>
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Do tekstu dodaj `#include <string>`. Pojedynczy znak zapisuj w apostrofach, a tekst w cudzysłowie.
+Do imienia użyj `std::string`, do wieku `int`, do klasy `char`, a do obecności `bool`.
 
 </details>
 
-<details>
-<summary>Pokaż rozwiązanie</summary>
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
 
 ```cpp
 #include <iostream>
@@ -111,7 +111,7 @@ int main()
     std::string imie = "Jan";
     int wiek = 16;
     char klasa = 'A';
-    bool obecny = false;
+    bool obecny = true;
 
     std::cout << "Imie: " << imie << "\n";
     std::cout << "Wiek: " << wiek << "\n";
@@ -124,6 +124,57 @@ int main()
 
 </details>
 
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Cena może mieć część ułamkową, więc użyj `double`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    double cena = 9.99;
+    int liczbaSztuk = 3;
+    double koszt = cena * liczbaSztuk;
+
+    std::cout << "Koszt: " << koszt << "\n";
+
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Ustaw zmienną typu `bool` na `false` i wypisz ją przez `std::cout`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    bool obecny = false;
+
+    std::cout << "Obecny: " << obecny << "\n";
+
+    return 0;
+}
+```
+
+</details>
 ## Typowe błędy
 
 - Użycie cudzysłowu dla `char`.

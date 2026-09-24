@@ -52,7 +52,7 @@ int main()
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>Pokaż wynik</summary>
 
 ```text
@@ -96,15 +96,40 @@ W większym projekcie albo w kodzie bibliotecznym bezpieczniej pisać pełne naz
 2. Napisz program, który wczytuje imię i wiek, a potem wypisuje jedno zdanie.
 3. Wyjaśnij własnymi słowami, co skraca `using namespace std;`.
 
-<details>
-<summary>Pokaż wskazówkę</summary>
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Po dodaniu `using namespace std;` możesz usunąć `std::` przed `cout`, `cin` i `string`.
+Dodaj `using namespace std;` po nagłówkach i usuń przedrostki `std::`.
 
 </details>
 
-<details>
-<summary>Pokaż rozwiązanie</summary>
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    cout << "Program bez przedrostka std::\n";
+
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Po `using namespace std;` możesz pisać `string`, `cout` i `cin` bez `std::`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
 
 ```cpp
 #include <iostream>
@@ -131,6 +156,31 @@ int main()
 
 </details>
 
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+W odpowiedzi napisz, że zapis skraca nazwy z przestrzeni `std`, ale nie zastępuje nagłówków.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    cout << "using namespace std; pozwala pisac cout zamiast std::cout.\n";
+    cout << "Ten zapis nie zastepuje naglowkow #include.\n";
+
+    return 0;
+}
+```
+
+</details>
 ## Typowe błędy
 
 - Traktowanie `using namespace std;` jako obowiązkowej magicznej linijki.

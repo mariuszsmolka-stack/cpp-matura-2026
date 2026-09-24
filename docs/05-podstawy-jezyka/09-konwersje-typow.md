@@ -56,7 +56,7 @@ int main()
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>Pokaż wynik</summary>
 
 ```text
@@ -95,15 +95,15 @@ Jeżeli od początku pracujesz na wartościach rzeczywistych, możesz użyć typ
 2. Sprawdź, co stanie się po konwersji `double` o wartości `8.75` na `int`.
 3. Oblicz wynik dzielenia `5 / 2` jako `int` i jako `double`.
 
-<details>
-<summary>Pokaż wskazówkę</summary>
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Aby uzyskać wynik rzeczywisty, wystarczy zamienić jedną z liczb na `double` przed dzieleniem.
+Średnią oblicz przez podzielenie sumy przez `2.0`, aby otrzymać wynik typu `double`.
 
 </details>
 
-<details>
-<summary>Pokaż rozwiązanie</summary>
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
 
 ```cpp
 #include <iostream>
@@ -119,10 +119,7 @@ int main()
     cin >> a >> b;
 
     double srednia = (a + b) / 2.0;
-    double iloraz = static_cast<double>(a) / b;
-
     cout << "Srednia: " << srednia << "\n";
-    cout << "Iloraz: " << iloraz << "\n";
 
     return 0;
 }
@@ -130,6 +127,66 @@ int main()
 
 </details>
 
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Użyj `static_cast<int>(wartosc)` i zobacz, że część po kropce zostaje odcięta.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    double wartosc = 8.75;
+    int poKonwersji = static_cast<int>(wartosc);
+
+    cout << "Przed konwersja: " << wartosc << "\n";
+    cout << "Po konwersji: " << poKonwersji << "\n";
+
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Dla wyniku rzeczywistego zamień jedną z liczb na `double` przed dzieleniem.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a = 5;
+    int b = 2;
+
+    int wynikInt = a / b;
+    double wynikDouble = static_cast<double>(a) / b;
+
+    cout << "Wynik int: " << wynikInt << "\n";
+    cout << "Wynik double: " << wynikDouble << "\n";
+
+    return 0;
+}
+```
+
+</details>
 ## Typowe błędy
 
 - Oczekiwanie, że `7 / 2` da `3.5`.

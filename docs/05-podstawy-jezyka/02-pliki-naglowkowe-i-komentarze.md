@@ -52,7 +52,7 @@ int main()
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>Pokaż wynik</summary>
 
 ```text
@@ -90,15 +90,15 @@ Nie omawiamy jeszcze własnych plików `.h`. Własne nagłówki przydają się w
 2. Dodaj komentarz wielowierszowy z krótkim opisem autora i tematu.
 3. Usuń na chwilę `#include <iostream>`, skompiluj program, a potem przywróć nagłówek.
 
-<details>
-<summary>Pokaż wskazówkę</summary>
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Dobry komentarz wyjaśnia po co jest fragment kodu, a nie przepisuje dokładnie instrukcję.
+Dodaj `#include <iostream>`, a komentarz zapisz nad instrukcjami wypisywania.
 
 </details>
 
-<details>
-<summary>Pokaż rozwiązanie</summary>
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
 
 ```cpp
 #include <iostream>
@@ -115,6 +115,55 @@ int main()
 
 </details>
 
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Komentarz wielowierszowy zacznij od `/*` i zakończ przez `*/`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    /*
+       Autor: uczen
+       Temat: komentarze w C++
+    */
+    std::cout << "Program z komentarzem wielowierszowym\n";
+
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Po teście błędu przywróć nagłówek. Poprawny program musi znów zawierać `#include <iostream>`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    std::cout << "Naglowek iostream jest potrzebny do cout\n";
+
+    return 0;
+}
+```
+
+</details>
 ## Typowe błędy
 
 - Brak `#` w `#include`.

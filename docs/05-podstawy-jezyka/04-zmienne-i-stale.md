@@ -52,7 +52,7 @@ int main()
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>Pokaż wynik</summary>
 
 ```text
@@ -98,15 +98,15 @@ Jeżeli wartość ma się zmieniać, wybierz zwykłą zmienną. Jeżeli ma pozos
 2. Utwórz stałą `LICZBA_DNI_TYGODNIA` i wypisz ją.
 3. Zmień wartość zmiennej `punkty` i wypisz ją przed oraz po zmianie.
 
-<details>
-<summary>Pokaż wskazówkę</summary>
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Najpierw nadaj zmiennym wartości początkowe. Nie używaj zmiennej, zanim otrzyma wartość.
+Utwórz dwie zmienne, a wynik mnożenia zapisz w trzeciej zmiennej.
 
 </details>
 
-<details>
-<summary>Pokaż rozwiązanie</summary>
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 1</summary>
 
 ```cpp
 #include <iostream>
@@ -116,9 +116,32 @@ int main()
     double cena = 12.50;
     int liczbaSztuk = 4;
     double koszt = cena * liczbaSztuk;
-    const int LICZBA_DNI_TYGODNIA = 7;
 
     std::cout << "Koszt: " << koszt << "\n";
+
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Stałą utwórz z użyciem słowa `const` i nadaj jej wartość od razu.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 2</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    const int LICZBA_DNI_TYGODNIA = 7;
+
     std::cout << "Liczba dni tygodnia: " << LICZBA_DNI_TYGODNIA << "\n";
 
     return 0;
@@ -127,6 +150,32 @@ int main()
 
 </details>
 
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Najpierw wypisz początkową wartość `punkty`, potem przypisz nową wartość i wypisz zmienną jeszcze raz.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie do ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    int punkty = 10;
+    std::cout << "Punkty przed zmiana: " << punkty << "\n";
+
+    punkty = 20;
+    std::cout << "Punkty po zmianie: " << punkty << "\n";
+
+    return 0;
+}
+```
+
+</details>
 ## Typowe błędy
 
 - Użycie zmiennej przed inicjalizacją.
