@@ -4,7 +4,7 @@ Repozytorium zawiera materiały do kursu programowania w języku C++.
 
 Kurs jest przeznaczony dla uczniów liceum realizujących informatykę na poziomie rozszerzonym, uczniów przygotowujących się do matury rozszerzonej z informatyki oraz osób rozpoczynających naukę C++ od podstaw.
 
-Środowiskiem kursu jest Code::Blocks. Materiały będą rozwijane etapami. Pierwszym szczegółowo opracowywanym rozdziałem będzie rozdział 05 - Podstawy języka C++.
+Środowiskiem kursu jest Code::Blocks. Rozdział 05 - Podstawy języka C++ zawiera pierwsze pełne lekcje języka. Kolejnym opracowywanym działem będzie rozdział 06 - Operatory i instrukcje warunkowe.
 
 ## Zakres
 
@@ -24,7 +24,7 @@ Kurs obejmuje:
 
 Materiały znajdują się w katalogu [docs](docs/index.md). Strona kursu korzysta z bocznej nawigacji, ścieżki nawigacyjnej oraz przycisków poprzedni i następny rozdział.
 
-Na tym etapie repozytorium zawiera strukturę techniczną strony, plan działów, materiały organizacyjne i status kursu. Właściwe lekcje programowania będą dodawane stopniowo.
+Repozytorium zawiera strukturę techniczną strony, plan działów, materiały organizacyjne, status kursu oraz pełny rozdział 05 - Podstawy języka C++.
 
 
 ## Licencja

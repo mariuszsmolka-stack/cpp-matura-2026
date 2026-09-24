@@ -41,6 +41,26 @@ sections:
     lessons:
       - title: "Wprowadzenie"
         url: "05-podstawy-jezyka/README.md"
+      - title: "Budowa programu"
+        url: "05-podstawy-jezyka/01-budowa-programu.md"
+      - title: "Pliki nagłówkowe i komentarze"
+        url: "05-podstawy-jezyka/02-pliki-naglowkowe-i-komentarze.md"
+      - title: "Wyświetlanie danych"
+        url: "05-podstawy-jezyka/03-wyswietlanie-danych.md"
+      - title: "Zmienne i stałe"
+        url: "05-podstawy-jezyka/04-zmienne-i-stale.md"
+      - title: "Podstawowe typy danych"
+        url: "05-podstawy-jezyka/05-podstawowe-typy-danych.md"
+      - title: "Wczytywanie danych"
+        url: "05-podstawy-jezyka/06-wczytywanie-danych.md"
+      - title: "using namespace std;"
+        url: "05-podstawy-jezyka/07-using-namespace-std.md"
+      - title: "Rozszerzone typy liczbowe"
+        url: "05-podstawy-jezyka/08-rozszerzone-typy-liczbowe.md"
+      - title: "Konwersje typów"
+        url: "05-podstawy-jezyka/09-konwersje-typow.md"
+      - title: "getline i formatowanie wyników"
+        url: "05-podstawy-jezyka/10-getline-i-formatowanie.md"
 
   - title: "06 - Operatory i instrukcje warunkowe"
     url: "06-operatory-i-warunki/README.md"
@@ -119,5 +139,3 @@ sections:
     lessons:
       - title: "Wprowadzenie"
         url: "18-warsztat-maturalny/README.md"
-
-
