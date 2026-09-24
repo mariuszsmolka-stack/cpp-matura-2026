@@ -371,9 +371,14 @@ Jan Kowalski
 
 wynik może wyglądać tak:
 
+<details markdown="1">
+<summary>Pokaż oczekiwany wynik</summary>
+
 ```text
 Witaj, Jan Kowalski
 ```
+
+</details>
 
 <details markdown="1">
 <summary>Pokaż wskazówkę</summary>
@@ -419,10 +424,15 @@ Nowy Sacz
 
 wynik może wyglądać tak:
 
+<details markdown="1">
+<summary>Pokaż oczekiwany wynik</summary>
+
 ```text
 Wiek: 16
 Miejscowosc: Nowy Sacz
 ```
+
+</details>
 
 <details markdown="1">
 <summary>Pokaż wskazówkę</summary>
@@ -472,9 +482,14 @@ Dla danych:
 
 wynik powinien zawierać:
 
+<details markdown="1">
+<summary>Pokaż oczekiwany wynik</summary>
+
 ```text
 19.90
 ```
+
+</details>
 
 <details markdown="1">
 <summary>Pokaż wskazówkę</summary>

@@ -251,9 +251,14 @@ Dla danych:
 
 wynik powinien zawierać wartość:
 
+<details markdown="1">
+<summary>Pokaż oczekiwany wynik</summary>
+
 ```text
 6.5
 ```
+
+</details>
 
 <details markdown="1">
 <summary>Pokaż wskazówkę</summary>
@@ -304,6 +309,15 @@ Dla danych:
 ```
 
 program powinien pokazać wynik z częścią ułamkową.
+
+<details markdown="1">
+<summary>Pokaż oczekiwany wynik</summary>
+
+```text
+Cena jednej sztuki: 16.6667
+```
+
+</details>
 
 <details markdown="1">
 <summary>Pokaż wskazówkę</summary>
