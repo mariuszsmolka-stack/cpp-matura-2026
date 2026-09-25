@@ -1,6 +1,6 @@
 # Plan kursu C++
 
-Struktura kursu została utworzona. Rozdziały 05 - Podstawy języka C++, 06 - Operatory i instrukcje warunkowe, 07 - Pętle, 08 - Znaki i napisy oraz 09 - Zakres zmiennych i funkcje zawierają komplet pełnych lekcji. Kolejnym rozdziałem do opracowania jest rozdział 10 - Tablice.
+Struktura kursu została utworzona. Rozdziały 05 - Podstawy języka C++, 06 - Operatory i instrukcje warunkowe, 07 - Pętle, 08 - Znaki i napisy, 09 - Zakres zmiennych i funkcje oraz 10 - Tablice zawierają komplet pełnych lekcji. Kolejnym rozdziałem do opracowania jest rozdział 11 - Dane złożone.
 
 ## Rozdziały
 
@@ -32,4 +32,5 @@ Struktura kursu została utworzona. Rozdziały 05 - Podstawy języka C++, 06 - O
 - Rozdział 07 - Pętle: gotowy, 8 pełnych lekcji.
 - Rozdział 08 - Znaki i napisy: gotowy, 6 pełnych lekcji.
 - Rozdział 09 - Zakres zmiennych i funkcje: gotowy, 6 pełnych lekcji.
-- Kolejny rozdział do szczegółowego opracowania: 10 - Tablice.
+- Rozdział 10 - Tablice: gotowy, 8 pełnych lekcji.
+- Kolejny rozdział do szczegółowego opracowania: 11 - Dane złożone.
