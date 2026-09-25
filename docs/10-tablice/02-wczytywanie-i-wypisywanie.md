@@ -38,6 +38,108 @@ Warunek `i < n` oznacza: wykonuj pętlę dla indeksów mniejszych od `n`. Dla `n
 
 Zapis `i <= n` jest błędny, bo dla `n = 5` dopuści indeks `5`, czyli o jeden element za daleko.
 
+## Tablica o rozmiarze podanym podczas działania programu
+
+Najpierw poznaliśmy wariant zgodny ze standardem ISO C++23:
+
+```cpp
+const int MAKS = 1000;
+int liczby[MAKS];
+int n;
+```
+
+W tym wariancie tablica ma stałą pojemność, a `n` mówi, ile miejsc aktualnie używamy.
+
+W szkolnych programach możesz jednak spotkać krótszy zapis:
+
+```cpp
+int n;
+cin >> n;
+int liczby[n];
+```
+
+Taki zapis oznacza, że `n` otrzymuje wartość dopiero podczas działania programu, a rozmiar tablicy jest ustalany na podstawie tej wartości. Taka konstrukcja jest nazywana tablicą o zmiennej długości. Można spotkać skrót VLA od `Variable Length Array`.
+
+GCC obsługuje VLA w C++ jako własne rozszerzenie. Dlatego taki program może działać w Code::Blocks z kompilatorem GCC. Nie jest to jednak element standardu ISO C++23. Ten sam program może zostać odrzucony przez inny kompilator albo przez GCC przy ścisłym sprawdzaniu zgodności ze standardem.
+
+Przed utworzeniem takiej tablicy zawsze sprawdzamy wartość `n`. Rozmiar powinien być dodatni i rozsądnie mały. Bardzo duża tablica lokalna może spowodować problem z dostępną pamięcią.
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+
+    cout << "Podaj rozmiar tablicy: ";
+    cin >> n;
+
+    if (n < 1 || n > 1000)
+    {
+        cout << "Nieprawidlowy rozmiar.\n";
+        return 0;
+    }
+
+    int liczby[n];
+
+    cout << "Podaj elementy tablicy:\n";
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> liczby[i];
+    }
+
+    cout << "Elementy tablicy:\n";
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << liczby[i] << " ";
+    }
+
+    cout << "\n";
+
+    return 0;
+}
+```
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik</summary>
+
+Dane wejściowe:
+```text
+4
+5 8 2 7
+```
+
+Wynik:
+```text
+Podaj rozmiar tablicy: Podaj elementy tablicy:
+Elementy tablicy:
+5 8 2 7
+```
+
+</details>
+
+Praktyczna zasada w tym kursie jest prosta:
+
+- w prostych programach wykonywanych w Code::Blocks można świadomie zastosować `int tablica[n]`,
+- trzeba wiedzieć, że jest to rozszerzenie GNU,
+- gdy program ma być zgodny ze standardem ISO C++23 i przenośny, używamy stałej pojemności oraz osobnego rozmiaru logicznego,
+- w zadaniu wymagającym konkretnego standardu stosujemy wymagania tego standardu.
+
+| Właściwość | Stała pojemność i rozmiar logiczny | `int tablica[n]` |
+|---|---|---|
+| Zgodność z ISO C++23 | tak | nie |
+| Działanie w GCC | tak | tak, jako rozszerzenie |
+| Przenośność | większa | mniejsza |
+| Prostota dla początkującego | wymaga rozróżnienia `MAKS` i `n` | prostszy zapis |
+| Kontrola maksymalnego rozmiaru | wynika z `MAKS` | trzeba sprawdzić `n` przed deklaracją |
+
+Nie chodzi o to, że jeden wariant jest zawsze najlepszy. Ważny jest kontekst: standardowy wariant jest przenośny, a wariant GNU bywa prosty i często działa w szkolnym środowisku z GCC.
+
+
 ## Diagram przechodzenia po tablicy
 
 ```mermaid
@@ -174,7 +276,7 @@ Jeżeli masz kilka stałych wartości znanych od razu, możesz zainicjalizować 
 - Brak sprawdzenia, czy `n <= MAKS`.
 - Mylenie pojemności tablicy z liczbą używanych elementów.
 - Wypisywanie nieużywanych elementów tablicy.
-- Próba utworzenia tablicy o rozmiarze podanym przez użytkownika.
+- Użycie `int liczby[n]` bez świadomości, że jest to rozszerzenie GNU, a nie element ISO C++23.
 
 ## Ćwiczenia
 
@@ -315,6 +417,75 @@ int main()
         }
         cout << "\n";
     }
+
+    return 0;
+}
+```
+
+</details>
+
+
+### Ćwiczenie 4
+
+To ćwiczenie celowo wykorzystuje rozszerzenie GNU: tablicę o rozmiarze podanym podczas działania programu.
+
+Wczytaj rozmiar tablicy. Sprawdź, czy mieści się w zakresie od `1` do `100`. Utwórz tablicę `int liczby[n]`, wczytaj jej elementy i wypisz je w odwrotnej kolejności.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
+
+Najpierw sprawdź `n`. Dopiero po sprawdzeniu utwórz tablicę `int liczby[n]`. Do wypisania od końca zacznij pętlę od `n - 1`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 4</summary>
+
+Dane wejściowe:
+```text
+5
+1 2 3 4 5
+```
+
+Wynik:
+```text
+5 4 3 2 1
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+
+    cin >> n;
+
+    if (n < 1 || n > 100)
+    {
+        cout << "Nieprawidlowy rozmiar.\n";
+        return 0;
+    }
+
+    int liczby[n];
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> liczby[i];
+    }
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        cout << liczby[i] << " ";
+    }
+    cout << "\n";
 
     return 0;
 }
