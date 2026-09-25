@@ -113,7 +113,18 @@ sections:
     lessons:
       - title: "Wprowadzenie"
         url: "08-znaki-i-napisy/README.md"
-
+      - title: "`char` i `string`"
+        url: "08-znaki-i-napisy/01-char-i-string.md"
+      - title: "Kody ASCII i konwersje"
+        url: "08-znaki-i-napisy/02-kody-ascii-i-konwersje.md"
+      - title: "Operacje na znakach"
+        url: "08-znaki-i-napisy/03-operacje-na-znakach.md"
+      - title: "Indeksy i długość napisu"
+        url: "08-znaki-i-napisy/04-indeksy-i-dlugosc-napisu.md"
+      - title: "Przechodzenie i zmienianie napisu"
+        url: "08-znaki-i-napisy/05-przechodzenie-i-zmienianie-napisu.md"
+      - title: "Szyfr Cezara"
+        url: "08-znaki-i-napisy/06-szyfr-cezara.md"
   - title: "09 - Zakres zmiennych i funkcje"
     url: "09-zakres-i-funkcje/README.md"
     lessons:

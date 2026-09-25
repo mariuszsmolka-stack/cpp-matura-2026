@@ -25,7 +25,9 @@ title: Status kursu
 - Liczba pełnych lekcji w rozdziale 06: 9
 - Rozdział 07 - Pętle: gotowy
 - Liczba pełnych lekcji w rozdziale 07: 8
-- Kolejny rozdział do opracowania: 08 - Znaki i napisy
+- Rozdział 08 - Znaki i napisy: gotowy
+- Liczba pełnych lekcji w rozdziale 08: 6
+- Kolejny rozdział do opracowania: 09 - Zakres zmiennych i funkcje
 
 ## Szczegóły
 
@@ -39,6 +41,7 @@ title: Status kursu
 - OK - rozdział `05-podstawy-jezyka` zawiera wprowadzenie i 10 pełnych lekcji.
 - OK - rozdział `06-operatory-i-warunki` zawiera wprowadzenie i 9 pełnych lekcji.
 - OK - rozdział `07-petle` zawiera wprowadzenie i 8 pełnych lekcji.
-- OK - kolejnym rozdziałem do szczegółowego opracowania jest `08-znaki-i-napisy`.
+- OK - rozdział 8-znaki-i-napisy zawiera wprowadzenie i 6 pełnych lekcji.
+- OK - kolejnym rozdziałem do szczegółowego opracowania jest `09-zakres-i-funkcje`.
 - OK - favicon nie jest dodawany, ponieważ w repozytorium nie ma neutralnego pliku `favicon.ico`.
-- BRAK - pełne lekcje w rozdziałach `08-18` nie zostały jeszcze utworzone.
+- BRAK - pełne lekcje w rozdziałach `09-18` nie zostały jeszcze utworzone.
