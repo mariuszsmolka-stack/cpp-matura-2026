@@ -23,7 +23,9 @@ title: Status kursu
 - Liczba pełnych lekcji w rozdziale 05: 10
 - Rozdział 06 - Operatory i instrukcje warunkowe: gotowy
 - Liczba pełnych lekcji w rozdziale 06: 9
-- Kolejny rozdział do opracowania: 07 - Pętle
+- Rozdział 07 - Pętle: gotowy
+- Liczba pełnych lekcji w rozdziale 07: 8
+- Kolejny rozdział do opracowania: 08 - Znaki i napisy
 
 ## Szczegóły
 
@@ -36,6 +38,7 @@ title: Status kursu
 - OK - rozdziały `00-18` mają strony wejściowe.
 - OK - rozdział `05-podstawy-jezyka` zawiera wprowadzenie i 10 pełnych lekcji.
 - OK - rozdział `06-operatory-i-warunki` zawiera wprowadzenie i 9 pełnych lekcji.
-- OK - kolejnym rozdziałem do szczegółowego opracowania jest `07-petle`.
+- OK - rozdział `07-petle` zawiera wprowadzenie i 8 pełnych lekcji.
+- OK - kolejnym rozdziałem do szczegółowego opracowania jest `08-znaki-i-napisy`.
 - OK - favicon nie jest dodawany, ponieważ w repozytorium nie ma neutralnego pliku `favicon.ico`.
-- BRAK - pełne lekcje w rozdziałach `07-18` nie zostały jeszcze utworzone.
+- BRAK - pełne lekcje w rozdziałach `08-18` nie zostały jeszcze utworzone.
