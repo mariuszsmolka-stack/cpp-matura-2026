@@ -80,13 +80,25 @@ int main()
 ```
 
 <details markdown="1">
-<summary>Pokaż wynik</summary>
+<summary>Pokaż przykładowe dane i wynik</summary>
+
+Dane wejściowe:
+
+```text
+4
+2
+0
+```
+
+Wynik:
 
 ```text
 4
 2
 Koniec
 ```
+
+Wartość 0 kończy pętlę i nie jest wypisywana.
 
 </details>
 

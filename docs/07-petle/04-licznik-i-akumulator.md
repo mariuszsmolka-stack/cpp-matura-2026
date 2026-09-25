@@ -53,7 +53,15 @@ int main()
 ```
 
 <details markdown="1">
-<summary>Pokaż wynik</summary>
+<summary>Pokaż przykładowe dane i wynik</summary>
+
+Dane wejściowe:
+
+```text
+4
+```
+
+Wynik:
 
 ```text
 Suma: 10
@@ -97,7 +105,20 @@ int main()
 ```
 
 <details markdown="1">
-<summary>Pokaż wynik</summary>
+<summary>Pokaż przykładowe dane i wynik</summary>
+
+Dane wejściowe:
+
+```text
+3
+2
+4
+6
+```
+
+Pierwsza liczba określa, ile kolejnych wartości zostanie wczytanych.
+
+Wynik:
 
 ```text
 Srednia: 4

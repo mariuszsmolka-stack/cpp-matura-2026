@@ -62,7 +62,15 @@ int main()
 ```
 
 <details markdown="1">
-<summary>Pokaż wynik</summary>
+<summary>Pokaż przykładowe dane i wynik</summary>
+
+Dane wejściowe:
+
+```text
+7
+```
+
+Wynik:
 
 ```text
 Podaj liczbe od 1 do 10: Poprawna liczba: 7
@@ -107,7 +115,15 @@ int main()
 ```
 
 <details markdown="1">
-<summary>Pokaż wynik</summary>
+<summary>Pokaż przykładowe dane i wynik</summary>
+
+Dane wejściowe:
+
+```text
+0
+```
+
+Wynik:
 
 ```text
 1 - Start

@@ -99,7 +99,16 @@ int main()
 ```
 
 <details markdown="1">
-<summary>Pokaż wynik</summary>
+<summary>Pokaż przykładowe dane i wynik</summary>
+
+Dane wejściowe:
+
+```text
+3
+0
+```
+
+Wynik:
 
 ```text
 Podaj liczbe, 0 konczy: Wczytano: 3
