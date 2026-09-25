@@ -172,6 +172,16 @@ sections:
     lessons:
       - title: "Wprowadzenie"
         url: "11-dane-zlozone/README.md"
+      - title: "Pierwsza struktura"
+        url: "11-dane-zlozone/01-pierwsza-struktura.md"
+      - title: "Tablice struktur"
+        url: "11-dane-zlozone/02-tablice-struktur.md"
+      - title: "Struktury i funkcje"
+        url: "11-dane-zlozone/03-struktury-i-funkcje.md"
+      - title: "`pair` i dwie wartości"
+        url: "11-dane-zlozone/04-pair-dwie-wartosci.md"
+      - title: "`tuple` i rozpakowywanie - materiał nieobowiązkowy"
+        url: "11-dane-zlozone/05-tuple-i-rozpakowywanie-material-nieobowiazkowy.md"
 
   - title: "12 - vector"
     url: "12-vector/README.md"

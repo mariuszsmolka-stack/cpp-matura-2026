@@ -32,7 +32,10 @@ title: Status kursu
 - Rozdział 10 - Tablice: gotowy
 - Rozdział 10 - materiał podstawowy: 8 pełnych lekcji
 - Rozdział 10 - materiał nieobowiązkowy: 1 materiał o tablicach dynamicznych
-- Kolejny rozdział do opracowania: 11 - Dane złożone
+- Rozdział 11 - Dane złożone: gotowy
+- Rozdział 11 - materiał podstawowy: 4 pełne lekcje
+- Rozdział 11 - materiał nieobowiązkowy: 1 materiał o tuple i rozpakowywaniu
+- Kolejny rozdział do opracowania: 12 - vector
 
 ## Szczegóły
 
@@ -49,6 +52,7 @@ title: Status kursu
 - OK - rozdział `08-znaki-i-napisy` zawiera wprowadzenie i 6 pełnych lekcji.
 - OK - rozdział `09-zakres-i-funkcje` zawiera wprowadzenie i 6 pełnych lekcji.
 - OK - rozdział `10-tablice` zawiera wprowadzenie, 8 pełnych lekcji podstawowych i 1 materiał nieobowiązkowy o tablicach dynamicznych.
-- OK - kolejnym rozdziałem do szczegółowego opracowania jest `11-dane-zlozone`.
+- OK - rozdział `11-dane-zlozone` zawiera wprowadzenie, 4 pełne lekcje podstawowe i 1 materiał nieobowiązkowy o tuple i rozpakowywaniu.
+- OK - kolejnym rozdziałem do szczegółowego opracowania jest `12-vector`.
 - OK - favicon nie jest dodawany, ponieważ w repozytorium nie ma neutralnego pliku `favicon.ico`.
-- BRAK - pełne lekcje w rozdziałach `11-18` nie zostały jeszcze utworzone.
+- BRAK - pełne lekcje w rozdziałach `12-18` nie zostały jeszcze utworzone.
