@@ -19,6 +19,19 @@ Ten szyfr ma znaczenie historyczne i dydaktyczne. Nie zapewnia współczesnego b
 
 Alfabet można wyobrazić sobie jako koło. Każda litera ma pozycję od `0` do `25`. Po literze `Z` wracamy do `A`, a po literze `z` wracamy do `a`.
 
+### Alfabet jako zamknięty obieg
+
+```mermaid
+flowchart LR
+    A(("A - pozycja 0")) --> B(("B - pozycja 1"))
+    B --> C(("C - pozycja 2"))
+    C --> X(("kolejne litery"))
+    X --> Z(("Z - pozycja 25"))
+    Z -->|"po Z wracamy do A"| A
+```
+
+Diagram pomija część liter, ale zasada obejmuje cały alfabet. Po osiągnięciu litery Z przechodzimy ponownie do A. Tak samo działa obieg małych liter od a do z.
+
 ```text
 litera => kod ASCII => pozycja 0-25 => przesunięcie => nowa pozycja => nowa litera
 ```
