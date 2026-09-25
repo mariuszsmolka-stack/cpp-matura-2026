@@ -39,11 +39,11 @@ for (int i = 0; i < (int)tekst.length(); i++)
 
 ```mermaid
 flowchart TD
-    A[Start: i = 0] --> B{Czy i < długość?}
-    B -->|tak| C[Odczytaj tekst[i]]
-    C --> D[Zwiększ i]
+    A["Start: i = 0"] --> B{"Czy i < długość?"}
+    B -->|tak| C["Odczytaj tekst[i]"]
+    C --> D["Zwiększ i"]
     D --> B
-    B -->|nie| E[Koniec]
+    B -->|nie| E["Koniec"]
 ```
 
 ## Przykład 1 - liczenie cyfr i spacji
