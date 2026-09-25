@@ -1,6 +1,6 @@
 # Plan kursu C++
 
-Struktura kursu została utworzona. Rozdział 05 - Podstawy języka C++ zawiera komplet pierwszych lekcji języka. Kolejnym rozdziałem do opracowania jest rozdział 06 - Operatory i instrukcje warunkowe.
+Struktura kursu została utworzona. Rozdział 05 - Podstawy języka C++ oraz rozdział 06 - Operatory i instrukcje warunkowe zawierają komplet pełnych lekcji. Kolejnym rozdziałem do opracowania jest rozdział 07 - Pętle.
 
 ## Rozdziały
 
@@ -28,4 +28,5 @@ Struktura kursu została utworzona. Rozdział 05 - Podstawy języka C++ zawiera 
 
 - Struktura kursu: utworzona.
 - Rozdział 05 - Podstawy języka C++: gotowy, 10 pełnych lekcji.
-- Kolejny rozdział do szczegółowego opracowania: 06 - Operatory i instrukcje warunkowe.
+- Rozdział 06 - Operatory i instrukcje warunkowe: gotowy, 9 pełnych lekcji.
+- Kolejny rozdział do szczegółowego opracowania: 07 - Pętle.

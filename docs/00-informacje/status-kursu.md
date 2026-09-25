@@ -7,7 +7,7 @@ title: Status kursu
 
 ## Data sprawdzenia
 
-2026-09-24
+2026-09-25
 
 ## Podsumowanie
 
@@ -21,7 +21,9 @@ title: Status kursu
 - Favicon: świadomie pominięty
 - Rozdział 05 - Podstawy języka C++: gotowy
 - Liczba pełnych lekcji w rozdziale 05: 10
-- Kolejny rozdział do opracowania: 06 - Operatory i instrukcje warunkowe
+- Rozdział 06 - Operatory i instrukcje warunkowe: gotowy
+- Liczba pełnych lekcji w rozdziale 06: 9
+- Kolejny rozdział do opracowania: 07 - Pętle
 
 ## Szczegóły
 
@@ -33,5 +35,7 @@ title: Status kursu
 - OK - przyciski poprzedni/następny korzystają z kolejności w `navigation.yml`.
 - OK - rozdziały `00-18` mają strony wejściowe.
 - OK - rozdział `05-podstawy-jezyka` zawiera wprowadzenie i 10 pełnych lekcji.
+- OK - rozdział `06-operatory-i-warunki` zawiera wprowadzenie i 9 pełnych lekcji.
+- OK - kolejnym rozdziałem do szczegółowego opracowania jest `07-petle`.
 - OK - favicon nie jest dodawany, ponieważ w repozytorium nie ma neutralnego pliku `favicon.ico`.
-- BRAK - pełne lekcje w rozdziałach `06-18` nie zostały jeszcze utworzone.
+- BRAK - pełne lekcje w rozdziałach `07-18` nie zostały jeszcze utworzone.
