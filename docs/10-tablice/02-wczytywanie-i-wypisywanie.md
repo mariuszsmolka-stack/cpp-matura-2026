@@ -38,7 +38,12 @@ Warunek `i < n` oznacza: wykonuj pętlę dla indeksów mniejszych od `n`. Dla `n
 
 Zapis `i <= n` jest błędny, bo dla `n = 5` dopuści indeks `5`, czyli o jeden element za daleko.
 
-## Tablica o rozmiarze podanym podczas działania programu
+## Materiał nieobowiązkowy - tablica o zmiennym rozmiarze w GNU C++
+
+> **Materiał nieobowiązkowy**
+>
+> Możesz pominąć tę część. Do wykonania pozostałych lekcji wystarczy standardowy wariant ze stałą pojemnością i rozmiarem logicznym `n`.
+
 
 Najpierw poznaliśmy wariant zgodny ze standardem ISO C++23:
 
@@ -425,7 +430,7 @@ int main()
 </details>
 
 
-### Ćwiczenie 4
+### Ćwiczenie nieobowiązkowe 4
 
 To ćwiczenie celowo wykorzystuje rozszerzenie GNU: tablicę o rozmiarze podanym podczas działania programu.
 

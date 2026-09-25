@@ -164,6 +164,8 @@ sections:
         url: "10-tablice/07-tablice-i-funkcje.md"
       - title: "Tablice dwuwymiarowe"
         url: "10-tablice/08-tablice-dwuwymiarowe.md"
+      - title: "Tablice dynamiczne - materiał nieobowiązkowy"
+        url: "10-tablice/09-tablice-dynamiczne-material-nieobowiazkowy.md"
 
   - title: "11 - Dane złożone"
     url: "11-dane-zlozone/README.md"

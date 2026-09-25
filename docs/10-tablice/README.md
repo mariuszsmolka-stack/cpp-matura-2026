@@ -6,11 +6,11 @@ Pojedyncza zmienna przechowuje jedną wartość. Tablica przechowuje wiele warto
 
 Każdy element tablicy ma indeks. W C++ pierwszy indeks ma wartość `0`. Jeżeli tablica ma 5 elementów, ostatni poprawny indeks to `4`.
 
-W tym rozdziale omawiamy klasyczne tablice C++ o stałej pojemności. To znaczy, że liczba dostępnych miejsc jest ustalona w kodzie programu. Gdy użytkownik podaje liczbę danych, używamy osobnej zmiennej `n`, która oznacza rozmiar logiczny, czyli liczbę aktualnie używanych elementów.
+W podstawowym toku rozdziału omawiamy klasyczne tablice C++ o stałej pojemności. To znaczy, że liczba dostępnych miejsc jest ustalona w kodzie programu. Gdy użytkownik podaje liczbę danych, używamy osobnej zmiennej `n`, która oznacza rozmiar logiczny, czyli liczbę aktualnie używanych elementów.
 
 ## Cele rozdziału
 
-Po tym rozdziale nauczysz się:
+Po materiale podstawowym nauczysz się:
 
 - deklarować tablice jednowymiarowe i dwuwymiarowe,
 - odczytywać i zmieniać elementy tablicy,
@@ -23,7 +23,7 @@ Po tym rozdziale nauczysz się:
 - przekazywać tablice do funkcji,
 - pracować z prostą tablicą dwuwymiarową.
 
-## Kolejność nauki
+## Materiał podstawowy
 
 1. [Pierwsza tablica](01-pierwsza-tablica.md)
 2. [Wczytywanie i wypisywanie](02-wczytywanie-i-wypisywanie.md)
@@ -33,6 +33,12 @@ Po tym rozdziale nauczysz się:
 6. [Logiczne wstawianie i usuwanie](06-logiczne-wstawianie-i-usuwanie.md)
 7. [Tablice i funkcje](07-tablice-i-funkcje.md)
 8. [Tablice dwuwymiarowe](08-tablice-dwuwymiarowe.md)
+
+## Materiał nieobowiązkowy
+
+- [Tablice dynamiczne - materiał nieobowiązkowy](09-tablice-dynamiczne-material-nieobowiazkowy.md)
+
+Materiał o tablicach dynamicznych wymaga poznania podstaw wskaźników oraz ręcznego zarządzania pamięcią. Nie jest potrzebny do przejścia do następnego rozdziału. Możesz wrócić do niego później.
 
 ## Co warto zapamiętać
 

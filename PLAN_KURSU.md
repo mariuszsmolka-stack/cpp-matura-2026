@@ -32,5 +32,5 @@ Struktura kursu została utworzona. Rozdziały 05 - Podstawy języka C++, 06 - O
 - Rozdział 07 - Pętle: gotowy, 8 pełnych lekcji.
 - Rozdział 08 - Znaki i napisy: gotowy, 6 pełnych lekcji.
 - Rozdział 09 - Zakres zmiennych i funkcje: gotowy, 6 pełnych lekcji.
-- Rozdział 10 - Tablice: gotowy, 8 pełnych lekcji.
+- Rozdział 10 - Tablice: gotowy, 8 pełnych lekcji podstawowych i 1 materiał nieobowiązkowy o tablicach dynamicznych.
 - Kolejny rozdział do szczegółowego opracowania: 11 - Dane złożone.

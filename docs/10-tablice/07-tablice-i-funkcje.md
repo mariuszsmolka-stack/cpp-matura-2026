@@ -161,6 +161,134 @@ Indeks 9: 2
 - Po wywołaniu funkcji zmienione wartości są widoczne w `main()`.
 - Liczba elementów `n` jest przekazana osobno.
 
+
+## Jak otrzymać tablicę wynikową z funkcji?
+
+Zwykłej wbudowanej tablicy nie można zwrócić przez wartość tak jak `int` albo `double`.
+
+Nie należy też zwracać wskaźnika do zwykłej lokalnej tablicy utworzonej wewnątrz funkcji. Taka tablica przestaje istnieć po zakończeniu funkcji.
+
+Najprostsze rozwiązanie na tym etapie jest inne:
+
+- w `main()` przygotowujemy tablicę wejściową,
+- w `main()` przygotowujemy osobną tablicę wynikową,
+- funkcja otrzymuje tablicę wejściową, tablicę wynikową i rozmiar,
+- funkcja zapisuje obliczone wartości do tablicy wynikowej.
+
+```cpp
+void obliczKwadraty(const int liczby[], int wyniki[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        wyniki[i] = liczby[i] * liczby[i];
+    }
+}
+```
+
+## Przykład 3 - tablica wynikowa przygotowana w `main`
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+void obliczKwadraty(const int liczby[], int wyniki[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        wyniki[i] = liczby[i] * liczby[i];
+    }
+}
+
+void wypiszTablice(const int tablica[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        cout << tablica[i] << " ";
+    }
+    cout << "\n";
+}
+
+int main()
+{
+    const int ROZMIAR = 5;
+    int liczby[ROZMIAR] = {1, 2, 3, 4, 5};
+    int kwadraty[ROZMIAR];
+
+    obliczKwadraty(liczby, kwadraty, ROZMIAR);
+
+    wypiszTablice(kwadraty, ROZMIAR);
+
+    return 0;
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wynik</summary>
+
+```text
+1 4 9 16 25
+```
+
+</details>
+
+### Omówienie przykładu
+
+- `liczby` przechowuje dane wejściowe.
+- `kwadraty` jest osobną tablicą wynikową.
+- Funkcja `obliczKwadraty()` nie tworzy nowej tablicy.
+- Funkcja wpisuje wyniki do tablicy przekazanej jako drugi parametr.
+- `main()` nadal decyduje, ile miejsc mają obie tablice.
+
+### Ćwiczenie 4
+
+Napisz funkcję, która zapisuje w tablicy wynikowej podwojone wartości tablicy wejściowej.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
+
+Funkcja może mieć parametry `const int liczby[]`, `int wyniki[]` i `int n`. W pętli zapisz `wyniki[i] = liczby[i] * 2`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+void obliczPodwojone(const int liczby[], int wyniki[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        wyniki[i] = liczby[i] * 2;
+    }
+}
+
+int main()
+{
+    const int ROZMIAR = 4;
+    int liczby[ROZMIAR] = {3, 5, 7, 9};
+    int podwojone[ROZMIAR];
+
+    obliczPodwojone(liczby, podwojone, ROZMIAR);
+
+    for (int i = 0; i < ROZMIAR; i++)
+    {
+        cout << podwojone[i] << " ";
+    }
+    cout << "\n";
+
+    return 0;
+}
+```
+
+</details>
+
+Funkcja może również utworzyć tablicę dynamiczną i zwrócić prowadzący do niej wskaźnik. Wymaga to jednak ręcznego zarządzania pamięcią. To zagadnienie znajduje się w materiale nieobowiązkowym: [Tablice dynamiczne - materiał nieobowiązkowy](09-tablice-dynamiczne-material-nieobowiazkowy.md).
+
 ## Kiedy tego użyć?
 
 Funkcji używamy, gdy ta sama operacja na tablicy pojawia się więcej niż raz albo gdy chcemy uporządkować program.

@@ -30,7 +30,8 @@ title: Status kursu
 - Rozdział 09 - Zakres zmiennych i funkcje: gotowy
 - Liczba pełnych lekcji w rozdziale 09: 6
 - Rozdział 10 - Tablice: gotowy
-- Liczba pełnych lekcji w rozdziale 10: 8
+- Rozdział 10 - materiał podstawowy: 8 pełnych lekcji
+- Rozdział 10 - materiał nieobowiązkowy: 1 materiał o tablicach dynamicznych
 - Kolejny rozdział do opracowania: 11 - Dane złożone
 
 ## Szczegóły
@@ -47,7 +48,7 @@ title: Status kursu
 - OK - rozdział `07-petle` zawiera wprowadzenie i 8 pełnych lekcji.
 - OK - rozdział `08-znaki-i-napisy` zawiera wprowadzenie i 6 pełnych lekcji.
 - OK - rozdział `09-zakres-i-funkcje` zawiera wprowadzenie i 6 pełnych lekcji.
-- OK - rozdział `10-tablice` zawiera wprowadzenie i 8 pełnych lekcji.
+- OK - rozdział `10-tablice` zawiera wprowadzenie, 8 pełnych lekcji podstawowych i 1 materiał nieobowiązkowy o tablicach dynamicznych.
 - OK - kolejnym rozdziałem do szczegółowego opracowania jest `11-dane-zlozone`.
 - OK - favicon nie jest dodawany, ponieważ w repozytorium nie ma neutralnego pliku `favicon.ico`.
 - BRAK - pełne lekcje w rozdziałach `11-18` nie zostały jeszcze utworzone.
