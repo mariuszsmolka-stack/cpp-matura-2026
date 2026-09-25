@@ -38,8 +38,8 @@ bool brakDostepu = !dostep;
 
 ### Operator ||
 
-| A | B | A || B |
-|---|---|--------|
+| A | B | A &#124;&#124; B |
+|---|---|------------------|
 | false | false | false |
 | false | true | true |
 | true | false | true |
