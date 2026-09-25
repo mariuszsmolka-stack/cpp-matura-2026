@@ -15,7 +15,7 @@ Szyfr Cezara to klasyczny algorytm edukacyjny. Każdą literę przesuwamy o usta
 
 Ten szyfr ma znaczenie historyczne i dydaktyczne. Nie zapewnia współczesnego bezpieczeństwa. Nie wolno używać go do ochrony haseł ani poufnych danych.
 
-## Wyjaśnienie idei metodą Feynmana
+## Wyjaśnienie idei
 
 Alfabet można wyobrazić sobie jako koło. Każda litera ma pozycję od `0` do `25`. Po literze `Z` wracamy do `A`, a po literze `z` wracamy do `a`.
 

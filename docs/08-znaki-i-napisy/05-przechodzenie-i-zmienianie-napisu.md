@@ -13,7 +13,7 @@ Nauczysz się przechodzić po znakach napisu, liczyć wybrane znaki i zmieniać 
 
 Gdy napis ma wiele znaków, często trzeba sprawdzić każdy znak po kolei. Możemy policzyć cyfry, spacje, znaleźć wybraną literę albo zamienić jeden znak na inny.
 
-## Wyjaśnienie idei metodą Feynmana
+## Wyjaśnienie idei
 
 Pętla zakresowa jest wygodna, gdy tylko odczytujemy znaki. Pętla indeksowa jest potrzebna, gdy korzystamy z pozycji znaku albo zmieniamy napis.
 

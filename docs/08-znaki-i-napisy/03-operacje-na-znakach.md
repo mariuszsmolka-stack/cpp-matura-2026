@@ -13,7 +13,7 @@ Nauczysz się sprawdzać rodzaj znaku oraz zamieniać małe litery na wielkie i 
 
 Program często musi odpowiedzieć na pytanie: czy ten znak jest cyfrą, małą literą albo wielką literą? Możemy to zrobić przez porównanie znaku z początkiem i końcem zakresu.
 
-## Wyjaśnienie idei metodą Feynmana
+## Wyjaśnienie idei
 
 Znaki w podstawowym ASCII są ułożone w kolejności. Cyfry leżą od `'0'` do `'9'`, wielkie litery od `'A'` do `'Z'`, a małe litery od `'a'` do `'z'`.
 

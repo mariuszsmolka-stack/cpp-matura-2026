@@ -13,7 +13,7 @@ Nauczysz się odróżniać pojedynczy znak od napisu oraz wczytywać znak, słow
 
 Program często pracuje z tekstem. Czasem wystarczy jeden znak, na przykład `t` albo `n`. Innym razem potrzebne jest słowo albo całe zdanie.
 
-## Wyjaśnienie idei metodą Feynmana
+## Wyjaśnienie idei
 
 `char` to jedno miejsce na jeden znak. `string` to uporządkowany szereg znaków.
 

@@ -13,7 +13,7 @@ Nauczysz się zamieniać znak na kod liczbowy i kod liczbowy na znak.
 
 Dla człowieka `A` jest literą. Dla komputera znak jest zapamiętany jako wartość liczbowa. Dzięki temu można znaki porównywać, przesuwać i zamieniać cyfry zapisane jako znaki na liczby.
 
-## Wyjaśnienie idei metodą Feynmana
+## Wyjaśnienie idei
 
 ASCII to tabela numerów dla podstawowych znaków. Obejmuje wartości od `0` do `127`. Pierwsze wartości są znakami sterującymi, a znaki widoczne mają własne kody.
 

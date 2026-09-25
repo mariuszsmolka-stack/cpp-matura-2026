@@ -13,7 +13,7 @@ Nauczysz się pobierać znaki z napisu przez indeks oraz bezpiecznie sprawdzać 
 
 Napis składa się z kolejnych znaków. Każdy znak ma swoje miejsce. W C++ pierwsze miejsce ma indeks `0`, a nie `1`.
 
-## Wyjaśnienie idei metodą Feynmana
+## Wyjaśnienie idei
 
 Indeks to numer miejsca znaku w napisie. Dla napisu `Ala`:
 
