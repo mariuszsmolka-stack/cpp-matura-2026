@@ -130,6 +130,18 @@ sections:
     lessons:
       - title: "Wprowadzenie"
         url: "09-zakres-i-funkcje/README.md"
+      - title: "Zmienne lokalne i zakres"
+        url: "09-zakres-i-funkcje/01-zmienne-lokalne-i-zakres.md"
+      - title: "Przesłanianie i zmienne globalne"
+        url: "09-zakres-i-funkcje/02-przeslanianie-i-zmienne-globalne.md"
+      - title: "Pierwsze funkcje"
+        url: "09-zakres-i-funkcje/03-pierwsze-funkcje.md"
+      - title: "Parametry i wartości zwracane"
+        url: "09-zakres-i-funkcje/04-parametry-i-wartosci-zwracane.md"
+      - title: "Wartość i referencja"
+        url: "09-zakres-i-funkcje/05-wartosc-i-referencja.md"
+      - title: "Podział programu na funkcje"
+        url: "09-zakres-i-funkcje/06-podzial-programu-na-funkcje.md"
 
   - title: "10 - Tablice"
     url: "10-tablice/README.md"
