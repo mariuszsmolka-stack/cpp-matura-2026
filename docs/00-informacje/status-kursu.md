@@ -19,6 +19,8 @@ title: Status kursu
 - Przyciski poprzedni/następny: OK
 - Rozdziały 00-18: OK
 - Favicon: świadomie pominięty
+- Rozdział 04 - Debugger w Code::Blocks: gotowy
+- Liczba pełnych lekcji w rozdziale 04: 3
 - Rozdział 05 - Podstawy języka C++: gotowy
 - Liczba pełnych lekcji w rozdziale 05: 10
 - Rozdział 06 - Operatory i instrukcje warunkowe: gotowy
@@ -52,6 +54,7 @@ title: Status kursu
 - OK - ścieżka nawigacyjna korzysta z tych samych adresów co menu.
 - OK - przyciski poprzedni/następny korzystają z kolejności w `navigation.yml`.
 - OK - rozdziały `00-18` mają strony wejściowe.
+- OK - rozdział `04-debugger` zawiera wprowadzenie i 3 pełne lekcje.
 - OK - rozdział `05-podstawy-jezyka` zawiera wprowadzenie i 10 pełnych lekcji.
 - OK - rozdział `06-operatory-i-warunki` zawiera wprowadzenie i 9 pełnych lekcji.
 - OK - rozdział `07-petle` zawiera wprowadzenie i 8 pełnych lekcji.

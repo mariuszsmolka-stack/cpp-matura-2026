@@ -35,6 +35,12 @@ sections:
     lessons:
       - title: "Wprowadzenie"
         url: "04-debugger/README.md"
+      - title: "Punkty przerwania"
+        url: "04-debugger/01-punkty-przerwania.md"
+      - title: "Praca krokowa i funkcje"
+        url: "04-debugger/02-praca-krokowa-i-funkcje.md"
+      - title: "Podgląd wartości zmiennych"
+        url: "04-debugger/03-podglad-zmiennych.md"
 
   - title: "05 - Podstawy języka C++"
     url: "05-podstawy-jezyka/README.md"
