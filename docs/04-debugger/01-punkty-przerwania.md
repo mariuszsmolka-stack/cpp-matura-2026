@@ -19,9 +19,9 @@ Dzięki temu możesz zobaczyć, co program zrobił do tej chwili i co dopiero ma
 
 Punkt przerwania to znak postawiony przy wierszu programu. Mówi debuggerowi: zatrzymaj program, gdy wykonanie dojdzie do tego miejsca.
 
-W Code::Blocks punkt przerwania można zwykle dodać kliknięciem na lewym marginesie edytora, obok numeru wiersza. Można też użyć polecenia `Debug -> Toggle breakpoint`.
+W Code::Blocks 25.03 punkt przerwania można zwykle dodać kliknięciem na lewym marginesie edytora, obok numeru wiersza. Można też użyć polecenia `Debug -> Toggle breakpoint`.
 
-Tym samym poleceniem lub ponownym kliknięciem w margines można punkt przerwania usunąć.
+Tym samym poleceniem albo ponownym kliknięciem na marginesie można punkt przerwania usunąć.
 
 Możesz ustawić kilka punktów przerwania. Wtedy program zatrzyma się na pierwszym z nich, a po kontynuowaniu działania zatrzyma się na następnym.
 
@@ -31,9 +31,9 @@ Przed rozpoczęciem:
 
 1. Otwórz projekt Code::Blocks.
 2. Upewnij się, że aktywna konfiguracja to `Debug`.
-3. Zbuduj projekt.
+3. Zbuduj projekt w konfiguracji `Debug`.
 4. Ustaw punkt przerwania.
-5. Uruchom program w debuggerze poleceniem z menu `Debug -> Start / Continue`.
+5. Uruchom program w debuggerze poleceniem `Debug -> Start`.
 
 Nie debuguj luźnego pliku `.cpp`, który nie należy do projektu. Taki plik może uruchamiać się normalnie, ale debugger może działać nieprzewidywalnie.
 
@@ -64,7 +64,7 @@ Ustaw pierwszy punkt przerwania przy wierszu:
 int koszt = cena * liczbaSztuk;
 ```
 
-Program zatrzyma się przed obliczeniem zmiennej `koszt`. W tym momencie zmienne `cena` i `liczbaSztuk` powinny mieć już wartości `12` i `4`, a `koszt` może jeszcze nie mieć poprawnej wartości.
+Program zatrzyma się przed obliczeniem zmiennej `koszt`. W tym momencie instrukcje tworzące `cena` i `liczbaSztuk` zostały już wykonane. Następną instrukcją do wykonania jest obliczenie `koszt`.
 
 Ustaw drugi punkt przerwania przy wierszu:
 
@@ -72,17 +72,17 @@ Ustaw drugi punkt przerwania przy wierszu:
 cout << "Koszt: " << koszt << '\n';
 ```
 
-Program zatrzyma się przed wypisaniem wyniku. Wtedy `koszt` powinien mieć wartość `48`.
+Program zatrzyma się przed wypisaniem wyniku. Wtedy instrukcja obliczająca `koszt` została już wykonana, więc `koszt` powinien mieć wartość `48`.
 
-## Co oznacza podświetlony wiersz?
+## Aktualne miejsce zatrzymania
 
-Podświetlony wiersz zwykle jest następną instrukcją do wykonania. Jeżeli program zatrzymał się przy obliczeniu `koszt`, to obliczenie najczęściej jeszcze się nie wykonało.
+Strzałka debuggera albo podświetlony wiersz wskazuje następną instrukcję do wykonania. Jeżeli program zatrzymał się przy obliczeniu `koszt`, to obliczenie najczęściej jeszcze się nie wykonało.
 
 Dopiero po przejściu do następnego wiersza wartość `koszt` powinna się zmienić.
 
 ## Kontynuowanie programu
 
-Gdy program zatrzyma się na pierwszym punkcie przerwania, możesz użyć polecenia `Debug -> Start / Continue`. Program ruszy dalej i zatrzyma się przy następnym punkcie przerwania albo zakończy działanie.
+Gdy program zatrzyma się na pierwszym punkcie przerwania, użyj `Debug -> Continue`. Program ruszy dalej i zatrzyma się przy następnym punkcie przerwania albo zakończy działanie.
 
 Sesję debugowania możesz zakończyć poleceniem `Debug -> Stop debugger`.
 
@@ -100,12 +100,12 @@ Jeżeli chcesz tylko szybko zobaczyć wynik programu, zwykłe uruchomienie wysta
 
 ### Ćwiczenie 1
 
-Ustaw jeden punkt przerwania przy obliczeniu zmiennej `koszt`. Uruchom program w debuggerze i sprawdź wartości `cena` oraz `liczbaSztuk`.
+Ustaw jeden punkt przerwania przy obliczeniu zmiennej `koszt`. Uruchom program w debuggerze i sprawdź, które instrukcje zostały wykonane.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Kliknij na marginesie obok wiersza `int koszt = cena * liczbaSztuk;`. Potem uruchom program w debuggerze.
+Kliknij na marginesie obok wiersza `int koszt = cena * liczbaSztuk;`. Potem uruchom program w debuggerze poleceniem `Debug -> Start`.
 
 </details>
 
@@ -132,8 +132,9 @@ int main()
 Oczekiwane obserwacje:
 
 - punkt przerwania: wiersz `int koszt = cena * liczbaSztuk;`,
-- przed wykonaniem tego wiersza: `cena = 12`, `liczbaSztuk = 4`,
-- po wykonaniu tego wiersza: `koszt = 48`.
+- wykonane wcześniej: `int cena = 12;` oraz `int liczbaSztuk = 4;`,
+- następna instrukcja: `int koszt = cena * liczbaSztuk;`,
+- po wykonaniu tej instrukcji: `koszt = 48`.
 
 </details>
 
@@ -144,7 +145,7 @@ Ustaw dwa punkty przerwania: przed obliczeniem `koszt` i przed instrukcją `cout
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Po zatrzymaniu na pierwszym punkcie użyj polecenia `Debug -> Start / Continue`.
+Po zatrzymaniu na pierwszym punkcie użyj polecenia `Debug -> Continue`.
 
 </details>
 
@@ -172,8 +173,9 @@ Oczekiwane obserwacje:
 
 - pierwszy punkt przerwania: `int koszt = cena * liczbaSztuk;`,
 - drugi punkt przerwania: `cout << "Koszt: " << koszt << '\n';`,
-- przy drugim punkcie: `koszt = 48`,
-- instrukcja `cout` dopiero ma wypisać wynik.
+- przy drugim punkcie instrukcja obliczenia została już wykonana,
+- następna instrukcja przy drugim punkcie: wypisanie wyniku,
+- `koszt = 48`.
 
 </details>
 
@@ -212,6 +214,7 @@ Oczekiwane obserwacje:
 
 - aktywny punkt przerwania: tylko wiersz z `cout`,
 - program nie zatrzymuje się wcześniej,
+- następna instrukcja: wypisanie wyniku,
 - przy zatrzymaniu `koszt` ma już wartość `48`.
 
 </details>
@@ -249,15 +252,16 @@ int main()
 
 Oczekiwane obserwacje:
 
-- przed wykonaniem instrukcji: `cena = 12`, `liczbaSztuk = 4`,
-- przewidywana wartość: `48`,
-- po wykonaniu instrukcji: `koszt = 48`.
+- punkt przerwania: `int koszt = cena * liczbaSztuk;`,
+- następna instrukcja: obliczenie zmiennej `koszt`,
+- przed wykonaniem: `cena = 12`, `liczbaSztuk = 4`,
+- po wykonaniu: `koszt = 48`.
 
 </details>
 
 ### Ćwiczenie 5
 
-Znajdź błąd logiczny w programie. Program powinien obliczyć koszt zakupów, ale wynik jest zbyt mały.
+Znajdź miejsce błędnego obliczenia. Program powinien obliczyć koszt zakupów, ale wynik jest zbyt mały.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 5</summary>
@@ -289,7 +293,7 @@ int main()
 Oczekiwane obserwacje:
 
 - punkt przerwania: wiersz `int koszt = cena + liczbaSztuk;`,
-- przed wykonaniem: `cena = 12`, `liczbaSztuk = 4`,
+- następna instrukcja: błędne obliczenie zmiennej `koszt`,
 - po wykonaniu: `koszt = 16`,
 - oczekiwany koszt to `48`, więc błąd jest w operatorze `+`, który powinien być operatorem `*`.
 
@@ -303,4 +307,4 @@ int koszt = cena * liczbaSztuk;
 
 ## Podsumowanie
 
-Punkt przerwania zatrzymuje program w wybranym miejscu. Podświetlony wiersz zwykle dopiero ma zostać wykonany. Kontynuowanie pozwala przejść do następnego punktu przerwania lub do końca programu.
+Punkt przerwania zatrzymuje program w wybranym miejscu. Wskazany wiersz zwykle dopiero ma zostać wykonany. Kontynuowanie pozwala przejść do następnego punktu przerwania lub do końca programu.

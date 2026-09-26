@@ -19,14 +19,14 @@ Możesz wykonać następny wiersz bez wchodzenia do funkcji albo wejść do funk
 
 ## Najważniejsze polecenia
 
-W Code::Blocks używaj poleceń z menu `Debug`:
+W Code::Blocks 25.03 używaj poleceń z menu `Debug`:
 
 - `Debug -> Next line` - wykonuje następny wiersz bez wchodzenia do funkcji,
 - `Debug -> Step into` - wchodzi do wywoływanej funkcji,
 - `Debug -> Step out` - kończy aktualną funkcję i wraca do miejsca wywołania,
-- `Debug -> Start / Continue` - kontynuuje program do następnego punktu przerwania albo końca.
+- `Debug -> Continue` - kontynuuje program do następnego punktu przerwania albo końca.
 
-Nazwy mogą wyglądać trochę inaczej w zależności od wersji programu, ale sens pozostaje ten sam: następny wiersz, wejście do funkcji, wyjście z funkcji i kontynuowanie.
+Nie używamy tutaj konsoli GDB. Wystarczą polecenia z menu i okno `Watches`.
 
 ## Program do ćwiczeń
 
@@ -70,12 +70,12 @@ Po tym kroku wykonanie przejdzie do wiersza z `cout`, a zmienna `wynik` powinna 
 
 Jeżeli na tym samym wierszu użyjesz `Debug -> Step into`, debugger wejdzie do funkcji `obliczPole`.
 
-Zobaczysz jej parametry:
+W oknie `Watches` argumenty powinny być widoczne w sekcji `Function arguments`:
 
 - `dlugosc = 5`,
 - `szerokosc = 3`.
 
-Potem powstanie zmienna `pole`. Po wykonaniu instrukcji:
+Lokalna zmienna `pole` jest widoczna tylko wewnątrz funkcji `obliczPole`. Po wykonaniu instrukcji:
 
 ```cpp
 int pole = dlugosc * szerokosc;
@@ -87,7 +87,7 @@ Po instrukcji `return pole;` wynik wraca do funkcji `main` i zostaje zapisany w 
 
 ## Jak wyjść z funkcji?
 
-Jeżeli jesteś wewnątrz funkcji i nie chcesz przechodzić przez wszystkie pozostałe instrukcje ręcznie, użyj `Debug -> Step out`.
+Jeżeli jesteś wewnątrz funkcji i nie chcesz przechodzić przez wszystkie pozostałe instrukcje po kolei, użyj `Debug -> Step out`.
 
 Debugger dokończy aktualną funkcję i wróci do miejsca, z którego została wywołana.
 
@@ -110,7 +110,7 @@ Przejdź przez program wiersz po wierszu od początku funkcji `main` do wypisani
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Ustaw punkt przerwania na pierwszym wierszu w funkcji `main`, a potem używaj przejścia do następnego wiersza.
+Ustaw punkt przerwania na pierwszym wierszu w funkcji `main`, a potem używaj `Debug -> Next line`.
 
 </details>
 
@@ -136,10 +136,10 @@ int main()
 
 Oczekiwane obserwacje:
 
+- punkt przerwania: `int a = 4;`,
 - po wykonaniu `int a = 4;`: `a = 4`,
 - po wykonaniu `int b = 6;`: `b = 6`,
-- po wykonaniu `int suma = a + b;`: `suma = 10`,
-- wiersz z `cout` wypisuje gotowy wynik.
+- po wykonaniu `int suma = a + b;`: `suma = 10`.
 
 </details>
 
@@ -150,7 +150,7 @@ Wejdź do funkcji dodającej dwie liczby i sprawdź wartości jej parametrów.
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Zatrzymaj program na wierszu z wywołaniem `dodaj(a, b)` i użyj wejścia do funkcji.
+Zatrzymaj program na wierszu z wywołaniem `dodaj(a, b)` i użyj `Debug -> Step into`.
 
 </details>
 
@@ -184,8 +184,8 @@ int main()
 Oczekiwane obserwacje:
 
 - punkt przerwania: `int suma = dodaj(a, b);`,
-- po wejściu do funkcji: `pierwsza = 7`, `druga = 8`,
-- po wykonaniu obliczenia: `wynik = 15`,
+- po wejściu do funkcji: argumenty w sekcji `Function arguments` mają wartości `7` i `8`,
+- po wykonaniu obliczenia: lokalna zmienna `wynik = 15`,
 - po powrocie do `main`: `suma = 15`.
 
 </details>
@@ -197,7 +197,7 @@ Porównaj przejście nad funkcją i wejście do funkcji. Wykonaj program dwa raz
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 3</summary>
 
-Za pierwszym razem użyj przejścia do następnego wiersza. Za drugim razem użyj wejścia do funkcji.
+Za pierwszym razem użyj `Debug -> Next line`. Za drugim razem użyj `Debug -> Step into`.
 
 </details>
 
@@ -229,14 +229,15 @@ int main()
 Oczekiwane obserwacje:
 
 - przejście nad funkcją: debugger nie pokazuje wnętrza `podwoj`, ale `wynik` w `main` otrzymuje wartość `18`,
-- wejście do funkcji: debugger pokazuje parametr `liczba = 9` i zmienną lokalną `wynik = 18`,
+- wejście do funkcji: debugger pokazuje argument `liczba = 9` w sekcji `Function arguments`,
+- wewnątrz funkcji zmienna lokalna `wynik` otrzymuje wartość `18`,
 - oba warianty prowadzą do tego samego wyniku programu.
 
 </details>
 
 ### Ćwiczenie 4
 
-Wejdź do funkcji, a potem użyj wyjścia z funkcji, aby wrócić do `main` bez ręcznego wykonywania wszystkich kroków.
+Wejdź do funkcji, a potem użyj wyjścia z funkcji, aby wrócić do `main` bez ręcznego wykonywania każdego kolejnego wiersza.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 4</summary>
@@ -274,7 +275,7 @@ int main()
 
 Oczekiwane obserwacje:
 
-- po wejściu do funkcji: `cena = 11`, `liczbaSztuk = 5`,
+- po wejściu do funkcji: `cena = 11`, `liczbaSztuk = 5` w sekcji `Function arguments`,
 - po wyjściu z funkcji: wykonanie wraca do `main`,
 - zmienna `razem` otrzymuje wartość `55`.
 
@@ -320,7 +321,7 @@ int main()
 
 Oczekiwane obserwacje:
 
-- po wejściu do funkcji: `dlugosc = 5`, `szerokosc = 3`,
+- po wejściu do funkcji: `dlugosc = 5`, `szerokosc = 3` w sekcji `Function arguments`,
 - po wykonaniu obliczenia: `pole = 8`,
 - oczekiwane pole prostokąta to `15`,
 - błąd jest w operatorze `+`, który powinien być operatorem `*`.
@@ -335,4 +336,4 @@ int pole = dlugosc * szerokosc;
 
 ## Podsumowanie
 
-Przejście nad funkcją wykonuje ją jako jeden krok. Wejście do funkcji pokazuje, co dzieje się w środku. Wyjście z funkcji pozwala wrócić do miejsca wywołania bez ręcznego przechodzenia przez resztę funkcji.
+`Debug -> Next line` wykonuje wywołanie funkcji jako jeden krok. `Debug -> Step into` wchodzi do funkcji i pokazuje jej argumenty. `Debug -> Step out` pozwala wrócić do miejsca wywołania.
