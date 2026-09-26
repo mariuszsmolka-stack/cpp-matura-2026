@@ -7,7 +7,7 @@ title: Status kursu
 
 ## Data sprawdzenia
 
-2026-09-25
+2026-09-26
 
 ## Podsumowanie
 
@@ -35,7 +35,10 @@ title: Status kursu
 - Rozdział 11 - Dane złożone: gotowy
 - Rozdział 11 - materiał podstawowy: 4 pełne lekcje
 - Rozdział 11 - materiał nieobowiązkowy: 1 materiał o tuple i rozpakowywaniu
-- Kolejny rozdział do opracowania: 12 - vector
+- Rozdział 12 - vector: gotowy
+- Rozdział 12 - lekcje obowiązkowe: 7
+- Rozdział 12 - lekcje nieobowiązkowe: 1
+- Kolejny rozdział do opracowania: 13 - Zbiory i kontenery asocjacyjne
 
 ## Szczegóły
 
@@ -53,6 +56,7 @@ title: Status kursu
 - OK - rozdział `09-zakres-i-funkcje` zawiera wprowadzenie i 6 pełnych lekcji.
 - OK - rozdział `10-tablice` zawiera wprowadzenie, 8 pełnych lekcji podstawowych i 1 materiał nieobowiązkowy o tablicach dynamicznych.
 - OK - rozdział `11-dane-zlozone` zawiera wprowadzenie, 4 pełne lekcje podstawowe i 1 materiał nieobowiązkowy o tuple i rozpakowywaniu.
-- OK - kolejnym rozdziałem do szczegółowego opracowania jest `12-vector`.
+- OK - rozdział `12-vector` zawiera wprowadzenie, 7 lekcji obowiązkowych i 1 materiał nieobowiązkowy o pojemności i iteratorach.
+- OK - kolejnym rozdziałem do szczegółowego opracowania jest `13-zbiory-i-kontenery`.
 - OK - favicon nie jest dodawany, ponieważ w repozytorium nie ma neutralnego pliku `favicon.ico`.
-- BRAK - pełne lekcje w rozdziałach `12-18` nie zostały jeszcze utworzone.
+- BRAK - pełne lekcje w rozdziałach `13-18` nie zostały jeszcze utworzone.
