@@ -113,7 +113,7 @@ using namespace std;
 
 int main()
 {
-    vector<vector<int>> tabela = {{1, 2, 3}, {4, 5, 6}};
+    vector<vector<int>> tabela = { {1, 2, 3}, {4, 5, 6} };
 
     for (int i = 0; i < (int)tabela.size(); i++)
     {
@@ -222,7 +222,7 @@ using namespace std;
 
 int main()
 {
-    vector<vector<int>> tabela = {{1, 2}, {3, 4}};
+    vector<vector<int>> tabela = { {1, 2}, {3, 4} };
     int suma = 0;
 
     for (const vector<int> &wiersz : tabela)
@@ -257,7 +257,7 @@ using namespace std;
 
 int main()
 {
-    vector<vector<int>> tabela = {{2, 3, 4}, {5, 6, 7}};
+    vector<vector<int>> tabela = { {2, 3, 4}, {5, 6, 7} };
 
     for (const vector<int> &wiersz : tabela)
     {
@@ -294,7 +294,7 @@ using namespace std;
 
 int main()
 {
-    vector<vector<int>> tabela = {{3, 9}, {10, 4}};
+    vector<vector<int>> tabela = { {3, 9}, {10, 4} };
     int maks = tabela[0][0], wi = 0, ko = 0;
 
     for (int i = 0; i < (int)tabela.size(); i++)
@@ -339,7 +339,7 @@ using namespace std;
 
 int main()
 {
-    vector<vector<int>> tabela = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    vector<vector<int>> tabela = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
 
     for (int i = 0; i < (int)tabela.size(); i++)
     {

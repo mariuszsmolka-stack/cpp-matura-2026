@@ -118,7 +118,7 @@ struct Produkt
 
 int main()
 {
-    vector<Produkt> produkty = {{"zeszyt", 4.5}, {"dlugopis", 3.0}};
+    vector<Produkt> produkty = { {"zeszyt", 4.5}, {"dlugopis", 3.0} };
 
     produkty[0].cena = 5.0;
 
@@ -188,7 +188,7 @@ struct Produkt
 
 int main()
 {
-    vector<Produkt> produkty = {{"zeszyt", 4.5}, {"gumka", 2.0}};
+    vector<Produkt> produkty = { {"zeszyt", 4.5}, {"gumka", 2.0} };
 
     for (const Produkt &produkt : produkty)
     {
@@ -283,7 +283,7 @@ struct Zawodnik
 
 int main()
 {
-    vector<Zawodnik> zawodnicy = {{"Ola", 12}, {"Adam", 20}, {"Ewa", 17}};
+    vector<Zawodnik> zawodnicy = { {"Ola", 12}, {"Adam", 20}, {"Ewa", 17} };
     int indeks = 0;
 
     for (int i = 1; i < (int)zawodnicy.size(); i++)
@@ -327,7 +327,7 @@ struct Pomiar
 
 int main()
 {
-    vector<Pomiar> pomiary = {{"dom", 21.5}, {"dwor", -2.0}, {"sala", 19.0}};
+    vector<Pomiar> pomiary = { {"dom", 21.5}, {"dwor", -2.0}, {"sala", 19.0} };
 
     for (const Pomiar &pomiar : pomiary)
     {
@@ -372,7 +372,7 @@ struct Uczen
 
 int main()
 {
-    vector<Uczen> uczniowie = {{"Anna", 78}, {"Jan", 64}};
+    vector<Uczen> uczniowie = { {"Anna", 78}, {"Jan", 64} };
 
     for (Uczen &uczen : uczniowie)
     {
