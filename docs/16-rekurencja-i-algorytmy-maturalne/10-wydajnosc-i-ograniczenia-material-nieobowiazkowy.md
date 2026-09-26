@@ -5,39 +5,31 @@ title: Wydajność i ograniczenia - materiał nieobowiązkowy
 
 # Wydajność i ograniczenia - materiał nieobowiązkowy
 
-> Materiał nieobowiązkowy. Możesz pominąć te lekcje bez utraty ciągłości materialu podstawowego.
+> Materiał nieobowiązkowy. Możesz pominąć tę lekcję bez utraty ciągłości materiału podstawowego.
 
-## Krótkie przedstawienie problemu
+## Problem
 
-Chcemy wiedzieć, kiedy rekurencja staje się kosztowna.
+Rekurencja bywa bardzo czytelna, ale każde wywołanie funkcji ma koszt. Program musi zapamiętać aktywne wywołania, ich argumenty, zmienne lokalne i miejsca powrotu. Gdy wywołań jest bardzo dużo, może zabraknąć pamięci stosu.
 
-## Proste wyjaśnienie idei
+Nie ma jednej stałej liczby wywołań, po której zawsze następuje przepełnienie stosu. Zależy to od środowiska, programu i dostępnej pamięci.
 
-Każde wywołanie funkcji ma koszt. Jeżeli wynik został już policzony, można go zapamiętać.
+## Rekurencja liniowa i rozgałęziająca
 
-## Dokładne wyjaśnienie techniczne
+Rekurencja liniowa tworzy zwykle jeden dalszy krok, np. `suma(n - 1)`. Głębokość rośnie mniej więcej wraz z argumentem.
 
-Zapamiętywanie wcześniej policzonych wyników ogranicza wielokrotne obliczanie tych samych wartości.
+Rekurencja rozgałęziająca może tworzyć kilka wywołań z jednego wywołania, np. `fib(n - 1) + fib(n - 2)`. Wtedy liczba wywołań może rosnąć bardzo szybko.
 
-## Przypadek podstawowy
+## Trzy podejścia do Fibonacciego
 
-Dla Fibonacciego przypadki podstawowe to `0` i `1`.
+| Rozwiązanie                    | Czas                 | Dodatkowa pamięć       | Uwagi                               |
+| ------------------------------ | -------------------- | ---------------------- | ----------------------------------- |
+| prosta rekurencja Fibonacciego | bardzo szybko rośnie | stos wywołań           | wielokrotnie liczy te same wartości |
+| rekurencja z pamięcią          | liniowy względem `n` | tablica wyników i stos | każdy wynik jest liczony raz        |
+| pętla                          | liniowy względem `n` | stała lub niewielka    | zwykle najprostsza dla samego ciągu |
 
-## Krok rekurencyjny
+## Rekurencja z pamięcią
 
-Jeżeli wyniku nie ma w pamięci, funkcja liczy go z dwóch mniejszych wyników i zapisuje.
-
-## W jaki sposób problem się zmniejsza?
-
-W każdym poprawnym przykładzie zmienia się argument funkcji albo zakres danych. Nowe wywołanie dostaje mniejszy problem, więc może dojść do przypadku podstawowego.
-
-## Ręczne prześledzenie niewielkiego przykładu
-
-Dla `fibMemo(10)` część wartości jest potrzebna wiele razy, ale zostaje zapisana.
-
-
-
-## Pełny program C++
+Wartość `-1` w tablicy `pamiec` oznacza, że wynik nie został jeszcze policzony. Funkcja najpierw sprawdza, czy wynik jest już zapisany. Jeśli tak, zwraca go bez ponownego rozbijania problemu.
 
 ```cpp
 #include <iostream>
@@ -47,6 +39,11 @@ using namespace std;
 
 long long fibMemo(int n, vector<long long> &pamiec)
 {
+    if (n < 0)
+    {
+        return -1;
+    }
+
     if (n == 0)
     {
         return 0;
@@ -69,22 +66,22 @@ long long fibMemo(int n, vector<long long> &pamiec)
 int main()
 {
     int n = 10;
+
+    if (n < 0)
+    {
+        cout << "Błędne dane\n";
+        return 0;
+    }
+
     vector<long long> pamiec(n + 1, -1);
     cout << fibMemo(n, pamiec) << "\n";
+
     return 0;
 }
 ```
 
 <details markdown="1">
-<summary>Pokaż przykładowe dane i wynik</summary>
-
-Dane wejściowe:
-
-```text
-brak
-```
-
-Wynik:
+<summary>Pokaż wynik</summary>
 
 ```text
 55
@@ -92,153 +89,161 @@ Wynik:
 
 </details>
 
-## Omówienie programu krok po kroku
+## Wersja iteracyjna
 
-Program tworzy vector `pamiec`. Wartość `-1` oznacza, że wynik nie został jeszcze policzony.
+Do samego obliczenia `fib(n)` pętla jest zwykle najprostsza:
 
-## Kiedy rekurencja się zakończy?
+```cpp
+#include <iostream>
 
-Rekurencja zakończy się wtedy, gdy kolejne wywołania doprowadzą do przypadku podstawowego. Jeżeli argument nie zbliża się do końca, funkcja może wywoływać się bez końca.
+using namespace std;
 
-## Kiedy lepsza będzie pętla?
+long long fibPetla(int n)
+{
+    if (n < 0)
+    {
+        return -1;
+    }
 
-Pętla będzie lepsza, gdy zadanie polega na prostym przejściu po kolejnych wartościach i rekurencja nie ułatwia myślenia. Pętla zwykle zużywa mniej pamięci i jest bezpieczniejsza dla bardzo dużych danych.
+    if (n == 0)
+    {
+        return 0;
+    }
 
-## Typowe błędy
+    long long a = 0;
+    long long b = 1;
 
-- Brak przypadku podstawowego.
-- Przypadek podstawowy, którego nie da się osiągnąć.
-- Argument rosnący zamiast zbliżającego się do końca.
-- Pominięcie `return` w funkcji zwracającej wartość.
-- Pomylenie instrukcji wykonywanych podczas schodzenia z instrukcjami wykonywanymi podczas powrotu.
-- Użycie rekurencji tam, gdzie zwykła pętla jest prostsza.
+    for (int i = 2; i <= n; i++)
+    {
+        long long kolejny = a + b;
+        a = b;
+        b = kolejny;
+    }
+
+    return b;
+}
+
+int main()
+{
+    cout << fibPetla(10) << "\n";
+    return 0;
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wynik</summary>
+
+```text
+55
+```
+
+</details>
+
+## Kiedy uważać
+
+- Gdy rekurencja jest bardzo głęboka.
+- Gdy jedno wywołanie tworzy kilka kolejnych wywołań.
+- Gdy te same wyniki są liczone wielokrotnie.
+- Gdy pętla jest prostsza i równie czytelna.
+- Gdy argument nie zbliża się do przypadku podstawowego.
 
 ## Ćwiczenia
 
-### Ćwiczenie 1 - przewidzenie wyniku
+### Ćwiczenie 1 - powtarzające się obliczenia
 
-Dla funkcji `fibMemo` pokazanej w tej lekcji ustal wynik wywołania `fibMemo(10, pamiec)`. Zapisz odpowiedź jako wartość zwracaną albo dokładny tekst wypisany przez program.
+W drzewie prostej rekurencji dla `fib(5)` wskaż, które wartości `fib(k)` pojawiają się więcej niż raz.
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Najpierw znajdź przypadek podstawowy `n == 0 albo n == 1`, a potem rozpisz kolejne wartości argumentu `n`.
+Rozwiń `fib(5)` na `fib(4)` i `fib(3)`.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
-Wywołanie `fibMemo(10, pamiec)` daje wynik:
+Więcej niż raz pojawiają się między innymi `fib(3)`, `fib(2)`, `fib(1)` i `fib(0)`. To pokazuje, dlaczego prosta rekurencja Fibonacciego wykonuje dużo powtarzających się obliczeń.
+
+</details>
+
+### Ćwiczenie 2 - liczba wywołań
+
+Policz wszystkie wywołania prostej funkcji `fib` dla `fib(4)`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Skorzystaj z drzewa z lekcji o Fibonaccim.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
+
+Drzewo zawiera:
 
 ```text
-55
+fib(4)
+fib(3), fib(2)
+fib(2), fib(1), fib(1), fib(0)
+fib(1), fib(0)
 ```
 
-</details>
-
-### Ćwiczenie 2 - rozpisanie wywołań
-
-Zapisz kolejno argumenty wszystkich wywołań rekurencyjnych funkcji `fibMemo` dla wywołania `fibMemo(10, pamiec)`. Przy każdym wywołaniu dopisz, czy funkcja schodzi głębiej, czy osiąga przypadek podstawowy.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zacznij od pierwszego wywołania. Potem zapisuj tylko te argumenty, które pojawiają się w kolejnych wywołaniach tej samej funkcji.
+Łącznie jest `9` wywołań.
 
 </details>
 
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+### Ćwiczenie 3 - działanie pamięci wyników
 
-Poprawna odpowiedź powinna pokazywać, że każde kolejne wywołanie zbliża funkcję do przypadku podstawowego `n == 0 albo n == 1`. Ostatni wiersz opisu to wywołanie, które już nie uruchamia kolejnej rekurencji.
-
-</details>
-
-### Ćwiczenie 3 - przypadek podstawowy
-
-Wskaż w funkcji `fibMemo` przypadek podstawowy. Napisz jednym zdaniem, dlaczego bez tego warunku rekurencja nie mogłaby się poprawnie zakończyć.
+Wyjaśnij, co oznacza warunek `pamiec[n] != -1` w funkcji `fibMemo`.
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
 
-Szukaj instrukcji `if`, po której funkcja kończy pracę bez kolejnego wywołania samej siebie.
+Wartość `-1` oznacza brak policzonego wyniku.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
 
-Przypadek podstawowy to warunek `n == 0 albo n == 1`. Po jego spełnieniu funkcja nie wywołuje już samej siebie, więc rekurencja zaczyna się kończyć.
-
-</details>
-
-### Ćwiczenie 4 - błąd w kroku rekurencyjnym
-
-Wyjaśnij, co mogłoby się stać, gdyby w funkcji `fibMemo` krok rekurencyjny nie zmieniał argumentu `n` w stronę przypadku podstawowego.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Porównaj pierwsze wywołanie z następnym. Sprawdź, czy problem staje się mniejszy albo prostszy.
+Warunek `pamiec[n] != -1` oznacza, że wynik dla `n` został już wcześniej obliczony i zapisany. Funkcja może go od razu zwrócić, zamiast ponownie tworzyć całe poddrzewo wywołań.
 
 </details>
 
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+### Ćwiczenie 4 - wybór podejścia
 
-Jeżeli argument nie zbliża się do przypadku podstawowego, funkcja może wywoływać samą siebie bez końca. Program zużywa wtedy coraz więcej pamięci stosu i może zakończyć się błędem.
-
-</details>
-
-### Ćwiczenie 5 - krótki program
-
-Napisz krótki program testujący funkcję `fibMemo` dla wywołania `fibMemo(10, pamiec)`. Program ma wypisać wynik i działać w standardzie C++23.
+Dla zadania „oblicz setny wyraz ciągu Fibonacciego” wybierz: prosta rekurencja, rekurencja z pamięcią czy pętla. Uzasadnij wybór.
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
 
-Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkcję z podanymi argumentami.
+Zastanów się, czy potrzebujesz drzewa wywołań, czy tylko wyniku.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
 
-```cpp
-#include <iostream>
-#include <vector>
+Najlepszym wyborem jest pętla albo rekurencja z pamięcią. Prosta rekurencja wielokrotnie liczy te same wartości i będzie bardzo wolna. Jeśli potrzebujemy tylko wyniku, pętla jest najprostsza i zużywa mało dodatkowej pamięci.
 
-using namespace std;
+</details>
 
-long long fibMemo(int n, vector<long long> &pamiec)
-{
-    if (n == 0)
-    {
-        return 0;
-    }
+### Ćwiczenie 5 - ryzyko głębokości
 
-    if (n == 1)
-    {
-        return 1;
-    }
+Dlaczego funkcja rekurencyjna licząca sumę od `1` do `1000000` może być gorszym wyborem niż pętla?
 
-    if (pamiec[n] != -1)
-    {
-        return pamiec[n];
-    }
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 5</summary>
 
-    pamiec[n] = fibMemo(n - 1, pamiec) + fibMemo(n - 2, pamiec);
-    return pamiec[n];
-}
+Pomyśl o liczbie aktywnych wywołań funkcji.
 
-int main()
-{
-    int n = 10;
-    vector<long long> pamiec(n + 1, -1);
-    cout << fibMemo(n, pamiec) << "\n";
-    return 0;
-}
-```
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 5</summary>
+
+Rekurencja utworzyłaby bardzo dużo aktywnych wywołań. Każde z nich zajmuje miejsce na stosie. Może to doprowadzić do przepełnienia stosu. Pętla wykona to samo obliczenie bez tworzenia miliona zagnieżdżonych wywołań.
 
 </details>

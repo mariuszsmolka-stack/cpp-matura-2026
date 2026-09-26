@@ -5,37 +5,43 @@ title: Operacje na cyfrach
 
 # Operacje na cyfrach
 
-## Krótkie przedstawienie problemu
+## Problem
 
-Chcemy przetwarzać liczbę cyfra po cyfrze.
+Chcemy rekurencyjnie przetwarzać cyfry liczby. W zadaniach maturalnych często trzeba obliczyć sumę cyfr, liczbę cyfr, największą cyfrę albo liczbę wystąpień wskazanej cyfry.
 
-## Proste wyjaśnienie idei
+W tej lekcji główne funkcje przyjmują liczby nieujemne. Liczby ujemne można obsłużyć przed pierwszym wywołaniem, zamieniając znak na dodatni.
 
-Ostatnia cyfrę pobieramy przez `% 10`, a reszte liczby przez `/ 10`.
+## Dwie operacje na liczbie
 
-## Dokładne wyjaśnienie techniczne
+Dla liczby całkowitej nieujemnej:
 
-Dzielenie całkowite przez 10 usuwa ostatnią cyfrę, więc problem staje się krótszy. Liczbę ujemną najpierw zamieniamy na dodatnią.
+- `liczba % 10` daje ostatnią cyfrę,
+- `liczba / 10` usuwa ostatnią cyfrę.
 
-## Przypadek podstawowy
+Przykład dla `472`:
 
-Dla liczby jednocyfrowej zwracamy wynik bez dalszego wywołania. Dla `0` liczba cyfr wynosi `1`.
+| Wyrażenie  | Wynik | Znaczenie              |
+| ---------- | ----- | ---------------------- |
+| `472 % 10` | `2`   | ostatnia cyfra         |
+| `472 / 10` | `47`  | liczba bez ostatniej   |
 
-## Krok rekurencyjny
+Dzielenie całkowite przez `10` zmniejsza problem, bo liczba ma mniej cyfr. Dlatego może prowadzić do przypadku podstawowego.
 
-Krok rekurencyjny przetwarza ostatnią cyfrę i wywołuje funkcję dla `liczba / 10`.
+## Suma cyfr
 
-## W jaki sposób problem się zmniejsza?
+Przypadek podstawowy: jeżeli `liczba < 10`, to liczba ma jedną cyfrę i sama jest sumą swoich cyfr.
 
-W każdym poprawnym przykładzie zmienia się argument funkcji albo zakres danych. Nowe wywołanie dostaje mniejszy problem, więc może dojść do przypadku podstawowego.
+Rozwinięcie dla `472`:
 
-## Ręczne prześledzenie niewielkiego przykładu
+```text
+sumaCyfr(472)
+=> 2 + sumaCyfr(47)
+=> 2 + 7 + sumaCyfr(4)
+=> 2 + 7 + 4
+=> 13
+```
 
-Dla `3054` kolejne argumenty to `3054`, `305`, `30`, `3`.
-
-
-
-## Pełny program C++
+## Kod
 
 ```cpp
 #include <iostream>
@@ -44,11 +50,6 @@ using namespace std;
 
 int sumaCyfr(int liczba)
 {
-    if (liczba < 0)
-    {
-        liczba = -liczba;
-    }
-
     if (liczba < 10)
     {
         return liczba;
@@ -59,11 +60,6 @@ int sumaCyfr(int liczba)
 
 int liczbaCyfr(int liczba)
 {
-    if (liczba < 0)
-    {
-        liczba = -liczba;
-    }
-
     if (liczba < 10)
     {
         return 1;
@@ -72,165 +68,233 @@ int liczbaCyfr(int liczba)
     return 1 + liczbaCyfr(liczba / 10);
 }
 
-int main()
-{
-    cout << sumaCyfr(-3054) << "\n";
-    cout << liczbaCyfr(0) << "\n";
-    return 0;
-}
-```
-
-<details markdown="1">
-<summary>Pokaż przykładowe dane i wynik</summary>
-
-Dane wejściowe:
-
-```text
-brak
-```
-
-Wynik:
-
-```text
-12
-1
-```
-
-</details>
-
-## Omówienie programu krok po kroku
-
-Program sumuje cyfry liczby ujemnej po zmianie znaku i poprawnie liczy liczbę cyfr zera.
-
-## Kiedy rekurencja się zakończy?
-
-Rekurencja zakończy się wtedy, gdy kolejne wywołania doprowadzą do przypadku podstawowego. Jeżeli argument nie zbliża się do końca, funkcja może wywoływać się bez końca.
-
-## Kiedy lepsza będzie pętla?
-
-Pętla będzie lepsza, gdy zadanie polega na prostym przejściu po kolejnych wartościach i rekurencja nie ułatwia myślenia. Pętla zwykle zużywa mniej pamięci i jest bezpieczniejsza dla bardzo dużych danych.
-
-## Typowe błędy
-
-- Brak przypadku podstawowego.
-- Przypadek podstawowy, którego nie da się osiągnąć.
-- Argument rosnący zamiast zbliżającego się do końca.
-- Pominięcie `return` w funkcji zwracającej wartość.
-- Pomylenie instrukcji wykonywanych podczas schodzenia z instrukcjami wykonywanymi podczas powrotu.
-- Użycie rekurencji tam, gdzie zwykła pętla jest prostsza.
-
-## Ćwiczenia
-
-### Ćwiczenie 1 - przewidzenie wyniku
-
-Dla funkcji `sumaCyfr` pokazanej w tej lekcji ustal wynik wywołania `sumaCyfr(472)`. Zapisz odpowiedź jako wartość zwracaną albo dokładny tekst wypisany przez program.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Najpierw znajdź przypadek podstawowy `liczba < 10`, a potem rozpisz kolejne wartości argumentu `liczba`.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Wywołanie `sumaCyfr(472)` daje wynik:
-
-```text
-13
-```
-
-</details>
-
-### Ćwiczenie 2 - rozpisanie wywołań
-
-Zapisz kolejno argumenty wszystkich wywołań rekurencyjnych funkcji `sumaCyfr` dla wywołania `sumaCyfr(472)`. Przy każdym wywołaniu dopisz, czy funkcja schodzi głębiej, czy osiąga przypadek podstawowy.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zacznij od pierwszego wywołania. Potem zapisuj tylko te argumenty, które pojawiają się w kolejnych wywołaniach tej samej funkcji.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Poprawna odpowiedź powinna pokazywać, że każde kolejne wywołanie zbliża funkcję do przypadku podstawowego `liczba < 10`. Ostatni wiersz opisu to wywołanie, które już nie uruchamia kolejnej rekurencji.
-
-</details>
-
-### Ćwiczenie 3 - przypadek podstawowy
-
-Wskaż w funkcji `sumaCyfr` przypadek podstawowy. Napisz jednym zdaniem, dlaczego bez tego warunku rekurencja nie mogłaby się poprawnie zakończyć.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Szukaj instrukcji `if`, po której funkcja kończy pracę bez kolejnego wywołania samej siebie.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Przypadek podstawowy to warunek `liczba < 10`. Po jego spełnieniu funkcja nie wywołuje już samej siebie, więc rekurencja zaczyna się kończyć.
-
-</details>
-
-### Ćwiczenie 4 - błąd w kroku rekurencyjnym
-
-Wyjaśnij, co mogłoby się stać, gdyby w funkcji `sumaCyfr` krok rekurencyjny nie zmieniał argumentu `liczba` w stronę przypadku podstawowego.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Porównaj pierwsze wywołanie z następnym. Sprawdź, czy problem staje się mniejszy albo prostszy.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Jeżeli argument nie zbliża się do przypadku podstawowego, funkcja może wywoływać samą siebie bez końca. Program zużywa wtedy coraz więcej pamięci stosu i może zakończyć się błędem.
-
-</details>
-
-### Ćwiczenie 5 - krótki program
-
-Napisz krótki program testujący funkcję `sumaCyfr` dla wywołania `sumaCyfr(472)`. Program ma wypisać wynik i działać w standardzie C++23.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkcję z podanymi argumentami.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-```cpp
-#include <iostream>
-
-using namespace std;
-
-int sumaCyfr(int liczba)
+int najwiekszaCyfra(int liczba)
 {
     if (liczba < 10)
     {
         return liczba;
     }
 
-    return liczba % 10 + sumaCyfr(liczba / 10);
+    int ostatnia = liczba % 10;
+    int najlepszaZReszty = najwiekszaCyfra(liczba / 10);
+
+    if (ostatnia > najlepszaZReszty)
+    {
+        return ostatnia;
+    }
+
+    return najlepszaZReszty;
 }
 
 int main()
 {
-    cout << sumaCyfr(472) << "\n";
+    int liczba = 472;
+
+    cout << "Suma cyfr: " << sumaCyfr(liczba) << "\n";
+    cout << "Liczba cyfr: " << liczbaCyfr(liczba) << "\n";
+    cout << "Największa cyfra: " << najwiekszaCyfra(liczba) << "\n";
+
     return 0;
 }
+```
+
+<details markdown="1">
+<summary>Pokaż wynik</summary>
+
+```text
+Suma cyfr: 13
+Liczba cyfr: 3
+Największa cyfra: 7
+```
+
+</details>
+
+## Zero
+
+Dla `0` funkcje działają poprawnie:
+
+- `sumaCyfr(0)` zwraca `0`,
+- `liczbaCyfr(0)` zwraca `1`,
+- `najwiekszaCyfra(0)` zwraca `0`.
+
+Zero zapisujemy jedną cyfrą, dlatego liczba cyfr wynosi `1`.
+
+## Liczby ujemne
+
+Jeżeli użytkownik może podać liczbę ujemną, najprościej zamienić ją na dodatnią przed pierwszym wywołaniem:
+
+```cpp
+if (liczba < 0)
+{
+    liczba = -liczba;
+}
+```
+
+Nie trzeba wykonywać tej zamiany w każdym wywołaniu rekurencyjnym.
+
+## Typowe błędy
+
+- Użycie `liczba % 10` jako liczby bez ostatniej cyfry.
+- Brak zmniejszenia problemu, np. wywołanie `sumaCyfr(liczba)`.
+- Niejasne traktowanie zera.
+- Zamiana znaku liczby ujemnej w każdym kroku bez potrzeby.
+- Zły przypadek podstawowy dla funkcji liczącej cyfry.
+
+## Ćwiczenia
+
+### Ćwiczenie 1 - ręczne obliczenie sumy cyfr
+
+Rozpisz działanie `sumaCyfr(905)` i podaj wartość zwracaną przez funkcję.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
+
+Ostatnia cyfra to `liczba % 10`, a reszta liczby to `liczba / 10`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 1</summary>
+
+```text
+sumaCyfr(905)
+=> 5 + sumaCyfr(90)
+=> 5 + 0 + sumaCyfr(9)
+=> 5 + 0 + 9
+=> 14
+```
+
+Wartość zwracana to `14`.
+
+</details>
+
+### Ćwiczenie 2 - liczba cyfr
+
+Podaj wynik funkcji `liczbaCyfr(1000)` i rozpisz kolejne argumenty wywołań.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Każde dzielenie przez `10` usuwa jedną cyfrę.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
+
+```text
+liczbaCyfr(1000)
+=> 1 + liczbaCyfr(100)
+=> 1 + 1 + liczbaCyfr(10)
+=> 1 + 1 + 1 + liczbaCyfr(1)
+=> 4
+```
+
+Wynik to `4`.
+
+</details>
+
+### Ćwiczenie 3 - wystąpienia cyfry
+
+Napisz funkcję `ileCyfr(int liczba, int cyfra)`, która dla liczby nieujemnej zlicza wystąpienia cyfry `cyfra`. Dla `ileCyfr(12022, 2)` wynik ma wynosić `3`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Porównuj `liczba % 10` z szukaną cyfrą, a potem wywołuj funkcję dla `liczba / 10`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int ileCyfr(int liczba, int cyfra)
+{
+    if (liczba < 10)
+    {
+        if (liczba == cyfra)
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+    int wynik = ileCyfr(liczba / 10, cyfra);
+
+    if (liczba % 10 == cyfra)
+    {
+        wynik = wynik + 1;
+    }
+
+    return wynik;
+}
+
+int main()
+{
+    cout << ileCyfr(12022, 2) << "\n";
+    return 0;
+}
+```
+
+</details>
+
+### Ćwiczenie 4 - największa cyfra
+
+Podaj wynik `najwiekszaCyfra(5831)` i wskaż, które cyfry są porównywane podczas powrotów.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
+
+Najpierw funkcja dochodzi do cyfry `5`, potem podczas powrotów porównuje kolejne ostatnie cyfry.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
+
+Cyfry liczby to `5`, `8`, `3`, `1`. Największa z nich to `8`.
+
+Podczas powrotów funkcja porównuje między innymi:
+
+```text
+3 z 1
+8 z 3
+5 z 8
+```
+
+Ostateczny wynik to `8`.
+
+</details>
+
+### Ćwiczenie 5 - błąd bez zmniejszenia liczby
+
+W funkcji `sumaCyfr` ktoś napisał:
+
+```cpp
+return liczba % 10 + sumaCyfr(liczba);
+```
+
+Wyjaśnij, dlaczego to błąd.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 5</summary>
+
+Sprawdź, czy argument kolejnego wywołania jest mniejszym problemem.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 5</summary>
+
+Argument się nie zmienia. Dla liczby większej lub równej `10` funkcja będzie wywoływać samą siebie z tą samą wartością, więc nie dojdzie do przypadku podstawowego. Poprawnie trzeba użyć:
+
+```cpp
+return liczba % 10 + sumaCyfr(liczba / 10);
 ```
 
 </details>

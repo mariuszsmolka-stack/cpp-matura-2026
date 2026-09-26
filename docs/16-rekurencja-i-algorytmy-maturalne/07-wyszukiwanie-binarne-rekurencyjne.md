@@ -5,44 +5,48 @@ title: Rekurencyjne wyszukiwanie binarne
 
 # Rekurencyjne wyszukiwanie binarne
 
-## Krótkie przedstawienie problemu
+## Problem
 
-Chcemy szybko znaleźć element w posortowanym vectorze.
+Chcemy szybko znaleźć wartość w posortowanym `vector<int>`. Wyszukiwanie binarne działa poprawnie tylko dla danych posortowanych zgodnie z przyjętym porządkiem.
 
-## Proste wyjaśnienie idei
+Pracujemy na zakresie domkniętym `[lewy, prawy]`, czyli sprawdzamy elementy od indeksu `lewy` do indeksu `prawy` włącznie.
 
-Sprawdźamy środek zakresu i odrzucamy połowę danych.
+## Idea
 
-## Dokładne wyjaśnienie techniczne
+W każdym kroku sprawdzamy środkowy element:
 
-Zakres opisuja argumenty `lewy` i `prawy`. Środek liczymy jako `lewy + (prawy - lewy) / 2`.
+```cpp
+int srodek = lewy + (prawy - lewy) / 2;
+```
 
-## Przypadek podstawowy
+- jeśli środkowy element jest szukany, zwracamy jego indeks,
+- jeśli szukana wartość jest mniejsza, szukamy w lewej połowie,
+- jeśli jest większa, szukamy w prawej połowie,
+- jeśli `lewy > prawy`, zakres jest pusty i zwracamy `-1`.
 
-Gdy `lewy > prawy`, zakres jest pusty i zwracamy `-1`.
+Środka nie wolno ponownie włączać do zakresu, bo został już sprawdzony.
 
-## Krok rekurencyjny
+## Tabela śledzenia
 
-Krok wybiera lewa albo prawa połowę, więc zakres się zmniejsza.
+Dla `liczby = {2, 5, 8, 12, 16, 23, 38}` i szukanej wartości `16`:
 
-## W jaki sposób problem się zmniejsza?
+| `lewy` | `prawy` | `srodek` | `liczby[srodek]` | Porównanie      | Następny zakres |
+| ------ | ------- | -------- | ---------------- | --------------- | --------------- |
+| 0      | 6       | 3        | 12               | 16 > 12         | `[4, 6]`        |
+| 4      | 6       | 5        | 23               | 16 < 23         | `[4, 4]`        |
+| 4      | 4       | 4        | 16               | znaleziono      | koniec          |
 
-W każdym poprawnym przykładzie zmienia się argument funkcji albo zakres danych. Nowe wywołanie dostaje mniejszy problem, więc może dojść do przypadku podstawowego.
+```mermaid
+flowchart TD
+    A["Zakres 0..6"] --> B["srodek = 3, wartość 12"]
+    B --> C["szukaj w 4..6"]
+    C --> D["srodek = 5, wartość 23"]
+    D --> E["szukaj w 4..4"]
+    E --> F["srodek = 4, wartość 16"]
+    F --> G["wynik: indeks 4"]
+```
 
-## Ręczne prześledzenie niewielkiego przykładu
-
-Dla szukania `16` zakresy to `0..6`, potem `4..6`, potem `4..4`.
-
-## Tabela sledzenia
-
-| Wywołanie | Lewy | Prawy | Środek | Decyzja |
-| --------- | ---: | ----: | -----: | ------- |
-| 1 | 0 | 6 | 3 | prawa połowa |
-| 2 | 4 | 6 | 5 | lewa połowa |
-| 3 | 4 | 4 | 4 | znaleziono |
-
-
-## Pełny program C++
+## Kod
 
 ```cpp
 #include <iostream>
@@ -57,175 +61,7 @@ int wyszukajBinarnie(const vector<int> &liczby, int lewy, int prawy, int szukana
         return -1;
     }
 
-    int środek = lewy + (prawy - lewy) / 2;
-
-    if (liczby[środek] == szukana)
-    {
-        return środek;
-    }
-
-    if (szukana < liczby[środek])
-    {
-        return wyszukajBinarnie(liczby, lewy, środek - 1, szukana);
-    }
-
-    return wyszukajBinarnie(liczby, środek + 1, prawy, szukana);
-}
-
-int main()
-{
-    vector<int> liczby = {2, 5, 8, 12, 16, 23, 38};
-    cout << wyszukajBinarnie(liczby, 0, (int)liczby.size() - 1, 16) << "\n";
-    cout << wyszukajBinarnie(liczby, 0, (int)liczby.size() - 1, 7) << "\n";
-    return 0;
-}
-```
-
-<details markdown="1">
-<summary>Pokaż przykładowe dane i wynik</summary>
-
-Dane wejściowe:
-
-```text
-brak
-```
-
-Wynik:
-
-```text
-4
--1
-```
-
-</details>
-
-## Omówienie programu krok po kroku
-
-Program znajduje indeks `4` dla wartości `16` i `-1` dla wartości `7`. Dane musza byc posortowane.
-
-## Kiedy rekurencja się zakończy?
-
-Rekurencja zakończy się wtedy, gdy kolejne wywołania doprowadzą do przypadku podstawowego. Jeżeli argument nie zbliża się do końca, funkcja może wywoływać się bez końca.
-
-## Kiedy lepsza będzie pętla?
-
-Pętla będzie lepsza, gdy zadanie polega na prostym przejściu po kolejnych wartościach i rekurencja nie ułatwia myślenia. Pętla zwykle zużywa mniej pamięci i jest bezpieczniejsza dla bardzo dużych danych.
-
-## Typowe błędy
-
-- Brak przypadku podstawowego.
-- Przypadek podstawowy, którego nie da się osiągnąć.
-- Argument rosnący zamiast zbliżającego się do końca.
-- Pominięcie `return` w funkcji zwracającej wartość.
-- Pomylenie instrukcji wykonywanych podczas schodzenia z instrukcjami wykonywanymi podczas powrotu.
-- Użycie rekurencji tam, gdzie zwykła pętla jest prostsza.
-
-## Ćwiczenia
-
-### Ćwiczenie 1 - przewidzenie wyniku
-
-Dla funkcji `wyszukajBinarnie` pokazanej w tej lekcji ustal wynik wywołania `wyszukajBinarnie(liczby, 0, 6, 16)`. Zapisz odpowiedź jako wartość zwracaną albo dokładny tekst wypisany przez program.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Najpierw znajdź przypadek podstawowy `lewy > prawy`, a potem rozpisz kolejne wartości argumentu `lewy i prawy`.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Wywołanie `wyszukajBinarnie(liczby, 0, 6, 16)` daje wynik:
-
-```text
-4
-```
-
-</details>
-
-### Ćwiczenie 2 - rozpisanie wywołań
-
-Zapisz kolejno argumenty wszystkich wywołań rekurencyjnych funkcji `wyszukajBinarnie` dla wywołania `wyszukajBinarnie(liczby, 0, 6, 16)`. Przy każdym wywołaniu dopisz, czy funkcja schodzi głębiej, czy osiąga przypadek podstawowy.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zacznij od pierwszego wywołania. Potem zapisuj tylko te argumenty, które pojawiają się w kolejnych wywołaniach tej samej funkcji.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Poprawna odpowiedź powinna pokazywać, że każde kolejne wywołanie zbliża funkcję do przypadku podstawowego `lewy > prawy`. Ostatni wiersz opisu to wywołanie, które już nie uruchamia kolejnej rekurencji.
-
-</details>
-
-### Ćwiczenie 3 - przypadek podstawowy
-
-Wskaż w funkcji `wyszukajBinarnie` przypadek podstawowy. Napisz jednym zdaniem, dlaczego bez tego warunku rekurencja nie mogłaby się poprawnie zakończyć.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Szukaj instrukcji `if`, po której funkcja kończy pracę bez kolejnego wywołania samej siebie.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Przypadek podstawowy to warunek `lewy > prawy`. Po jego spełnieniu funkcja nie wywołuje już samej siebie, więc rekurencja zaczyna się kończyć.
-
-</details>
-
-### Ćwiczenie 4 - błąd w kroku rekurencyjnym
-
-Wyjaśnij, co mogłoby się stać, gdyby w funkcji `wyszukajBinarnie` krok rekurencyjny nie zmieniał argumentu `lewy i prawy` w stronę przypadku podstawowego.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Porównaj pierwsze wywołanie z następnym. Sprawdź, czy problem staje się mniejszy albo prostszy.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Jeżeli argument nie zbliża się do przypadku podstawowego, funkcja może wywoływać samą siebie bez końca. Program zużywa wtedy coraz więcej pamięci stosu i może zakończyć się błędem.
-
-</details>
-
-### Ćwiczenie 5 - krótki program
-
-Napisz krótki program testujący funkcję `wyszukajBinarnie` dla wywołania `wyszukajBinarnie(liczby, 0, 6, 16)`. Program ma wypisać wynik i działać w standardzie C++23.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkcję z podanymi argumentami.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-```cpp
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-int wyszukajBinarnie(const vector<int> &liczby, int lewy, int prawy, int szukana)
-{
-    if (lewy > prawy)
-    {
-        return -1;
-    }
-
-    int srodek = (lewy + prawy) / 2;
+    int srodek = lewy + (prawy - lewy) / 2;
 
     if (liczby[srodek] == szukana)
     {
@@ -243,9 +79,171 @@ int wyszukajBinarnie(const vector<int> &liczby, int lewy, int prawy, int szukana
 int main()
 {
     vector<int> liczby = {2, 5, 8, 12, 16, 23, 38};
-    cout << wyszukajBinarnie(liczby, 0, 6, 16) << "\n";
+    int wynik = wyszukajBinarnie(liczby, 0, (int)liczby.size() - 1, 16);
+
+    cout << wynik << "\n";
     return 0;
 }
 ```
+
+<details markdown="1">
+<summary>Pokaż wynik</summary>
+
+```text
+4
+```
+
+</details>
+
+## Znaczenie wyniku
+
+Wartość `-1` oznacza, że szukanej liczby nie ma w przeszukiwanym zakresie. Nie jest to indeks. To umowna informacja o braku wyniku.
+
+Dla pustego `vector` pierwsze wywołanie może wyglądać tak:
+
+```cpp
+wyszukajBinarnie(liczby, 0, (int)liczby.size() - 1, szukana)
+```
+
+Gdy `liczby.size()` wynosi `0`, prawy indeks będzie równy `-1`, więc warunek `lewy > prawy` od razu zwróci `-1`.
+
+## Typowe błędy
+
+- Użycie wyszukiwania binarnego dla danych nieposortowanych.
+- Ponowne uwzględnienie środka w kolejnym zakresie.
+- Zły warunek pustego zakresu.
+- Mylenie zakresu `[lewy, prawy]` z zakresem bez prawego końca.
+- Użycie identyfikatora z polskim znakiem w kodzie, np. `środek`.
+
+## Ćwiczenia
+
+### Ćwiczenie 1 - element istnieje
+
+Dla `liczby = {1, 4, 6, 9, 13, 20}` prześledź wyszukiwanie wartości `13`. Podaj kolejne zakresy i wynik.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
+
+Zaczynasz od zakresu `[0, 5]`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 1</summary>
+
+| `lewy` | `prawy` | `srodek` | Wartość | Decyzja       |
+| ------ | ------- | -------- | ------- | ------------- |
+| 0      | 5       | 2        | 6       | szukaj w 3..5 |
+| 3      | 5       | 4        | 13      | znaleziono    |
+
+Wynik to indeks `4`.
+
+</details>
+
+### Ćwiczenie 2 - brak elementu
+
+Dla tego samego `vector` prześledź wyszukiwanie wartości `7`. Podaj, kiedy pojawia się pusty zakres.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Po sprawdzeniu wartości `6` przejdziesz w prawo, a po sprawdzeniu `9` w lewo.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
+
+```text
+[0, 5] => srodek 2, wartość 6, szukaj w [3, 5]
+[3, 5] => srodek 4, wartość 13, szukaj w [3, 3]
+[3, 3] => srodek 3, wartość 9, szukaj w [3, 2]
+```
+
+Zakres `[3, 2]` jest pusty, bo `lewy > prawy`. Wynik to `-1`.
+
+</details>
+
+### Ćwiczenie 3 - jednoelementowy zakres
+
+Co zwróci wywołanie dla `liczby = {8}`, zakresu `[0, 0]` i szukanej wartości `8`?
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Dla zakresu `[0, 0]` środek też wynosi `0`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
+
+Funkcja sprawdzi `liczby[0]`, znajdzie wartość `8` i zwróci indeks `0`.
+
+</details>
+
+### Ćwiczenie 4 - pusty vector
+
+Jaki wynik powinno dać wyszukiwanie w pustym `vector<int>`?
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
+
+Pierwszy zakres jest od razu pusty.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
+
+Wynik powinien wynosić `-1`. Dla pustego `vector` mamy wywołanie z zakresem `[0, -1]`, więc `lewy > prawy` jest prawdziwe.
+
+</details>
+
+### Ćwiczenie 5 - błąd ze środkiem
+
+Wyjaśnij błąd w wywołaniu:
+
+```cpp
+return wyszukajBinarnie(liczby, lewy, srodek, szukana);
+```
+
+użytym wtedy, gdy `szukana < liczby[srodek]`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 5</summary>
+
+Element pod indeksem `srodek` został już porównany.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 5</summary>
+
+Błąd polega na ponownym włączeniu środka do zakresu. Poprawnie trzeba użyć:
+
+```cpp
+return wyszukajBinarnie(liczby, lewy, srodek - 1, szukana);
+```
+
+W przeciwnym razie przy niektórych zakresach funkcja może nie zmniejszać problemu.
+
+</details>
+
+### Ćwiczenie 6 - dane nieposortowane
+
+Dlaczego wyszukiwanie binarne nie jest poprawnym wyborem dla danych `{8, 2, 16, 4, 10}`?
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 6</summary>
+
+Decyzja o odrzuceniu połowy danych ma sens tylko wtedy, gdy dane są uporządkowane.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 6</summary>
+
+Dane nie są posortowane. Po sprawdzeniu środka nie wiemy, czy szukana wartość powinna znajdować się po lewej, czy po prawej stronie. Odrzucenie połowy danych może usunąć część, w której naprawdę znajduje się szukana wartość.
 
 </details>

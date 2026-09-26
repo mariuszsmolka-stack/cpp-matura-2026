@@ -5,217 +5,425 @@ title: Zadania maturalne z rekurencji
 
 # Zadania maturalne z rekurencji
 
-## Krótkie przedstawienie problemu
+## Jak pracować z zadaniami
 
-Chcemy ćwiczyć analizę rekurencji podobną do zadan maturalnych.
+W zadaniach maturalnych z rekurencji często nie trzeba pisać dużego programu. Trzeba zrozumieć, co robi funkcja: jaka jest wartość zwracana, kiedy pojawia się przypadek podstawowy, ile wywołań powstaje i w jakiej kolejności wykonywane są instrukcje.
 
-## Proste wyjaśnienie idei
+Przy każdym zadaniu zapisuj:
 
-Najpierw znajdujemy przypadek podstawowy, potem zmianę argumentu, a na końcu kolejność wykonywania instrukcji.
+- argumenty kolejnych wywołań,
+- moment zatrzymania,
+- wartości zwracane podczas powrotów,
+- ostateczną odpowiedź.
 
-## Dokładne wyjaśnienie techniczne
+## Zadania
 
-W zadaniach analitycznych rozwiązaniem może byc tabela wywołań, rozwinięcie wzoru albo poprawiony fragment funkcji.
+### Zadanie 1 - wartość zwracana
 
-## Przypadek podstawowy
-
-W programie modelowym przypadek podstawowy to `n == 0`.
-
-## Krok rekurencyjny
-
-Krok rekurencyjny zwraca `n + funkcja(n - 1)`.
-
-## W jaki sposób problem się zmniejsza?
-
-W każdym poprawnym przykładzie zmienia się argument funkcji albo zakres danych. Nowe wywołanie dostaje mniejszy problem, więc może dojść do przypadku podstawowego.
-
-## Ręczne prześledzenie niewielkiego przykładu
-
-Dla `funkcja(4)` otrzymujemy `4 + 3 + 2 + 1 + 0`.
-
-## Zadania modelowe
-
-1. Ustal wynik funkcji.
-2. Ustal kolejność wypisywania.
-3. Znajdz przypadek podstawowy.
-4. Popraw błąd zatrzymania.
-5. Zamień prosta rekurencje na petle.
-
-
-## Pełny program C++
+Dana jest funkcja:
 
 ```cpp
-#include <iostream>
+int sumaNieparzystych(int n)
+{
+    if (n <= 0)
+    {
+        return 0;
+    }
 
-using namespace std;
+    if (n % 2 == 1)
+    {
+        return n + sumaNieparzystych(n - 1);
+    }
 
-int funkcja(int n)
+    return sumaNieparzystych(n - 1);
+}
+```
+
+Podaj wartość zwracaną przez `sumaNieparzystych(7)`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
+
+Dodawane są tylko liczby nieparzyste.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 1</summary>
+
+```text
+sumaNieparzystych(7)
+= 7 + sumaNieparzystych(6)
+= 7 + sumaNieparzystych(5)
+= 7 + 5 + sumaNieparzystych(4)
+= 7 + 5 + sumaNieparzystych(3)
+= 7 + 5 + 3 + sumaNieparzystych(2)
+= 7 + 5 + 3 + sumaNieparzystych(1)
+= 7 + 5 + 3 + 1 + sumaNieparzystych(0)
+= 16
+```
+
+Odpowiedź: `16`.
+
+</details>
+
+### Zadanie 2 - kolejność wypisywania
+
+Dana jest funkcja:
+
+```cpp
+void wypisz(int n)
+{
+    if (n == 0)
+    {
+        return;
+    }
+
+    cout << n << " ";
+    wypisz(n - 1);
+    cout << n * 10 << " ";
+}
+```
+
+Podaj dokładny tekst wypisany przez `wypisz(3)`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Pierwszy `cout` działa podczas schodzenia, drugi podczas powrotów.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
+
+Schodzenie wypisuje:
+
+```text
+3 2 1
+```
+
+Powroty wypisują:
+
+```text
+10 20 30
+```
+
+Cały wynik:
+
+```text
+3 2 1 10 20 30
+```
+
+</details>
+
+### Zadanie 3 - tabela wywołań
+
+Dla funkcji:
+
+```cpp
+int iloczyn(int n)
+{
+    if (n <= 1)
+    {
+        return 1;
+    }
+
+    return n * iloczyn(n - 1);
+}
+```
+
+Uzupełnij tabelę dla `iloczyn(4)`: wywołanie, wartość zwracana przez głębsze wywołanie, wynik bieżącego wywołania.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Najpierw dojdź do `iloczyn(1)`, potem wracaj.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
+
+| Wywołanie     | Wynik głębszego wywołania | Wynik bieżący |
+| ------------- | -------------------------- | ------------- |
+| `iloczyn(1)`  | brak                       | `1`           |
+| `iloczyn(2)`  | `1`                        | `2 * 1 = 2`   |
+| `iloczyn(3)`  | `2`                        | `3 * 2 = 6`   |
+| `iloczyn(4)`  | `6`                        | `4 * 6 = 24`  |
+
+Odpowiedź: `24`.
+
+</details>
+
+### Zadanie 4 - liczba wywołań
+
+Ile wszystkich wywołań funkcji powstanie dla `licz(5)`?
+
+```cpp
+int licz(int n)
+{
+    if (n <= 0)
+    {
+        return 0;
+    }
+
+    return 1 + licz(n - 1);
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
+
+Policz także wywołanie z argumentem `0`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
+
+Powstają wywołania:
+
+```text
+licz(5), licz(4), licz(3), licz(2), licz(1), licz(0)
+```
+
+Łącznie jest `6` wywołań.
+
+</details>
+
+### Zadanie 5 - maksymalna głębokość
+
+Dla tej samej funkcji `licz` ustal maksymalną liczbę aktywnych wywołań jednocześnie dla `licz(4)`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 5</summary>
+
+Największa głębokość występuje tuż przed rozpoczęciem powrotów.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 5</summary>
+
+Najgłębszy moment:
+
+```text
+licz(4) czeka na licz(3)
+licz(3) czeka na licz(2)
+licz(2) czeka na licz(1)
+licz(1) czeka na licz(0)
+licz(0) działa
+```
+
+Aktywnych jest `5` wywołań.
+
+</details>
+
+### Zadanie 6 - brakujący przypadek podstawowy
+
+Uzupełnij przypadek podstawowy w funkcji zliczającej cyfry liczby nieujemnej:
+
+```cpp
+int cyfry(int liczba)
+{
+    if (...)
+    {
+        return ...;
+    }
+
+    return 1 + cyfry(liczba / 10);
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 6</summary>
+
+Liczby od `0` do `9` mają jedną cyfrę.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 6</summary>
+
+Poprawne uzupełnienie:
+
+```cpp
+if (liczba < 10)
+{
+    return 1;
+}
+```
+
+Dla `0` wynik też wynosi `1`, bo zapis `0` ma jedną cyfrę.
+
+</details>
+
+### Zadanie 7 - błąd bez zakończenia
+
+Znajdź błąd:
+
+```cpp
+int f(int n)
 {
     if (n == 0)
     {
         return 0;
     }
 
-    return n + funkcja(n - 1);
+    return 1 + f(n + 1);
 }
+```
 
-int main()
+Rozważ wywołanie `f(3)`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 7</summary>
+
+Sprawdź, czy argument zbliża się do `0`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 7</summary>
+
+Dla `f(3)` powstają wywołania `f(4)`, `f(5)`, `f(6)` i tak dalej. Argument oddala się od przypadku podstawowego `n == 0`. Funkcja nie zakończy się poprawnie dla dodatniego argumentu.
+
+</details>
+
+### Zadanie 8 - funkcja z dwoma argumentami
+
+Dana jest funkcja:
+
+```cpp
+int dodaj(int a, int b)
 {
-    cout << funkcja(4) << "\n";
-    return 0;
+    if (b == 0)
+    {
+        return a;
+    }
+
+    return dodaj(a + 1, b - 1);
 }
 ```
 
-<details markdown="1">
-<summary>Pokaż przykładowe dane i wynik</summary>
+Podaj wynik `dodaj(4, 3)` i kolejne pary argumentów.
 
-Dane wejściowe:
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 8</summary>
+
+Pierwszy argument rośnie, drugi maleje.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 8</summary>
 
 ```text
-brak
+dodaj(4, 3)
+=> dodaj(5, 2)
+=> dodaj(6, 1)
+=> dodaj(7, 0)
+=> 7
 ```
 
-Wynik:
+Wynik to `7`.
+
+</details>
+
+### Zadanie 9 - dwa wywołania rekurencyjne
+
+Dana jest funkcja:
+
+```cpp
+int g(int n)
+{
+    if (n <= 1)
+    {
+        return 1;
+    }
+
+    return g(n - 1) + g(n - 2);
+}
+```
+
+Podaj wartość `g(4)` i liczbę wszystkich wywołań funkcji.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 9</summary>
+
+Rozpisz drzewo: `g(4)` tworzy `g(3)` i `g(2)`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 9</summary>
+
+Wartości:
 
 ```text
-10
+g(0) = 1
+g(1) = 1
+g(2) = 2
+g(3) = 3
+g(4) = 5
 ```
 
-</details>
-
-## Omówienie programu krok po kroku
-
-Program modelowy sumuje liczby od `1` do `n`. Podobne zadanie może pytac o wynik, liczbę wywołań, brakujący warunek albo maksymalna głębokość.
-
-## Kiedy rekurencja się zakończy?
-
-Rekurencja zakończy się wtedy, gdy kolejne wywołania doprowadzą do przypadku podstawowego. Jeżeli argument nie zbliża się do końca, funkcja może wywoływać się bez końca.
-
-## Kiedy lepsza będzie pętla?
-
-Pętla będzie lepsza, gdy zadanie polega na prostym przejściu po kolejnych wartościach i rekurencja nie ułatwia myślenia. Pętla zwykle zużywa mniej pamięci i jest bezpieczniejsza dla bardzo dużych danych.
-
-## Typowe błędy
-
-- Brak przypadku podstawowego.
-- Przypadek podstawowy, którego nie da się osiągnąć.
-- Argument rosnący zamiast zbliżającego się do końca.
-- Pominięcie `return` w funkcji zwracającej wartość.
-- Pomylenie instrukcji wykonywanych podczas schodzenia z instrukcjami wykonywanymi podczas powrotu.
-- Użycie rekurencji tam, gdzie zwykła pętla jest prostsza.
-
-## Ćwiczenia
-
-### Ćwiczenie 1 - przewidzenie wyniku
-
-Dla funkcji `funkcja` pokazanej w tej lekcji ustal wynik wywołania `funkcja(4)`. Zapisz odpowiedź jako wartość zwracaną albo dokładny tekst wypisany przez program.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Najpierw znajdź przypadek podstawowy `n == 0`, a potem rozpisz kolejne wartości argumentu `n`.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Wywołanie `funkcja(4)` daje wynik:
+Wywołania w drzewie:
 
 ```text
-10
+g(4)
+g(3), g(2)
+g(2), g(1), g(1), g(0)
+g(1), g(0)
 ```
 
-</details>
-
-### Ćwiczenie 2 - rozpisanie wywołań
-
-Zapisz kolejno argumenty wszystkich wywołań rekurencyjnych funkcji `funkcja` dla wywołania `funkcja(4)`. Przy każdym wywołaniu dopisz, czy funkcja schodzi głębiej, czy osiąga przypadek podstawowy.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zacznij od pierwszego wywołania. Potem zapisuj tylko te argumenty, które pojawiają się w kolejnych wywołaniach tej samej funkcji.
+Łącznie jest `9` wywołań.
 
 </details>
 
+### Zadanie 10 - funkcja według specyfikacji
+
+Napisz funkcję rekurencyjną `sumaKwadratow(int n)`, która dla `n >= 0` zwraca:
+
+```text
+1^2 + 2^2 + ... + n^2
+```
+
+Dla `n == 0` wynik ma wynosić `0`.
+
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 10</summary>
 
-Poprawna odpowiedź powinna pokazywać, że każde kolejne wywołanie zbliża funkcję do przypadku podstawowego `n == 0`. Ostatni wiersz opisu to wywołanie, które już nie uruchamia kolejnej rekurencji.
-
-</details>
-
-### Ćwiczenie 3 - przypadek podstawowy
-
-Wskaż w funkcji `funkcja` przypadek podstawowy. Napisz jednym zdaniem, dlaczego bez tego warunku rekurencja nie mogłaby się poprawnie zakończyć.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Szukaj instrukcji `if`, po której funkcja kończy pracę bez kolejnego wywołania samej siebie.
+Dodaj `n * n` do wyniku dla `n - 1`.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Przypadek podstawowy to warunek `n == 0`. Po jego spełnieniu funkcja nie wywołuje już samej siebie, więc rekurencja zaczyna się kończyć.
-
-</details>
-
-### Ćwiczenie 4 - błąd w kroku rekurencyjnym
-
-Wyjaśnij, co mogłoby się stać, gdyby w funkcji `funkcja` krok rekurencyjny nie zmieniał argumentu `n` w stronę przypadku podstawowego.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Porównaj pierwsze wywołanie z następnym. Sprawdź, czy problem staje się mniejszy albo prostszy.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Jeżeli argument nie zbliża się do przypadku podstawowego, funkcja może wywoływać samą siebie bez końca. Program zużywa wtedy coraz więcej pamięci stosu i może zakończyć się błędem.
-
-</details>
-
-### Ćwiczenie 5 - krótki program
-
-Napisz krótki program testujący funkcję `funkcja` dla wywołania `funkcja(4)`. Program ma wypisać wynik i działać w standardzie C++23.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkcję z podanymi argumentami.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 10</summary>
 
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-int funkcja(int n)
+int sumaKwadratow(int n)
 {
-    if (n == 0)
+    if (n <= 0)
     {
         return 0;
     }
 
-    return n + funkcja(n - 1);
+    return n * n + sumaKwadratow(n - 1);
 }
 
 int main()
 {
-    cout << funkcja(4) << "\n";
+    cout << sumaKwadratow(4) << "\n";
     return 0;
 }
 ```
+
+Dla `4` wynik to `16 + 9 + 4 + 1 = 30`.
 
 </details>

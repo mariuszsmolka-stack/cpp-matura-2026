@@ -5,54 +5,76 @@ title: Tablice, vector i napisy
 
 # Tablice, vector i napisy
 
-## Krótkie przedstawienie problemu
+## Problem
 
-Chcemy rekurencyjnie przetwarzać dane od podanego indeksu albo od dwóch końców.
+Rekurencja może przetwarzać dane złożone: `vector`, tablicę albo napis. Wtedy zamiast zmniejszać liczbę, zwykle zmieniamy indeksy.
 
-## Proste wyjaśnienie idei
+W tej lekcji używamy `vector<int>` i `string`. Nazwy zmiennych w kodzie są bez polskich znaków.
 
-Argument `indeks` mowi, który element aktualnie rozpatrujemy. Dla napisu można uzyc indeksu lewego i prawego.
+## 1. Przetwarzanie vector od podanego indeksu
 
-## Dokładne wyjaśnienie techniczne
+Chcemy obliczyć sumę elementów od indeksu `0` do końca. Funkcję wywołujemy z indeksem `0`.
 
-Nie kopiujemy całego `vector` ani napisu. Gdy funkcja tylko czyta dane, przekazujemy `const vector<int> &` albo `const string &`.
+Przypadek podstawowy:
 
-## Przypadek podstawowy
+```cpp
+if (indeks >= (int)liczby.size())
+{
+    return 0;
+}
+```
 
-Dla vectora koniec jest wtedy, gdy `indeks == size()`. Dla palindromu koniec jest wtedy, gdy `lewy >= prawy`.
-
-## Krok rekurencyjny
-
-Krok rekurencyjny zwiększa indeks albo zawęża zakres z obu stron.
-
-## W jaki sposób problem się zmniejsza?
-
-W każdym poprawnym przykładzie zmienia się argument funkcji albo zakres danych. Nowe wywołanie dostaje mniejszy problem, więc może dojść do przypadku podstawowego.
-
-## Ręczne prześledzenie niewielkiego przykładu
-
-Dla `{4, 7, 2, 9}` kolejne indeksy to `0`, `1`, `2`, `3`, `4`.
-
-
-
-## Pełny program C++
+Ten warunek jest bezpieczny także wtedy, gdy `vector` jest pusty.
 
 ```cpp
 #include <iostream>
-#include <string>
 #include <vector>
 
 using namespace std;
 
 int suma(const vector<int> &liczby, int indeks)
 {
-    if (indeks == (int)liczby.size())
+    if (indeks >= (int)liczby.size())
     {
         return 0;
     }
 
     return liczby[indeks] + suma(liczby, indeks + 1);
 }
+
+int main()
+{
+    vector<int> liczby = {4, 7, 2, 9};
+    cout << suma(liczby, 0) << "\n";
+    return 0;
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wynik</summary>
+
+```text
+22
+```
+
+</details>
+
+## 2. Przetwarzanie napisu od dwóch końców
+
+Palindrom to napis, który czytany od lewej i od prawej strony jest taki sam, np. `kajak`.
+
+Używamy dwóch indeksów:
+
+- `lewy` wskazuje znak z lewej strony,
+- `prawy` wskazuje znak z prawej strony.
+
+Przypadek podstawowy to `lewy >= prawy`. Oznacza to, że sprawdziliśmy już wszystkie potrzebne pary znaków.
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 bool czyPalindrom(const string &tekst, int lewy, int prawy)
 {
@@ -71,143 +93,87 @@ bool czyPalindrom(const string &tekst, int lewy, int prawy)
 
 int main()
 {
-    vector<int> liczby = {4, 7, 2, 9};
-    cout << suma(liczby, 0) << "\n";
-    cout << czyPalindrom("kajak", 0, 4) << "\n";
+    string tekst = "kajak";
+
+    if (czyPalindrom(tekst, 0, (int)tekst.size() - 1))
+    {
+        cout << "TAK\n";
+    }
+    else
+    {
+        cout << "NIE\n";
+    }
+
     return 0;
 }
 ```
 
 <details markdown="1">
-<summary>Pokaż przykładowe dane i wynik</summary>
-
-Dane wejściowe:
+<summary>Pokaż wynik</summary>
 
 ```text
-brak
-```
-
-Wynik:
-
-```text
-22
-1
+TAK
 ```
 
 </details>
 
-## Omówienie programu krok po kroku
+Pusty napis i napis jednoznakowy są palindromami. Dla pustego napisu `prawy` ma wartość `-1`, więc warunek `lewy >= prawy` jest od razu prawdziwy.
 
-Program sumuje vector i sprawdźa palindrom bez kopiowania danych.
+## 3. Warunki poprawności indeksów
 
-## Kiedy rekurencja się zakończy?
-
-Rekurencja zakończy się wtedy, gdy kolejne wywołania doprowadzą do przypadku podstawowego. Jeżeli argument nie zbliża się do końca, funkcja może wywoływać się bez końca.
-
-## Kiedy lepsza będzie pętla?
-
-Pętla będzie lepsza, gdy zadanie polega na prostym przejściu po kolejnych wartościach i rekurencja nie ułatwia myślenia. Pętla zwykle zużywa mniej pamięci i jest bezpieczniejsza dla bardzo dużych danych.
+- Dla `vector` nie wolno czytać elementu poza zakresem.
+- Dla napisu ostatni indeks to `(int)tekst.size() - 1`.
+- Warunek `indeks >= (int)liczby.size()` zatrzymuje funkcję, zanim odczyta element poza końcem.
+- W palindromie po każdym kroku `lewy` rośnie, a `prawy` maleje.
 
 ## Typowe błędy
 
-- Brak przypadku podstawowego.
-- Przypadek podstawowy, którego nie da się osiągnąć.
-- Argument rosnący zamiast zbliżającego się do końca.
-- Pominięcie `return` w funkcji zwracającej wartość.
-- Pomylenie instrukcji wykonywanych podczas schodzenia z instrukcjami wykonywanymi podczas powrotu.
-- Użycie rekurencji tam, gdzie zwykła pętla jest prostsza.
+- Wywołanie funkcji z indeksem `1` zamiast `0`, przez co pomijamy pierwszy element.
+- Warunek `indeks > size()` zamiast `indeks >= size()`.
+- Odczyt `tekst[prawy]`, gdy napis jest pusty i warunek zatrzymania jest źle ustawiony.
+- Wypisywanie wartości logicznej jako `1` lub `0` bez wyjaśnienia.
+- Kopiowanie całego `vector` w każdym wywołaniu zamiast przekazania przez referencję do odczytu.
 
 ## Ćwiczenia
 
-### Ćwiczenie 1 - przewidzenie wyniku
+### Ćwiczenie 1 - suma elementów
 
-Dla funkcji `suma` pokazanej w tej lekcji ustal wynik wywołania `suma(liczby, 0)`. Zapisz odpowiedź jako wartość zwracaną albo dokładny tekst wypisany przez program.
+Dla `vector<int> liczby = {3, -1, 5}` rozpisz wywołania funkcji `suma(liczby, 0)` i podaj wynik.
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Najpierw znajdź przypadek podstawowy `indeks == liczby.size()`, a potem rozpisz kolejne wartości argumentu `indeks`.
+Indeks przyjmuje kolejno wartości `0`, `1`, `2`, `3`.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Wywołanie `suma(liczby, 0)` daje wynik:
+<summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
 ```text
-22
+suma(liczby, 0) => 3 + suma(liczby, 1)
+suma(liczby, 1) => -1 + suma(liczby, 2)
+suma(liczby, 2) => 5 + suma(liczby, 3)
+suma(liczby, 3) => 0
 ```
 
-</details>
-
-### Ćwiczenie 2 - rozpisanie wywołań
-
-Zapisz kolejno argumenty wszystkich wywołań rekurencyjnych funkcji `suma` dla wywołania `suma(liczby, 0)`. Przy każdym wywołaniu dopisz, czy funkcja schodzi głębiej, czy osiąga przypadek podstawowy.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zacznij od pierwszego wywołania. Potem zapisuj tylko te argumenty, które pojawiają się w kolejnych wywołaniach tej samej funkcji.
+Wynik to `3 + (-1) + 5 = 7`.
 
 </details>
 
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+### Ćwiczenie 2 - liczba dodatnich elementów
 
-Poprawna odpowiedź powinna pokazywać, że każde kolejne wywołanie zbliża funkcję do przypadku podstawowego `indeks == liczby.size()`. Ostatni wiersz opisu to wywołanie, które już nie uruchamia kolejnej rekurencji.
-
-</details>
-
-### Ćwiczenie 3 - przypadek podstawowy
-
-Wskaż w funkcji `suma` przypadek podstawowy. Napisz jednym zdaniem, dlaczego bez tego warunku rekurencja nie mogłaby się poprawnie zakończyć.
+Napisz funkcję `ileDodatnich`, która zlicza dodatnie elementy w `vector<int>` od podanego indeksu do końca.
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Szukaj instrukcji `if`, po której funkcja kończy pracę bez kolejnego wywołania samej siebie.
+Dla elementu dodatniego dodaj `1` do wyniku dalszego wywołania.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Przypadek podstawowy to warunek `indeks == liczby.size()`. Po jego spełnieniu funkcja nie wywołuje już samej siebie, więc rekurencja zaczyna się kończyć.
-
-</details>
-
-### Ćwiczenie 4 - błąd w kroku rekurencyjnym
-
-Wyjaśnij, co mogłoby się stać, gdyby w funkcji `suma` krok rekurencyjny nie zmieniał argumentu `indeks` w stronę przypadku podstawowego.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Porównaj pierwsze wywołanie z następnym. Sprawdź, czy problem staje się mniejszy albo prostszy.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Jeżeli argument nie zbliża się do przypadku podstawowego, funkcja może wywoływać samą siebie bez końca. Program zużywa wtedy coraz więcej pamięci stosu i może zakończyć się błędem.
-
-</details>
-
-### Ćwiczenie 5 - krótki program
-
-Napisz krótki program testujący funkcję `suma` dla wywołania `suma(liczby, 0)`. Program ma wypisać wynik i działać w standardzie C++23.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkcję z podanymi argumentami.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
 
 ```cpp
 #include <iostream>
@@ -215,22 +181,155 @@ Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkc
 
 using namespace std;
 
-int suma(const vector<int> &liczby, int indeks)
+int ileDodatnich(const vector<int> &liczby, int indeks)
 {
-    if (indeks == (int)liczby.size())
+    if (indeks >= (int)liczby.size())
     {
         return 0;
     }
 
-    return liczby[indeks] + suma(liczby, indeks + 1);
+    if (liczby[indeks] > 0)
+    {
+        return 1 + ileDodatnich(liczby, indeks + 1);
+    }
+
+    return ileDodatnich(liczby, indeks + 1);
+}
+
+int main()
+{
+    vector<int> liczby = {3, -1, 0, 5};
+    cout << ileDodatnich(liczby, 0) << "\n";
+    return 0;
+}
+```
+
+</details>
+
+### Ćwiczenie 3 - największy element
+
+Napisz funkcję `maksimum`, która zwraca największy element w niepustym `vector<int>`. Funkcję możesz wywoływać od indeksu `0`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Przypadek podstawowy może wystąpić przy ostatnim elemencie.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int maksimum(const vector<int> &liczby, int indeks)
+{
+    if (indeks == (int)liczby.size() - 1)
+    {
+        return liczby[indeks];
+    }
+
+    int najlepszyDalej = maksimum(liczby, indeks + 1);
+
+    if (liczby[indeks] > najlepszyDalej)
+    {
+        return liczby[indeks];
+    }
+
+    return najlepszyDalej;
+}
+
+int main()
+{
+    vector<int> liczby = {4, 9, 2, 7};
+    cout << maksimum(liczby, 0) << "\n";
+    return 0;
+}
+```
+
+</details>
+
+### Ćwiczenie 4 - wyszukanie wartości
+
+Napisz funkcję `czyJest`, która sprawdza, czy w `vector<int>` występuje podana wartość.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
+
+Jeżeli aktualny element jest równy szukanej wartości, możesz od razu zwrócić `true`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+bool czyJest(const vector<int> &liczby, int indeks, int szukana)
+{
+    if (indeks >= (int)liczby.size())
+    {
+        return false;
+    }
+
+    if (liczby[indeks] == szukana)
+    {
+        return true;
+    }
+
+    return czyJest(liczby, indeks + 1, szukana);
 }
 
 int main()
 {
     vector<int> liczby = {4, 7, 2, 9};
-    cout << suma(liczby, 0) << "\n";
+
+    if (czyJest(liczby, 0, 2))
+    {
+        cout << "TAK\n";
+    }
+    else
+    {
+        cout << "NIE\n";
+    }
+
     return 0;
 }
 ```
+
+</details>
+
+### Ćwiczenie 5 - porównywanie znaków od końców
+
+Dla napisu `radar` zapisz pary indeksów porównywane przez funkcję `czyPalindrom`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 5</summary>
+
+Pierwsza para to pierwszy i ostatni znak.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 5</summary>
+
+Dla `radar` długość wynosi `5`, więc ostatni indeks to `4`.
+
+Porównania:
+
+```text
+(0, 4): r i r
+(1, 3): a i a
+```
+
+Potem `lewy == prawy`, więc funkcja kończy się wynikiem `true`.
 
 </details>

@@ -5,106 +5,126 @@ title: Stos wywołań i kolejność działania
 
 # Stos wywołań i kolejność działania
 
-## Krótkie przedstawienie problemu
+## Problem
 
-Chcemy zrozumiec, dlaczego polozenie instrukcji przed albo po wywołaniu rekurencyjnym zmienia wynik.
+W rekurencji ważne jest nie tylko to, jakie wywołania powstają, ale też kiedy wykonywane są instrukcje. Ten sam warunek i ten sam argument mogą dać inny wynik, jeśli `cout` znajduje się przed wywołaniem rekurencyjnym albo po nim.
 
-## Proste wyjaśnienie idei
+## Dwie wersje funkcji
 
-Każde wywołanie ma własny argument i może czekac na zakonczenie głębszego wywołania.
+Pierwsza wersja wypisuje podczas schodzenia:
 
-## Dokładne wyjaśnienie techniczne
+```cpp
+void przed(int liczba)
+{
+    if (liczba <= 0)
+    {
+        return;
+    }
 
-Stos wywołań przechowuje aktywne wywołania. Najnowsze wywołanie konczy się jako pierwsze.
+    cout << liczba << " ";
+    przed(liczba - 1);
+}
+```
 
-## Przypadek podstawowy
+Druga wersja wypisuje podczas powrotów:
 
-Dla `liczba == 0` funkcja wraca.
+```cpp
+void po(int liczba)
+{
+    if (liczba <= 0)
+    {
+        return;
+    }
 
-## Krok rekurencyjny
+    po(liczba - 1);
+    cout << liczba << " ";
+}
+```
 
-Argument maleje przez wywołanie z `liczba - 1`.
+Różnica jest w położeniu instrukcji `cout`.
 
-## W jaki sposób problem się zmniejsza?
+## Schodzenie i powroty
 
-W każdym poprawnym przykładzie zmienia się argument funkcji albo zakres danych. Nowe wywołanie dostaje mniejszy problem, więc może dojść do przypadku podstawowego.
+Dla `po(3)` wywołania schodzą w dół tak:
 
-## Ręczne prześledzenie niewielkiego przykładu
+```text
+po(3) => po(2) => po(1) => po(0)
+```
 
-Dla `rosnaco(3)` funkcja najpierw schodzi do zera, a potem wypisuje `1`, `2`, `3`.
+`po(0)` trafia w przypadek podstawowy. Dopiero potem wcześniejsze wywołania kończą swoją pracę:
 
-## Tabela wywołań
-
-| Wywołanie | Argument | Co robi? |
-| --- | ---: | --- |
-| `wypisz(3)` | 3 | czeka na `wypisz(2)` |
-| `wypisz(2)` | 2 | czeka na `wypisz(1)` |
-| `wypisz(1)` | 1 | czeka na `wypisz(0)` |
-| `wypisz(0)` | 0 | konczy schodzenie |
-| powrót do `wypisz(1)` | 1 | wykonuje dalszą część |
-| powrót do `wypisz(2)` | 2 | wykonuje dalszą część |
-| powrót do `wypisz(3)` | 3 | wykonuje dalszą część |
+```text
+powrót do po(1) => wypisz 1
+powrót do po(2) => wypisz 2
+powrót do po(3) => wypisz 3
+```
 
 ```mermaid
 flowchart TD
-    A["wypisz(3)"] --> B["wypisz(2)"]
-    B --> C["wypisz(1)"]
-    C --> D["wypisz(0)"]
-    D --> E["powrót do 1"]
-    E --> F["powrót do 2"]
-    F --> G["powrót do 3"]
+    A["po(3)"] --> B["po(2)"]
+    B --> C["po(1)"]
+    C --> D["po(0): stop"]
+    D --> E["powrót: wypisz 1"]
+    E --> F["powrót: wypisz 2"]
+    F --> G["powrót: wypisz 3"]
 ```
 
+## Stos wywołań
 
-## Pełny program C++
+Stos wywołań przechowuje aktywne wywołania funkcji. Dla każdego wywołania pamiętane są między innymi argumenty, zmienne lokalne i miejsce, do którego program ma wrócić.
+
+To nie jest osobna funkcja w kodzie. To mechanizm działania programu. Uczeń powinien wiedzieć, że wcześniejsze wywołanie może czekać, aż zakończy się głębsze wywołanie.
+
+| Numer wywołania | Wartość `liczba` | Przed zejściem | Moment oczekiwania | Po powrocie |
+| ---------------- | ---------------- | -------------- | ------------------ | ----------- |
+| 1                | 3                | brak wypisu    | czeka na `po(2)`   | wypisuje 3  |
+| 2                | 2                | brak wypisu    | czeka na `po(1)`   | wypisuje 2  |
+| 3                | 1                | brak wypisu    | czeka na `po(0)`   | wypisuje 1  |
+| 4                | 0                | stop           | nie czeka          | brak        |
+
+## Pełny program
 
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-void malejaco(int liczba)
+void przed(int liczba)
 {
-    if (liczba == 0)
+    if (liczba <= 0)
     {
         return;
     }
 
     cout << liczba << " ";
-    malejaco(liczba - 1);
+    przed(liczba - 1);
 }
 
-void rosnaco(int liczba)
+void po(int liczba)
 {
-    if (liczba == 0)
+    if (liczba <= 0)
     {
         return;
     }
 
-    rosnaco(liczba - 1);
+    po(liczba - 1);
     cout << liczba << " ";
 }
 
 int main()
 {
-    malejaco(3);
+    przed(3);
     cout << "\n";
-    rosnaco(3);
+
+    po(3);
     cout << "\n";
+
     return 0;
 }
 ```
 
 <details markdown="1">
-<summary>Pokaż przykładowe dane i wynik</summary>
-
-Dane wejściowe:
-
-```text
-brak
-```
-
-Wynik:
+<summary>Pokaż wynik</summary>
 
 ```text
 3 2 1
@@ -113,44 +133,82 @@ Wynik:
 
 </details>
 
-## Omówienie programu krok po kroku
-
-Pierwsza funkcja wypisuje podczas schodzenia, a druga podczas powrotów.
-
-## Kiedy rekurencja się zakończy?
-
-Rekurencja zakończy się wtedy, gdy kolejne wywołania doprowadzą do przypadku podstawowego. Jeżeli argument nie zbliża się do końca, funkcja może wywoływać się bez końca.
-
-## Kiedy lepsza będzie pętla?
-
-Pętla będzie lepsza, gdy zadanie polega na prostym przejściu po kolejnych wartościach i rekurencja nie ułatwia myślenia. Pętla zwykle zużywa mniej pamięci i jest bezpieczniejsza dla bardzo dużych danych.
-
 ## Typowe błędy
 
-- Brak przypadku podstawowego.
-- Przypadek podstawowy, którego nie da się osiągnąć.
-- Argument rosnący zamiast zbliżającego się do końca.
-- Pominięcie `return` w funkcji zwracającej wartość.
-- Pomylenie instrukcji wykonywanych podczas schodzenia z instrukcjami wykonywanymi podczas powrotu.
-- Użycie rekurencji tam, gdzie zwykła pętla jest prostsza.
+- Zakładanie, że instrukcje po wywołaniu rekurencyjnym wykonują się od razu.
+- Brak rozróżnienia między schodzeniem i powrotami.
+- Mylenie kolejności wywołań z kolejnością wypisywania.
+- Rysowanie rekurencji jako zwykłej pętli.
+- Pomijanie aktywnych wywołań, które czekają na zakończenie głębszych wywołań.
 
 ## Ćwiczenia
 
-### Ćwiczenie 1 - przewidzenie wyniku
+### Ćwiczenie 1 - kolejność wypisywania
 
-Dla funkcji `rosnaco` pokazanej w tej lekcji ustal wynik wywołania `rosnaco(3)`. Zapisz odpowiedź jako wartość zwracaną albo dokładny tekst wypisany przez program.
+Jaki tekst wypisze wywołanie `po(4)`?
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Najpierw znajdź przypadek podstawowy `liczba == 0`, a potem rozpisz kolejne wartości argumentu `liczba`.
+W funkcji `po` wypisywanie jest po wywołaniu rekurencyjnym.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
-Wywołanie `rosnaco(3)` daje wynik:
+```text
+1 2 3 4
+```
+
+Najpierw funkcja schodzi do `po(0)`, a dopiero podczas powrotów wypisuje `1`, `2`, `3`, `4`.
+
+</details>
+
+### Ćwiczenie 2 - tabela wywołań
+
+Uzupełnij tabelę dla wywołania `przed(3)`: wartość parametru, tekst wypisany przed zejściem i następne wywołanie.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+W funkcji `przed` instrukcja `cout` jest przed wywołaniem rekurencyjnym.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
+
+| Wywołanie    | Wypisuje przed zejściem | Następne wywołanie |
+| ------------ | ----------------------- | ------------------ |
+| `przed(3)`   | `3`                     | `przed(2)`         |
+| `przed(2)`   | `2`                     | `przed(1)`         |
+| `przed(1)`   | `1`                     | `przed(0)`         |
+| `przed(0)`   | nic                     | brak               |
+
+</details>
+
+### Ćwiczenie 3 - przeniesienie instrukcji
+
+Funkcja wypisuje liczby malejąco. Jak zmieni się wynik, jeśli instrukcję `cout << liczba << " ";` przeniesiesz za wywołanie rekurencyjne?
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Instrukcja po wywołaniu rekurencyjnym wykona się dopiero podczas powrotów.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
+
+Wynik zmieni się z malejącego na rosnący. Dla argumentu `3` zamiast:
+
+```text
+3 2 1
+```
+
+otrzymamy:
 
 ```text
 1 2 3
@@ -158,93 +216,82 @@ Wywołanie `rosnaco(3)` daje wynik:
 
 </details>
 
-### Ćwiczenie 2 - rozpisanie wywołań
+### Ćwiczenie 4 - schodzenie i powroty jednocześnie
 
-Zapisz kolejno argumenty wszystkich wywołań rekurencyjnych funkcji `rosnaco` dla wywołania `rosnaco(3)`. Przy każdym wywołaniu dopisz, czy funkcja schodzi głębiej, czy osiąga przypadek podstawowy.
+Przewidź wynik programu:
+
+```cpp
+void pokaz(int liczba)
+{
+    if (liczba <= 0)
+    {
+        return;
+    }
+
+    cout << "A" << liczba << " ";
+    pokaz(liczba - 1);
+    cout << "B" << liczba << " ";
+}
+```
+
+Dla wywołania `pokaz(2)` podaj dokładny tekst wypisany przez funkcję.
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
 
-Zacznij od pierwszego wywołania. Potem zapisuj tylko te argumenty, które pojawiają się w kolejnych wywołaniach tej samej funkcji.
+`A` wypisuje się podczas schodzenia, a `B` podczas powrotów.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
 
-Poprawna odpowiedź powinna pokazywać, że każde kolejne wywołanie zbliża funkcję do przypadku podstawowego `liczba == 0`. Ostatni wiersz opisu to wywołanie, które już nie uruchamia kolejnej rekurencji.
+```text
+A2 A1 B1 B2
+```
 
-</details>
-
-### Ćwiczenie 3 - przypadek podstawowy
-
-Wskaż w funkcji `rosnaco` przypadek podstawowy. Napisz jednym zdaniem, dlaczego bez tego warunku rekurencja nie mogłaby się poprawnie zakończyć.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Szukaj instrukcji `if`, po której funkcja kończy pracę bez kolejnego wywołania samej siebie.
+Najpierw działa `pokaz(2)`, potem `pokaz(1)`, potem `pokaz(0)` kończy rekurencję. Po powrocie wypisują się części `B1` i `B2`.
 
 </details>
 
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+### Ćwiczenie 5 - kompletny program
 
-Przypadek podstawowy to warunek `liczba == 0`. Po jego spełnieniu funkcja nie wywołuje już samej siebie, więc rekurencja zaczyna się kończyć.
+Napisz program z funkcją `ramka(int liczba)`, która dla `ramka(3)` wypisze:
 
-</details>
-
-### Ćwiczenie 4 - błąd w kroku rekurencyjnym
-
-Wyjaśnij, co mogłoby się stać, gdyby w funkcji `rosnaco` krok rekurencyjny nie zmieniał argumentu `liczba` w stronę przypadku podstawowego.
+```text
+[3 [2 [1 ]1 ]2 ]3
+```
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 5</summary>
 
-Porównaj pierwsze wywołanie z następnym. Sprawdź, czy problem staje się mniejszy albo prostszy.
+Przed wywołaniem wypisz `[` i liczbę. Po powrocie wypisz `]` i tę samą liczbę.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Jeżeli argument nie zbliża się do przypadku podstawowego, funkcja może wywoływać samą siebie bez końca. Program zużywa wtedy coraz więcej pamięci stosu i może zakończyć się błędem.
-
-</details>
-
-### Ćwiczenie 5 - krótki program
-
-Napisz krótki program testujący funkcję `rosnaco` dla wywołania `rosnaco(3)`. Program ma wypisać wynik i działać w standardzie C++23.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkcję z podanymi argumentami.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 5</summary>
 
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-void rosnaco(int liczba)
+void ramka(int liczba)
 {
-    if (liczba == 0)
+    if (liczba <= 0)
     {
         return;
     }
 
-    rosnaco(liczba - 1);
-    cout << liczba << " ";
+    cout << "[" << liczba << " ";
+    ramka(liczba - 1);
+    cout << "]" << liczba << " ";
 }
 
 int main()
 {
-    rosnaco(3);
+    ramka(3);
     cout << "\n";
     return 0;
 }

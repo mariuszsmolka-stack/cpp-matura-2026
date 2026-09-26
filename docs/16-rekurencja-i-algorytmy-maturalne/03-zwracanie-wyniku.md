@@ -5,37 +5,43 @@ title: Zwracanie wyniku
 
 # Zwracanie wyniku
 
-## Krótkie przedstawienie problemu
+## Problem
 
-Chcemy pisać funkcje rekurencyjne, które zwracają wartość.
+Nie każda funkcja rekurencyjna tylko wypisuje tekst. Często ma obliczyć wynik i zwrócić go do poprzedniego wywołania. Przykładem jest suma liczb od `1` do `n`.
 
-## Proste wyjaśnienie idei
+Przyjmujemy dziedzinę: `liczba >= 0`. Dla wartości `0` suma wynosi `0`.
 
-Bieżące wywołanie łączy swój fragment wyniku z wynikiem mniejszego problemu.
+## Idea
 
-## Dokładne wyjaśnienie techniczne
+Suma od `1` do `liczba` to aktualna liczba plus suma liczb wcześniejszych:
 
-Funkcja zwracająca wartość musi mieć `return` w przypadku podstawowym i w kroku rekurencyjnym.
+```text
+suma(4) = 4 + suma(3)
+```
 
-## Przypadek podstawowy
+Przypadek podstawowy to `liczba <= 0`. Funkcja zwraca wtedy `0`, bo nie ma już czego dodawać.
 
-`suma(1)` zwraca `1`, `silnia(0)` zwraca `1`, a `potega(..., 0)` zwraca `1`.
+## Rozwinięcie wywołań
 
-## Krok rekurencyjny
+```text
+suma(4)
+=> 4 + suma(3)
+=> 4 + 3 + suma(2)
+=> 4 + 3 + 2 + suma(1)
+=> 4 + 3 + 2 + 1 + suma(0)
+```
 
-Krok rekurencyjny dodaje albo mnoży wynik bieżącego kroku z wynikiem mniejszego problemu.
+Powroty z wartościami:
 
-## W jaki sposób problem się zmniejsza?
+```text
+suma(0) => 0
+suma(1) => 1
+suma(2) => 3
+suma(3) => 6
+suma(4) => 10
+```
 
-W każdym poprawnym przykładzie zmienia się argument funkcji albo zakres danych. Nowe wywołanie dostaje mniejszy problem, więc może dojść do przypadku podstawowego.
-
-## Ręczne prześledzenie niewielkiego przykładu
-
-`suma(4) = 4 + suma(3) = 4 + 3 + suma(2) = 4 + 3 + 2 + suma(1) = 10`.
-
-
-
-## Pełny program C++
+## Kod główny
 
 ```cpp
 #include <iostream>
@@ -44,23 +50,241 @@ using namespace std;
 
 int suma(int liczba)
 {
-    if (liczba == 1)
+    if (liczba <= 0)
     {
-        return 1;
+        return 0;
     }
 
     return liczba + suma(liczba - 1);
 }
 
-long long silnia(int liczba)
+int main()
 {
-    if (liczba == 0)
+    cout << suma(4) << "\n";
+    return 0;
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wynik</summary>
+
+```text
+10
+```
+
+</details>
+
+## Omówienie kodu
+
+- `suma(4)` nie zna od razu całego wyniku.
+- Musi poczekać na `suma(3)`.
+- `suma(3)` czeka na `suma(2)`, a tak dalej.
+- `suma(0)` zwraca `0` i zaczyna etap powrotów.
+- Każde wcześniejsze wywołanie dodaje swoją liczbę do wyniku otrzymanego z głębszego wywołania.
+
+## Silnia i potęga
+
+Silnia dla `n >= 0`:
+
+```cpp
+long long silnia(int n)
+{
+    if (n <= 1)
     {
         return 1;
     }
 
-    return liczba * silnia(liczba - 1);
+    return n * silnia(n - 1);
 }
+```
+
+Potęga dla wykładnika `wykladnik >= 0`:
+
+```cpp
+long long potega(int podstawa, int wykladnik)
+{
+    if (wykladnik == 0)
+    {
+        return 1;
+    }
+
+    return podstawa * potega(podstawa, wykladnik - 1);
+}
+```
+
+Te funkcje nie obsługują dowolnych argumentów ujemnych. Dodatkowo wyniki mogą przekroczyć zakres typu. `long long` ma większy zakres niż `int`, ale także jest ograniczony.
+
+## Typowe błędy
+
+- Brak `return` przed wywołaniem rekurencyjnym.
+- Zły wynik w przypadku podstawowym, np. `0` dla silni.
+- Brak określonej dziedziny argumentów.
+- Zakładanie, że `long long` pomieści każdy wynik.
+- Mylenie wartości zwracanej z tekstem wypisanym przez `cout`.
+
+## Ćwiczenia
+
+### Ćwiczenie 1 - rozwinięcie działania
+
+Rozwiń wywołanie `suma(5)` aż do przypadku podstawowego i podaj wynik zwracany przez `suma(5)`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
+
+Zapisz `5 + suma(4)`, potem rozwijaj dalej.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 1</summary>
+
+```text
+suma(5)
+=> 5 + suma(4)
+=> 5 + 4 + suma(3)
+=> 5 + 4 + 3 + suma(2)
+=> 5 + 4 + 3 + 2 + suma(1)
+=> 5 + 4 + 3 + 2 + 1 + suma(0)
+=> 15
+```
+
+Wartość zwracana przez `suma(5)` to `15`.
+
+</details>
+
+### Ćwiczenie 2 - przypadek podstawowy
+
+Uzupełnij brakującą wartość w przypadku podstawowym:
+
+```cpp
+int suma(int liczba)
+{
+    if (liczba <= 0)
+    {
+        return ...;
+    }
+
+    return liczba + suma(liczba - 1);
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Suma pustego zakresu powinna wynosić zero.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
+
+Należy wpisać `0`:
+
+```cpp
+return 0;
+```
+
+Dzięki temu `suma(1)` zwraca `1 + suma(0)`, czyli `1 + 0`.
+
+</details>
+
+### Ćwiczenie 3 - brakujący return
+
+Wyjaśnij błąd w funkcji:
+
+```cpp
+int suma(int liczba)
+{
+    if (liczba <= 0)
+    {
+        return 0;
+    }
+
+    liczba + suma(liczba - 1);
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+Funkcja typu `int` musi zwrócić wynik również w kroku rekurencyjnym.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
+
+Błędna linia oblicza wartość, ale jej nie zwraca. Poprawnie:
+
+```cpp
+return liczba + suma(liczba - 1);
+```
+
+Bez `return` wynik nie zostanie przekazany do poprzedniego wywołania.
+
+</details>
+
+### Ćwiczenie 4 - suma liczb parzystych
+
+Napisz funkcję `sumaParzystych(int liczba)`, która dla `liczba >= 0` zwraca sumę dodatnich liczb parzystych nie większych od `liczba`. Dla `sumaParzystych(7)` wynik ma wynosić `12`, bo `6 + 4 + 2 = 12`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
+
+Jeżeli liczba jest nieparzysta, pomiń ją. Jeżeli jest parzysta, dodaj ją do wyniku mniejszego problemu.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int sumaParzystych(int liczba)
+{
+    if (liczba <= 0)
+    {
+        return 0;
+    }
+
+    if (liczba % 2 != 0)
+    {
+        return sumaParzystych(liczba - 1);
+    }
+
+    return liczba + sumaParzystych(liczba - 2);
+}
+
+int main()
+{
+    cout << sumaParzystych(7) << "\n";
+    return 0;
+}
+```
+
+</details>
+
+### Ćwiczenie 5 - potęgowanie
+
+Napisz funkcję `potega(int podstawa, int wykladnik)`, która dla `wykladnik >= 0` zwraca wartość `podstawa` podniesioną do podanej potęgi.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 5</summary>
+
+Przypadek podstawowy to wykładnik `0`, a krok rekurencyjny zmniejsza wykładnik o `1`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 5</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
 
 long long potega(int podstawa, int wykladnik)
 {
@@ -74,163 +298,45 @@ long long potega(int podstawa, int wykladnik)
 
 int main()
 {
-    cout << suma(4) << "\n";
-    cout << silnia(5) << "\n";
-    cout << potega(2, 6) << "\n";
+    cout << potega(2, 5) << "\n";
     return 0;
 }
 ```
 
-<details markdown="1">
-<summary>Pokaż przykładowe dane i wynik</summary>
-
-Dane wejściowe:
-
-```text
-brak
-```
-
-Wynik:
-
-```text
-10
-120
-64
-```
-
 </details>
 
-## Omówienie programu krok po kroku
+### Ćwiczenie 6 - iloczyn od 1 do n
 
-Program pokazuje sumę, silnię i potęgowanie. `int` nie jest wystarczający dla dowolnie dużych silni.
-
-## Kiedy rekurencja się zakończy?
-
-Rekurencja zakończy się wtedy, gdy kolejne wywołania doprowadzą do przypadku podstawowego. Jeżeli argument nie zbliża się do końca, funkcja może wywoływać się bez końca.
-
-## Kiedy lepsza będzie pętla?
-
-Pętla będzie lepsza, gdy zadanie polega na prostym przejściu po kolejnych wartościach i rekurencja nie ułatwia myślenia. Pętla zwykle zużywa mniej pamięci i jest bezpieczniejsza dla bardzo dużych danych.
-
-## Typowe błędy
-
-- Brak przypadku podstawowego.
-- Przypadek podstawowy, którego nie da się osiągnąć.
-- Argument rosnący zamiast zbliżającego się do końca.
-- Pominięcie `return` w funkcji zwracającej wartość.
-- Pomylenie instrukcji wykonywanych podczas schodzenia z instrukcjami wykonywanymi podczas powrotu.
-- Użycie rekurencji tam, gdzie zwykła pętla jest prostsza.
-
-## Ćwiczenia
-
-### Ćwiczenie 1 - przewidzenie wyniku
-
-Dla funkcji `suma` pokazanej w tej lekcji ustal wynik wywołania `suma(4)`. Zapisz odpowiedź jako wartość zwracaną albo dokładny tekst wypisany przez program.
+Napisz funkcję `iloczyn(int n)`, która dla `n >= 1` zwraca wynik `1 * 2 * ... * n`.
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 6</summary>
 
-Najpierw znajdź przypadek podstawowy `liczba == 1`, a potem rozpisz kolejne wartości argumentu `liczba`.
+Dla `n == 1` wynik to `1`. Dla większego `n` zwróć `n * iloczyn(n - 1)`.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Wywołanie `suma(4)` daje wynik:
-
-```text
-10
-```
-
-</details>
-
-### Ćwiczenie 2 - rozpisanie wywołań
-
-Zapisz kolejno argumenty wszystkich wywołań rekurencyjnych funkcji `suma` dla wywołania `suma(4)`. Przy każdym wywołaniu dopisz, czy funkcja schodzi głębiej, czy osiąga przypadek podstawowy.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zacznij od pierwszego wywołania. Potem zapisuj tylko te argumenty, które pojawiają się w kolejnych wywołaniach tej samej funkcji.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Poprawna odpowiedź powinna pokazywać, że każde kolejne wywołanie zbliża funkcję do przypadku podstawowego `liczba == 1`. Ostatni wiersz opisu to wywołanie, które już nie uruchamia kolejnej rekurencji.
-
-</details>
-
-### Ćwiczenie 3 - przypadek podstawowy
-
-Wskaż w funkcji `suma` przypadek podstawowy. Napisz jednym zdaniem, dlaczego bez tego warunku rekurencja nie mogłaby się poprawnie zakończyć.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Szukaj instrukcji `if`, po której funkcja kończy pracę bez kolejnego wywołania samej siebie.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Przypadek podstawowy to warunek `liczba == 1`. Po jego spełnieniu funkcja nie wywołuje już samej siebie, więc rekurencja zaczyna się kończyć.
-
-</details>
-
-### Ćwiczenie 4 - błąd w kroku rekurencyjnym
-
-Wyjaśnij, co mogłoby się stać, gdyby w funkcji `suma` krok rekurencyjny nie zmieniał argumentu `liczba` w stronę przypadku podstawowego.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Porównaj pierwsze wywołanie z następnym. Sprawdź, czy problem staje się mniejszy albo prostszy.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Jeżeli argument nie zbliża się do przypadku podstawowego, funkcja może wywoływać samą siebie bez końca. Program zużywa wtedy coraz więcej pamięci stosu i może zakończyć się błędem.
-
-</details>
-
-### Ćwiczenie 5 - krótki program
-
-Napisz krótki program testujący funkcję `suma` dla wywołania `suma(4)`. Program ma wypisać wynik i działać w standardzie C++23.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkcję z podanymi argumentami.
-
-</details>
-
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 6</summary>
 
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-int suma(int liczba)
+long long iloczyn(int n)
 {
-    if (liczba == 1)
+    if (n <= 1)
     {
         return 1;
     }
 
-    return liczba + suma(liczba - 1);
+    return n * iloczyn(n - 1);
 }
 
 int main()
 {
-    cout << suma(4) << "\n";
+    cout << iloczyn(5) << "\n";
     return 0;
 }
 ```

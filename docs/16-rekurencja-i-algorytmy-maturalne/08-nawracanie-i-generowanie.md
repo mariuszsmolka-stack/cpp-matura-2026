@@ -5,52 +5,22 @@ title: Nawracanie i generowanie
 
 # Nawracanie i generowanie
 
-## Krótkie przedstawienie problemu
+## Problem
 
-Chcemy generowac wiele możliwych rozwiązań.
+Nawracanie polega na budowaniu rozwiązania krok po kroku. Wybieramy możliwość, zapisujemy ją, schodzimy głębiej, a po powrocie cofamy wybór. Dzięki temu możemy sprawdzić kolejną możliwość.
 
-## Proste wyjaśnienie idei
+To nie jest tylko rozgałęzianie. Ważny jest moment cofnięcia decyzji.
 
-Wybieramy możliwość, przechodzimy głębiej, po powrocie cofamy zmianę, jeśli była potrzebna, i sprawdzamy następną możliwość.
+## Cztery etapy
 
-## Dokładne wyjaśnienie techniczne
+1. Wybierz możliwość.
+2. Zapisz wybór.
+3. Wywołaj funkcję dla kolejnego etapu.
+4. Cofnij wybór po powrocie.
 
-To rekurencja rozgaleziajaca się. Czasem wystarczy przekazywac nowy napis, a czasem trzeba zmieniac wspólny stan i go cofac.
+Będziemy generować napisy binarne określonej długości. Długość musi być nieujemna.
 
-## Przypadek podstawowy
-
-Gdy napis ma wymagana długość, wypisujemy go i konczymy wywołanie.
-
-## Krok rekurencyjny
-
-Funkcja tworzy dwa wywołania: z dopisanym `0` i z dopisanym `1`.
-
-## W jaki sposób problem się zmniejsza?
-
-W każdym poprawnym przykładzie zmienia się argument funkcji albo zakres danych. Nowe wywołanie dostaje mniejszy problem, więc może dojść do przypadku podstawowego.
-
-## Ręczne prześledzenie niewielkiego przykładu
-
-Dla długości `3` powstaja galezie od pustego napisu do pełnych napisow binarnych.
-
-## Drzewo decyzji
-
-```mermaid
-flowchart TD
-    A["start"] --> B["0"]
-    A --> C["1"]
-    B --> D["00"]
-    B --> E["01"]
-    C --> F["10"]
-    C --> G["11"]
-    D --> H["000 albo 001"]
-    E --> I["010 albo 011"]
-    F --> J["100 albo 101"]
-    G --> K["110 albo 111"]
-```
-
-
-## Pełny program C++
+## Kod z rzeczywistym cofaniem wyboru
 
 ```cpp
 #include <iostream>
@@ -58,35 +28,39 @@ flowchart TD
 
 using namespace std;
 
-void generujBinarne(int długość, string wynik)
+void generujBinarne(int dlugosc, string &wynik)
 {
-    if ((int)wynik.size() == długość)
+    if ((int)wynik.size() == dlugosc)
     {
-        cout << wynik << "\n";
+        cout << wynik << '\n';
         return;
     }
 
-    generujBinarne(długość, wynik + "0");
-    generujBinarne(długość, wynik + "1");
+    wynik.push_back('0');
+    generujBinarne(dlugosc, wynik);
+    wynik.pop_back();
+
+    wynik.push_back('1');
+    generujBinarne(dlugosc, wynik);
+    wynik.pop_back();
 }
 
 int main()
 {
-    generujBinarne(3, "");
+    int dlugosc = 3;
+    string wynik = "";
+
+    if (dlugosc >= 0)
+    {
+        generujBinarne(dlugosc, wynik);
+    }
+
     return 0;
 }
 ```
 
 <details markdown="1">
-<summary>Pokaż przykładowe dane i wynik</summary>
-
-Dane wejściowe:
-
-```text
-brak
-```
-
-Wynik:
+<summary>Pokaż wynik</summary>
 
 ```text
 000
@@ -101,118 +75,121 @@ Wynik:
 
 </details>
 
-## Omówienie programu krok po kroku
+## Co robią push_back i pop_back
 
-Program najpierw generuje warianty zaczynające się od `0`, a potem warianty zaczynające się od `1`. Permutacje są trudniejsze, bo trzeba pilnowac użytych elementow.
+- `push_back('0')` zapisuje wybór znaku `0`.
+- Wywołanie rekurencyjne rozwija ten wybór.
+- `pop_back()` usuwa ostatni znak i przywraca poprzedni stan napisu.
+- Po cofnięciu można sprawdzić wybór `1`.
 
-## Kiedy rekurencja się zakończy?
+Ten sam napis `wynik` jest przekazywany przez referencję. Dlatego cofnięcie wyboru jest konieczne. Bez `pop_back()` kolejne gałęzie dostałyby zły stan.
 
-Rekurencja zakończy się wtedy, gdy kolejne wywołania doprowadzą do przypadku podstawowego. Jeżeli argument nie zbliża się do końca, funkcja może wywoływać się bez końca.
+## Drzewo dla długości 3
 
-## Kiedy lepsza będzie pętla?
+```mermaid
+flowchart TD
+    A["pusty napis"] --> B["0"]
+    A --> C["1"]
+    B --> D["00"]
+    B --> E["01"]
+    C --> F["10"]
+    C --> G["11"]
+    D --> H["000"]
+    D --> I["001"]
+    E --> J["010"]
+    E --> K["011"]
+    F --> L["100"]
+    F --> M["101"]
+    G --> N["110"]
+    G --> O["111"]
+```
 
-Pętla będzie lepsza, gdy zadanie polega na prostym przejściu po kolejnych wartościach i rekurencja nie ułatwia myślenia. Pętla zwykle zużywa mniej pamięci i jest bezpieczniejsza dla bardzo dużych danych.
+Liście drzewa są gotowymi napisami. Każdy liść ma długość `3`.
 
 ## Typowe błędy
 
-- Brak przypadku podstawowego.
-- Przypadek podstawowy, którego nie da się osiągnąć.
-- Argument rosnący zamiast zbliżającego się do końca.
-- Pominięcie `return` w funkcji zwracającej wartość.
-- Pomylenie instrukcji wykonywanych podczas schodzenia z instrukcjami wykonywanymi podczas powrotu.
-- Użycie rekurencji tam, gdzie zwykła pętla jest prostsza.
+- Brak `pop_back()` po powrocie z rekurencji.
+- Cofnięcie wyboru przed wywołaniem rekurencyjnym.
+- Brak warunku końcowego dla osiągniętej długości.
+- Przekazywanie napisu przez referencję bez rozumienia, że zmieniamy wspólny obiekt.
+- Pokazywanie drzewa z połączonymi liśćmi zamiast osobnych wyników.
 
 ## Ćwiczenia
 
-### Ćwiczenie 1 - przewidzenie wyniku
+### Ćwiczenie 1 - drzewo dla długości 2
 
-Dla funkcji `generujBinarne` pokazanej w tej lekcji ustal wynik wywołania `generujBinarne(3, "")`. Zapisz odpowiedź jako wartość zwracaną albo dokładny tekst wypisany przez program.
+Zapisz wszystkie napisy wygenerowane dla `dlugosc = 2` w takiej kolejności, w jakiej wypisze je program.
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Najpierw znajdź przypadek podstawowy `wynik.size() == długość`, a potem rozpisz kolejne wartości argumentu `wynik`.
+Program najpierw wybiera `0`, potem znów `0`, a po cofnięciu wybiera `1`.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
-
-Wywołanie `generujBinarne(3, "")` daje wynik:
+<summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
 ```text
-000, 001, 010, 011, 100, 101, 110, 111
+00
+01
+10
+11
 ```
 
-</details>
-
-### Ćwiczenie 2 - rozpisanie wywołań
-
-Zapisz kolejno argumenty wszystkich wywołań rekurencyjnych funkcji `generujBinarne` dla wywołania `generujBinarne(3, "")`. Przy każdym wywołaniu dopisz, czy funkcja schodzi głębiej, czy osiąga przypadek podstawowy.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Zacznij od pierwszego wywołania. Potem zapisuj tylko te argumenty, które pojawiają się w kolejnych wywołaniach tej samej funkcji.
+To są cztery liście drzewa dla długości `2`.
 
 </details>
 
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+### Ćwiczenie 2 - momenty cofania
 
-Poprawna odpowiedź powinna pokazywać, że każde kolejne wywołanie zbliża funkcję do przypadku podstawowego `wynik.size() == długość`. Ostatni wiersz opisu to wywołanie, które już nie uruchamia kolejnej rekurencji.
-
-</details>
-
-### Ćwiczenie 3 - przypadek podstawowy
-
-Wskaż w funkcji `generujBinarne` przypadek podstawowy. Napisz jednym zdaniem, dlaczego bez tego warunku rekurencja nie mogłaby się poprawnie zakończyć.
+Dla gałęzi prowadzącej do napisu `01` wskaż, kiedy wykonują się operacje `pop_back()`.
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Szukaj instrukcji `if`, po której funkcja kończy pracę bez kolejnego wywołania samej siebie.
+Każdy zapisany znak musi zostać cofnięty po powrocie z głębszego wywołania.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
 
-Przypadek podstawowy to warunek `wynik.size() == długość`. Po jego spełnieniu funkcja nie wywołuje już samej siebie, więc rekurencja zaczyna się kończyć.
-
-</details>
-
-### Ćwiczenie 4 - błąd w kroku rekurencyjnym
-
-Wyjaśnij, co mogłoby się stać, gdyby w funkcji `generujBinarne` krok rekurencyjny nie zmieniał argumentu `wynik` w stronę przypadku podstawowego.
-
-<details markdown="1">
-<summary>Wskazówka</summary>
-
-Porównaj pierwsze wywołanie z następnym. Sprawdź, czy problem staje się mniejszy albo prostszy.
+Najpierw program zapisuje `0`, potem próbuje gałąź `00`. Po wypisaniu `00` cofa drugi znak. Następnie zapisuje `1` i wypisuje `01`. Po powrocie cofa `1`, a później cofa pierwsze `0`, aby przejść do gałęzi zaczynającej się od `1`.
 
 </details>
 
-<details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+### Ćwiczenie 3 - brak jednego cofnięcia
 
-Jeżeli argument nie zbliża się do przypadku podstawowego, funkcja może wywoływać samą siebie bez końca. Program zużywa wtedy coraz więcej pamięci stosu i może zakończyć się błędem.
-
-</details>
-
-### Ćwiczenie 5 - krótki program
-
-Napisz krótki program testujący funkcję `generujBinarne` dla wywołania `generujBinarne(3, "")`. Program ma wypisać wynik i działać w standardzie C++23.
+Co może się stać, jeśli usuniemy `wynik.pop_back()` po gałęzi z `0`?
 
 <details markdown="1">
-<summary>Wskazówka</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
 
-Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkcję z podanymi argumentami.
+Napis będzie nadal zawierał wybór z poprzedniej gałęzi.
 
 </details>
 
 <details markdown="1">
-<summary>Przykładowe rozwiązanie</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
+
+Stan napisu nie wróci do poprzedniej długości. Kolejna gałąź zacznie pracę z nadmiarowym znakiem, więc program może pominąć część wyników albo wypisać napisy niezgodne z oczekiwaną strukturą drzewa.
+
+</details>
+
+### Ćwiczenie 4 - napisy z liter A i B
+
+Napisz program generujący wszystkie napisy długości `2` z liter `A` i `B`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
+
+Zamiast znaków `0` i `1` użyj `A` i `B`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
 
 ```cpp
 #include <iostream>
@@ -220,21 +197,77 @@ Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkc
 
 using namespace std;
 
-void generujBinarne(int dlugosc, string wynik)
+void generuj(int dlugosc, string &wynik)
 {
     if ((int)wynik.size() == dlugosc)
     {
-        cout << wynik << "\n";
+        cout << wynik << '\n';
         return;
     }
 
-    generujBinarne(dlugosc, wynik + "0");
-    generujBinarne(dlugosc, wynik + "1");
+    wynik.push_back('A');
+    generuj(dlugosc, wynik);
+    wynik.pop_back();
+
+    wynik.push_back('B');
+    generuj(dlugosc, wynik);
+    wynik.pop_back();
 }
 
 int main()
 {
-    generujBinarne(3, "");
+    string wynik = "";
+    generuj(2, wynik);
+    return 0;
+}
+```
+
+</details>
+
+### Ćwiczenie 5 - bez dwóch sąsiednich jedynek
+
+Napisz funkcję generującą napisy binarne długości `3`, ale bez dwóch sąsiednich jedynek.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 5</summary>
+
+Znak `1` możesz dodać tylko wtedy, gdy napis jest pusty albo ostatni znak nie jest jedynką.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 5</summary>
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void generujBezSasiednichJedynek(int dlugosc, string &wynik)
+{
+    if ((int)wynik.size() == dlugosc)
+    {
+        cout << wynik << '\n';
+        return;
+    }
+
+    wynik.push_back('0');
+    generujBezSasiednichJedynek(dlugosc, wynik);
+    wynik.pop_back();
+
+    if (wynik.empty() || wynik[wynik.size() - 1] != '1')
+    {
+        wynik.push_back('1');
+        generujBezSasiednichJedynek(dlugosc, wynik);
+        wynik.pop_back();
+    }
+}
+
+int main()
+{
+    string wynik = "";
+    generujBezSasiednichJedynek(3, wynik);
     return 0;
 }
 ```
