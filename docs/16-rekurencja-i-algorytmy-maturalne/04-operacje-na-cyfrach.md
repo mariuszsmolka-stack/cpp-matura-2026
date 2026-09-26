@@ -5,37 +5,37 @@ title: Operacje na cyfrach
 
 # Operacje na cyfrach
 
-## Krotkie przedstawienie problemu
+## Krótkie przedstawienie problemu
 
-Chcemy przetwarzac liczbe cyfra po cyfrze.
+Chcemy przetwarzać liczbę cyfra po cyfrze.
 
-## Proste wyjasnienie idei
+## Proste wyjaśnienie idei
 
-Ostatnia cyfre pobieramy przez `% 10`, a reszte liczby przez `/ 10`.
+Ostatnia cyfrę pobieramy przez `% 10`, a reszte liczby przez `/ 10`.
 
-## Dokladne wyjasnienie techniczne
+## Dokładne wyjaśnienie techniczne
 
-Dzielenie calkowite przez 10 usuwa ostatnia cyfre, wiec problem staje sie krotszy. Liczbe ujemna najpierw zamieniamy na dodatnia.
+Dzielenie całkowite przez 10 usuwa ostatnią cyfrę, więc problem staje się krótszy. Liczbę ujemną najpierw zamieniamy na dodatnią.
 
 ## Przypadek podstawowy
 
-Dla liczby jednocyfrowej zwracamy wynik bez dalszego wywolania. Dla `0` liczba cyfr wynosi `1`.
+Dla liczby jednocyfrowej zwracamy wynik bez dalszego wywołania. Dla `0` liczba cyfr wynosi `1`.
 
 ## Krok rekurencyjny
 
-Krok rekurencyjny przetwarza ostatnia cyfre i wywoluje funkcje dla `liczba / 10`.
+Krok rekurencyjny przetwarza ostatnią cyfrę i wywołuje funkcję dla `liczba / 10`.
 
-## W jaki sposob problem sie zmniejsza?
+## W jaki sposób problem się zmniejsza?
 
-W kazdym poprawnym przykladzie zmienia sie argument funkcji albo zakres danych. Nowe wywolanie dostaje mniejszy problem, wiec moze dojsc do przypadku podstawowego.
+W każdym poprawnym przykładzie zmienia się argument funkcji albo zakres danych. Nowe wywołanie dostaje mniejszy problem, więc może dojść do przypadku podstawowego.
 
-## Reczne przesledzenie niewielkiego przykladu
+## Ręczne prześledzenie niewielkiego przykładu
 
 Dla `3054` kolejne argumenty to `3054`, `305`, `30`, `3`.
 
 
 
-## Pelny program C++
+## Pełny program C++
 
 ```cpp
 #include <iostream>
@@ -81,9 +81,9 @@ int main()
 ```
 
 <details markdown="1">
-<summary>Pokaz przykladowe dane i wynik</summary>
+<summary>Pokaż przykładowe dane i wynik</summary>
 
-Dane wejsciowe:
+Dane wejściowe:
 
 ```text
 brak
@@ -98,114 +98,118 @@ Wynik:
 
 </details>
 
-## Omowienie programu krok po kroku
+## Omówienie programu krok po kroku
 
-Program sumuje cyfry liczby ujemnej po zmianie znaku i poprawnie liczy liczbe cyfr zera.
+Program sumuje cyfry liczby ujemnej po zmianie znaku i poprawnie liczy liczbę cyfr zera.
 
-## Kiedy rekurencja sie zakonczy?
+## Kiedy rekurencja się zakończy?
 
-Rekurencja zakonczy sie wtedy, gdy kolejne wywolania doprowadza do przypadku podstawowego. Jezeli argument nie zbliza sie do konca, funkcja moze wywolywac sie bez konca.
+Rekurencja zakończy się wtedy, gdy kolejne wywołania doprowadzą do przypadku podstawowego. Jeżeli argument nie zbliża się do końca, funkcja może wywoływać się bez końca.
 
-## Kiedy lepsza bedzie petla?
+## Kiedy lepsza będzie pętla?
 
-Petla bedzie lepsza, gdy zadanie polega na prostym przejsciu po kolejnych wartosciach i rekurencja nie ulatwia myslenia. Petla zwykle zuzywa mniej pamieci i jest bezpieczniejsza dla bardzo duzych danych.
+Pętla będzie lepsza, gdy zadanie polega na prostym przejściu po kolejnych wartościach i rekurencja nie ułatwia myślenia. Pętla zwykle zużywa mniej pamięci i jest bezpieczniejsza dla bardzo dużych danych.
 
-## Typowe bledy
+## Typowe błędy
 
 - Brak przypadku podstawowego.
-- Przypadek podstawowy, ktorego nie da sie osiagnac.
-- Argument rosnacy zamiast zblizajacego sie do konca.
-- Pominiecie `return` w funkcji zwracajacej wartosc.
+- Przypadek podstawowy, którego nie da się osiągnąć.
+- Argument rosnący zamiast zbliżającego się do końca.
+- Pominięcie `return` w funkcji zwracającej wartość.
 - Pomylenie instrukcji wykonywanych podczas schodzenia z instrukcjami wykonywanymi podczas powrotu.
-- Uzycie rekurencji tam, gdzie zwykla petla jest prostsza.
+- Użycie rekurencji tam, gdzie zwykła pętla jest prostsza.
 
-## Cwiczenia
+## Ćwiczenia
 
-### Cwiczenie 1 - Przewidzenie wyniku
+### Ćwiczenie 1 - przewidzenie wyniku
 
-Przewidz wynik malego wywolania z lekcji.
+Dla funkcji `sumaCyfr` pokazanej w tej lekcji ustal wynik wywołania `sumaCyfr(472)`. Zapisz odpowiedź jako wartość zwracaną albo dokładny tekst wypisany przez program.
 
 <details markdown="1">
-<summary>Pokaz wskazowke do cwiczenia 1</summary>
+<summary>Wskazówka</summary>
 
-Rozpisz kolejne argumenty i zaznacz przypadek podstawowy.
+Najpierw znajdź przypadek podstawowy `liczba < 10`, a potem rozpisz kolejne wartości argumentu `liczba`.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaz rozwiazanie cwiczenia 1</summary>
+<summary>Przykładowe rozwiązanie</summary>
 
-Rozwiazanie polega na rozpisaniu kolejnych wywolan i powrotow. Dla malego przykladu widac, kiedy funkcja przestaje wywolywac sama siebie.
+Wywołanie `sumaCyfr(472)` daje wynik:
 
-</details>
-
-### Cwiczenie 2 - Reczne rozpisanie wywolan
-
-Utworz tabele wywolan dla wartosci poczatkowej podanej w przykladzie.
-
-<details markdown="1">
-<summary>Pokaz wskazowke do cwiczenia 2</summary>
-
-W pierwszej kolumnie wpisz numer wywolania, w drugiej argument, w trzeciej decyzje.
+```text
+13
+```
 
 </details>
 
-<details markdown="1">
-<summary>Pokaz rozwiazanie cwiczenia 2</summary>
+### Ćwiczenie 2 - rozpisanie wywołań
 
-Tabela powinna pokazac schodzenie do przypadku podstawowego oraz powroty do poprzednich wywolan.
-
-</details>
-
-### Cwiczenie 3 - Przypadek podstawowy
-
-Wskaz przypadek podstawowy i wyjasnij, dlaczego konczy rekurencje.
+Zapisz kolejno argumenty wszystkich wywołań rekurencyjnych funkcji `sumaCyfr` dla wywołania `sumaCyfr(472)`. Przy każdym wywołaniu dopisz, czy funkcja schodzi głębiej, czy osiąga przypadek podstawowy.
 
 <details markdown="1">
-<summary>Pokaz wskazowke do cwiczenia 3</summary>
+<summary>Wskazówka</summary>
 
-Szukaj warunku, po ktorym funkcja nie wywoluje samej siebie.
+Zacznij od pierwszego wywołania. Potem zapisuj tylko te argumenty, które pojawiają się w kolejnych wywołaniach tej samej funkcji.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaz rozwiazanie cwiczenia 3</summary>
+<summary>Przykładowe rozwiązanie</summary>
 
-Przypadek podstawowy jest tym fragmentem funkcji, ktory zwraca wynik albo wykonuje `return` bez kolejnego wywolania rekurencyjnego.
-
-</details>
-
-### Cwiczenie 4 - Poprawienie bledu
-
-Wyjasnij, co stanie sie, gdy argument nie bedzie sie zmniejszal.
-
-<details markdown="1">
-<summary>Pokaz wskazowke do cwiczenia 4</summary>
-
-Sprawdz, czy kolejne wywolanie zbliza sie do konca.
+Poprawna odpowiedź powinna pokazywać, że każde kolejne wywołanie zbliża funkcję do przypadku podstawowego `liczba < 10`. Ostatni wiersz opisu to wywołanie, które już nie uruchamia kolejnej rekurencji.
 
 </details>
 
-<details markdown="1">
-<summary>Pokaz rozwiazanie cwiczenia 4</summary>
+### Ćwiczenie 3 - przypadek podstawowy
 
-Jezeli argument nie zbliza sie do przypadku podstawowego, rekurencja moze dzialac bez konca albo zakonczyc sie bledem wykonania.
-
-</details>
-
-### Cwiczenie 5 - Program
-
-Napisz lub uruchom kompletny program oparty na schemacie z lekcji.
+Wskaż w funkcji `sumaCyfr` przypadek podstawowy. Napisz jednym zdaniem, dlaczego bez tego warunku rekurencja nie mogłaby się poprawnie zakończyć.
 
 <details markdown="1">
-<summary>Pokaz wskazowke do cwiczenia 5</summary>
+<summary>Wskazówka</summary>
 
-Zachowaj przypadek podstawowy i krok rekurencyjny.
+Szukaj instrukcji `if`, po której funkcja kończy pracę bez kolejnego wywołania samej siebie.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaz rozwiazanie cwiczenia 5</summary>
+<summary>Przykładowe rozwiązanie</summary>
+
+Przypadek podstawowy to warunek `liczba < 10`. Po jego spełnieniu funkcja nie wywołuje już samej siebie, więc rekurencja zaczyna się kończyć.
+
+</details>
+
+### Ćwiczenie 4 - błąd w kroku rekurencyjnym
+
+Wyjaśnij, co mogłoby się stać, gdyby w funkcji `sumaCyfr` krok rekurencyjny nie zmieniał argumentu `liczba` w stronę przypadku podstawowego.
+
+<details markdown="1">
+<summary>Wskazówka</summary>
+
+Porównaj pierwsze wywołanie z następnym. Sprawdź, czy problem staje się mniejszy albo prostszy.
+
+</details>
+
+<details markdown="1">
+<summary>Przykładowe rozwiązanie</summary>
+
+Jeżeli argument nie zbliża się do przypadku podstawowego, funkcja może wywoływać samą siebie bez końca. Program zużywa wtedy coraz więcej pamięci stosu i może zakończyć się błędem.
+
+</details>
+
+### Ćwiczenie 5 - krótki program
+
+Napisz krótki program testujący funkcję `sumaCyfr` dla wywołania `sumaCyfr(472)`. Program ma wypisać wynik i działać w standardzie C++23.
+
+<details markdown="1">
+<summary>Wskazówka</summary>
+
+Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkcję z podanymi argumentami.
+
+</details>
+
+<details markdown="1">
+<summary>Przykładowe rozwiązanie</summary>
 
 ```cpp
 #include <iostream>
@@ -214,11 +218,6 @@ using namespace std;
 
 int sumaCyfr(int liczba)
 {
-    if (liczba < 0)
-    {
-        liczba = -liczba;
-    }
-
     if (liczba < 10)
     {
         return liczba;
@@ -227,32 +226,11 @@ int sumaCyfr(int liczba)
     return liczba % 10 + sumaCyfr(liczba / 10);
 }
 
-int liczbaCyfr(int liczba)
-{
-    if (liczba < 0)
-    {
-        liczba = -liczba;
-    }
-
-    if (liczba < 10)
-    {
-        return 1;
-    }
-
-    return 1 + liczbaCyfr(liczba / 10);
-}
-
 int main()
 {
-    cout << sumaCyfr(-3054) << "\n";
-    cout << liczbaCyfr(0) << "\n";
+    cout << sumaCyfr(472) << "\n";
     return 0;
 }
 ```
 
 </details>
-
-
-## Podsumowanie
-
-Najwazniejsze jest rozumienie przypadku podstawowego, zmniejszania problemu i kolejności powrotow.

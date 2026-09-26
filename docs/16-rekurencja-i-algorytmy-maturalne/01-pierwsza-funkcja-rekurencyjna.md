@@ -5,47 +5,47 @@ title: Pierwsza funkcja rekurencyjna
 
 # Pierwsza funkcja rekurencyjna
 
-## Krotkie przedstawienie problemu
+## Krótkie przedstawienie problemu
 
-Chcemy zobaczyc najprostszy mechanizm: funkcja wywoluje sama siebie.
+Chcemy zobaczyć najprostszy mechanizm: funkcja wywołuje sama siebie.
 
-## Proste wyjasnienie idei
+## Proste wyjaśnienie idei
 
-Funkcja wykonuje jeden krok i przekazuje mniejszy problem kolejnemu wywolaniu.
+Funkcja wykonuje jeden krok i przekazuje mniejszy problem kolejnemu wywołaniu.
 
-## Dokladne wyjasnienie techniczne
+## Dokładne wyjaśnienie techniczne
 
-Rekurencja wymaga warunku zatrzymania oraz wywolania z argumentem blizszym temu warunkowi.
+Rekurencja wymaga warunku zatrzymania oraz wywołania z argumentem blizszym temu warunkowi.
 
 ## Przypadek podstawowy
 
-Dla `liczba == 0` funkcja konczy biezace wywolanie przez `return`.
+Dla `liczba == 0` funkcja konczy bieżące wywołanie przez `return`.
 
 ## Krok rekurencyjny
 
-Funkcja wypisuje aktualna liczbe i wywoluje `odliczaj(liczba - 1)`.
+Funkcja wypisuje aktualną liczbę i wywołuje `odliczaj(liczba - 1)`.
 
-## W jaki sposob problem sie zmniejsza?
+## W jaki sposób problem się zmniejsza?
 
-W kazdym poprawnym przykladzie zmienia sie argument funkcji albo zakres danych. Nowe wywolanie dostaje mniejszy problem, wiec moze dojsc do przypadku podstawowego.
+W każdym poprawnym przykładzie zmienia się argument funkcji albo zakres danych. Nowe wywołanie dostaje mniejszy problem, więc może dojść do przypadku podstawowego.
 
-## Reczne przesledzenie niewielkiego przykladu
+## Ręczne prześledzenie niewielkiego przykładu
 
 Dla `odliczaj(4)` kolejne argumenty to `4`, `3`, `2`, `1`, `0`.
 
-## Diagram dzialania
+## Diagram działania
 
 ```mermaid
 flowchart TD
-    A["Wejscie do funkcji"] --> B{"Czy liczba == 0?"}
-    B -->|tak| C["Zakoncz wywolanie"]
-    B -->|nie| D["Wypisz liczbe"]
+    A["Wejście do funkcji"] --> B{"Czy liczba == 0?"}
+    B -->|tak| C["Zakończ wywołanie"]
+    B -->|nie| D["Wypisz liczbę"]
     D --> E["Wywolaj dla liczba - 1"]
     E --> A
 ```
 
 
-## Pelny program C++
+## Pełny program C++
 
 ```cpp
 #include <iostream>
@@ -72,9 +72,9 @@ int main()
 ```
 
 <details markdown="1">
-<summary>Pokaz przykladowe dane i wynik</summary>
+<summary>Pokaż przykładowe dane i wynik</summary>
 
-Dane wejsciowe:
+Dane wejściowe:
 
 ```text
 brak
@@ -88,114 +88,118 @@ Wynik:
 
 </details>
 
-## Omowienie programu krok po kroku
+## Omówienie programu krok po kroku
 
-Program pokazuje roznice miedzy zwyklym wywolaniem funkcji a rekurencja. Ostatnie wywolanie dla zera niczego nie wypisuje.
+Program pokazuje różnicę między zwyklym wywołaniem funkcji a rekurencja. Ostatnie wywołanie dla zera niczego nie wypisuje.
 
-## Kiedy rekurencja sie zakonczy?
+## Kiedy rekurencja się zakończy?
 
-Rekurencja zakonczy sie wtedy, gdy kolejne wywolania doprowadza do przypadku podstawowego. Jezeli argument nie zbliza sie do konca, funkcja moze wywolywac sie bez konca.
+Rekurencja zakończy się wtedy, gdy kolejne wywołania doprowadzą do przypadku podstawowego. Jeżeli argument nie zbliża się do końca, funkcja może wywoływać się bez końca.
 
-## Kiedy lepsza bedzie petla?
+## Kiedy lepsza będzie pętla?
 
-Petla bedzie lepsza, gdy zadanie polega na prostym przejsciu po kolejnych wartosciach i rekurencja nie ulatwia myslenia. Petla zwykle zuzywa mniej pamieci i jest bezpieczniejsza dla bardzo duzych danych.
+Pętla będzie lepsza, gdy zadanie polega na prostym przejściu po kolejnych wartościach i rekurencja nie ułatwia myślenia. Pętla zwykle zużywa mniej pamięci i jest bezpieczniejsza dla bardzo dużych danych.
 
-## Typowe bledy
+## Typowe błędy
 
 - Brak przypadku podstawowego.
-- Przypadek podstawowy, ktorego nie da sie osiagnac.
-- Argument rosnacy zamiast zblizajacego sie do konca.
-- Pominiecie `return` w funkcji zwracajacej wartosc.
+- Przypadek podstawowy, którego nie da się osiągnąć.
+- Argument rosnący zamiast zbliżającego się do końca.
+- Pominięcie `return` w funkcji zwracającej wartość.
 - Pomylenie instrukcji wykonywanych podczas schodzenia z instrukcjami wykonywanymi podczas powrotu.
-- Uzycie rekurencji tam, gdzie zwykla petla jest prostsza.
+- Użycie rekurencji tam, gdzie zwykła pętla jest prostsza.
 
-## Cwiczenia
+## Ćwiczenia
 
-### Cwiczenie 1 - Przewidzenie wyniku
+### Ćwiczenie 1 - przewidzenie wyniku
 
-Przewidz wynik malego wywolania z lekcji.
+Dla funkcji `odliczaj` pokazanej w tej lekcji ustal wynik wywołania `odliczaj(4)`. Zapisz odpowiedź jako wartość zwracaną albo dokładny tekst wypisany przez program.
 
 <details markdown="1">
-<summary>Pokaz wskazowke do cwiczenia 1</summary>
+<summary>Wskazówka</summary>
 
-Rozpisz kolejne argumenty i zaznacz przypadek podstawowy.
+Najpierw znajdź przypadek podstawowy `liczba <= 0`, a potem rozpisz kolejne wartości argumentu `liczba`.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaz rozwiazanie cwiczenia 1</summary>
+<summary>Przykładowe rozwiązanie</summary>
 
-Rozwiazanie polega na rozpisaniu kolejnych wywolan i powrotow. Dla malego przykladu widac, kiedy funkcja przestaje wywolywac sama siebie.
+Wywołanie `odliczaj(4)` daje wynik:
 
-</details>
-
-### Cwiczenie 2 - Reczne rozpisanie wywolan
-
-Utworz tabele wywolan dla wartosci poczatkowej podanej w przykladzie.
-
-<details markdown="1">
-<summary>Pokaz wskazowke do cwiczenia 2</summary>
-
-W pierwszej kolumnie wpisz numer wywolania, w drugiej argument, w trzeciej decyzje.
+```text
+4 3 2 1
+```
 
 </details>
 
-<details markdown="1">
-<summary>Pokaz rozwiazanie cwiczenia 2</summary>
+### Ćwiczenie 2 - rozpisanie wywołań
 
-Tabela powinna pokazac schodzenie do przypadku podstawowego oraz powroty do poprzednich wywolan.
-
-</details>
-
-### Cwiczenie 3 - Przypadek podstawowy
-
-Wskaz przypadek podstawowy i wyjasnij, dlaczego konczy rekurencje.
+Zapisz kolejno argumenty wszystkich wywołań rekurencyjnych funkcji `odliczaj` dla wywołania `odliczaj(4)`. Przy każdym wywołaniu dopisz, czy funkcja schodzi głębiej, czy osiąga przypadek podstawowy.
 
 <details markdown="1">
-<summary>Pokaz wskazowke do cwiczenia 3</summary>
+<summary>Wskazówka</summary>
 
-Szukaj warunku, po ktorym funkcja nie wywoluje samej siebie.
+Zacznij od pierwszego wywołania. Potem zapisuj tylko te argumenty, które pojawiają się w kolejnych wywołaniach tej samej funkcji.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaz rozwiazanie cwiczenia 3</summary>
+<summary>Przykładowe rozwiązanie</summary>
 
-Przypadek podstawowy jest tym fragmentem funkcji, ktory zwraca wynik albo wykonuje `return` bez kolejnego wywolania rekurencyjnego.
-
-</details>
-
-### Cwiczenie 4 - Poprawienie bledu
-
-Wyjasnij, co stanie sie, gdy argument nie bedzie sie zmniejszal.
-
-<details markdown="1">
-<summary>Pokaz wskazowke do cwiczenia 4</summary>
-
-Sprawdz, czy kolejne wywolanie zbliza sie do konca.
+Poprawna odpowiedź powinna pokazywać, że każde kolejne wywołanie zbliża funkcję do przypadku podstawowego `liczba <= 0`. Ostatni wiersz opisu to wywołanie, które już nie uruchamia kolejnej rekurencji.
 
 </details>
 
-<details markdown="1">
-<summary>Pokaz rozwiazanie cwiczenia 4</summary>
+### Ćwiczenie 3 - przypadek podstawowy
 
-Jezeli argument nie zbliza sie do przypadku podstawowego, rekurencja moze dzialac bez konca albo zakonczyc sie bledem wykonania.
-
-</details>
-
-### Cwiczenie 5 - Program
-
-Napisz lub uruchom kompletny program oparty na schemacie z lekcji.
+Wskaż w funkcji `odliczaj` przypadek podstawowy. Napisz jednym zdaniem, dlaczego bez tego warunku rekurencja nie mogłaby się poprawnie zakończyć.
 
 <details markdown="1">
-<summary>Pokaz wskazowke do cwiczenia 5</summary>
+<summary>Wskazówka</summary>
 
-Zachowaj przypadek podstawowy i krok rekurencyjny.
+Szukaj instrukcji `if`, po której funkcja kończy pracę bez kolejnego wywołania samej siebie.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaz rozwiazanie cwiczenia 5</summary>
+<summary>Przykładowe rozwiązanie</summary>
+
+Przypadek podstawowy to warunek `liczba <= 0`. Po jego spełnieniu funkcja nie wywołuje już samej siebie, więc rekurencja zaczyna się kończyć.
+
+</details>
+
+### Ćwiczenie 4 - błąd w kroku rekurencyjnym
+
+Wyjaśnij, co mogłoby się stać, gdyby w funkcji `odliczaj` krok rekurencyjny nie zmieniał argumentu `liczba` w stronę przypadku podstawowego.
+
+<details markdown="1">
+<summary>Wskazówka</summary>
+
+Porównaj pierwsze wywołanie z następnym. Sprawdź, czy problem staje się mniejszy albo prostszy.
+
+</details>
+
+<details markdown="1">
+<summary>Przykładowe rozwiązanie</summary>
+
+Jeżeli argument nie zbliża się do przypadku podstawowego, funkcja może wywoływać samą siebie bez końca. Program zużywa wtedy coraz więcej pamięci stosu i może zakończyć się błędem.
+
+</details>
+
+### Ćwiczenie 5 - krótki program
+
+Napisz krótki program testujący funkcję `odliczaj` dla wywołania `odliczaj(4)`. Program ma wypisać wynik i działać w standardzie C++23.
+
+<details markdown="1">
+<summary>Wskazówka</summary>
+
+Zostaw przypadek podstawowy i krok rekurencyjny. W funkcji `main` wywołaj funkcję z podanymi argumentami.
+
+</details>
+
+<details markdown="1">
+<summary>Przykładowe rozwiązanie</summary>
 
 ```cpp
 #include <iostream>
@@ -204,7 +208,7 @@ using namespace std;
 
 void odliczaj(int liczba)
 {
-    if (liczba == 0)
+    if (liczba <= 0)
     {
         return;
     }
@@ -222,8 +226,3 @@ int main()
 ```
 
 </details>
-
-
-## Podsumowanie
-
-Najwazniejsze jest rozumienie przypadku podstawowego, zmniejszania problemu i kolejności powrotow.
