@@ -37,8 +37,21 @@ Zaczynaj od `vector`. `set` wybieraj dla unikalności. `map` wybieraj dla relacj
 ```cpp
 #include <iostream>
 #include <vector>
+
 using namespace std;
-int main(){vector<int> oceny={5,4,5,3};for(int x:oceny)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    vector<int> oceny = {5, 4, 5, 3};
+
+    for (int liczba : oceny)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż wynik</summary>
@@ -58,8 +71,21 @@ int main(){vector<int> oceny={5,4,5,3};for(int x:oceny)cout<<x<<" ";cout<<"\n";r
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){set<int>s={12,7,12,3,7};for(int x:s)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    set<int> liczby = {12, 7, 12, 3, 7};
+
+    for (int liczba : liczby)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż wynik</summary>
@@ -76,8 +102,29 @@ int main(){set<int>s={12,7,12,3,7};for(int x:s)cout<<x<<" ";cout<<"\n";return 0;
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){map<string,double> ceny;ceny["zeszyt"]=4.5;ceny["dlugopis"]=3.2;string p;cin>>p;if(ceny.find(p)!=ceny.end())cout<<ceny[p]<<"\n";else cout<<"Brak.\n";return 0;}
+
+int main()
+{
+    map<string, double> ceny;
+    ceny["zeszyt"] = 4.5;
+    ceny["dlugopis"] = 3.2;
+
+    string produkt;
+    cin >> produkt;
+
+    if (ceny.find(produkt) != ceny.end())
+    {
+        cout << ceny[produkt] << "\n";
+    }
+    else
+    {
+        cout << "Brak.\n";
+    }
+
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -129,8 +176,21 @@ Wybrano `vector`, bo powtórzenia są ważne.
 ```cpp
 #include <iostream>
 #include <vector>
+
 using namespace std;
-int main(){vector<int> oceny={5,4,5,3};for(int x:oceny)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    vector<int> oceny = {5, 4, 5, 3};
+
+    for (int liczba : oceny)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -153,8 +213,21 @@ Wybrano `set`, bo usuwa duplikaty.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){set<int>s={12,7,12,3,7};for(int x:s)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    set<int> liczby = {12, 7, 12, 3, 7};
+
+    for (int liczba : liczby)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -178,8 +251,29 @@ Wybrano `map`, bo kod jest kluczem.
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){map<string,double> ceny;ceny["zeszyt"]=4.5;ceny["dlugopis"]=3.2;string p;cin>>p;if(ceny.find(p)!=ceny.end())cout<<ceny[p]<<"\n";else cout<<"Brak.\n";return 0;}
+
+int main()
+{
+    map<string, double> ceny;
+    ceny["zeszyt"] = 4.5;
+    ceny["dlugopis"] = 3.2;
+
+    string produkt;
+    cin >> produkt;
+
+    if (ceny.find(produkt) != ceny.end())
+    {
+        cout << ceny[produkt] << "\n";
+    }
+    else
+    {
+        cout << "Brak.\n";
+    }
+
+    return 0;
+}
 ```
 
 </details>
@@ -203,8 +297,30 @@ Wybrano mapę, bo słowo jest kluczem licznika.
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){int n;cin>>n;map<string,int> l;for(int i=0;i<n;i++){string s;cin>>s;l[s]++;}for(const auto &e:l)cout<<e.first<<" => "<<e.second<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+
+    map<string, int> licznikSlow;
+
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        string slowo;
+        cin >> slowo;
+        licznikSlow[slowo]++;
+    }
+
+    for (const auto &element : licznikSlow)
+    {
+        cout << element.first << " => " << element.second << "\n";
+    }
+
+    return 0;
+}
 ```
 
 </details>
@@ -227,8 +343,22 @@ Wybrano `vector`, bo to zwykła lista wartości.
 ```cpp
 #include <iostream>
 #include <vector>
+
 using namespace std;
-int main(){vector<double> p={20.5,21,19.5,22,20};double s=0;for(double x:p)s+=x;cout<<s/p.size()<<"\n";return 0;}
+
+int main()
+{
+    vector<double> pomiary = {20.5, 21, 19.5, 22, 20};
+    double suma = 0;
+
+    for (double pomiar : pomiary)
+    {
+        suma += pomiar;
+    }
+
+    cout << suma / pomiary.size() << "\n";
+    return 0;
+}
 ```
 
 </details>

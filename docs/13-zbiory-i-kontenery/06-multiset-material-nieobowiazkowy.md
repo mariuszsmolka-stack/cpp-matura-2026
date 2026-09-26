@@ -19,6 +19,7 @@ To podobne do `set`, ale ta sama wartość może wystąpić wiele razy.
 
 ```cpp
 #include <set>
+
 multiset<int> wartosci;
 wartosci.insert(5);
 wartosci.count(5);
@@ -33,8 +34,22 @@ wartosci.erase(5);
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){multiset<int> m={12,7,12,20,7};for(int x:m)cout<<x<<" ";cout<<"\n";cout<<m.count(12)<<"\n";return 0;}
+
+int main()
+{
+    multiset<int> wartosci = {12, 7, 12, 20, 7};
+
+    for (int liczba : wartosci)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    cout << wartosci.count(12) << "\n";
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż wynik</summary>
@@ -55,8 +70,36 @@ Powtórzenia zostały zachowane i uporządkowane.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){multiset<int> m={10,20,10,30,10};auto it=m.find(10);if(it!=m.end())m.erase(it);for(int x:m)cout<<x<<" ";cout<<"\n";m.erase(10);for(int x:m)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    multiset<int> wartosci = {10, 20, 10, 30, 10};
+
+    auto it = wartosci.find(10);
+    if (it != wartosci.end())
+    {
+        wartosci.erase(it);
+    }
+
+    for (int liczba : wartosci)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+
+    wartosci.erase(10);
+
+    for (int liczba : wartosci)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż wynik</summary>
@@ -101,8 +144,22 @@ Użyj `insert()`.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){multiset<int> m={12,7,12,20,7};for(int x:m)cout<<x<<" ";cout<<"\n";cout<<m.count(12)<<"\n";return 0;}
+
+int main()
+{
+    multiset<int> wartosci = {12, 7, 12, 20, 7};
+
+    for (int liczba : wartosci)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    cout << wartosci.count(12) << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -125,8 +182,22 @@ W `multiset` wynik może być większy niż 1.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){multiset<int> m={12,7,12,20,7};for(int x:m)cout<<x<<" ";cout<<"\n";cout<<m.count(12)<<"\n";return 0;}
+
+int main()
+{
+    multiset<int> wartosci = {12, 7, 12, 20, 7};
+
+    for (int liczba : wartosci)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    cout << wartosci.count(12) << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -149,8 +220,30 @@ Iterator usuwa jeden element.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){multiset<int> m={5,5,5,8};int x;cin>>x;auto it=m.find(x);if(it!=m.end())m.erase(it);for(int v:m)cout<<v<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    multiset<int> wartosci = {5, 5, 5, 8};
+
+    int liczba;
+    cin >> liczba;
+
+    auto it = wartosci.find(liczba);
+    if (it != wartosci.end())
+    {
+        wartosci.erase(it);
+    }
+
+    for (int wartosc : wartosci)
+    {
+        cout << wartosc << " ";
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -173,8 +266,21 @@ Wybrano vector dla zachowania kolejności.
 ```cpp
 #include <iostream>
 #include <vector>
+
 using namespace std;
-int main(){vector<int> oceny={5,4,5,3};for(int x:oceny)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    vector<int> oceny = {5, 4, 5, 3};
+
+    for (int liczba : oceny)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>

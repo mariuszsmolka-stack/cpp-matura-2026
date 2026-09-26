@@ -17,6 +17,7 @@ title: set - unikalne wartości
 
 ```cpp
 #include <set>
+
 set<int> liczby;
 liczby.insert(7);
 liczby.erase(7);
@@ -31,8 +32,27 @@ liczby.empty();
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){int n;cin>>n;set<int>s;for(int i=0;i<n;i++){int x;cin>>x;s.insert(x);}for(int x:s)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    set<int> liczby;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        int liczba;
+        cin >> liczba;
+        liczby.insert(liczba);
+    }
+    for (int liczba : liczby)
+    {
+        cout << liczba << " ";
+    }
+    cout << "\n";
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -61,8 +81,31 @@ Program wczytuje liczby, dodaje je przez `insert()` i wypisuje różne wartości
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){int n;cin>>n;set<int>s;bool d=false;for(int i=0;i<n;i++){int x;cin>>x;if(s.count(x))d=true;else s.insert(x);}cout<<(d?"Duplikat.\n":"Brak duplikatu.\n");return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    set<int> liczby;
+    bool znalezionoDuplikat = false;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        int liczba;
+        cin >> liczba;
+        if (liczby.count(liczba))
+        {
+            znalezionoDuplikat = true;
+        }
+        else
+        {
+            liczby.insert(liczba);
+        }
+    }
+    cout << (znalezionoDuplikat ? "Duplikat.\n" : "Brak duplikatu.\n");
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -90,8 +133,24 @@ Spacje pomijamy, wielkość liter ma znaczenie.
 #include <iostream>
 #include <set>
 #include <string>
+
 using namespace std;
-int main(){string t;getline(cin,t);set<char>s;for(char c:t)if(c!=' ')s.insert(c);cout<<s.size()<<"\n";return 0;}
+
+int main()
+{
+    string t;
+    getline(cin, t);
+    set<char> liczby;
+    for (char c : t)
+    {
+        if (c != ' ')
+        {
+            liczby.insert(c);
+        }
+    }
+    cout << liczby.size() << "\n";
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -143,8 +202,27 @@ Dodawaj liczby przez `insert()`.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){int n;cin>>n;set<int>s;for(int i=0;i<n;i++){int x;cin>>x;s.insert(x);}for(int x:s)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    set<int> liczby;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        int liczba;
+        cin >> liczba;
+        liczby.insert(liczba);
+    }
+    for (int liczba : liczby)
+    {
+        cout << liczba << " ";
+    }
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -167,8 +245,23 @@ Rozmiar `set` to liczba różnych wartości.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){int n;cin>>n;set<int>s;for(int i=0;i<n;i++){int x;cin>>x;s.insert(x);}cout<<s.size()<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    set<int> liczby;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        int liczba;
+        cin >> liczba;
+        liczby.insert(liczba);
+    }
+    cout << liczby.size() << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -191,8 +284,31 @@ Przed dodaniem użyj `count()`.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){int n;cin>>n;set<int>s;bool d=false;for(int i=0;i<n;i++){int x;cin>>x;if(s.count(x))d=true;else s.insert(x);}cout<<(d?"Duplikat.\n":"Brak duplikatu.\n");return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    set<int> liczby;
+    bool znalezionoDuplikat = false;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        int liczba;
+        cin >> liczba;
+        if (liczby.count(liczba))
+        {
+            znalezionoDuplikat = true;
+        }
+        else
+        {
+            liczby.insert(liczba);
+        }
+    }
+    cout << (znalezionoDuplikat ? "Duplikat.\n" : "Brak duplikatu.\n");
+    return 0;
+}
 ```
 
 </details>
@@ -215,8 +331,25 @@ Użyj `erase(wartosc)`.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){set<int>s; s.insert(3);s.insert(8);s.insert(10);int x;cin>>x;s.erase(x);for(int v:s)cout<<v<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    set<int> liczby;
+    liczby.insert(3);
+    liczby.insert(8);
+    liczby.insert(10);
+    int liczba;
+    cin >> liczba;
+    liczby.erase(liczba);
+    for (int v : liczby)
+    {
+        cout << v << " ";
+    }
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -240,8 +373,26 @@ Użyj `set<string>`.
 #include <iostream>
 #include <set>
 #include <string>
+
 using namespace std;
-int main(){int n;cin>>n;set<string>s;for(int i=0;i<n;i++){string x;cin>>x;s.insert(x);}for(const string &x:s)cout<<x<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    set<string> liczby;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        string x;
+        cin >> x;
+        liczby.insert(x);
+    }
+    for (const string &x : liczby)
+    {
+        cout << x << "\n";
+    }
+    return 0;
+}
 ```
 
 </details>
@@ -265,8 +416,24 @@ Każdy znak trafia do zbioru raz.
 #include <iostream>
 #include <set>
 #include <string>
+
 using namespace std;
-int main(){string t;getline(cin,t);set<char>s;for(char c:t)if(c!=' ')s.insert(c);cout<<s.size()<<"\n";return 0;}
+
+int main()
+{
+    string t;
+    getline(cin, t);
+    set<char> liczby;
+    for (char c : t)
+    {
+        if (c != ' ')
+        {
+            liczby.insert(c);
+        }
+    }
+    cout << liczby.size() << "\n";
+    return 0;
+}
 ```
 
 </details>

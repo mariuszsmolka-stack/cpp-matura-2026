@@ -16,9 +16,9 @@ Dla `A = {1, 2, 4, 7}` i `B = {2, 3, 4, 8}` suma to `{1, 2, 3, 4, 7, 8}`, częś
 ## Składnia
 
 ```cpp
-if (b.count(x) == 1)
+if (zbiorB.count(liczba) == 1)
 {
-    cout << x << " ";
+    cout << liczba << " ";
 }
 ```
 
@@ -27,8 +27,33 @@ if (b.count(x) == 1)
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){set<int>a={1,2,4,7},b={2,3,4,8},s;for(int x:a)s.insert(x);for(int x:b)s.insert(x);for(int x:s)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    set<int> zbiorA = {1, 2, 4, 7};
+    set<int> zbiorB = {2, 3, 4, 8};
+    set<int> suma;
+
+    for (int liczba : zbiorA)
+    {
+        suma.insert(liczba);
+    }
+
+    for (int liczba : zbiorB)
+    {
+        suma.insert(liczba);
+    }
+
+    for (int liczba : suma)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż wynik</summary>
@@ -48,8 +73,25 @@ Dodajemy elementy obu zbiorów do trzeciego `set`.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){set<int>a={1,2,4,7},b={2,3,4,8};for(int x:a)if(b.count(x))cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    set<int> zbiorA = {1, 2, 4, 7};
+    set<int> zbiorB = {2, 3, 4, 8};
+
+    for (int liczba : zbiorA)
+    {
+        if (zbiorB.count(liczba))
+        {
+            cout << liczba << " ";
+        }
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż wynik</summary>
@@ -65,8 +107,38 @@ int main(){set<int>a={1,2,4,7},b={2,3,4,8};for(int x:a)if(b.count(x))cout<<x<<" 
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){set<int>a={1,2,4,7},b={2,3,4,8};for(int x:a)if(!b.count(x))cout<<x<<" ";cout<<"\n";set<int>w={2,4};bool ok=true;for(int x:w)if(!a.count(x))ok=false;cout<<(ok?"Podzbior.\n":"Braki.\n");return 0;}
+
+int main()
+{
+    set<int> zbiorA = {1, 2, 4, 7};
+    set<int> zbiorB = {2, 3, 4, 8};
+
+    for (int liczba : zbiorA)
+    {
+        if (!zbiorB.count(liczba))
+        {
+            cout << liczba << " ";
+        }
+    }
+
+    cout << "\n";
+
+    set<int> wymagane = {2, 4};
+    bool ok = true;
+
+    for (int liczba : wymagane)
+    {
+        if (!zbiorA.count(liczba))
+        {
+            ok = false;
+        }
+    }
+
+    cout << (ok ? "Podzbior.\n" : "Braki.\n");
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż wynik</summary>
@@ -111,8 +183,33 @@ Suma zbiorów pasuje do `set`.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){set<int>a={1,2},b={2,3},s;for(int x:a)s.insert(x);for(int x:b)s.insert(x);for(int x:s)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    set<int> zbiorA = {1, 2};
+    set<int> zbiorB = {2, 3};
+    set<int> suma;
+
+    for (int liczba : zbiorA)
+    {
+        suma.insert(liczba);
+    }
+
+    for (int liczba : zbiorB)
+    {
+        suma.insert(liczba);
+    }
+
+    for (int liczba : suma)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -135,8 +232,25 @@ Część wspólna wymaga obecności w obu zbiorach.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){set<int>a={1,2,4},b={2,4,8};for(int x:a)if(b.count(x))cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    set<int> zbiorA = {1, 2, 4};
+    set<int> zbiorB = {2, 4, 8};
+
+    for (int liczba : zbiorA)
+    {
+        if (zbiorB.count(liczba))
+        {
+            cout << liczba << " ";
+        }
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -159,8 +273,25 @@ Różnica sprawdza brak w drugim zbiorze.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){set<int>a={1,2,4},b={2,8};for(int x:a)if(!b.count(x))cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    set<int> zbiorA = {1, 2, 4};
+    set<int> zbiorB = {2, 8};
+
+    for (int liczba : zbiorA)
+    {
+        if (!zbiorB.count(liczba))
+        {
+            cout << liczba << " ";
+        }
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -184,8 +315,26 @@ To klasyczny test podzbioru.
 #include <iostream>
 #include <set>
 #include <string>
+
 using namespace std;
-int main(){set<string>d={"A1","B2","C3"},w={"A1","C3"};bool ok=true;for(const string &x:w)if(!d.count(x))ok=false;cout<<(ok?"OK\n":"BRAK\n");return 0;}
+
+int main()
+{
+    set<string> dostepne = {"A1", "B2", "C3"};
+    set<string> wymagane = {"A1", "C3"};
+    bool ok = true;
+
+    for (const string &kod : wymagane)
+    {
+        if (!dostepne.count(kod))
+        {
+            ok = false;
+        }
+    }
+
+    cout << (ok ? "OK\n" : "BRAK\n");
+    return 0;
+}
 ```
 
 </details>
@@ -209,8 +358,47 @@ To różnica symetryczna.
 #include <iostream>
 #include <set>
 #include <string>
+
 using namespace std;
-int main(){string a,b;cin>>a>>b;set<char>x,y;for(char c:a)x.insert(c);for(char c:b)y.insert(c);for(char c:x)if(!y.count(c))cout<<c<<" ";for(char c:y)if(!x.count(c))cout<<c<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    string tekstA;
+    string tekstB;
+    cin >> tekstA >> tekstB;
+
+    set<char> znakiA;
+    set<char> znakiB;
+
+    for (char znak : tekstA)
+    {
+        znakiA.insert(znak);
+    }
+
+    for (char znak : tekstB)
+    {
+        znakiB.insert(znak);
+    }
+
+    for (char znak : znakiA)
+    {
+        if (!znakiB.count(znak))
+        {
+            cout << znak << " ";
+        }
+    }
+
+    for (char znak : znakiB)
+    {
+        if (!znakiA.count(znak))
+        {
+            cout << znak << " ";
+        }
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>

@@ -17,6 +17,7 @@ title: map - klucz i wartość
 
 ```cpp
 #include <map>
+
 map<string, int> punkty;
 punkty["Adam"] = 15;
 punkty.find("Adam");
@@ -43,8 +44,26 @@ Jeżeli klucza nie ma, `mapa[klucz]` tworzy nowy element z wartością domyśln�
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){map<string,double> ceny;ceny["zeszyt"]=4.5;ceny["dlugopis"]=3.2;string p;cin>>p;if(ceny.find(p)!=ceny.end())cout<<ceny[p]<<"\n";else cout<<"Brak.\n";return 0;}
+
+int main()
+{
+    map<string, double> ceny;
+    ceny["zeszyt"] = 4.5;
+    ceny["dlugopis"] = 3.2;
+    string p;
+    cin >> p;
+    if (ceny.find(p) != ceny.end())
+    {
+        cout << ceny[p] << "\n";
+    }
+    else
+    {
+        cout << "Brak.\n";
+    }
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -72,8 +91,22 @@ Program sprawdza klucz przez `find()`, a potem odczytuje wartość.
 ```cpp
 #include <iostream>
 #include <map>
+
 using namespace std;
-int main(){map<int,int> p;p[101]=35;p[205]=42;p[205]=45;p.erase(101);for(const auto &e:p)cout<<e.first<<" => "<<e.second<<"\n";return 0;}
+
+int main()
+{
+    map<int, int> p;
+    p[101] = 35;
+    p[205] = 42;
+    p[205] = 45;
+    p.erase(101);
+    for (const auto &e : p)
+    {
+        cout << e.first << " => " << e.second << "\n";
+    }
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż wynik</summary>
@@ -90,8 +123,27 @@ int main(){map<int,int> p;p[101]=35;p[205]=42;p[205]=45;p.erase(101);for(const a
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){int n;cin>>n;map<string,double> t;for(int i=0;i<n;i++){string m;double x;cin>>m>>x;t[m]=x;}for(const auto &e:t)cout<<e.first<<" => "<<e.second<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    map<string, double> t;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        string m;
+        double x;
+        cin >> m >> x;
+        t[m] = x;
+    }
+    for (const auto &e : t)
+    {
+        cout << e.first << " => " << e.second << "\n";
+    }
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -149,8 +201,26 @@ Słowo jest kluczem.
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){map<string,string> ceny;ceny["set"]="zbior";ceny["map"]="klucz wartosc";string p;cin>>p;if(ceny.find(p)!=ceny.end())cout<<ceny[p]<<"\n";else cout<<"Brak.\n";return 0;}
+
+int main()
+{
+    map<string, string> ceny;
+    ceny["set"] = "zbior";
+    ceny["map"] = "klucz wartosc";
+    string p;
+    cin >> p;
+    if (ceny.find(p) != ceny.end())
+    {
+        cout << ceny[p] << "\n";
+    }
+    else
+    {
+        cout << "Brak.\n";
+    }
+    return 0;
+}
 ```
 
 </details>
@@ -174,8 +244,26 @@ Cena jest wartością w mapie.
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){map<string,double> ceny;ceny["zeszyt"]=4.5;ceny["dlugopis"]=3.2;string p;cin>>p;if(ceny.find(p)!=ceny.end())cout<<ceny[p]<<"\n";else cout<<"Brak.\n";return 0;}
+
+int main()
+{
+    map<string, double> ceny;
+    ceny["zeszyt"] = 4.5;
+    ceny["dlugopis"] = 3.2;
+    string p;
+    cin >> p;
+    if (ceny.find(p) != ceny.end())
+    {
+        cout << ceny[p] << "\n";
+    }
+    else
+    {
+        cout << "Brak.\n";
+    }
+    return 0;
+}
 ```
 
 </details>
@@ -198,8 +286,17 @@ Mapa przechowuje aktualną wartość.
 ```cpp
 #include <iostream>
 #include <map>
+
 using namespace std;
-int main(){map<int,int> p;p[1]=10;p[1]=15;cout<<p[1]<<"\n";return 0;}
+
+int main()
+{
+    map<int, int> p;
+    p[1] = 10;
+    p[1] = 15;
+    cout << p[1] << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -223,8 +320,26 @@ find nie tworzy nowego klucza.
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){map<string,double> t;t["Krakow"]=21.5;string m;cin>>m;auto it=t.find(m);if(it!=t.end())cout<<it->second<<"\n";else cout<<"Brak.\n";return 0;}
+
+int main()
+{
+    map<string, double> t;
+    t["Krakow"] = 21.5;
+    string m;
+    cin >> m;
+    auto it = t.find(m);
+    if (it != t.end())
+    {
+        cout << it -> second << "\n";
+    }
+    else
+    {
+        cout << "Brak.\n";
+    }
+    return 0;
+}
 ```
 
 </details>
@@ -248,8 +363,23 @@ Klucz wskazuje cały wpis.
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){map<string,int> m;m["A"]=1;m["B"]=2;string k;cin>>k;m.erase(k);for(const auto &e:m)cout<<e.first<<" => "<<e.second<<"\n";return 0;}
+
+int main()
+{
+    map<string, int> m;
+    m["A"] = 1;
+    m["B"] = 2;
+    string k;
+    cin >> k;
+    m.erase(k);
+    for (const auto &e : m)
+    {
+        cout << e.first << " => " << e.second << "\n";
+    }
+    return 0;
+}
 ```
 
 </details>
@@ -273,8 +403,26 @@ Wybrano `map`, bo wyszukujemy po kodzie.
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){map<string,double> ceny;ceny["zeszyt"]=4.5;ceny["dlugopis"]=3.2;string p;cin>>p;if(ceny.find(p)!=ceny.end())cout<<ceny[p]<<"\n";else cout<<"Brak.\n";return 0;}
+
+int main()
+{
+    map<string, double> ceny;
+    ceny["zeszyt"] = 4.5;
+    ceny["dlugopis"] = 3.2;
+    string p;
+    cin >> p;
+    if (ceny.find(p) != ceny.end())
+    {
+        cout << ceny[p] << "\n";
+    }
+    else
+    {
+        cout << "Brak.\n";
+    }
+    return 0;
+}
 ```
 
 </details>

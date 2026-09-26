@@ -18,7 +18,7 @@ W zadaniach często liczymy wystąpienia liczb, słów lub znaków albo grupujem
 ```cpp
 map<int, int> licznik;
 licznik[liczba]++;
-map<string, vector<int>> wynikiUczniow;
+map<string, vector<int >> wynikiUczniow;
 wynikiUczniow[imie].push_back(wynik);
 ```
 
@@ -29,8 +29,26 @@ wynikiUczniow[imie].push_back(wynik);
 ```cpp
 #include <iostream>
 #include <map>
+
 using namespace std;
-int main(){int n;cin>>n;map<int,int> l;for(int i=0;i<n;i++){int x;cin>>x;l[x]++;}for(const auto &e:l)cout<<e.first<<" => "<<e.second<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    map<int, int> l;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        int liczba;
+        cin >> liczba;
+        l[liczba]++;
+    }
+    for (const auto &e : l)
+    {
+        cout << e.first << " => " << e.second << "\n";
+    }
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -65,8 +83,26 @@ Wczytujemy pojedyncze słowa. Wielkość liter ma znaczenie, interpunkcja nie je
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){int n;cin>>n;map<string,int> l;for(int i=0;i<n;i++){string s;cin>>s;l[s]++;}for(const auto &e:l)cout<<e.first<<" => "<<e.second<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    map<string, int> l;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        string s;
+        cin >> s;
+        l[s]++;
+    }
+    for (const auto &e : l)
+    {
+        cout << e.first << " => " << e.second << "\n";
+    }
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -95,8 +131,27 @@ psa => 1
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){string t;getline(cin,t);map<char,int>s;for(char c:t)if(c!=' ')s[c]++;for(const auto &e:s)cout<<e.first<<" => "<<e.second<<"\n";return 0;}
+
+int main()
+{
+    string t;
+    getline(cin, t);
+    map<char, int> s;
+    for (char c : t)
+    {
+        if (c != ' ')
+        {
+            s[c]++;
+        }
+    }
+    for (const auto &e : s)
+    {
+        cout << e.first << " => " << e.second << "\n";
+    }
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -124,8 +179,32 @@ m => 1
 #include <map>
 #include <string>
 #include <vector>
+
 using namespace std;
-int main(){int n;cin>>n;map<string,vector<int>> w;for(int i=0;i<n;i++){string im;int x;cin>>im>>x;w[im].push_back(x);}for(const auto &e:w){cout<<e.first<<": ";for(int x:e.second)cout<<x<<" ";cout<<"\n";}return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    map<string, vector<int >> w;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        string im;
+        int liczba;
+        cin >> im >> liczba;
+        w[im].push_back(liczba);
+    }
+    for (const auto &e : w)
+    {
+        cout << e.first << ": ";
+        for (int liczba : e.second)
+        {
+            cout << liczba << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -184,8 +263,32 @@ Mapa przechowuje liczniki.
 ```cpp
 #include <iostream>
 #include <map>
+
 using namespace std;
-int main(){int n;cin>>n;map<int,int> l;for(int i=0;i<n;i++){int x;cin>>x;l[x]++;}int val=0,b=0;for(const auto &e:l)if(e.second>b){val=e.first;b=e.second;}cout<<val<<" => "<<b<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    map<int, int> l;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        int liczba;
+        cin >> liczba;
+        l[liczba]++;
+    }
+    int val = 0, b = 0;
+    for (const auto &e : l)
+    {
+        if (e.second> b)
+        {
+            val = e.first;
+            b = e.second;
+        }
+        cout << val << " => " << b << "\n";
+    }
+    return 0;
+}
 ```
 
 </details>
@@ -209,8 +312,31 @@ Mapa trzyma licznik słowa.
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){int n;cin>>n;map<string,int> l;for(int i=0;i<n;i++){string s;cin>>s;l[s]++;}for(const auto &e:l){cout<<e.first<<": ";for(int i=0;i<e.second;i++)cout<<"*";cout<<"\n";}return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    map<string, int> l;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        string s;
+        cin >> s;
+        l[s]++;
+    }
+    for (const auto &e : l)
+    {
+        cout << e.first << ": ";
+        for (int i = 0; i < e.second; i++)
+        {
+            cout << "*";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
 ```
 
 </details>
@@ -234,8 +360,27 @@ Kluczem jest znak.
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){string t;getline(cin,t);map<char,int>s;for(char c:t)if(c!=' ')s[c]++;for(const auto &e:s)cout<<e.first<<" => "<<e.second<<"\n";return 0;}
+
+int main()
+{
+    string t;
+    getline(cin, t);
+    map<char, int> s;
+    for (char c : t)
+    {
+        if (c != ' ')
+        {
+            s[c]++;
+        }
+    }
+    for (const auto &e : s)
+    {
+        cout << e.first << " => " << e.second << "\n";
+    }
+    return 0;
+}
 ```
 
 </details>
@@ -259,8 +404,27 @@ Mapa grupuje sumy według nazwiska.
 #include <iostream>
 #include <map>
 #include <string>
+
 using namespace std;
-int main(){int n;cin>>n;map<string,int> suma;for(int i=0;i<n;i++){string z;int p;cin>>z>>p;suma[z]+=p;}for(const auto &e:suma)cout<<e.first<<" => "<<e.second<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    map<string, int> suma;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        string z;
+        int p;
+        cin >> z >> p;
+        suma[z] += p;
+    }
+    for (const auto &e : suma)
+    {
+        cout << e.first << " => " << e.second << "\n";
+    }
+    return 0;
+}
 ```
 
 </details>
@@ -285,8 +449,32 @@ Jednemu uczniowi przypisujemy wiele ocen.
 #include <map>
 #include <string>
 #include <vector>
+
 using namespace std;
-int main(){int n;cin>>n;map<string,vector<int>> w;for(int i=0;i<n;i++){string im;int x;cin>>im>>x;w[im].push_back(x);}for(const auto &e:w){cout<<e.first<<": ";for(int x:e.second)cout<<x<<" ";cout<<"\n";}return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    map<string, vector<int >> w;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        string im;
+        int liczba;
+        cin >> im >> liczba;
+        w[im].push_back(liczba);
+    }
+    for (const auto &e : w)
+    {
+        cout << e.first << ": ";
+        for (int liczba : e.second)
+        {
+            cout << liczba << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
 ```
 
 </details>
@@ -311,8 +499,31 @@ Wartością jest `vector` nazw produktów.
 #include <map>
 #include <string>
 #include <vector>
+
 using namespace std;
-int main(){int n;cin>>n;map<string,vector<string>> p;for(int i=0;i<n;i++){string k,nazwa;cin>>k>>nazwa;p[k].push_back(nazwa);}for(const auto &e:p){cout<<e.first<<": ";for(const string &x:e.second)cout<<x<<" ";cout<<"\n";}return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+    map<string, vector<string >> p;
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        string k, nazwa;
+        cin >> k >> nazwa;
+        p[k].push_back(nazwa);
+    }
+    for (const auto &e : p)
+    {
+        cout << e.first << ": ";
+        for (const string &x : e.second)
+        {
+            cout << x << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
 ```
 
 </details>

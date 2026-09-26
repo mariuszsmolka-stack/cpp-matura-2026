@@ -20,6 +20,7 @@ Kontenery `unordered` nie gwarantują kolejności, ale przeciętnie szybko wyszu
 ```cpp
 #include <unordered_set>
 #include <unordered_map>
+
 unordered_set<int> identyfikatory;
 unordered_map<string, int> licznik;
 ```
@@ -29,8 +30,19 @@ unordered_map<string, int> licznik;
 ```cpp
 #include <iostream>
 #include <unordered_set>
+
 using namespace std;
-int main(){unordered_set<int> id={101,205,330};int x;cin>>x;cout<<(id.count(x)?"Jest.\n":"Nie ma.\n");return 0;}
+
+int main()
+{
+    unordered_set<int> identyfikatory = {101, 205, 330};
+
+    int liczba;
+    cin >> liczba;
+
+    cout << (identyfikatory.count(liczba) ? "Jest.\n" : "Nie ma.\n");
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -58,8 +70,26 @@ Kolejność identyfikatorów nie jest potrzebna.
 ```cpp
 #include <iostream>
 #include <unordered_map>
+
 using namespace std;
-int main(){int n;cin>>n;unordered_map<int,int> l;for(int i=0;i<n;i++){int x;cin>>x;l[x]++;}cout<<"Roznych: "<<l.size()<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+
+    unordered_map<int, int> licznik;
+
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        int liczba;
+        cin >> liczba;
+        licznik[liczba]++;
+    }
+
+    cout << "Roznych: " << licznik.size() << "\n";
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -86,8 +116,35 @@ Nie wypisujemy zawartości, bo kolejność nie jest gwarantowana.
 ```cpp
 #include <iostream>
 #include <unordered_set>
+
 using namespace std;
-int main(){int n;cin>>n;unordered_set<int>s;bool d=false;for(int i=0;i<n;i++){int x;cin>>x;if(s.count(x))d=true;else s.insert(x);}cout<<(d?"Duplikat.\n":"Brak duplikatu.\n");return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+
+    unordered_set<int> liczby;
+    bool znalezionoDuplikat = false;
+
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        int liczba;
+        cin >> liczba;
+
+        if (liczby.count(liczba))
+        {
+            znalezionoDuplikat = true;
+        }
+        else
+        {
+            liczby.insert(liczba);
+        }
+    }
+
+    cout << (znalezionoDuplikat ? "Duplikat.\n" : "Brak duplikatu.\n");
+    return 0;
+}
 ```
 <details markdown="1">
 <summary>Pokaż przykładowe dane i wynik</summary>
@@ -140,8 +197,19 @@ Kolejność nie jest potrzebna.
 ```cpp
 #include <iostream>
 #include <unordered_set>
+
 using namespace std;
-int main(){unordered_set<int> id={101,205,330};int x;cin>>x;cout<<(id.count(x)?"Jest.\n":"Nie ma.\n");return 0;}
+
+int main()
+{
+    unordered_set<int> identyfikatory = {101, 205, 330};
+
+    int liczba;
+    cin >> liczba;
+
+    cout << (identyfikatory.count(liczba) ? "Jest.\n" : "Nie ma.\n");
+    return 0;
+}
 ```
 
 </details>
@@ -164,8 +232,26 @@ Nie obiecujemy kolejności.
 ```cpp
 #include <iostream>
 #include <unordered_set>
+
 using namespace std;
-int main(){int n;cin>>n;unordered_set<int>s;for(int i=0;i<n;i++){int x;cin>>x;s.insert(x);}cout<<s.size()<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+
+    unordered_set<int> liczby;
+
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        int liczba;
+        cin >> liczba;
+        liczby.insert(liczba);
+    }
+
+    cout << liczby.size() << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -189,8 +275,26 @@ Kolejność kluczy nie jest częścią wyniku.
 #include <iostream>
 #include <string>
 #include <unordered_map>
+
 using namespace std;
-int main(){int n;cin>>n;unordered_map<string,int> l;for(int i=0;i<n;i++){string s;cin>>s;l[s]++;}cout<<"Roznych slow: "<<l.size()<<"\n";return 0;}
+
+int main()
+{
+    int liczbaElementow;
+    cin >> liczbaElementow;
+
+    unordered_map<string, int> licznikSlow;
+
+    for (int i = 0; i < liczbaElementow; i++)
+    {
+        string slowo;
+        cin >> slowo;
+        licznikSlow[slowo]++;
+    }
+
+    cout << "Roznych slow: " << licznikSlow.size() << "\n";
+    return 0;
+}
 ```
 
 </details>
@@ -213,8 +317,21 @@ Wybrano set, bo potrzebny jest porządek.
 ```cpp
 #include <iostream>
 #include <set>
+
 using namespace std;
-int main(){set<int>s={8,3,8,1};for(int x:s)cout<<x<<" ";cout<<"\n";return 0;}
+
+int main()
+{
+    set<int> liczby = {8, 3, 8, 1};
+
+    for (int liczba : liczby)
+    {
+        cout << liczba << " ";
+    }
+
+    cout << "\n";
+    return 0;
+}
 ```
 
 </details>
