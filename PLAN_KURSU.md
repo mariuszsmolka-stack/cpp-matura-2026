@@ -1,6 +1,6 @@
 # Plan kursu C++
 
-Struktura kursu została utworzona. Rozdziały 04 - Debugger w Code::Blocks, 05 - Podstawy języka C++, 06 - Operatory i instrukcje warunkowe, 07 - Pętle, 08 - Znaki i napisy, 09 - Zakres zmiennych i funkcje, 10 - Tablice, 11 - Dane złożone, 12 - vector oraz 13 - Zbiory i kontenery asocjacyjne zawierają komplet pełnych materiałów. Kolejnym rozdziałem do opracowania jest rozdział 14 - Podstawowe algorytmy.
+Struktura kursu została utworzona. Rozdziały 04 - Debugger w Code::Blocks, 05 - Podstawy języka C++, 06 - Operatory i instrukcje warunkowe, 07 - Pętle, 08 - Znaki i napisy, 09 - Zakres zmiennych i funkcje, 10 - Tablice, 11 - Dane złożone, 12 - vector, 13 - Zbiory i kontenery asocjacyjne oraz 16 - Rekurencja i algorytmy maturalne zawierają komplet pełnych materiałów. Kolejnym rozdziałem do opracowania jest rozdział 14 - Podstawowe algorytmy.
 
 ## Rozdziały
 
@@ -37,4 +37,5 @@ Struktura kursu została utworzona. Rozdziały 04 - Debugger w Code::Blocks, 05 
 - Rozdział 11 - Dane złożone: gotowy, 4 pełne lekcje podstawowe i 1 materiał nieobowiązkowy o tuple i rozpakowywaniu.
 - Rozdział 12 - vector: gotowy, 7 lekcji obowiązkowych i 1 materiał nieobowiązkowy o pojemności i iteratorach.
 - Rozdział 13 - Zbiory i kontenery asocjacyjne: gotowy, 5 lekcji obowiązkowych i 2 lekcje nieobowiązkowe.
+- Rozdział 16 - Rekurencja i algorytmy maturalne: gotowy, 9 lekcji obowiązkowych i 1 materiał nieobowiązkowy.
 - Kolejny rozdział do szczegółowego opracowania: 14 - Podstawowe algorytmy.

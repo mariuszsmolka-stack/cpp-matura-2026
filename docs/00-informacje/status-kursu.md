@@ -43,6 +43,9 @@ title: Status kursu
 - Rozdział 13 - Zbiory i kontenery asocjacyjne: gotowy
 - Rozdział 13 - lekcje obowiązkowe: 5
 - Rozdział 13 - lekcje nieobowiązkowe: 2
+- Rozdział 16 - Rekurencja i algorytmy maturalne: gotowy
+- Rozdział 16 - lekcje obowiązkowe: 9
+- Rozdział 16 - lekcje nieobowiązkowe: 1
 - Kolejny rozdział do opracowania: 14 - Podstawowe algorytmy
 
 ## Szczegóły
@@ -65,4 +68,5 @@ title: Status kursu
 - OK - rozdział `12-vector` zawiera wprowadzenie, 7 lekcji obowiązkowych i 1 materiał nieobowiązkowy o pojemności i iteratorach.
 - OK - rozdział `13-zbiory-i-kontenery` zawiera wprowadzenie, 5 lekcji obowiązkowych i 2 materiały nieobowiązkowe.
 - OK - favicon nie jest dodawany, ponieważ w repozytorium nie ma neutralnego pliku `favicon.ico`.
-- BRAK - pełne lekcje w rozdziałach `14-18` nie zostały jeszcze utworzone.
+- OK - rozdział `16-rekurencja-i-algorytmy-maturalne` zawiera wprowadzenie, 9 lekcji obowiązkowych i 1 materiał nieobowiązkowy.
+- BRAK - pełne lekcje w rozdziałach `14-15` oraz `17-18` nie zostały jeszcze utworzone.
