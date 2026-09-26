@@ -38,7 +38,10 @@ title: Status kursu
 - Rozdział 12 - vector: gotowy
 - Rozdział 12 - lekcje obowiązkowe: 7
 - Rozdział 12 - lekcje nieobowiązkowe: 1
-- Kolejny rozdział do opracowania: 13 - Zbiory i kontenery asocjacyjne
+- Rozdział 13 - Zbiory i kontenery asocjacyjne: gotowy
+- Rozdział 13 - lekcje obowiązkowe: 5
+- Rozdział 13 - lekcje nieobowiązkowe: 2
+- Kolejny rozdział do opracowania: 14 - Podstawowe algorytmy
 
 ## Szczegóły
 
@@ -57,6 +60,6 @@ title: Status kursu
 - OK - rozdział `10-tablice` zawiera wprowadzenie, 8 pełnych lekcji podstawowych i 1 materiał nieobowiązkowy o tablicach dynamicznych.
 - OK - rozdział `11-dane-zlozone` zawiera wprowadzenie, 4 pełne lekcje podstawowe i 1 materiał nieobowiązkowy o tuple i rozpakowywaniu.
 - OK - rozdział `12-vector` zawiera wprowadzenie, 7 lekcji obowiązkowych i 1 materiał nieobowiązkowy o pojemności i iteratorach.
-- OK - kolejnym rozdziałem do szczegółowego opracowania jest `13-zbiory-i-kontenery`.
+- OK - rozdział `13-zbiory-i-kontenery` zawiera wprowadzenie, 5 lekcji obowiązkowych i 2 materiały nieobowiązkowe.
 - OK - favicon nie jest dodawany, ponieważ w repozytorium nie ma neutralnego pliku `favicon.ico`.
-- BRAK - pełne lekcje w rozdziałach `13-18` nie zostały jeszcze utworzone.
+- BRAK - pełne lekcje w rozdziałach `14-18` nie zostały jeszcze utworzone.
