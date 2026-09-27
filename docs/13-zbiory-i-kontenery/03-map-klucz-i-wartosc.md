@@ -232,7 +232,9 @@ using namespace std;
 
 int main()
 {
-    map<string, int> ceny = {{"zeszyt", 5}, {"olowek", 2}};
+    map<string, int> ceny;
+    ceny["zeszyt"] = 5;
+    ceny["olowek"] = 2;
     string produkt;
     cin >> produkt;
     if (ceny.count(produkt))
@@ -318,7 +320,8 @@ using namespace std;
 
 int main()
 {
-    map<int, int> punkty = {{101, 0}};
+    map<int, int> punkty;
+    punkty[101] = 0;
     int numer;
     cin >> numer;
     if (punkty.count(numer))
@@ -389,7 +392,9 @@ using namespace std;
 
 int main()
 {
-    map<int, int> punkty = {{101, 8}, {205, 12}};
+    map<int, int> punkty;
+    punkty[101] = 8;
+    punkty[205] = 12;
     int numer, nowePunkty;
     cin >> numer >> nowePunkty;
     if (nowePunkty < 0 || nowePunkty > 100)
