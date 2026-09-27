@@ -244,92 +244,62 @@ Do samej obecności wystarczy `set`. Bez kolejności i przy wielu wyszukiwaniach
 
 ## Ćwiczenia
 
-### Ćwiczenie 1
+Dane wejściowe mają opisany format. Jeśli polecenie nie wymaga odrzucenia wartości spoza zakresu, przyjmij, że spełniają podane ograniczenia. W wynikach wypisujących listy dodatkowa spacja na końcu wiersza nie ma znaczenia.
 
-Znajdź dominantę.
+### Ćwiczenie 1. Jak rośnie licznik?
+
+Pusta mapa `map<int, int> licznik` przetwarza kolejno `4, 2, 4` instrukcją `licznik[liczba]++`. Zapisz stan po każdym kroku. Ile jest kluczy, a ile wynosi suma liczników? Wyjaśnij, dlaczego pierwszy odczyt nieistniejącego klucza przez `[]` jest tu celowy.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Najpierw zlicz wystąpienia.
+Nowy licznik typu int zaczyna od zera. Liczba kluczy i liczba przetworzonych danych nie muszą być równe.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
-Mapa przechowuje liczniki.
-
-```cpp
-#include <iostream>
-#include <map>
-
-using namespace std;
-
-int main()
-{
-    int liczbaElementow;
-    cin >> liczbaElementow;
-    map<int, int> l;
-    for (int i = 0; i < liczbaElementow; i++)
-    {
-        int liczba;
-        cin >> liczba;
-        l[liczba]++;
-    }
-    int val = 0, b = 0;
-    for (const auto &e : l)
-    {
-        if (e.second> b)
-        {
-            val = e.first;
-            b = e.second;
-        }
-        cout << val << " => " << b << "\n";
-    }
-    return 0;
-}
-```
+Stany: `{4 => 1}`, `{2 => 1, 4 => 1}`, `{2 => 1, 4 => 2}`. Dwa klucze, suma liczników 3. Tutaj chcemy tworzyć licznik dla nowej wartości, dlatego wstawianie przez `[]` jest potrzebne.
 
 </details>
-### Ćwiczenie 2
 
-Wypisz histogram słów znakami `*`.
+### Ćwiczenie 2. Histogram ocen
+
+Wczytaj `n` (`0–100`), a następnie `n` ocen całkowitych od 1 do 6. Dane są poprawne. Dla każdej występującej oceny wypisz rosnąco ocenę, dwukropek, spację i tyle gwiazdek, ile razy wystąpiła. Dla `n = 0` wypisz `Brak ocen.`.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Po zliczeniu wypisz pętlą gwiazdki.
+Mapa przechowa częstości. Osobna pętla dla każdego klucza może zamienić licznik na gwiazdki.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 2</summary>
 
-Mapa trzyma licznik słowa.
-
 ```cpp
 #include <iostream>
 #include <map>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    int liczbaElementow;
-    cin >> liczbaElementow;
-    map<string, int> l;
-    for (int i = 0; i < liczbaElementow; i++)
+    int liczbaOcen;
+    cin >> liczbaOcen;
+    map<int, int> licznik;
+    for (int indeks = 0; indeks < liczbaOcen; indeks++)
     {
-        string s;
-        cin >> s;
-        l[s]++;
+        int ocena;
+        cin >> ocena;
+        licznik[ocena]++;
     }
-    for (const auto &e : l)
+    if (licznik.empty()) cout << "Brak ocen.\n";
+    for (const auto &wpis : licznik)
     {
-        cout << e.first << ": ";
-        for (int i = 0; i < e.second; i++)
+        cout << wpis.first << ": ";
+        for (int powtorzenie = 0; powtorzenie < wpis.second; powtorzenie++)
         {
             cout << "*";
         }
@@ -340,21 +310,54 @@ int main()
 ```
 
 </details>
-### Ćwiczenie 3
 
-Policz znaki w napisie.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 2</summary>
+
+Dane wejściowe:
+
+```text
+5
+4 2 4 5 2
+```
+
+Wynik:
+
+```text
+2: **
+4: **
+5: *
+```
+
+Dane wejściowe:
+
+```text
+0
+```
+
+Wynik:
+
+```text
+Brak ocen.
+```
+
+</details>
+
+### Ćwiczenie 3. Suma nie jest ostatnim wynikiem
+
+W pętli wczytującej pary `imie`, `punkty` użyto `sumy[imie] = punkty;`. Program miał sumować punkty ze wszystkich rund. Wyjaśnij błąd i napisz poprawiony program. Wczytaj `n` (`0–100`), potem `n` par: imię bez spacji i punkty (`0–100`). Wypisz sumy alfabetycznie według imion jako `imię => suma`. Dla zera rund wypisz `Brak danych.`.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 3</summary>
 
-Użyj `map<char,int>`.
+Zastanów się, czy nowa runda zastępuje poprzednią, czy powinna ją powiększyć.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 3</summary>
 
-Kluczem jest znak.
+Przypisanie zachowuje tylko ostatnią rundę. Trzeba dodać nowe punkty do dotychczasowej sumy.
 
 ```cpp
 #include <iostream>
@@ -365,45 +368,77 @@ using namespace std;
 
 int main()
 {
-    string t;
-    getline(cin, t);
-    map<char, int> s;
-    for (char c : t)
+    int liczbaRund;
+    cin >> liczbaRund;
+    map<string, int> sumy;
+    for (int indeks = 0; indeks < liczbaRund; indeks++)
     {
-        if (c != ' ')
-        {
-            s[c]++;
-        }
+        string imie;
+        int punkty;
+        cin >> imie >> punkty;
+        sumy[imie] += punkty;
     }
-    for (const auto &e : s)
+    if (sumy.empty()) cout << "Brak danych.\n";
+    for (const auto &wpis : sumy)
     {
-        cout << e.first << " => " << e.second << "\n";
+        cout << wpis.first << " => " << wpis.second << "\n";
     }
     return 0;
 }
 ```
 
 </details>
-### Ćwiczenie 4
 
-Zsumuj punkty zawodników.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 3</summary>
+
+Dane wejściowe:
+
+```text
+3
+Anna 5
+Jan 4
+Anna 3
+```
+
+Wynik:
+
+```text
+Anna => 8
+Jan => 4
+```
+
+Dane wejściowe:
+
+```text
+0
+```
+
+Wynik:
+
+```text
+Brak danych.
+```
+
+</details>
+
+### Ćwiczenie 4. Dominanta z remisem
+
+Wczytaj `n` (`0–100`) i `n` liczb całkowitych. Wypisz wartość występującą najczęściej oraz jej liczbę wystąpień. Przy remisie wybierz najmniejszą wartość. Dla braku danych wypisz `Brak danych.`. Nie zakładaj, że zero występuje w danych.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 4</summary>
 
-Użyj `suma[nazwisko] += punkty`.
+Mapa przechodzi po kluczach rosnąco. Ustal, czy remis powinien zastępować wcześniej wybraną wartość.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 4</summary>
 
-Mapa grupuje sumy według nazwiska.
-
 ```cpp
 #include <iostream>
 #include <map>
-#include <string>
 
 using namespace std;
 
@@ -411,38 +446,92 @@ int main()
 {
     int liczbaElementow;
     cin >> liczbaElementow;
-    map<string, int> suma;
-    for (int i = 0; i < liczbaElementow; i++)
+    map<int, int> licznik;
+    for (int indeks = 0; indeks < liczbaElementow; indeks++)
     {
-        string z;
-        int p;
-        cin >> z >> p;
-        suma[z] += p;
+        int liczba;
+        cin >> liczba;
+        licznik[liczba]++;
     }
-    for (const auto &e : suma)
+    if (licznik.empty())
     {
-        cout << e.first << " => " << e.second << "\n";
+        cout << "Brak danych.\n";
+        return 0;
     }
+    int dominanta = 0, najwiecej = 0;
+    for (const auto &wpis : licznik)
+    {
+        if (wpis.second > najwiecej)
+        {
+            dominanta = wpis.first;
+            najwiecej = wpis.second;
+        }
+    }
+    cout << dominanta << " " << najwiecej << "\n";
     return 0;
 }
 ```
 
 </details>
-### Ćwiczenie 5
 
-Zgrupuj oceny uczniów.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 4</summary>
+
+Dane wejściowe:
+
+```text
+5
+8 2 8 2 9
+```
+
+Wynik:
+
+```text
+2 2
+```
+
+Dane wejściowe:
+
+```text
+0
+```
+
+Wynik:
+
+```text
+Brak danych.
+```
+
+Dane wejściowe:
+
+```text
+1
+-5
+```
+
+Wynik:
+
+```text
+-5 1
+```
+
+</details>
+
+### Ćwiczenie 5. Zachowaj wszystkie wyniki
+
+Wczytaj `n` (`0–100`), a potem `n` par: imię bez spacji i wynik (`0–100`). Dla każdego imienia wypisz wszystkie wyniki w kolejności ich podania. Imiona wypisz alfabetycznie. Zachowaj powtórzone wyniki. Dla braku danych wypisz `Brak danych.`. Wybierz typ wartości w mapie i wyjaśnij, dlaczego sama suma nie wystarcza.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 5</summary>
 
-Użyj `map<string, vector<int>>`.
+Jednemu kluczowi trzeba przypisać całą sekwencję, a nie jeden licznik.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 5</summary>
 
-Jednemu uczniowi przypisujemy wiele ocen.
+Wartością jest `vector<int>`. Suma straciłaby informacje o poszczególnych wynikach i ich kolejności.
 
 ```cpp
 #include <iostream>
@@ -454,23 +543,21 @@ using namespace std;
 
 int main()
 {
-    int liczbaElementow;
-    cin >> liczbaElementow;
-    map<string, vector<int >> w;
-    for (int i = 0; i < liczbaElementow; i++)
+    int liczbaWynikow;
+    cin >> liczbaWynikow;
+    map<string, vector<int>> wyniki;
+    for (int indeks = 0; indeks < liczbaWynikow; indeks++)
     {
-        string im;
-        int liczba;
-        cin >> im >> liczba;
-        w[im].push_back(liczba);
+        string imie;
+        int wynik;
+        cin >> imie >> wynik;
+        wyniki[imie].push_back(wynik);
     }
-    for (const auto &e : w)
+    if (wyniki.empty()) cout << "Brak danych.\n";
+    for (const auto &wpis : wyniki)
     {
-        cout << e.first << ": ";
-        for (int liczba : e.second)
-        {
-            cout << liczba << " ";
-        }
+        cout << wpis.first << ": ";
+        for (int wynik : wpis.second) cout << wynik << " ";
         cout << "\n";
     }
     return 0;
@@ -478,52 +565,137 @@ int main()
 ```
 
 </details>
-### Ćwiczenie 6
 
-Pogrupuj produkty według kategorii.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 5</summary>
+
+Dane wejściowe:
+
+```text
+4
+Jan 4
+Anna 5
+Jan 4
+Jan 2
+```
+
+Wynik:
+
+```text
+Anna: 5
+Jan: 4 4 2
+```
+
+Dane wejściowe:
+
+```text
+0
+```
+
+Wynik:
+
+```text
+Brak danych.
+```
+
+</details>
+
+### Ćwiczenie 6. Kto osiągnął próg? — ćwiczenie trudniejsze
+
+Wczytaj `n` (`0–100`), potem `n` par: imię bez spacji i punkty (`0–100`). Na końcu wczytaj próg (`0–10000`). Zsumuj punkty każdej osoby. Wypisz alfabetycznie wyłącznie imiona osób z sumą co najmniej równą progowi. Jeśli nikt nie spełnia warunku, wypisz `Brak.`. Nie twórz wpisów dla osób, których nie ma w danych.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 6</summary>
 
-Kluczem jest kategoria.
+Po zebraniu danych wykonaj drugi etap: wybór osób na podstawie ich sum. Zapamiętaj, czy kogokolwiek wypisano.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 6</summary>
 
-Wartością jest `vector` nazw produktów.
-
 ```cpp
 #include <iostream>
 #include <map>
 #include <string>
-#include <vector>
 
 using namespace std;
 
 int main()
 {
-    int liczbaElementow;
-    cin >> liczbaElementow;
-    map<string, vector<string >> p;
-    for (int i = 0; i < liczbaElementow; i++)
+    int liczbaWynikow;
+    cin >> liczbaWynikow;
+    map<string, int> sumy;
+    for (int indeks = 0; indeks < liczbaWynikow; indeks++)
     {
-        string k, nazwa;
-        cin >> k >> nazwa;
-        p[k].push_back(nazwa);
+        string imie;
+        int punkty;
+        cin >> imie >> punkty;
+        sumy[imie] += punkty;
     }
-    for (const auto &e : p)
+    int prog;
+    cin >> prog;
+    bool znaleziono = false;
+    for (const auto &wpis : sumy)
     {
-        cout << e.first << ": ";
-        for (const string &x : e.second)
+        if (wpis.second >= prog)
         {
-            cout << x << " ";
+            cout << wpis.first << "\n";
+            znaleziono = true;
         }
-        cout << "\n";
     }
+    if (!znaleziono) cout << "Brak.\n";
     return 0;
 }
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 6</summary>
+
+Dane wejściowe:
+
+```text
+3
+Jan 4
+Anna 8
+Jan 4
+8
+```
+
+Wynik:
+
+```text
+Anna
+Jan
+```
+
+Dane wejściowe:
+
+```text
+1
+Jan 4
+5
+```
+
+Wynik:
+
+```text
+Brak.
+```
+
+Dane wejściowe:
+
+```text
+0
+0
+```
+
+Wynik:
+
+```text
+Brak.
 ```
 
 </details>

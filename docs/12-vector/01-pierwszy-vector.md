@@ -117,7 +117,7 @@ Pierwszy pomiar: 10
 
 </details>
 
-`at()` sprawdza zakres i zgłasza błąd `out_of_range`, gdy indeks jest niepoprawny. Operator `[]` nie wykonuje takiej kontroli. `at()` sprawdza, czy wskazany element istnieje. `[]` zakłada, że programista podał prawidłowy indeks. Użycie `[]` z niepoprawnym indeksem prowadzi do niezdefiniowanego działania programu. `at()` jest przydatne podczas nauki i sprawdzania poprawności indeksu.
+`at()` sprawdza zakres i zgłasza błąd `out_of_range`, gdy indeks jest niepoprawny. Operator `[]` nie wykonuje takiej kontroli. `at()` sprawdza, czy wskazany element istnieje. `[]` zakłada, że programista podał prawidłowy indeks. Użycie `[]` z niepoprawnym indeksem prowadzi do niezdefiniowanego działania programu. `at()` nie dodaje elementów i nie powiększa `vector`. Dla niepustego kontenera poprawne indeksy należą do zakresu od `0` do `size() - 1`. Pusty kontener nie ma żadnego poprawnego indeksu. `at()` jest przydatne podczas nauki i sprawdzania poprawności indeksu.
 
 ## Kiedy tego użyć?
 
@@ -137,56 +137,49 @@ Jeżeli rozmiar jest mały, stały i znany wcześniej, zwykła tablica może wys
 
 ## Ćwiczenia
 
-### Ćwiczenie 1
+Dane wejściowe mają opisany format. Jeśli polecenie nie wymaga odrzucenia wartości spoza zakresu, przyjmij, że spełniają podane ograniczenia. W wynikach wypisujących listy dodatkowa spacja na końcu wiersza nie ma znaczenia.
 
-Utwórz `vector` z pięcioma liczbami i wypisz wszystkie elementy.
+### Ćwiczenie 1. Indeks a liczba elementów
+
+Dla `vector<int> liczby = {8, 3, 8};` podaj rozmiar oraz pierwszy i ostatni poprawny indeks. Następnie prześledź fragment:
+
+```cpp
+liczby[1] = liczby[0] + 1;
+cout << liczby[1] << " " << liczby.at(2) << "\n";
+```
+
+Podaj wynik i końcową zawartość kontenera. Czy zmienił się jego rozmiar?
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Utwórz `vector<int> liczby = {...};` i wypisz elementy przez indeksy od `0` do `4`.
+Numerujesz miejsca od zera. Przypisanie zmienia wartość w istniejącym miejscu.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
-```cpp
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-int main()
-{
-    vector<int> liczby = {4, 8, 2, 9, 7};
-
-    for (int i = 0; i < (int)liczby.size(); i++)
-    {
-        cout << liczby[i] << " ";
-    }
-    cout << "\n";
-
-    return 0;
-}
-```
+Rozmiar: 3, indeksy od 0 do 2. Po przypisaniu zawartość to `{8, 9, 8}`. Wynik: `9 8`. Rozmiar nadal wynosi 3.
 
 </details>
 
-### Ćwiczenie 2
+### Ćwiczenie 2. Pierwszy i ostatni pomiar
 
-Utwórz `vector` z ocenami i wypisz pierwszy oraz ostatni element.
+Utwórz `vector<int> pomiary = {12, 15, 11};`. Napisz program wypisujący pierwszy i ostatni element w jednym wierszu. Jeśli kontener jest pusty, wypisz `Brak pomiarów.`. Sprawdź program także po zastąpieniu inicjalizacji przez `{}` oraz `{7}`.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Ostatni indeks to `(int)oceny.size() - 1`. Najpierw sprawdź, czy `vector` nie jest pusty.
+Przed obliczeniem ostatniego indeksu sprawdź, czy istnieje choć jeden element.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 2</summary>
 
+Dla `{}` wynik to `Brak pomiarów.`, a dla `{7}` wynik to `7 7`. Jedyny element jest jednocześnie pierwszy i ostatni.
+
 ```cpp
 #include <iostream>
 #include <vector>
@@ -195,34 +188,55 @@ using namespace std;
 
 int main()
 {
-    vector<int> oceny = {5, 4, 3, 5};
-
-    if (!oceny.empty())
+    vector<int> pomiary = {12, 15, 11};
+    if (pomiary.empty())
     {
-        cout << "Pierwsza: " << oceny[0] << "\n";
-        cout << "Ostatnia: " << oceny[oceny.size() - 1] << "\n";
+        cout << "Brak pomiarów.\n";
     }
-
+    else
+    {
+        cout << pomiary[0] << " " << pomiary[pomiary.size() - 1] << "\n";
+    }
     return 0;
 }
 ```
 
 </details>
 
-### Ćwiczenie 3
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 2</summary>
 
-Wczytaj indeks i nową wartość. Jeżeli indeks jest poprawny, zmień element w `vector`.
+Program nie pobiera danych. Wynik:
+
+```text
+12 11
+```
+
+</details>
+
+### Ćwiczenie 3. Dlaczego size() nie jest indeksem?
+
+Znajdź i wyjaśnij błąd:
+
+```cpp
+vector<int> liczby = {4, 9};
+cout << liczby[liczby.size()] << "\n";
+```
+
+Nie uruchamiaj błędnego fragmentu. Napisz kompletny program bezpiecznie wypisujący ostatni element albo `Brak elementów.`. Wyjaśnij, co zmieniłoby samo zastąpienie `[]` przez `at()`.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 3</summary>
 
-Poprawny indeks spełnia warunek `indeks >= 0 && indeks < (int)liczby.size()`.
+Porównaj liczbę elementów z największym poprawnym indeksem. Osobno rozważ pusty kontener.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 3</summary>
 
+Indeks 2 jest poza zakresem 0–1. Błędny odczyt przez `[]` ma niezdefiniowane działanie. `at(liczby.size())` zgłosiłoby `out_of_range`; nie naprawiłoby indeksu ani nie dodałoby elementu.
+
 ```cpp
 #include <iostream>
 #include <vector>
@@ -231,36 +245,40 @@ using namespace std;
 
 int main()
 {
-    vector<int> liczby = {10, 20, 30, 40};
-    int indeks, nowaWartosc;
-
-    cin >> indeks >> nowaWartosc;
-
-    if (indeks >= 0 && indeks < (int)liczby.size())
+    vector<int> liczby = {4, 9};
+    if (liczby.empty())
     {
-        liczby[indeks] = nowaWartosc;
+        cout << "Brak elementów.\n";
     }
-
-    for (int liczba : liczby)
+    else
     {
-        cout << liczba << " ";
+        cout << liczby.at(liczby.size() - 1) << "\n";
     }
-    cout << "\n";
-
     return 0;
 }
 ```
 
 </details>
 
-### Ćwiczenie 4
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 3</summary>
 
-Wczytaj rozmiar `n`, utwórz `vector<int>` o takim rozmiarze i ustaw wszystkie elementy na `1`.
+Program nie pobiera danych. Wynik:
+
+```text
+9
+```
+
+</details>
+
+### Ćwiczenie 4. Korekta wyniku
+
+Wyniki czterech prób zapisano jako `{10, 20, 30, 40}`. Wczytaj indeks oraz nową wartość całkowitą. Zmień wskazany element tylko dla poprawnego indeksu i wypisz cały kontener. Dla błędnego indeksu wypisz wyłącznie `Niepoprawny indeks.`. Przygotuj test dla ostatniego elementu i dla indeksu tuż za końcem.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 4</summary>
 
-Użyj konstruktora `vector<int> liczby(n, 1);`. Sprawdź, czy `n` nie jest ujemne.
+Ustal obie granice indeksu przed zapisem do kontenera.
 
 </details>
 
@@ -275,42 +293,82 @@ using namespace std;
 
 int main()
 {
-    int n;
-    cin >> n;
-
-    if (n < 0)
+    vector<int> wyniki = {10, 20, 30, 40};
+    int indeks, nowaWartosc;
+    cin >> indeks >> nowaWartosc;
+    if (indeks < 0 || indeks >= (int)wyniki.size())
     {
-        cout << "Nieprawidlowy rozmiar.\n";
+        cout << "Niepoprawny indeks.\n";
         return 0;
     }
-
-    vector<int> liczby(n, 1);
-
-    for (int liczba : liczby)
+    wyniki[indeks] = nowaWartosc;
+    for (int wynik : wyniki)
     {
-        cout << liczba << " ";
+        cout << wynik << " ";
     }
     cout << "\n";
-
     return 0;
 }
 ```
 
 </details>
 
-### Ćwiczenie 5
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 4</summary>
 
-Utwórz pusty `vector`. Sprawdź, czy jest pusty, zanim spróbujesz wypisać pierwszy element.
+Dane wejściowe:
+
+```text
+3 50
+```
+
+Wynik:
+
+```text
+10 20 30 50
+```
+
+Dane wejściowe:
+
+```text
+4 50
+```
+
+Wynik:
+
+```text
+Niepoprawny indeks.
+```
+
+Dane wejściowe:
+
+```text
+-1 8
+```
+
+Wynik:
+
+```text
+Niepoprawny indeks.
+```
+
+</details>
+
+### Ćwiczenie 5. Rezerwacja miejsc na pomiary — ćwiczenie trudniejsze
+
+Wczytaj liczbę pomiarów z zakresu `0–100`. Dla innej liczby wypisz `Niepoprawny rozmiar.` i zakończ program. Utwórz `vector<int>` o podanym rozmiarze, wczytaj pomiary i wypisz ich sumę. Dla zera wypisz `Brak pomiarów.`. Wyjaśnij, dlaczego tablica o stałym rozmiarze byłaby tu mniej wygodna.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 5</summary>
 
-Użyj `empty()`. Jeżeli `vector` jest pusty, wypisz komunikat.
+Najpierw sprawdź rozmiar, potem utwórz kontener. Suma przed pierwszym pomiarem wynosi zero.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 5</summary>
+
+Rozmiar `vector` można ustalić na podstawie wczytanej wartości. Zwykła tablica wymagałaby stałej pojemności i osobnego pilnowania liczby użytych miejsc.
 
 ```cpp
 #include <iostream>
@@ -320,19 +378,70 @@ using namespace std;
 
 int main()
 {
-    vector<int> liczby;
-
-    if (liczby.empty())
+    int liczbaPomiarow;
+    cin >> liczbaPomiarow;
+    if (liczbaPomiarow < 0 || liczbaPomiarow > 100)
     {
-        cout << "Brak elementow.\n";
+        cout << "Niepoprawny rozmiar.\n";
+        return 0;
     }
-    else
+    vector<int> pomiary(liczbaPomiarow);
+    if (pomiary.empty())
     {
-        cout << liczby[0] << "\n";
+        cout << "Brak pomiarów.\n";
+        return 0;
     }
-
+    long long suma = 0;
+    for (int indeks = 0; indeks < liczbaPomiarow; indeks++)
+    {
+        cin >> pomiary[indeks];
+        suma += pomiary[indeks];
+    }
+    cout << suma << "\n";
     return 0;
 }
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 5</summary>
+
+Dane wejściowe:
+
+```text
+3
+4 -2 7
+```
+
+Wynik:
+
+```text
+9
+```
+
+Dane wejściowe:
+
+```text
+0
+```
+
+Wynik:
+
+```text
+Brak pomiarów.
+```
+
+Dane wejściowe:
+
+```text
+-1
+```
+
+Wynik:
+
+```text
+Niepoprawny rozmiar.
 ```
 
 </details>

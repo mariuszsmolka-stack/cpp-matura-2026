@@ -15,7 +15,7 @@ Dla człowieka `A` jest literą. Dla komputera znak jest zapamiętany jako warto
 
 ## Wyjaśnienie idei
 
-ASCII to tabela numerów dla podstawowych znaków. Standardowy ASCII obejmuje kody od `0` do `127`. Nie każdy kod odpowiada znakowi widocznemu na ekranie. Kody `0`-`31` oraz `127` oznaczają znaki sterujące. Zwykle widoczne znaki znajdują się w zakresie `32`-`126`.
+ASCII to tabela numerów dla podstawowych znaków. Standardowy ASCII obejmuje kody od `0` do `127`. Nie każdy kod odpowiada znakowi widocznemu na ekranie. Kody `0`-`31` oraz `127` oznaczają znaki sterujące. Znaki sterujące zwykle nie są widoczne jako normalne znaki na ekranie. Typowe znaki drukowalne mają kody `32`–`126`; spacja (32) nie ma widocznego kształtu. Sama konwersja liczby na `char` nie gwarantuje czytelnego znaku.
 
 Nie trzeba pamiętać całej tabeli. Ważne jest rozumienie ciągłości zakresów.
 
@@ -136,47 +136,49 @@ Jeżeli program ma obsługiwać pełne Unicode i wiele języków, zwykły `char`
 
 ## Ćwiczenia
 
-### 1. Kod podanego znaku
+Dane wejściowe mają opisany format. Jeśli polecenie nie wymaga odrzucenia wartości spoza zakresu, przyjmij, że spełniają podane ograniczenia. W wynikach wypisujących listy dodatkowa spacja na końcu wiersza nie ma znaczenia.
 
-Wczytaj znak i wypisz jego kod liczbowy.
+### Ćwiczenie 1. Znak, kod i cyfra
+
+Bez uruchamiania przewidź trzy wypisane liczby. Wyjaśnij, dlaczego pierwsza i druga są różne.
+
+```cpp
+char znak = '7';
+cout << (int)znak << "\n";
+cout << znak - '0' << "\n";
+cout << (int)'A' << "\n";
+```
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Wczytaj `char`, a potem wypisz `(int)znak`.
+Odróżnij numer znaku w tabeli od wartości cyfry zapisanej tym znakiem.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
-```cpp
-#include <iostream>
+Wynik:
 
-using namespace std;
-
-int main()
-{
-    char znak;
-
-    cin >> znak;
-
-    cout << "Kod znaku: " << (int)znak << "\n";
-
-    return 0;
-}
+```text
+55
+7
+65
 ```
+
+Kod znaku `7` to 55. Odejmowanie kodu `0`, czyli 48, daje wartość cyfry: 7. Kod wielkiej litery `A` to 65.
 
 </details>
 
-### 2. Znak o podanym kodzie
+### Ćwiczenie 2. Bezpieczny podgląd kodu
 
-Wczytaj liczbę całkowitą. Jeżeli należy do zakresu standardowego ASCII `0`-`127`, wypisz znak o takim kodzie. Jeżeli liczba jest spoza zakresu, wypisz komunikat o błędzie. Pamiętaj, że kody `0`-`31` oraz `127` oznaczają znaki sterujące, więc wynik może nie być widoczny na ekranie.
+Napisz program, który wczyta liczbę całkowitą. Dla kodu spoza `0–127` wypisz `Kod poza ASCII.`. Dla kodów `0–31` oraz `127` wypisz `Znak sterujący.`. Dla pozostałych kodów wypisz `Znak: ` i odpowiadający znak. Spacja (kod 32) jest drukowalna, ale nie ma widocznego kształtu. Konwersję wykonaj dopiero po sprawdzeniu kodu.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Wczytaj `int kod`. Najpierw sprawdź warunek `kod >= 0 && kod <= 127`, a dopiero potem wykonaj konwersję `(char)kod`. Do testu użyj na przykład kodu `65`, którego wynikiem jest `A`.
+Najpierw odrzuć liczbę spoza tabeli. Potem rozdziel kody sterujące i drukowalne.
 
 </details>
 
@@ -191,24 +193,29 @@ using namespace std;
 int main()
 {
     int kod;
-
     cin >> kod;
-
-    if (kod >= 0 && kod <= 127)
+    if (kod < 0 || kod > 127)
     {
-        char znak = (char)kod;
-        cout << znak << '\n';
+        cout << "Kod poza ASCII.\n";
+    }
+    else if (kod < 32 || kod == 127)
+    {
+        cout << "Znak sterujący.\n";
     }
     else
     {
-        cout << "Kod ASCII musi nalezec do zakresu 0-127.\n";
+        cout << "Znak: " << (char)kod << "\n";
     }
-
     return 0;
 }
 ```
 
-Przykładowe dane wejściowe:
+</details>
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 2</summary>
+
+Dane wejściowe:
 
 ```text
 65
@@ -217,24 +224,58 @@ Przykładowe dane wejściowe:
 Wynik:
 
 ```text
-A
+Znak: A
+```
+
+Dane wejściowe:
+
+```text
+10
+```
+
+Wynik:
+
+```text
+Znak sterujący.
+```
+
+Dane wejściowe:
+
+```text
+200
+```
+
+Wynik:
+
+```text
+Kod poza ASCII.
 ```
 
 </details>
 
-### 3. Cyfra jako liczba
+### Ćwiczenie 3. Napraw konwersję cyfry
 
-Wczytaj znak cyfry i wypisz odpowiadającą mu liczbę.
+Program ma zamieniać pojedynczy znak cyfry na liczbę, lecz dla `A` też wypisuje liczbę:
+
+```cpp
+char znak;
+cin >> znak;
+cout << znak - '0' << "\n";
+```
+
+Wyjaśnij błąd i napisz poprawiony, kompletny program. Wczytaj jeden znak bez spacji. Dla cyfry wypisz jej wartość liczbową, a w przeciwnym razie `To nie cyfra.`.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 3</summary>
 
-Od znaku odejmij znak `'0'`.
+Odejmowanie kodów ma sens dla cyfr dopiero po sprawdzeniu, do jakiego zakresu należy znak.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 3</summary>
+
+Samo odejmowanie nie rozpoznaje cyfry. Dla `A` błędny fragment wypisuje 17, czyli różnicę kodów 65 i 48.
 
 ```cpp
 #include <iostream>
@@ -243,17 +284,145 @@ using namespace std;
 
 int main()
 {
-    char znakCyfry;
-    int cyfra;
-
-    cin >> znakCyfry;
-
-    cyfra = znakCyfry - '0';
-
-    cout << "Liczba: " << cyfra << "\n";
-
+    char znak;
+    cin >> znak;
+    if (znak >= '0' && znak <= '9')
+    {
+        cout << znak - '0' << "\n";
+    }
+    else
+    {
+        cout << "To nie cyfra.\n";
+    }
     return 0;
 }
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 3</summary>
+
+Dane wejściowe:
+
+```text
+7
+```
+
+Wynik:
+
+```text
+7
+```
+
+Dane wejściowe:
+
+```text
+A
+```
+
+Wynik:
+
+```text
+To nie cyfra.
+```
+
+Dane wejściowe:
+
+```text
+0
+```
+
+Wynik:
+
+```text
+0
+```
+
+</details>
+
+### Ćwiczenie 4. Klasyfikator znaku — ćwiczenie trudniejsze
+
+Program kontroluje znaki wpisywane do prostego identyfikatora. Wczytaj jeden znak drukowalny ASCII bez spacji. Wypisz jedną kategorię: `Cyfra`, `Wielka litera`, `Mała litera` albo `Inny znak`. Nie obsługuj tu polskich liter ani całych napisów. Samodzielnie dobierz testy sprawdzające końce zakresów i znak leżący między zakresami.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
+
+Przygotuj osobne przedziały dla cyfr i obu rodzajów liter. Pozostałe znaki nie należą do żadnego z tych przedziałów.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    char znak;
+    cin >> znak;
+    if (znak >= '0' && znak <= '9')
+    {
+        cout << "Cyfra\n";
+    }
+    else if (znak >= 'A' && znak <= 'Z')
+    {
+        cout << "Wielka litera\n";
+    }
+    else if (znak >= 'a' && znak <= 'z')
+    {
+        cout << "Mała litera\n";
+    }
+    else
+    {
+        cout << "Inny znak\n";
+    }
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 4</summary>
+
+Dane wejściowe:
+
+```text
+A
+```
+
+Wynik:
+
+```text
+Wielka litera
+```
+
+Dane wejściowe:
+
+```text
+z
+```
+
+Wynik:
+
+```text
+Mała litera
+```
+
+Dane wejściowe:
+
+```text
+9
+```
+
+Wynik:
+
+```text
+Cyfra
 ```
 
 </details>

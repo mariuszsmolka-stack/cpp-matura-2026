@@ -164,21 +164,113 @@ Dla danych klucz => wartość wybierz `map`.
 
 ## Ćwiczenia
 
-### Ćwiczenie 1
+Dane wejściowe mają opisany format. Jeśli polecenie nie wymaga odrzucenia wartości spoza zakresu, przyjmij, że spełniają podane ograniczenia. W wynikach wypisujących listy dodatkowa spacja na końcu wiersza nie ma znaczenia.
 
-Wypisz sumę dwóch zbiorów.
+### Ćwiczenie 1. Dwie listy uczestników
+
+Dla `A = {1, 3, 5}` i `B = {3, 4}` ręcznie podaj: sumę, część wspólną, różnicę `A - B` i różnicę symetryczną. Dopasuj operację do dwóch potrzeb: „osoby zapisane na oba zajęcia” oraz „osoby zapisane na dokładnie jedne zajęcia”.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Dodaj elementy obu zbiorów do trzeciego.
+Oddziel elementy wspólne od tych należących tylko do jednej listy.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
-Suma zbiorów pasuje do `set`.
+Suma: `{1, 3, 4, 5}`. Część wspólna: `{3}`. Różnica `A - B`: `{1, 5}`. Różnica symetryczna: `{1, 4, 5}`. Na oba zajęcia => część wspólna. Na dokładnie jedne => różnica symetryczna.
+
+</details>
+
+### Ćwiczenie 2. Uzupełnij sumę
+
+Dokończ fragment i zapisz kompletny program wypisujący rosnąco sumę zbiorów. Zastąp komentarz potrzebnymi operacjami.
+
+```cpp
+set<int> zbiorA = {2, 6};
+set<int> zbiorB = {6, 9};
+set<int> suma = zbiorA;
+// Dołącz elementy zbiorB.
+```
+
+Powtórzony element ma wystąpić w wyniku tylko raz.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+
+Każdy element drugiego zbioru rozpatrz niezależnie. Zbiór wynikowy sam pilnuje unikalności.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
+
+```cpp
+#include <iostream>
+#include <set>
+
+using namespace std;
+
+int main()
+{
+    set<int> zbiorA = {2, 6};
+    set<int> zbiorB = {6, 9};
+    set<int> suma = zbiorA;
+    for (int liczba : zbiorB)
+    {
+        suma.insert(liczba);
+    }
+    for (int liczba : suma)
+    {
+        cout << liczba << " ";
+    }
+    cout << "\n";
+    return 0;
+}
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 2</summary>
+
+Program nie pobiera danych. Wynik:
+
+```text
+2 6 9
+```
+
+</details>
+
+### Ćwiczenie 3. Czy znaleziono część wspólną?
+
+Fragment ma wypisywać część wspólną, ale użyto błędnego warunku:
+
+```cpp
+for (int liczba : zbiorA)
+{
+    if (!zbiorB.count(liczba))
+    {
+        cout << liczba << " ";
+    }
+}
+```
+
+Nazwij operację, którą faktycznie wykonuje. Popraw warunek i napisz kompletny program dla `A = {1, 2}`, `B = {2, 3}`. Jeśli część wspólna jest pusta, wypisz `Brak wspólnych.`. Przetestuj też zbiory rozłączne i pusty `A`.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+
+W pętli już wiadomo, że liczba należy do A. Pozostaje ustalić, kiedy powinna należeć do wyniku.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
+
+Błędny fragment oblicza różnicę `A - B`. Część wspólna wymaga obecności elementu również w B.
 
 ```cpp
 #include <iostream>
@@ -190,215 +282,242 @@ int main()
 {
     set<int> zbiorA = {1, 2};
     set<int> zbiorB = {2, 3};
-    set<int> suma;
-
-    for (int liczba : zbiorA)
-    {
-        suma.insert(liczba);
-    }
-
-    for (int liczba : zbiorB)
-    {
-        suma.insert(liczba);
-    }
-
-    for (int liczba : suma)
-    {
-        cout << liczba << " ";
-    }
-
-    cout << "\n";
-    return 0;
-}
-```
-
-</details>
-### Ćwiczenie 2
-
-Wypisz część wspólną.
-
-<details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
-
-Sprawdź `count()` w drugim zbiorze.
-
-</details>
-
-<details markdown="1">
-<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
-
-Część wspólna wymaga obecności w obu zbiorach.
-
-```cpp
-#include <iostream>
-#include <set>
-
-using namespace std;
-
-int main()
-{
-    set<int> zbiorA = {1, 2, 4};
-    set<int> zbiorB = {2, 4, 8};
-
+    bool znaleziono = false;
     for (int liczba : zbiorA)
     {
         if (zbiorB.count(liczba))
         {
             cout << liczba << " ";
+            znaleziono = true;
         }
     }
-
-    cout << "\n";
-    return 0;
-}
-```
-
-</details>
-### Ćwiczenie 3
-
-Wypisz różnicę A - B.
-
-<details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
-
-Wypisz elementy z A, których nie ma w B.
-
-</details>
-
-<details markdown="1">
-<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
-
-Różnica sprawdza brak w drugim zbiorze.
-
-```cpp
-#include <iostream>
-#include <set>
-
-using namespace std;
-
-int main()
-{
-    set<int> zbiorA = {1, 2, 4};
-    set<int> zbiorB = {2, 8};
-
-    for (int liczba : zbiorA)
+    if (!znaleziono)
     {
-        if (!zbiorB.count(liczba))
-        {
-            cout << liczba << " ";
-        }
+        cout << "Brak wspólnych.";
     }
-
     cout << "\n";
     return 0;
 }
 ```
 
 </details>
-### Ćwiczenie 4
 
-Sprawdź podzbiór kodów produktów.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 3</summary>
+
+Program nie pobiera danych. Wynik:
+
+```text
+2
+```
+
+</details>
+
+### Ćwiczenie 4. Brakujące wymagania
+
+Dostępne kody produktów to `{2, 4, 7}`. Wczytaj liczbę wymaganych kodów `n` (`0–100`), a potem te kody. Wypisz `Komplet.`, jeśli wszystkie wymagane kody są dostępne. W przeciwnym razie wypisz brakujące kody rosnąco, każdy tylko raz. Dla pustej listy wymagań wypisz `Komplet.`. Nazwij użyte operacje na zbiorach.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 4</summary>
 
-Każdy wymagany kod musi być dostępny.
+Najpierw zbierz wymagania, potem sprawdź, których nie ma w dostępnych. Pusta lista wymagań nie tworzy braków.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 4</summary>
 
-To klasyczny test podzbioru.
+Braki to różnica `wymagane - dostępne`. Jeśli jest pusta, wymagane stanowią podzbiór dostępnych.
 
 ```cpp
 #include <iostream>
 #include <set>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    set<string> dostepne = {"A1", "B2", "C3"};
-    set<string> wymagane = {"A1", "C3"};
-    bool ok = true;
-
-    for (const string &kod : wymagane)
+    set<int> dostepne = {2, 4, 7};
+    set<int> wymagane;
+    int liczbaKodow;
+    cin >> liczbaKodow;
+    for (int indeks = 0; indeks < liczbaKodow; indeks++)
+    {
+        int kod;
+        cin >> kod;
+        wymagane.insert(kod);
+    }
+    bool komplet = true;
+    for (int kod : wymagane)
     {
         if (!dostepne.count(kod))
         {
-            ok = false;
+            cout << kod << " ";
+            komplet = false;
         }
     }
-
-    cout << (ok ? "OK\n" : "BRAK\n");
+    if (komplet)
+    {
+        cout << "Komplet.";
+    }
+    cout << "\n";
     return 0;
 }
 ```
 
 </details>
-### Ćwiczenie 5
 
-Wypisz znaki tylko z jednego z dwóch napisów.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 4</summary>
+
+Dane wejściowe:
+
+```text
+4
+9 2 9 8
+```
+
+Wynik:
+
+```text
+8 9
+```
+
+Dane wejściowe:
+
+```text
+0
+```
+
+Wynik:
+
+```text
+Komplet.
+```
+
+Dane wejściowe:
+
+```text
+2
+2 7
+```
+
+Wynik:
+
+```text
+Komplet.
+```
+
+</details>
+
+### Ćwiczenie 5. Zmiany między dwiema listami — ćwiczenie trudniejsze
+
+Porównaj listę zapisanych z wczoraj i dzisiaj. Wczytaj liczbę `n` i `n` wczorajszych identyfikatorów, potem liczbę `m` i `m` dzisiejszych identyfikatorów (`0–100` na każdej liście). Wypisz rosnąco osoby obecne na dokładnie jednej liście. Powtórzenia na jednej liście nie zmieniają wyniku. Gdy listy zawierają te same osoby, wypisz `Bez zmian.`. Dobierz właściwą operację na zbiorach.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 5</summary>
 
-Sprawdź różnice w obie strony.
+Osobno znajdź osoby tylko na starej liście i tylko na nowej. Połącz oba wyniki.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 5</summary>
 
-To różnica symetryczna.
+Potrzebna jest różnica symetryczna. Zwykła różnica pominęłaby jeden kierunek zmian.
 
 ```cpp
 #include <iostream>
 #include <set>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    string tekstA;
-    string tekstB;
-    cin >> tekstA >> tekstB;
-
-    set<char> znakiA;
-    set<char> znakiB;
-
-    for (char znak : tekstA)
+    int liczbaWczoraj, liczbaDzis;
+    set<int> wczoraj, dzis, zmiany;
+    cin >> liczbaWczoraj;
+    for (int indeks = 0; indeks < liczbaWczoraj; indeks++)
     {
-        znakiA.insert(znak);
+        int numer;
+        cin >> numer;
+        wczoraj.insert(numer);
     }
-
-    for (char znak : tekstB)
+    cin >> liczbaDzis;
+    for (int indeks = 0; indeks < liczbaDzis; indeks++)
     {
-        znakiB.insert(znak);
+        int numer;
+        cin >> numer;
+        dzis.insert(numer);
     }
-
-    for (char znak : znakiA)
+    for (int numer : wczoraj)
     {
-        if (!znakiB.count(znak))
-        {
-            cout << znak << " ";
-        }
+        if (!dzis.count(numer)) zmiany.insert(numer);
     }
-
-    for (char znak : znakiB)
+    for (int numer : dzis)
     {
-        if (!znakiA.count(znak))
-        {
-            cout << znak << " ";
-        }
+        if (!wczoraj.count(numer)) zmiany.insert(numer);
     }
-
+    if (zmiany.empty())
+    {
+        cout << "Bez zmian.";
+    }
+    else
+    {
+        for (int numer : zmiany) cout << numer << " ";
+    }
     cout << "\n";
     return 0;
 }
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 5</summary>
+
+Dane wejściowe:
+
+```text
+3
+1 3 5
+2
+3 4
+```
+
+Wynik:
+
+```text
+1 4 5
+```
+
+Dane wejściowe:
+
+```text
+2
+7 7
+1
+7
+```
+
+Wynik:
+
+```text
+Bez zmian.
+```
+
+Dane wejściowe:
+
+```text
+0
+2
+9 2
+```
+
+Wynik:
+
+```text
+2 9
 ```
 
 </details>

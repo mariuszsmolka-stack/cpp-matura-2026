@@ -178,56 +178,41 @@ Gdy potrzebny jest porządek, wybierz `set` albo `map`. Gdy potrzebujesz indeks�
 
 ## Ćwiczenia
 
-### Ćwiczenie 1
+Dane wejściowe mają opisany format. Jeśli polecenie nie wymaga odrzucenia wartości spoza zakresu, przyjmij, że spełniają podane ograniczenia. W wynikach wypisujących listy dodatkowa spacja na końcu wiersza nie ma znaczenia.
 
-Sprawdź identyfikator w `unordered_set`.
+### Ćwiczenie 1. Co wolno przewidzieć?
+
+Dla `unordered_set<int> numery = {8, 2, 8, 5};` uczeń oczekuje po pętli wypisującej elementy dokładnie `2 5 8`. Oceń to oczekiwanie. Podaj gwarantowany rozmiar, gwarantowaną zawartość i zasady poprawnego testu wyniku. Nie wybieraj jednej kolejności wypisywania.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Użyj `count()`.
+Nazwa kontenera mówi, której własności nie obiecuje. Unikalność nadal obowiązuje.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
-Kolejność nie jest potrzebna.
-
-```cpp
-#include <iostream>
-#include <unordered_set>
-
-using namespace std;
-
-int main()
-{
-    unordered_set<int> identyfikatory = {101, 205, 330};
-
-    int liczba;
-    cin >> liczba;
-
-    cout << (identyfikatory.count(liczba) ? "Jest.\n" : "Nie ma.\n");
-    return 0;
-}
-```
+Rozmiar wynosi 3, a elementy to 2, 5 i 8, każdy raz. Kolejność nie jest gwarantowana. Test powinien sprawdzić obecność tych trzech wartości, brak dodatkowych wartości i brak powtórzeń, bez porównywania kolejności.
 
 </details>
-### Ćwiczenie 2
 
-Policz liczbę różnych wartości bez wypisywania kolejności.
+### Ćwiczenie 2. Wiele pytań o obecność
+
+Uprawnione identyfikatory to `{101, 205, 330}`. Wczytaj liczbę pytań `q` (`0–100`), a potem `q` identyfikatorów. Dla każdego wypisz `TAK` albo `NIE`, zachowując kolejność pytań. Użyj `unordered_set`. Wyjaśnij, dlaczego brak porządku wewnątrz kontenera nie zmienia kolejności odpowiedzi. Jak zmieniłby się wybór przy jednym pytaniu o trzy elementy?
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Użyj `unordered_set` i `size()`.
+Odpowiadasz podczas czytania pytań, a nie podczas przechodzenia po zbiorze.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 2</summary>
 
-Nie obiecujemy kolejności.
+Kolejność odpowiedzi ustala pętla po pytaniach. Zbiór służy tylko do sprawdzania obecności. Przy jednym pytaniu i trzech elementach wystarczyłby `vector` oraz zwykła pętla.
 
 ```cpp
 #include <iostream>
@@ -237,101 +222,214 @@ using namespace std;
 
 int main()
 {
-    int liczbaElementow;
-    cin >> liczbaElementow;
-
-    unordered_set<int> liczby;
-
-    for (int i = 0; i < liczbaElementow; i++)
+    unordered_set<int> uprawnieni = {101, 205, 330};
+    int liczbaPytan;
+    cin >> liczbaPytan;
+    for (int indeks = 0; indeks < liczbaPytan; indeks++)
     {
-        int liczba;
-        cin >> liczba;
-        liczby.insert(liczba);
+        int numer;
+        cin >> numer;
+        cout << (uprawnieni.count(numer) ? "TAK\n" : "NIE\n");
     }
-
-    cout << liczby.size() << "\n";
     return 0;
 }
 ```
 
 </details>
-### Ćwiczenie 3
 
-Policz różne słowa przez `unordered_map`.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 2</summary>
+
+Dane wejściowe:
+
+```text
+3
+205 999 101
+```
+
+Wynik:
+
+```text
+TAK
+NIE
+TAK
+```
+
+Dane wejściowe:
+
+```text
+1
+0
+```
+
+Wynik:
+
+```text
+NIE
+```
+
+</details>
+
+### Ćwiczenie 3. Raport miał być alfabetyczny
+
+Program wypisuje pary z `unordered_map<string, int> licznik`, ale specyfikacja wymaga słów w kolejności alfabetycznej. Wyjaśnij błąd doboru kontenera i napisz kompletny program z właściwym kontenerem. Wczytaj `n` (`0–100`) i `n` słów z małych liter `a–z`. Wypisz każde słowo i jego częstość jako `słowo => licznik`. Dla `n = 0` wypisz `Brak słów.`. Nie sortuj osobnej listy.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 3</summary>
 
-Nie wypisuj kluczy w ustalonej kolejności.
+W tym zadaniu uporządkowany wynik jest wymaganiem, więc wybór kontenera powinien je uwzględniać.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 3</summary>
 
-Kolejność kluczy nie jest częścią wyniku.
+Zamieniamy `unordered_map` na `map`. Mapa uporządkowana pozwala wypisać klucze alfabetycznie; kontener nieuporządkowany takiej kolejności nie gwarantuje.
 
 ```cpp
 #include <iostream>
+#include <map>
 #include <string>
-#include <unordered_map>
 
 using namespace std;
 
 int main()
 {
-    int liczbaElementow;
-    cin >> liczbaElementow;
-
-    unordered_map<string, int> licznikSlow;
-
-    for (int i = 0; i < liczbaElementow; i++)
+    int liczbaSlow;
+    cin >> liczbaSlow;
+    map<string, int> licznik;
+    for (int indeks = 0; indeks < liczbaSlow; indeks++)
     {
         string slowo;
         cin >> slowo;
-        licznikSlow[slowo]++;
+        licznik[slowo]++;
     }
-
-    cout << "Roznych slow: " << licznikSlow.size() << "\n";
+    if (licznik.empty()) cout << "Brak słów.\n";
+    for (const auto &wpis : licznik)
+    {
+        cout << wpis.first << " => " << wpis.second << "\n";
+    }
     return 0;
 }
 ```
 
 </details>
-### Ćwiczenie 4
 
-Pokaż, kiedy lepszy jest `set`.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 3</summary>
+
+Dane wejściowe:
+
+```text
+4
+kot ala kot dom
+```
+
+Wynik:
+
+```text
+ala => 1
+dom => 1
+kot => 2
+```
+
+Dane wejściowe:
+
+```text
+0
+```
+
+Wynik:
+
+```text
+Brak słów.
+```
+
+</details>
+
+### Ćwiczenie 4. Licznik na żądanie — ćwiczenie trudniejsze
+
+Wczytaj `n` (`0–100`) i `n` słów bez spacji, potem liczbę zapytań `q` (`0–100`) i `q` słów. Dla każdego pytania wypisz liczbę wystąpień danego słowa. Wielkość liter ma znaczenie. Użyj `unordered_map`, bo nie potrzebujesz uporządkowanego raportu. Nie dodawaj brakujących słów podczas pytań. Na końcu wypisz `Różnych: ` i liczbę różnych słów w danych początkowych.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 4</summary>
 
-Jeżeli wynik ma być rosnący, użyj `set`.
+Oddziel etap tworzenia liczników od etapu odczytu. Brak klucza w pytaniu oznacza wynik zero, ale nie nowy wpis.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 4</summary>
 
-Wybrano set, bo potrzebny jest porządek.
-
 ```cpp
 #include <iostream>
-#include <set>
+#include <unordered_map>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    set<int> liczby = {8, 3, 8, 1};
-
-    for (int liczba : liczby)
+    int liczbaSlow;
+    cin >> liczbaSlow;
+    unordered_map<string, int> licznik;
+    for (int indeks = 0; indeks < liczbaSlow; indeks++)
     {
-        cout << liczba << " ";
+        string slowo;
+        cin >> slowo;
+        licznik[slowo]++;
     }
-
-    cout << "\n";
+    int liczbaPytan;
+    cin >> liczbaPytan;
+    for (int indeks = 0; indeks < liczbaPytan; indeks++)
+    {
+        string slowo;
+        cin >> slowo;
+        if (licznik.count(slowo)) cout << licznik[slowo] << "\n";
+        else cout << "0\n";
+    }
+    cout << "Różnych: " << licznik.size() << "\n";
     return 0;
 }
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 4</summary>
+
+Dane wejściowe:
+
+```text
+3
+kot pies kot
+3
+kot ptak pies
+```
+
+Wynik:
+
+```text
+2
+0
+1
+Różnych: 2
+```
+
+Dane wejściowe:
+
+```text
+0
+2
+kot Kot
+```
+
+Wynik:
+
+```text
+0
+0
+Różnych: 0
 ```
 
 </details>

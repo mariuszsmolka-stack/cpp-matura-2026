@@ -181,65 +181,48 @@ Dla samych unikalnych wartości wystarczy `set`.
 
 ## Ćwiczenia
 
-### Ćwiczenie 1
+Dane wejściowe mają opisany format. Jeśli polecenie nie wymaga odrzucenia wartości spoza zakresu, przyjmij, że spełniają podane ograniczenia. W wynikach wypisujących listy dodatkowa spacja na końcu wiersza nie ma znaczenia.
 
-Utwórz słownik pojęć i wyszukaj hasło.
+### Ćwiczenie 1. Nowy klucz czy nowa wartość?
+
+Prześledź kolejne stany mapy i podaj końcowy rozmiar. Czy drugie przypisanie do klucza `101` dodaje drugą parę?
+
+```cpp
+map<int, int> punkty;
+punkty[101] = 8;
+punkty[205] = 8;
+punkty[101] = 12;
+punkty.erase(999);
+```
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Użyj `map<string, string>`.
+Klucz i przypisana mu wartość pełnią różne role. Unikalność dotyczy tylko jednej z nich.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
-Słowo jest kluczem.
-
-```cpp
-#include <iostream>
-#include <map>
-#include <string>
-
-using namespace std;
-
-int main()
-{
-    map<string, string> ceny;
-    ceny["set"] = "zbior";
-    ceny["map"] = "klucz wartosc";
-    string p;
-    cin >> p;
-    if (ceny.find(p) != ceny.end())
-    {
-        cout << ceny[p] << "\n";
-    }
-    else
-    {
-        cout << "Brak.\n";
-    }
-    return 0;
-}
-```
+Stany: `{101 => 8}`, `{101 => 8, 205 => 8}`, `{101 => 12, 205 => 8}`, bez zmian po `erase(999)`. Rozmiar: 2. Istniejący klucz ma aktualizowaną wartość. Różne klucze mogą mieć tę samą wartość.
 
 </details>
-### Ćwiczenie 2
 
-Wyszukaj cenę produktu.
+### Ćwiczenie 2. Bezpieczny odczyt cennika
+
+Utwórz cennik `zeszyt => 5`, `olowek => 2` (ceny w złotych). Wczytaj nazwę produktu bez spacji. Wypisz cenę albo `Brak produktu.`. Wyszukiwanie nie może dodawać nowych wpisów. W drugim wierszu wypisz rozmiar cennika.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Kluczem jest nazwa produktu.
+Przed odczytem wartości sprawdź klucz metodą, która nie zmienia mapy.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 2</summary>
 
-Cena jest wartością w mapie.
-
 ```cpp
 #include <iostream>
 #include <map>
@@ -249,39 +232,83 @@ using namespace std;
 
 int main()
 {
-    map<string, double> ceny;
-    ceny["zeszyt"] = 4.5;
-    ceny["dlugopis"] = 3.2;
-    string p;
-    cin >> p;
-    if (ceny.find(p) != ceny.end())
+    map<string, int> ceny = {{"zeszyt", 5}, {"olowek", 2}};
+    string produkt;
+    cin >> produkt;
+    if (ceny.count(produkt))
     {
-        cout << ceny[p] << "\n";
+        cout << ceny[produkt] << "\n";
     }
     else
     {
-        cout << "Brak.\n";
+        cout << "Brak produktu.\n";
     }
+    cout << ceny.size() << "\n";
     return 0;
 }
 ```
 
 </details>
-### Ćwiczenie 3
 
-Zaktualizuj punkty ucznia.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 2</summary>
+
+Dane wejściowe:
+
+```text
+zeszyt
+```
+
+Wynik:
+
+```text
+5
+2
+```
+
+Dane wejściowe:
+
+```text
+gumka
+```
+
+Wynik:
+
+```text
+Brak produktu.
+2
+```
+
+</details>
+
+### Ćwiczenie 3. Zero nie oznacza braku klucza
+
+W mapie punktów jest wpis `101 => 0`. Błędny fragment sprawdza obecność tak:
+
+```cpp
+if (punkty[numer] != 0)
+{
+    cout << "Jest.\n";
+}
+else
+{
+    cout << "Brak.\n";
+}
+```
+
+Wyjaśnij dwa problemy: dla numeru 101 i dla nieobecnego 999. Napisz poprawny program: wczytaj numer, wypisz `Jest.` albo `Brak.`, a potem rozmiar mapy. Sprawdzenie nie może jej zmieniać.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 3</summary>
 
-Przypisanie pod istniejący klucz zmienia wartość.
+Wartość zero może być poprawnym wynikiem. Sprawdź również, co robi `[]`, kiedy klucza jeszcze nie ma.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 3</summary>
 
-Mapa przechowuje aktualną wartość.
+Dla 101 program myli zero punktów z brakiem osoby. Dla 999 tworzy nowy wpis z zerem. `count()` sprawdza obecność niezależnie od liczby punktów.
 
 ```cpp
 #include <iostream>
@@ -291,138 +318,251 @@ using namespace std;
 
 int main()
 {
-    map<int, int> p;
-    p[1] = 10;
-    p[1] = 15;
-    cout << p[1] << "\n";
+    map<int, int> punkty = {{101, 0}};
+    int numer;
+    cin >> numer;
+    if (punkty.count(numer))
+    {
+        cout << "Jest.\n";
+    }
+    else
+    {
+        cout << "Brak.\n";
+    }
+    cout << punkty.size() << "\n";
     return 0;
 }
 ```
 
 </details>
-### Ćwiczenie 4
 
-Bezpiecznie sprawdź temperaturę miasta.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 3</summary>
+
+Dane wejściowe:
+
+```text
+101
+```
+
+Wynik:
+
+```text
+Jest.
+1
+```
+
+Dane wejściowe:
+
+```text
+999
+```
+
+Wynik:
+
+```text
+Brak.
+1
+```
+
+</details>
+
+### Ćwiczenie 4. Korekta istniejącego wyniku
+
+Mapa zawiera `101 => 8`, `205 => 12`. Wczytaj numer ucznia i nową liczbę punktów (`0–100`). Jeżeli liczba punktów jest poza zakresem, wypisz `Niepoprawne punkty.`. W przeciwnym razie zaktualizuj wyłącznie istniejący wpis i wypisz nową wartość albo `Brak ucznia.`. Nie dopisuj nieznanych uczniów.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 4</summary>
 
-Użyj `find()`, nie samego `[]`.
+Oddziel poprawność nowej wartości od obecności klucza. Dopiero po obu sprawdzeniach wykonaj zapis.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 4</summary>
 
-find nie tworzy nowego klucza.
-
 ```cpp
 #include <iostream>
 #include <map>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    map<string, double> t;
-    t["Krakow"] = 21.5;
-    string m;
-    cin >> m;
-    auto it = t.find(m);
-    if (it != t.end())
+    map<int, int> punkty = {{101, 8}, {205, 12}};
+    int numer, nowePunkty;
+    cin >> numer >> nowePunkty;
+    if (nowePunkty < 0 || nowePunkty > 100)
     {
-        cout << it -> second << "\n";
+        cout << "Niepoprawne punkty.\n";
+    }
+    else if (!punkty.count(numer))
+    {
+        cout << "Brak ucznia.\n";
     }
     else
     {
-        cout << "Brak.\n";
+        punkty[numer] = nowePunkty;
+        cout << punkty[numer] << "\n";
     }
     return 0;
 }
 ```
 
 </details>
-### Ćwiczenie 5
 
-Usuń wpis z mapy po kluczu.
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 4</summary>
+
+Dane wejściowe:
+
+```text
+101 15
+```
+
+Wynik:
+
+```text
+15
+```
+
+Dane wejściowe:
+
+```text
+999 15
+```
+
+Wynik:
+
+```text
+Brak ucznia.
+```
+
+Dane wejściowe:
+
+```text
+101 -1
+```
+
+Wynik:
+
+```text
+Niepoprawne punkty.
+```
+
+</details>
+
+### Ćwiczenie 5. Co sprawdzić po usunięciu?
+
+Dla mapy `{101 => 8, 205 => 12}` przygotuj dwa testy operacji `erase(numer)`: usunięcie istniejącego i nieistniejącego klucza. W każdym podaj numer, końcową zawartość i rozmiar. Następnie opisz test usunięcia ostatniego wpisu. Nie pisz programu.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 5</summary>
 
-Użyj `erase(klucz)`.
+Test powinien wykrywać zarówno usunięcie właściwego wpisu, jak i przypadkową zmianę pozostałych.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 5</summary>
 
-Klucz wskazuje cały wpis.
-
-```cpp
-#include <iostream>
-#include <map>
-#include <string>
-
-using namespace std;
-
-int main()
-{
-    map<string, int> m;
-    m["A"] = 1;
-    m["B"] = 2;
-    string k;
-    cin >> k;
-    m.erase(k);
-    for (const auto &e : m)
-    {
-        cout << e.first << " => " << e.second << "\n";
-    }
-    return 0;
-}
-```
+Każdy z pierwszych testów zaczyna od mapy podanej w poleceniu. Numer 101 => `{205 => 12}`, rozmiar 1. Numer 999 => `{101 => 8, 205 => 12}`, rozmiar 2. Dla mapy jednoelementowej `{205 => 12}` usunięcie 205 daje pustą mapę, rozmiar 0 i `empty() == true`.
 
 </details>
-### Ćwiczenie 6
 
-Wybierz kontener dla cennika i uzasadnij w komentarzu.
+### Ćwiczenie 6. Ostatni odczyt czujnika — ćwiczenie trudniejsze
+
+Wczytaj liczbę odczytów `n` (`0–100`), potem `n` par: numer czujnika i temperatura całkowita. Nowszy odczyt zastępuje poprzedni dla tego samego czujnika. Na końcu wczytaj numer szukanego czujnika i wypisz jego ostatnią temperaturę albo `Brak odczytu.`. Dobierz kontener i porównaj go z `set` oraz listą wszystkich odczytów w `vector`.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 6</summary>
 
-Kod produktu jest kluczem.
+Potrzebujesz powiązania numeru z jedną, aktualną wartością. Powtórny numer ma zmienić wartość.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 6</summary>
 
-Wybrano `map`, bo wyszukujemy po kodzie.
+Wybieramy `map<int, int>`. Sam `set<int>` pamiętałby tylko numery. `vector` z historią wymagałby wyszukania ostatniego odczytu; jest przydatny, jeśli historia też ma być zachowana.
 
 ```cpp
 #include <iostream>
 #include <map>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    map<string, double> ceny;
-    ceny["zeszyt"] = 4.5;
-    ceny["dlugopis"] = 3.2;
-    string p;
-    cin >> p;
-    if (ceny.find(p) != ceny.end())
+    int liczbaOdczytow;
+    cin >> liczbaOdczytow;
+    map<int, int> temperatury;
+    for (int indeks = 0; indeks < liczbaOdczytow; indeks++)
     {
-        cout << ceny[p] << "\n";
+        int numer, temperatura;
+        cin >> numer >> temperatura;
+        temperatury[numer] = temperatura;
+    }
+    int szukanyNumer;
+    cin >> szukanyNumer;
+    if (temperatury.count(szukanyNumer))
+    {
+        cout << temperatury[szukanyNumer] << "\n";
     }
     else
     {
-        cout << "Brak.\n";
+        cout << "Brak odczytu.\n";
     }
     return 0;
 }
+```
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż przykładowe dane i wynik do ćwiczenia 6</summary>
+
+Dane wejściowe:
+
+```text
+3
+7 12
+2 8
+7 15
+7
+```
+
+Wynik:
+
+```text
+15
+```
+
+Dane wejściowe:
+
+```text
+0
+7
+```
+
+Wynik:
+
+```text
+Brak odczytu.
+```
+
+Dane wejściowe:
+
+```text
+1
+7 0
+7
+```
+
+Wynik:
+
+```text
+0
 ```
 
 </details>
