@@ -16,7 +16,7 @@ Przy każdym zadaniu zapisuj:
 - wartości zwracane podczas powrotów,
 - ostateczną odpowiedź.
 
-## Zadania
+## Rozgrzewka - zadania podstawowe
 
 ### Zadanie 1 - wartość zwracana
 
@@ -307,7 +307,7 @@ int dodaj(int a, int b)
 }
 ```
 
-Podaj wynik `dodaj(4, 3)` i kolejne pary argumentów.
+Podaj wynik `dodaj(4, 3)` i kolejne pary argumentów. Przyjmij założenie `b >= 0`. Dla ujemnego `b` warunek `b == 0` nie zostałby osiągnięty, bo w każdym kroku `b` jest zmniejszane.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 8</summary>
@@ -425,5 +425,187 @@ int main()
 ```
 
 Dla `4` wynik to `16 + 9 + 4 + 1 = 30`.
+
+</details>
+
+
+## Większe zadania w stylu maturalnym
+
+### Zadanie 11 - analiza funkcji z cyframi
+
+Dana jest funkcja działająca dla `liczba >= 0`:
+
+```cpp
+int sumaCoDrugiejCyfry(int liczba, bool dodaj)
+{
+    if (liczba == 0)
+    {
+        return 0;
+    }
+
+    int cyfra = liczba % 10;
+
+    if (dodaj)
+    {
+        return cyfra + sumaCoDrugiejCyfry(liczba / 10, false);
+    }
+
+    return sumaCoDrugiejCyfry(liczba / 10, true);
+}
+```
+
+Wykonaj polecenia:
+
+1. Oblicz wynik `sumaCoDrugiejCyfry(58342, true)`.
+2. Uzupełnij tabelę kolejnych wywołań: `liczba`, `dodaj`, użyta cyfra, wartość dodawana do wyniku.
+3. Opisz jednym zdaniem, które cyfry liczby są sumowane.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 11</summary>
+
+Funkcja zaczyna od ostatniej cyfry. Parametr `dodaj` zmienia się w każdym wywołaniu.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 11</summary>
+
+| Wywołanie | `liczba` | `dodaj` | `cyfra` | Wartość dodana |
+| --------- | -------: | ------- | ------: | --------------: |
+| 1 | 58342 | `true`  | 2 | 2 |
+| 2 | 5834  | `false` | 4 | 0 |
+| 3 | 583   | `true`  | 3 | 3 |
+| 4 | 58    | `false` | 8 | 0 |
+| 5 | 5     | `true`  | 5 | 5 |
+| 6 | 0     | -       | - | 0 |
+
+Wynik:
+
+```text
+2 + 3 + 5 = 10
+```
+
+Funkcja sumuje co drugą cyfrę, licząc od końca liczby.
+
+</details>
+
+### Zadanie 12 - liczba wywołań i głębokość
+
+Dana jest funkcja:
+
+```cpp
+int rozgalezienie(int n)
+{
+    if (n <= 0)
+    {
+        return 1;
+    }
+
+    return rozgalezienie(n - 1) + rozgalezienie(n - 2);
+}
+```
+
+Dla wywołania `rozgalezienie(3)`:
+
+1. Narysuj albo zapisz drzewo wywołań.
+2. Podaj liczbę wszystkich wywołań.
+3. Podaj maksymalną głębokość aktywnych wywołań.
+4. Podaj wartość zwracaną przez funkcję.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 12</summary>
+
+Każde wywołanie z `n > 0` tworzy dwa kolejne wywołania: dla `n - 1` i dla `n - 2`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 12</summary>
+
+Drzewo wywołań:
+
+```text
+rozgalezienie(3)
+├─ rozgalezienie(2)
+│  ├─ rozgalezienie(1)
+│  │  ├─ rozgalezienie(0)
+│  │  └─ rozgalezienie(-1)
+│  └─ rozgalezienie(0)
+└─ rozgalezienie(1)
+   ├─ rozgalezienie(0)
+   └─ rozgalezienie(-1)
+```
+
+Liczba wszystkich wywołań: `9`.
+
+Maksymalna głębokość: `4`, na przykład ścieżka `3 -> 2 -> 1 -> 0`.
+
+Wartości zwracane:
+
+```text
+rozgalezienie(0) = 1
+rozgalezienie(-1) = 1
+rozgalezienie(1) = 2
+rozgalezienie(2) = 3
+rozgalezienie(3) = 5
+```
+
+Ostateczny wynik: `5`.
+
+</details>
+
+### Zadanie 13 - uzupełnianie funkcji z dwoma argumentami
+
+Funkcja ma obliczać iloczyn `a * b` przez wielokrotne dodawanie. Przyjmij założenia: `a >= 0`, `b >= 0`.
+
+Uzupełnij brakujące fragmenty:
+
+```cpp
+int mnoz(int a, int b)
+{
+    if (...)
+    {
+        return ...;
+    }
+
+    return a + mnoz(a, ...);
+}
+```
+
+Następnie oblicz `mnoz(4, 3)` i zapisz kolejne wywołania.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 13</summary>
+
+Drugi argument mówi, ile razy trzeba jeszcze dodać `a`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 13</summary>
+
+Uzupełniona funkcja:
+
+```cpp
+int mnoz(int a, int b)
+{
+    if (b == 0)
+    {
+        return 0;
+    }
+
+    return a + mnoz(a, b - 1);
+}
+```
+
+Przebieg:
+
+```text
+mnoz(4, 3)
+=> 4 + mnoz(4, 2)
+=> 4 + 4 + mnoz(4, 1)
+=> 4 + 4 + 4 + mnoz(4, 0)
+=> 12
+```
 
 </details>

@@ -116,7 +116,7 @@ Te funkcje nie obsługują dowolnych argumentów ujemnych. Dodatkowo wyniki mog�
 
 ## Typowe błędy
 
-- Brak `return` przed wywołaniem rekurencyjnym.
+- Brak zwrócenia wyniku w jednej z gałęzi funkcji zwracającej wartość. Problemem nie jest samo położenie słowa `return` przed wywołaniem, ale sytuacja, w której funkcja typu `int` albo `long long` dochodzi do końca bez oddania wyniku.
 - Zły wynik w przypadku podstawowym, np. `0` dla silni.
 - Brak określonej dziedziny argumentów.
 - Zakładanie, że `long long` pomieści każdy wynik.
@@ -305,14 +305,21 @@ int main()
 
 </details>
 
-### Ćwiczenie 6 - iloczyn od 1 do n
+### Ćwiczenie 6 - suma wielokrotności
 
-Napisz funkcję `iloczyn(int n)`, która dla `n >= 1` zwraca wynik `1 * 2 * ... * n`.
+Napisz funkcję `sumaWielokrotnosci(int n, int dzielnik)`, która oblicza sumę dodatnich wielokrotności liczby `dzielnik`, które nie przekraczają `n`.
+
+Założenia:
+
+- `n >= 0`,
+- `dzielnik > 0`.
+
+Dla `sumaWielokrotnosci(20, 6)` wynik ma wynosić `36`, bo dodatnie wielokrotności `6` nie większe niż `20` to `6`, `12` i `18`.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 6</summary>
 
-Dla `n == 1` wynik to `1`. Dla większego `n` zwróć `n * iloczyn(n - 1)`.
+Rozważ liczby od `n` w dół. Jeżeli `n` jest podzielne przez `dzielnik`, dodaj je do wyniku dla `n - 1`. W przeciwnym razie pomiń `n`.
 
 </details>
 
@@ -324,21 +331,28 @@ Dla `n == 1` wynik to `1`. Dla większego `n` zwróć `n * iloczyn(n - 1)`.
 
 using namespace std;
 
-long long iloczyn(int n)
+int sumaWielokrotnosci(int n, int dzielnik)
 {
-    if (n <= 1)
+    if (n <= 0)
     {
-        return 1;
+        return 0;
     }
 
-    return n * iloczyn(n - 1);
+    if (n % dzielnik == 0)
+    {
+        return n + sumaWielokrotnosci(n - 1, dzielnik);
+    }
+
+    return sumaWielokrotnosci(n - 1, dzielnik);
 }
 
 int main()
 {
-    cout << iloczyn(5) << "\n";
+    cout << sumaWielokrotnosci(20, 6) << "\n";
     return 0;
 }
 ```
+
+Dla danych z przykładu funkcja dodaje `18 + 12 + 6`, więc zwraca `36`.
 
 </details>

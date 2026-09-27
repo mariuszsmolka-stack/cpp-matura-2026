@@ -9,27 +9,46 @@ title: Wydajność i ograniczenia - materiał nieobowiązkowy
 
 ## Problem
 
-Rekurencja bywa bardzo czytelna, ale każde wywołanie funkcji ma koszt. Program musi zapamiętać aktywne wywołania, ich argumenty, zmienne lokalne i miejsca powrotu. Gdy wywołań jest bardzo dużo, może zabraknąć pamięci stosu.
+Rekurencja bywa czytelna, ale każde wywołanie funkcji ma koszt. Program musi zapamiętać aktywne wywołania, ich argumenty, zmienne lokalne i miejsca powrotu. Gdy wywołań jest bardzo dużo, może zabraknąć pamięci stosu.
 
 Nie ma jednej stałej liczby wywołań, po której zawsze następuje przepełnienie stosu. Zależy to od środowiska, programu i dostępnej pamięci.
 
-## Rekurencja liniowa i rozgałęziająca
+## Dwa różne problemy
 
-Rekurencja liniowa tworzy zwykle jeden dalszy krok, np. `suma(n - 1)`. Głębokość rośnie mniej więcej wraz z argumentem.
+Przy dużych wyrazach ciągu Fibonacciego pojawiają się dwa osobne problemy:
 
-Rekurencja rozgałęziająca może tworzyć kilka wywołań z jednego wywołania, np. `fib(n - 1) + fib(n - 2)`. Wtedy liczba wywołań może rosnąć bardzo szybko.
+- algorytm może być zbyt wolny,
+- typ danych może mieć zbyt mały zakres.
 
-## Trzy podejścia do Fibonacciego
+Dokładna wartość:
 
-| Rozwiązanie                    | Czas                 | Dodatkowa pamięć       | Uwagi                               |
-| ------------------------------ | -------------------- | ---------------------- | ----------------------------------- |
-| prosta rekurencja Fibonacciego | bardzo szybko rośnie | stos wywołań           | wielokrotnie liczy te same wartości |
-| rekurencja z pamięcią          | liniowy względem `n` | tablica wyników i stos | każdy wynik jest liczony raz        |
-| pętla                          | liniowy względem `n` | stała lub niewielka    | zwykle najprostsza dla samego ciągu |
+```text
+F(100) = 354224848179261915075
+```
+
+nie mieści się w typowym 64-bitowym `long long`. Warto wiedzieć, że `F(92)` jeszcze mieści się w takim typie, ale `F(93)` już się nie mieści. Standardowy C++ nie ma wbudowanego całkowitego typu o dowolnie dużym zakresie.
+
+W przykładach praktycznych w tej lekcji bezpiecznie liczymy mniejsze wartości, na przykład `F(50)`.
+
+## Proste wyjaśnienie oznaczeń O
+
+Zapis `O(n)` oznacza, że liczba kroków rośnie mniej więcej liniowo z `n`. Jeśli `n` rośnie dwa razy, pracy też jest około dwa razy więcej.
+
+Zapis `O(2^n)` oznacza wzrost bardzo szybki. Każde zwiększenie `n` może prawie podwoić liczbę pracy.
+
+Zapis `O(1)` oznacza pamięć stałą, czyli taką, która nie rośnie wraz z `n` w istotny sposób.
+
+| Rozwiązanie           | Czas działania | Dodatkowa pamięć        |
+| --------------------- | -------------- | ----------------------- |
+| Naiwna rekurencja     | około `O(2^n)` | `O(n)` na stosie        |
+| Rekurencja z pamięcią | `O(n)`         | `O(n)` na wyniki i stos |
+| Pętla                 | `O(n)`         | `O(1)`                  |
 
 ## Rekurencja z pamięcią
 
 Wartość `-1` w tablicy `pamiec` oznacza, że wynik nie został jeszcze policzony. Funkcja najpierw sprawdza, czy wynik jest już zapisany. Jeśli tak, zwraca go bez ponownego rozbijania problemu.
+
+Poniższa wersja zapisuje w pamięci także przypadki podstawowe `0` i `1`.
 
 ```cpp
 #include <iostream>
@@ -39,23 +58,14 @@ using namespace std;
 
 long long fibMemo(int n, vector<long long> &pamiec)
 {
-    if (n < 0)
-    {
-        return -1;
-    }
-
-    if (n == 0)
-    {
-        return 0;
-    }
-
-    if (n == 1)
-    {
-        return 1;
-    }
-
     if (pamiec[n] != -1)
     {
+        return pamiec[n];
+    }
+
+    if (n <= 1)
+    {
+        pamiec[n] = n;
         return pamiec[n];
     }
 
@@ -65,7 +75,7 @@ long long fibMemo(int n, vector<long long> &pamiec)
 
 int main()
 {
-    int n = 10;
+    int n = 50;
 
     if (n < 0)
     {
@@ -84,14 +94,16 @@ int main()
 <summary>Pokaż wynik</summary>
 
 ```text
-55
+12586269025
 ```
 
 </details>
 
+Dla `n == 0` powstaje `vector` o rozmiarze `1`, więc dostęp do `pamiec[0]` jest poprawny.
+
 ## Wersja iteracyjna
 
-Do samego obliczenia `fib(n)` pętla jest zwykle najprostsza:
+Do samego obliczenia `fib(n)` pętla jest zwykle najprostsza i zużywa najmniej dodatkowej pamięci.
 
 ```cpp
 #include <iostream>
@@ -125,7 +137,7 @@ long long fibPetla(int n)
 
 int main()
 {
-    cout << fibPetla(10) << "\n";
+    cout << fibPetla(50) << "\n";
     return 0;
 }
 ```
@@ -134,7 +146,7 @@ int main()
 <summary>Pokaż wynik</summary>
 
 ```text
-55
+12586269025
 ```
 
 </details>
@@ -146,87 +158,97 @@ int main()
 - Gdy te same wyniki są liczone wielokrotnie.
 - Gdy pętla jest prostsza i równie czytelna.
 - Gdy argument nie zbliża się do przypadku podstawowego.
+- Gdy wynik może przekroczyć zakres typu liczbowego.
 
 ## Ćwiczenia
 
-### Ćwiczenie 1 - powtarzające się obliczenia
+### Ćwiczenie 1 - dwa problemy przy F(100)
 
-W drzewie prostej rekurencji dla `fib(5)` wskaż, które wartości `fib(k)` pojawiają się więcej niż raz.
+Wyjaśnij, dlaczego obliczenie `F(100)` w standardowym programie z typem `long long` ma dwa problemy: wydajność prostego algorytmu i zakres typu.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 1</summary>
 
-Rozwiń `fib(5)` na `fib(4)` i `fib(3)`.
+Oddziel pytanie „jak szybko liczymy?” od pytania „czy wynik mieści się w typie?”.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
-Więcej niż raz pojawiają się między innymi `fib(3)`, `fib(2)`, `fib(1)` i `fib(0)`. To pokazuje, dlaczego prosta rekurencja Fibonacciego wykonuje dużo powtarzających się obliczeń.
+Prosta rekurencja jest zbyt wolna, bo wielokrotnie liczy te same wartości. Nawet jeśli użyjemy szybszej metody, pojawia się drugi problem: `F(100) = 354224848179261915075`, a ta liczba nie mieści się w typowym 64-bitowym `long long`.
 
 </details>
 
-### Ćwiczenie 2 - liczba wywołań
+### Ćwiczenie 2 - pamięć po fibMemo(6)
 
-Policz wszystkie wywołania prostej funkcji `fib` dla `fib(4)`.
+Załóż, że uruchamiamy `fibMemo(6, pamiec)` z tablicą wypełnioną wartościami `-1`. Jakie wartości będą zapisane w `pamiec[0]` ... `pamiec[6]` po zakończeniu obliczeń?
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Skorzystaj z drzewa z lekcji o Fibonaccim.
+Rekurencja z pamięcią obliczy każdy wynik od `0` do `6` pierwszy raz i zapisze go w tablicy.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 2</summary>
 
-Drzewo zawiera:
+Po zakończeniu obliczeń pamięć zawiera:
 
-```text
-fib(4)
-fib(3), fib(2)
-fib(2), fib(1), fib(1), fib(0)
-fib(1), fib(0)
-```
+| Indeks | Wartość |
+| -----: | ------: |
+| 0 | 0 |
+| 1 | 1 |
+| 2 | 1 |
+| 3 | 2 |
+| 4 | 3 |
+| 5 | 5 |
+| 6 | 8 |
 
-Łącznie jest `9` wywołań.
+Każdy z tych wyników został policzony raz i zapisany.
 
 </details>
 
-### Ćwiczenie 3 - działanie pamięci wyników
+### Ćwiczenie 3 - które wartości są liczone pierwszy raz
 
-Wyjaśnij, co oznacza warunek `pamiec[n] != -1` w funkcji `fibMemo`.
+Podczas obliczania `fibMemo(6, pamiec)` wypisz wartości `n`, dla których wynik trzeba obliczyć pierwszy raz.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 3</summary>
 
-Wartość `-1` oznacza brak policzonego wyniku.
+Wyniki, które są już w pamięci, nie są obliczane ponownie.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 3</summary>
 
-Warunek `pamiec[n] != -1` oznacza, że wynik dla `n` został już wcześniej obliczony i zapisany. Funkcja może go od razu zwrócić, zamiast ponownie tworzyć całe poddrzewo wywołań.
+Pierwszy raz trzeba obliczyć wartości dla:
+
+```text
+6, 5, 4, 3, 2, 1, 0
+```
+
+Potem kolejne odwołania do tych samych indeksów mogą korzystać z `pamiec[n]`.
 
 </details>
 
 ### Ćwiczenie 4 - wybór podejścia
 
-Dla zadania „oblicz setny wyraz ciągu Fibonacciego” wybierz: prosta rekurencja, rekurencja z pamięcią czy pętla. Uzasadnij wybór.
+Dla zadania „oblicz `F(50)`” wybierz: prosta rekurencja, rekurencja z pamięcią czy pętla. Uzasadnij wybór.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 4</summary>
 
-Zastanów się, czy potrzebujesz drzewa wywołań, czy tylko wyniku.
+Jeśli potrzebujesz tylko wyniku, nie musisz budować drzewa wywołań.
 
 </details>
 
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 4</summary>
 
-Najlepszym wyborem jest pętla albo rekurencja z pamięcią. Prosta rekurencja wielokrotnie liczy te same wartości i będzie bardzo wolna. Jeśli potrzebujemy tylko wyniku, pętla jest najprostsza i zużywa mało dodatkowej pamięci.
+Najlepszym wyborem jest pętla albo rekurencja z pamięcią. Pętla jest najprostsza i zużywa najmniej dodatkowej pamięci. Rekurencja z pamięcią też działa szybko, ale potrzebuje tablicy wyników i stosu wywołań.
 
 </details>
 

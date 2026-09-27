@@ -119,7 +119,52 @@ TAK
 
 Pusty napis i napis jednoznakowy są palindromami. Dla pustego napisu `prawy` ma wartość `-1`, więc warunek `lewy >= prawy` jest od razu prawdziwy.
 
-## 3. Warunki poprawności indeksów
+
+## 3. Zwykła tablica C++
+
+Tytuł tej lekcji obejmuje również zwykłe tablice. Różnią się one od `vector` tym, że funkcja otrzymująca tablicę nie zna automatycznie jej rozmiaru. Dlatego rozmiar przekazujemy jako osobny argument.
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int sumaTablicy(const int tablica[], int rozmiar, int indeks)
+{
+    if (indeks >= rozmiar)
+    {
+        return 0;
+    }
+
+    return tablica[indeks] + sumaTablicy(tablica, rozmiar, indeks + 1);
+}
+
+int main()
+{
+    int liczby[] = {4, 7, 2};
+    cout << sumaTablicy(liczby, 3, 0) << "\n";
+    return 0;
+}
+```
+
+<details markdown="1">
+<summary>Pokaż wynik</summary>
+
+```text
+13
+```
+
+</details>
+
+W tej funkcji:
+
+- tablica nie przechowuje informacji o swoim rozmiarze dostępnej w `sumaTablicy`,
+- `rozmiar` przekazujemy osobno,
+- `indeks` informuje, który element jest aktualnie przetwarzany,
+- warunek `indeks >= rozmiar` chroni przed wyjściem poza tablicę,
+- dla `rozmiar == 0` funkcja od razu zwraca `0`.
+
+## 4. Warunki poprawności indeksów
 
 - Dla `vector` nie wolno czytać elementu poza zakresem.
 - Dla napisu ostatni indeks to `(int)tekst.size() - 1`.
@@ -136,19 +181,45 @@ Pusty napis i napis jednoznakowy są palindromami. Dla pustego napisu `prawy` ma
 
 ## Ćwiczenia
 
-### Ćwiczenie 1 - suma elementów
+### Ćwiczenie 1 - suma zwykłej tablicy
+
+Dla zwykłej tablicy `int liczby[] = {5, -2, 8, 1}` rozpisz wywołania funkcji `sumaTablicy(liczby, 4, 0)` i podaj wynik.
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
+
+Indeks rośnie od `0` do `4`. Przy indeksie `4` funkcja kończy pracę i zwraca `0`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 1</summary>
+
+```text
+sumaTablicy(liczby, 4, 0) => 5 + sumaTablicy(liczby, 4, 1)
+sumaTablicy(liczby, 4, 1) => -2 + sumaTablicy(liczby, 4, 2)
+sumaTablicy(liczby, 4, 2) => 8 + sumaTablicy(liczby, 4, 3)
+sumaTablicy(liczby, 4, 3) => 1 + sumaTablicy(liczby, 4, 4)
+sumaTablicy(liczby, 4, 4) => 0
+```
+
+Wynik to `5 + (-2) + 8 + 1 = 12`.
+
+</details>
+
+### Ćwiczenie 2 - suma elementów vector
 
 Dla `vector<int> liczby = {3, -1, 5}` rozpisz wywołania funkcji `suma(liczby, 0)` i podaj wynik.
 
 <details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 1</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
 Indeks przyjmuje kolejno wartości `0`, `1`, `2`, `3`.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaż rozwiązanie ćwiczenia 1</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
 
 ```text
 suma(liczby, 0) => 3 + suma(liczby, 1)
@@ -161,19 +232,19 @@ Wynik to `3 + (-1) + 5 = 7`.
 
 </details>
 
-### Ćwiczenie 2 - liczba dodatnich elementów
+### Ćwiczenie 3 - liczba dodatnich elementów
 
 Napisz funkcję `ileDodatnich`, która zlicza dodatnie elementy w `vector<int>` od podanego indeksu do końca.
 
 <details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 2</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
 
 Dla elementu dodatniego dodaj `1` do wyniku dalszego wywołania.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaż rozwiązanie ćwiczenia 2</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
 
 ```cpp
 #include <iostream>
@@ -206,19 +277,19 @@ int main()
 
 </details>
 
-### Ćwiczenie 3 - największy element
+### Ćwiczenie 4 - największy element
 
 Napisz funkcję `maksimum`, która zwraca największy element w niepustym `vector<int>`. Funkcję możesz wywoływać od indeksu `0`.
 
 <details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 3</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
 
 Przypadek podstawowy może wystąpić przy ostatnim elemencie.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaż rozwiązanie ćwiczenia 3</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
 
 ```cpp
 #include <iostream>
@@ -253,19 +324,19 @@ int main()
 
 </details>
 
-### Ćwiczenie 4 - wyszukanie wartości
+### Ćwiczenie 5 - wyszukanie wartości
 
 Napisz funkcję `czyJest`, która sprawdza, czy w `vector<int>` występuje podana wartość.
 
 <details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 4</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 5</summary>
 
 Jeżeli aktualny element jest równy szukanej wartości, możesz od razu zwrócić `true`.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaż rozwiązanie ćwiczenia 4</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 5</summary>
 
 ```cpp
 #include <iostream>
@@ -307,19 +378,19 @@ int main()
 
 </details>
 
-### Ćwiczenie 5 - porównywanie znaków od końców
+### Ćwiczenie 6 - porównywanie znaków od końców
 
 Dla napisu `radar` zapisz pary indeksów porównywane przez funkcję `czyPalindrom`.
 
 <details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 5</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 6</summary>
 
 Pierwsza para to pierwszy i ostatni znak.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaż rozwiązanie ćwiczenia 5</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 6</summary>
 
 Dla `radar` długość wynosi `5`, więc ostatni indeks to `4`.
 

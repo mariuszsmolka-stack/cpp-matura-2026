@@ -33,6 +33,24 @@ flowchart TD
     D --> I["fib(0) = 0"]
 ```
 
+Kolejność wykonywania wywołań przy typowej ewaluacji od lewej do prawej można zapisać tak:
+
+```text
+fib(4)
+  fib(3)
+    fib(2)
+      fib(1) => 1
+      fib(0) => 0
+    fib(2) => 1
+    fib(1) => 1
+  fib(3) => 2
+  fib(2)
+    fib(1) => 1
+    fib(0) => 0
+  fib(2) => 1
+fib(4) => 3
+```
+
 Wartości zwracane:
 
 ```text
@@ -41,7 +59,9 @@ fib(3) = fib(2) + fib(1) = 2
 fib(4) = fib(3) + fib(2) = 3
 ```
 
-Niektóre wartości są liczone wielokrotnie. Na przykład `fib(2)` pojawia się dwa razy. To główna przyczyna niewydajności prostej wersji rekurencyjnej.
+Wartość `fib(2)` jest liczona dwa razy: raz wewnątrz `fib(3)` i drugi raz jako prawa gałąź `fib(4)`. Problem tej wersji nie wynika z samego użycia rekurencji, tylko z wielokrotnego rozwiązywania tych samych podproblemów.
+
+Warto też pamiętać, że wartości ciągu Fibonacciego szybko rosną i mogą przekroczyć zakres typów całkowitych. Ta lekcja pokazuje mechanizm wywołań, a nie sposób liczenia bardzo dużych wyrazów ciągu.
 
 ## Kod
 

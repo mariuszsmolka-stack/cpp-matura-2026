@@ -95,6 +95,24 @@ int main()
 
 </details>
 
+## Dlaczego wyszukiwanie binarne jest szybkie
+
+W każdym kroku odrzucamy mniej więcej połowę pozostałych elementów. Dlatego liczba sprawdzeń rośnie bardzo wolno w porównaniu z liczbą danych.
+
+| Liczba elementów | Przybliżona maksymalna liczba sprawdzeń |
+| ---------------: | --------------------------------------: |
+|                8 |                                       4 |
+|            1 000 |                                      10 |
+|        1 000 000 |                                      20 |
+
+Ta szybkość działa tylko wtedy, gdy dane są uporządkowane.
+
+## Powtarzające się wartości
+
+Jeżeli w posortowanych danych ta sama wartość występuje kilka razy, algorytm może zwrócić indeks jednego z wystąpień. Nie musi to być pierwsze ani ostatnie wystąpienie.
+
+Przykład: dla danych `{2, 4, 4, 4, 9}` i szukanej wartości `4` funkcja może zwrócić indeks `2`, bo środkowy element jest równy szukanej wartości. Jeśli potrzebujemy pierwszego albo ostatniego wystąpienia, trzeba zmodyfikować algorytm i po znalezieniu wartości dalej zawężać zakres.
+
 ## Znaczenie wyniku
 
 Wartość `-1` oznacza, że szukanej liczby nie ma w przeszukiwanym zakresie. Nie jest to indeks. To umowna informacja o braku wyniku.
@@ -230,19 +248,39 @@ W przeciwnym razie przy niektórych zakresach funkcja może nie zmniejszać prob
 
 </details>
 
-### Ćwiczenie 6 - dane nieposortowane
+### Ćwiczenie 6 - duplikaty
+
+Dla `liczby = {2, 4, 4, 4, 9}` oraz szukanej wartości `4` podaj indeks, który zwróci funkcja przy pierwszym sprawdzeniu środka. Czy musi to być pierwsze wystąpienie wartości `4`?
+
+<details markdown="1">
+<summary>Pokaż wskazówkę do ćwiczenia 6</summary>
+
+Dla zakresu `[0, 4]` środek ma indeks `2`.
+
+</details>
+
+<details markdown="1">
+<summary>Pokaż rozwiązanie ćwiczenia 6</summary>
+
+Środek zakresu `[0, 4]` to `2`, a `liczby[2]` ma wartość `4`. Funkcja zwróci więc indeks `2`.
+
+Nie jest to pierwsze wystąpienie, bo wartość `4` znajduje się także pod indeksem `1`. Klasyczna wersja wyszukiwania binarnego zwraca jedno znalezione wystąpienie, niekoniecznie pierwsze lub ostatnie.
+
+</details>
+
+### Ćwiczenie 7 - dane nieposortowane
 
 Dlaczego wyszukiwanie binarne nie jest poprawnym wyborem dla danych `{8, 2, 16, 4, 10}`?
 
 <details markdown="1">
-<summary>Pokaż wskazówkę do ćwiczenia 6</summary>
+<summary>Pokaż wskazówkę do ćwiczenia 7</summary>
 
 Decyzja o odrzuceniu połowy danych ma sens tylko wtedy, gdy dane są uporządkowane.
 
 </details>
 
 <details markdown="1">
-<summary>Pokaż rozwiązanie ćwiczenia 6</summary>
+<summary>Pokaż rozwiązanie ćwiczenia 7</summary>
 
 Dane nie są posortowane. Po sprawdzeniu środka nie wiemy, czy szukana wartość powinna znajdować się po lewej, czy po prawej stronie. Odrzucenie połowy danych może usunąć część, w której naprawdę znajduje się szukana wartość.
 

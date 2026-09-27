@@ -9,7 +9,7 @@ title: Operacje na cyfrach
 
 Chcemy rekurencyjnie przetwarzać cyfry liczby. W zadaniach maturalnych często trzeba obliczyć sumę cyfr, liczbę cyfr, największą cyfrę albo liczbę wystąpień wskazanej cyfry.
 
-W tej lekcji główne funkcje przyjmują liczby nieujemne. Liczby ujemne można obsłużyć przed pierwszym wywołaniem, zamieniając znak na dodatni.
+W tej lekcji funkcje i ćwiczenia działają na liczbach nieujemnych. Nie omawiamy tu pełnej obsługi wszystkich wartości typu `int`, tylko mechanizm przetwarzania cyfr dla `liczba >= 0`.
 
 ## Dwie operacje na liczbie
 
@@ -119,25 +119,26 @@ Dla `0` funkcje działają poprawnie:
 
 Zero zapisujemy jedną cyfrą, dlatego liczba cyfr wynosi `1`.
 
-## Liczby ujemne
+## Założenia dla ćwiczeń
 
-Jeżeli użytkownik może podać liczbę ujemną, najprościej zamienić ją na dodatnią przed pierwszym wywołaniem:
+W ćwiczeniach z tej lekcji przyjmujemy liczby nieujemne. Dla funkcji:
 
 ```cpp
-if (liczba < 0)
-{
-    liczba = -liczba;
-}
+int ileCyfr(int liczba, int cyfra);
 ```
 
-Nie trzeba wykonywać tej zamiany w każdym wywołaniu rekurencyjnym.
+obowiązują założenia:
+
+- `liczba >= 0`,
+- `0 <= cyfra && cyfra <= 9`.
+
+Dla liczby `0` funkcja `ileCyfr(0, 0)` powinna zwrócić `1`, bo zapis liczby `0` zawiera jedną cyfrę zero. Dla `ileCyfr(0, 5)` wynik powinien wynosić `0`.
 
 ## Typowe błędy
 
 - Użycie `liczba % 10` jako liczby bez ostatniej cyfry.
 - Brak zmniejszenia problemu, np. wywołanie `sumaCyfr(liczba)`.
 - Niejasne traktowanie zera.
-- Zamiana znaku liczby ujemnej w każdym kroku bez potrzeby.
 - Zły przypadek podstawowy dla funkcji liczącej cyfry.
 
 ## Ćwiczenia
@@ -196,7 +197,7 @@ Wynik to `4`.
 
 ### Ćwiczenie 3 - wystąpienia cyfry
 
-Napisz funkcję `ileCyfr(int liczba, int cyfra)`, która dla liczby nieujemnej zlicza wystąpienia cyfry `cyfra`. Dla `ileCyfr(12022, 2)` wynik ma wynosić `3`.
+Napisz funkcję `ileCyfr(int liczba, int cyfra)`, która dla `liczba >= 0` oraz `0 <= cyfra && cyfra <= 9` zlicza wystąpienia cyfry `cyfra`. Dla `ileCyfr(12022, 2)` wynik ma wynosić `3`. Dopilnuj, aby `ileCyfr(0, 0)` zwracało `1`.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 3</summary>

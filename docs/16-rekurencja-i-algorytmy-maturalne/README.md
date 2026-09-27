@@ -16,7 +16,7 @@ W rekurencji często rozróżniamy dwa etapy:
 - schodzenie - powstają kolejne wywołania, zwykle z coraz mniejszym problemem,
 - powroty - zakończone wywołania oddają wynik do poprzednich wywołań.
 
-Rekurencja jest naturalna, gdy problem sam ma strukturę „mniejszej wersji siebie”. Dotyczy to między innymi drzew wywołań, dzielenia zakresu na połowy, przechodzenia po cyfrach liczby, generowania możliwości oraz niektórych zadań maturalnych z analizą funkcji.
+Rekurencja jest naturalna, gdy problem sam ma strukturę „mniejszej wersji siebie”. Dobrze pasuje między innymi do drzew i katalogów, dzielenia problemu na mniejsze części, nawracania, operacji na cyfrach oraz przeszukiwania przestrzeni rozwiązań.
 
 Pętla bywa lepsza, gdy zadanie polega po prostu na przejściu po kolejnych wartościach. Pętla zwykle zużywa mniej pamięci i jest łatwiejsza do kontroli, gdy nie potrzebujemy naturalnego podziału problemu.
 
@@ -44,4 +44,4 @@ Pętla bywa lepsza, gdy zadanie polega po prostu na przejściu po kolejnych wart
 
 ## Po tym rozdziale
 
-Po rozdziale umiesz wskazać przypadek podstawowy, opisać krok rekurencyjny, prześledzić schodzenie i powroty, analizować wartości zwracane, rozpoznawać rozgałęzianie wywołań oraz zdecydować, kiedy lepsza będzie pętla.
+Po rozdziale umiesz wskazać przypadek podstawowy, opisać krok rekurencyjny, prześledzić schodzenie i powroty, analizować wartości zwracane, wykonać rekurencyjne wyszukiwanie binarne, rozpoznać nawracanie, wskazać powtarzające się obliczenia oraz ocenić podstawową wydajność rozwiązania.

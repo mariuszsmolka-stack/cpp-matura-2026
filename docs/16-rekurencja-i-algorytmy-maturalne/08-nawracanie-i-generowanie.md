@@ -84,6 +84,24 @@ int main()
 
 Ten sam napis `wynik` jest przekazywany przez referencję. Dlatego cofnięcie wyboru jest konieczne. Bez `pop_back()` kolejne gałęzie dostałyby zły stan.
 
+## Ślad zmian dla długości 2
+
+Poniższa tabela pokazuje, jak zmienia się wspólny napis `wynik` podczas generowania napisów długości `2`.
+
+| Krok | Operacja | Stan `wynik` | Co się dzieje? |
+| ---: | -------- | ------------ | -------------- |
+| 1 | `push_back('0')` | `0` | wybieramy pierwszą możliwość |
+| 2 | wywołanie rekurencyjne | `0` | przechodzimy na kolejny poziom |
+| 3 | `push_back('0')` | `00` | powstaje pierwszy pełny napis |
+| 4 | wypisanie i powrót | `00` | program wraca z głębszego wywołania |
+| 5 | `pop_back()` | `0` | cofamy drugi znak |
+| 6 | `push_back('1')` | `01` | próbujemy kolejną możliwość |
+| 7 | wypisanie i powrót | `01` | program wraca z gałęzi `01` |
+| 8 | `pop_back()` | `0` | cofamy drugi znak |
+| 9 | `pop_back()` | pusty | cofamy pierwszy znak i możemy zacząć gałąź `1` |
+
+Najważniejsza myśl: po powrocie z wywołania trzeba odtworzyć stan sprzed wyboru.
+
 ## Drzewo dla długości 3
 
 ```mermaid
@@ -173,7 +191,29 @@ Napis będzie nadal zawierał wybór z poprzedniej gałęzi.
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 3</summary>
 
-Stan napisu nie wróci do poprzedniej długości. Kolejna gałąź zacznie pracę z nadmiarowym znakiem, więc program może pominąć część wyników albo wypisać napisy niezgodne z oczekiwaną strukturą drzewa.
+Jeżeli usuniemy `pop_back()` po gałęzi dodającej `0`, napis nie zostanie przywrócony do poprzedniego stanu.
+
+Krótki ślad dla oczekiwanej długości `2`:
+
+```text
+wynik = ""
+push_back('0')  => "0"
+push_back('0')  => "00"
+wypisz "00"
+brak pop_back() => nadal "00"
+próba push_back('1') => "001"
+```
+
+Warunek końcowy sprawdza równość długości:
+
+```cpp
+if ((int)wynik.size() == dlugosc)
+```
+
+Dla napisu `"001"` długość wynosi `3`, więc warunek dla `dlugosc == 2` nie jest spełniony. Kolejne znaki mogą być dokładane do coraz dłuższego napisu, a rekurencja może nie zakończyć się poprawnie. W praktyce program może zakończyć się przepełnieniem stosu.
+
+Nie należy zmieniać warunku na `>=` tylko po to, aby ukryć błąd. Celem jest poprawne cofanie zmian przez `pop_back()`.
+
 
 </details>
 
