@@ -18,7 +18,7 @@ Po tym rozdziale będziesz umieć:
 
 ## Kolejność nauki
 
-Najpierw poznasz zakres zmiennych. Potem zobaczysz przesłanianie i zmienne globalne. Następnie przejdziesz do funkcji bez parametrów, funkcji z parametrami, wartości zwracanych oraz referencji. Na końcu połączysz wszystko w prostym programie podzielonym na funkcje.
+Najpierw poznasz zakres zmiennych. Potem zobaczysz przesłanianie i zmienne globalne. Następnie przejdziesz do funkcji bez parametrów, funkcji z parametrami, wartości zwracanych oraz referencji. Następnie połączysz wszystko w prostym programie podzielonym na funkcje. Na końcu znajduje się dodatkowa lekcja o asercjach: pokazuje, jak sprawdzać założenia i wyniki funkcji. Nie jest konieczna do zrozumienia kolejnych rozdziałów, ale pomaga w wykrywaniu błędów i pracy z debuggerem.
 
 ## Lekcje
 
@@ -28,6 +28,7 @@ Najpierw poznasz zakres zmiennych. Potem zobaczysz przesłanianie i zmienne glob
 4. [Parametry i wartości zwracane](04-parametry-i-wartosci-zwracane.md)
 5. [Wartość i referencja](05-wartosc-i-referencja.md)
 6. [Podział programu na funkcje](06-podzial-programu-na-funkcje.md)
+7. [Asercje - sprawdzanie założeń](07-asercje-i-sprawdzanie-zalozen.md) — materiał dodatkowy
 
 ## Po ukończeniu rozdziału
 

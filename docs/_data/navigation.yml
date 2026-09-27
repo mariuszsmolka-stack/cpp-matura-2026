@@ -148,6 +148,8 @@ sections:
         url: "09-zakres-i-funkcje/05-wartosc-i-referencja.md"
       - title: "Podział programu na funkcje"
         url: "09-zakres-i-funkcje/06-podzial-programu-na-funkcje.md"
+      - title: "Asercje - sprawdzanie założeń"
+        url: "09-zakres-i-funkcje/07-asercje-i-sprawdzanie-zalozen.md"
 
   - title: "10 - Tablice"
     url: "10-tablice/README.md"

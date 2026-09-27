@@ -7,7 +7,7 @@ title: Status kursu
 
 ## Data sprawdzenia
 
-2026-09-26
+2026-09-27
 
 ## Podsumowanie
 
@@ -30,7 +30,7 @@ title: Status kursu
 - Rozdział 08 - Znaki i napisy: gotowy
 - Liczba pełnych lekcji w rozdziale 08: 6
 - Rozdział 09 - Zakres zmiennych i funkcje: gotowy
-- Liczba pełnych lekcji w rozdziale 09: 6
+- Liczba pełnych lekcji w rozdziale 09: 7 (6 podstawowych i 1 dodatkowa o asercjach)
 - Rozdział 10 - Tablice: gotowy
 - Rozdział 10 - materiał podstawowy: 8 pełnych lekcji
 - Rozdział 10 - materiał nieobowiązkowy: 1 materiał o tablicach dynamicznych
@@ -62,7 +62,7 @@ title: Status kursu
 - OK - rozdział `06-operatory-i-warunki` zawiera wprowadzenie i 9 pełnych lekcji.
 - OK - rozdział `07-petle` zawiera wprowadzenie i 8 pełnych lekcji.
 - OK - rozdział `08-znaki-i-napisy` zawiera wprowadzenie i 6 pełnych lekcji.
-- OK - rozdział `09-zakres-i-funkcje` zawiera wprowadzenie i 6 pełnych lekcji.
+- OK - rozdział `09-zakres-i-funkcje` zawiera wprowadzenie, 6 pełnych lekcji podstawowych i 1 dodatkową lekcję o asercjach.
 - OK - rozdział `10-tablice` zawiera wprowadzenie, 8 pełnych lekcji podstawowych i 1 materiał nieobowiązkowy o tablicach dynamicznych.
 - OK - rozdział `11-dane-zlozone` zawiera wprowadzenie, 4 pełne lekcje podstawowe i 1 materiał nieobowiązkowy o tuple i rozpakowywaniu.
 - OK - rozdział `12-vector` zawiera wprowadzenie, 7 lekcji obowiązkowych i 1 materiał nieobowiązkowy o pojemności i iteratorach.
