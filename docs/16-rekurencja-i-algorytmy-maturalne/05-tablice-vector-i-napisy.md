@@ -9,7 +9,7 @@ title: Tablice, vector i napisy
 
 Rekurencja może przetwarzać dane złożone: `vector`, tablicę albo napis. Wtedy zamiast zmniejszać liczbę, zwykle zmieniamy indeksy.
 
-W tej lekcji używamy `vector<int>` i `string`. Nazwy zmiennych w kodzie są bez polskich znaków.
+W tej lekcji używamy zwykłych tablic, `vector<int>` oraz `string`. Nazwy zmiennych w kodzie są bez polskich znaków.
 
 ## 1. Przetwarzanie vector od podanego indeksu
 

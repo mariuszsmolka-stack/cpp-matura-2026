@@ -93,12 +93,21 @@ Poniższa tabela pokazuje, jak zmienia się wspólny napis `wynik` podczas gener
 | 1 | `push_back('0')` | `0` | wybieramy pierwszą możliwość |
 | 2 | wywołanie rekurencyjne | `0` | przechodzimy na kolejny poziom |
 | 3 | `push_back('0')` | `00` | powstaje pierwszy pełny napis |
-| 4 | wypisanie i powrót | `00` | program wraca z głębszego wywołania |
+| 4 | wypisanie i powrót | `00` | program wypisuje `00` i wraca z głębszego wywołania |
 | 5 | `pop_back()` | `0` | cofamy drugi znak |
-| 6 | `push_back('1')` | `01` | próbujemy kolejną możliwość |
-| 7 | wypisanie i powrót | `01` | program wraca z gałęzi `01` |
+| 6 | `push_back('1')` | `01` | próbujemy drugą możliwość na tym samym poziomie |
+| 7 | wypisanie i powrót | `01` | program wypisuje `01` i wraca z gałęzi `01` |
 | 8 | `pop_back()` | `0` | cofamy drugi znak |
-| 9 | `pop_back()` | pusty | cofamy pierwszy znak i możemy zacząć gałąź `1` |
+| 9 | `pop_back()` | pusty | cofamy pierwszy znak i kończymy gałąź zaczynającą się od `0` |
+| 10 | `push_back('1')` | `1` | zaczynamy gałąź zaczynającą się od `1` |
+| 11 | wywołanie rekurencyjne | `1` | przechodzimy na kolejny poziom |
+| 12 | `push_back('0')` | `10` | powstaje kolejny pełny napis |
+| 13 | wypisanie i powrót | `10` | program wypisuje `10` i wraca z gałęzi `10` |
+| 14 | `pop_back()` | `1` | cofamy drugi znak |
+| 15 | `push_back('1')` | `11` | próbujemy ostatnią możliwość |
+| 16 | wypisanie i powrót | `11` | program wypisuje `11` i wraca z gałęzi `11` |
+| 17 | `pop_back()` | `1` | cofamy drugi znak |
+| 18 | `pop_back()` | pusty | cofamy pierwszy znak i wracamy do pustego napisu |
 
 Najważniejsza myśl: po powrocie z wywołania trzeba odtworzyć stan sprzed wyboru.
 

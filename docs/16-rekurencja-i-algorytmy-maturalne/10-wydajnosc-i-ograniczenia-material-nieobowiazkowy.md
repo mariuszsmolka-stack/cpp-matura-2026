@@ -38,6 +38,10 @@ Zapis `O(2^n)` oznacza wzrost bardzo szybki. Każde zwiększenie `n` może prawi
 
 Zapis `O(1)` oznacza pamięć stałą, czyli taką, która nie rośnie wraz z `n` w istotny sposób.
 
+Zapis `O(log n)` oznacza, że liczba kroków rośnie wolno, bo w każdym kroku odrzucamy dużą część danych. Przykładem jest wyszukiwanie binarne z poprzedniej lekcji: w każdym kroku odrzuca około połowy pozostałych elementów. Dla około miliona elementów wystarcza około 20 sprawdzeń, ale warunkiem jest uporządkowanie danych.
+
+Nie wszystkie algorytmy rekurencyjne mają tę samą złożoność. Trzeba patrzeć na to, ile wywołań powstaje i czy program powtarza te same obliczenia.
+
 | Rozwiązanie           | Czas działania | Dodatkowa pamięć        |
 | --------------------- | -------------- | ----------------------- |
 | Naiwna rekurencja     | około `O(2^n)` | `O(n)` na stosie        |
@@ -48,7 +52,7 @@ Zapis `O(1)` oznacza pamięć stałą, czyli taką, która nie rośnie wraz z `n
 
 Wartość `-1` w tablicy `pamiec` oznacza, że wynik nie został jeszcze policzony. Funkcja najpierw sprawdza, czy wynik jest już zapisany. Jeśli tak, zwraca go bez ponownego rozbijania problemu.
 
-Poniższa wersja zapisuje w pamięci także przypadki podstawowe `0` i `1`.
+Poniższa wersja zapisuje w pamięci także przypadki podstawowe `0` i `1`. Dwie gałęzie obliczamy w osobnych instrukcjach celowo, aby kolejność pierwszych wywołań była jednoznaczna.
 
 ```cpp
 #include <iostream>
@@ -69,7 +73,10 @@ long long fibMemo(int n, vector<long long> &pamiec)
         return pamiec[n];
     }
 
-    pamiec[n] = fibMemo(n - 1, pamiec) + fibMemo(n - 2, pamiec);
+    long long wynikPierwszejGalezi = fibMemo(n - 1, pamiec);
+    long long wynikDrugiejGalezi = fibMemo(n - 2, pamiec);
+
+    pamiec[n] = wynikPierwszejGalezi + wynikDrugiejGalezi;
     return pamiec[n];
 }
 

@@ -33,7 +33,9 @@ flowchart TD
     D --> I["fib(0) = 0"]
 ```
 
-Kolejność wykonywania wywołań przy typowej ewaluacji od lewej do prawej można zapisać tak:
+W kodzie w tej lekcji gałęzie są zapisane w osobnych instrukcjach. To ważne, bo w wyrażeniu `fib(n - 1) + fib(n - 2)` kompilator nie musi zaczynać od lewego składnika dodawania. Osobne instrukcje wymuszają kolejność: najpierw rozwijana jest gałąź `fib(n - 1)`, a dopiero później gałąź `fib(n - 2)`. Dzięki temu pokazany ślad wywołań jest zgodny z programem.
+
+Dla tak zapisanego programu kolejność wykonywania wywołań można zapisać tak:
 
 ```text
 fib(4)
@@ -87,7 +89,10 @@ int fib(int n)
         return 1;
     }
 
-    return fib(n - 1) + fib(n - 2);
+    int wynikPierwszejGalezi = fib(n - 1);
+    int wynikDrugiejGalezi = fib(n - 2);
+
+    return wynikPierwszejGalezi + wynikDrugiejGalezi;
 }
 
 int main()
@@ -214,7 +219,10 @@ int fib(int n)
         return 0;
     }
 
-    return fib(n - 1) + fib(n - 2);
+    int wynikPierwszejGalezi = fib(n - 1);
+    int wynikDrugiejGalezi = fib(n - 2);
+
+    return wynikPierwszejGalezi + wynikDrugiejGalezi;
 }
 ```
 
