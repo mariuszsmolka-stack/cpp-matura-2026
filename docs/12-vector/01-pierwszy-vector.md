@@ -117,7 +117,7 @@ Pierwszy pomiar: 10
 
 </details>
 
-`at()` sprawdza zakres dokładniej niż `[]`. Nadal najlepiej samodzielnie pilnować poprawnych indeksów.
+`at()` sprawdza zakres i zgłasza błąd `out_of_range`, gdy indeks jest niepoprawny. Operator `[]` nie wykonuje takiej kontroli. `at()` sprawdza, czy wskazany element istnieje. `[]` zakłada, że programista podał prawidłowy indeks. Użycie `[]` z niepoprawnym indeksem prowadzi do niezdefiniowanego działania programu. `at()` jest przydatne podczas nauki i sprawdzania poprawności indeksu.
 
 ## Kiedy tego użyć?
 

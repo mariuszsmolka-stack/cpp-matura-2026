@@ -15,7 +15,7 @@ Dla człowieka `A` jest literą. Dla komputera znak jest zapamiętany jako warto
 
 ## Wyjaśnienie idei
 
-ASCII to tabela numerów dla podstawowych znaków. Obejmuje wartości od `0` do `127`. Pierwsze wartości są znakami sterującymi, a znaki widoczne mają własne kody.
+ASCII to tabela numerów dla podstawowych znaków. Standardowy ASCII obejmuje kody od `0` do `127`. Nie każdy kod odpowiada znakowi widocznemu na ekranie. Kody `0`-`31` oraz `127` oznaczają znaki sterujące. Zwykle widoczne znaki znajdują się w zakresie `32`-`126`.
 
 Nie trzeba pamiętać całej tabeli. Ważne jest rozumienie ciągłości zakresów.
 
@@ -171,12 +171,12 @@ int main()
 
 ### 2. Znak o podanym kodzie
 
-Wczytaj liczbę całkowitą i wypisz znak o takim kodzie.
+Wczytaj liczbę całkowitą. Jeżeli należy do zakresu standardowego ASCII `0`-`127`, wypisz znak o takim kodzie. Jeżeli liczba jest spoza zakresu, wypisz komunikat o błędzie. Pamiętaj, że kody `0`-`31` oraz `127` oznaczają znaki sterujące, więc wynik może nie być widoczny na ekranie.
 
 <details markdown="1">
 <summary>Pokaż wskazówkę do ćwiczenia 2</summary>
 
-Wczytaj `int kod`, a potem wypisz `(char)kod`.
+Wczytaj `int kod`. Najpierw sprawdź warunek `kod >= 0 && kod <= 127`, a dopiero potem wykonaj konwersję `(char)kod`. Do testu użyj na przykład kodu `65`, którego wynikiem jest `A`.
 
 </details>
 
@@ -194,10 +194,30 @@ int main()
 
     cin >> kod;
 
-    cout << "Znak: " << (char)kod << "\n";
+    if (kod >= 0 && kod <= 127)
+    {
+        char znak = (char)kod;
+        cout << znak << '\n';
+    }
+    else
+    {
+        cout << "Kod ASCII musi nalezec do zakresu 0-127.\n";
+    }
 
     return 0;
 }
+```
+
+Przykładowe dane wejściowe:
+
+```text
+65
+```
+
+Wynik:
+
+```text
+A
 ```
 
 </details>

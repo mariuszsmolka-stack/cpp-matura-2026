@@ -11,7 +11,7 @@ title: set - unikalne wartości
 
 ## Wyjaśnienie idei prostym językiem
 
-`set` to uporządkowany zbiór. Nie przechowuje duplikatów, nie działa jak tablica i nie ma dostępu przez indeks. Kolejność wynika z wartości, a nie z kolejności wpisania.
+`set` to uporządkowany zbiór. Nie przechowuje drugiego egzemplarza tej samej wartości, nie działa jak tablica i nie ma dostępu przez indeks. Kolejność wynika z wartości, a nie z kolejności wpisania.
 
 ## Składnia
 
@@ -197,7 +197,7 @@ Dodawaj liczby przez `insert()`.
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 1</summary>
 
-`set` usuwa powtórzenia.
+Jeżeli taka sama wartość pojawi się kolejny raz, `set` nie przechowuje drugiego egzemplarza tej samej wartości.
 
 ```cpp
 #include <iostream>
@@ -326,7 +326,7 @@ Użyj `erase(wartosc)`.
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 4</summary>
 
-`set` usuwa wartość bez indeksu.
+`set` pozwala usunąć wskazaną wartość bez używania indeksu.
 
 ```cpp
 #include <iostream>

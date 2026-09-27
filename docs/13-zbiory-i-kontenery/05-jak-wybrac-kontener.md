@@ -20,7 +20,7 @@ Zaczynaj od `vector`. `set` wybieraj dla unikalności. `map` wybieraj dla relacj
 | Zachowanie kolejności wprowadzania              | `vector`                           |
 | Dostęp przez indeks                             | `vector`                           |
 | Zachowanie powtórzeń                            | `vector`                           |
-| Automatyczne usuwanie powtórzeń                 | `set`                              |
+| Przechowywanie każdej wartości najwyżej raz       | `set`                              |
 | Automatyczne uporządkowanie unikalnych wartości | `set`                              |
 | Wyszukiwanie przez klucz                        | `map`                              |
 | Zliczanie wystąpień                             | `map`                              |
@@ -66,7 +66,7 @@ int main()
 
 `vector` jest dobry, bo kolejność i powtórzenia są ważne.
 
-## Przykład 2 - `set` usuwa powtórzenia
+## Przykład 2 - `set` przechowuje wartości bez powtórzeń
 
 ```cpp
 #include <iostream>
@@ -208,7 +208,7 @@ Wybierz `set`.
 <details markdown="1">
 <summary>Pokaż rozwiązanie ćwiczenia 2</summary>
 
-Wybrano `set`, bo usuwa duplikaty.
+Wybrano `set`, bo nie przechowuje drugiego egzemplarza tej samej wartości.
 
 ```cpp
 #include <iostream>
