@@ -22,3 +22,8 @@
     });
   });
 </script>
+
+{% if page.algorithm_visualizer %}
+<link rel="stylesheet" href="{{ '/assets/css/algorithm-visualizer.css' | relative_url }}">
+<script defer src="{{ '/assets/js/algorithm-visualizer.js' | relative_url }}"></script>
+{% endif %}

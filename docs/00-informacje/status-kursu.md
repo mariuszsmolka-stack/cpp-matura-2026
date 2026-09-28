@@ -7,7 +7,7 @@ title: Status kursu
 
 ## Data sprawdzenia
 
-2026-09-27
+2026-09-28
 
 ## Podsumowanie
 
@@ -46,7 +46,9 @@ title: Status kursu
 - Rozdział 16 - Rekurencja i algorytmy maturalne: gotowy
 - Rozdział 16 - lekcje obowiązkowe: 9
 - Rozdział 16 - lekcje nieobowiązkowe: 1
-- Kolejny rozdział do opracowania: 14 - Podstawowe algorytmy
+- Rozdział 14 - Podstawowe algorytmy: w trakcie
+- Rozdział 14 - gotowe lekcje: 1 (sortowanie bąbelkowe z wizualizacją i programem do pobrania)
+- Kontynuacja opracowania: 14 - Podstawowe algorytmy
 
 ## Szczegóły
 
@@ -69,4 +71,5 @@ title: Status kursu
 - OK - rozdział `13-zbiory-i-kontenery` zawiera wprowadzenie, 5 lekcji obowiązkowych i 2 materiały nieobowiązkowe.
 - OK - favicon nie jest dodawany, ponieważ w repozytorium nie ma neutralnego pliku `favicon.ico`.
 - OK - rozdział `16-rekurencja-i-algorytmy-maturalne` zawiera wprowadzenie, 9 lekcji obowiązkowych i 1 materiał nieobowiązkowy.
-- BRAK - pełne lekcje w rozdziałach `14-15` oraz `17-18` nie zostały jeszcze utworzone.
+- W TRAKCIE - rozdział `14-algorytmy-podstawowe` zawiera jedną gotową lekcję: [sortowanie bąbelkowe krok po kroku](../14-algorytmy-podstawowe/20-sortowanie-babelkowe.md). Pozostałe lekcje są planowane.
+- BRAK - pełne lekcje w rozdziałach `15` oraz `17-18` nie zostały jeszcze utworzone.

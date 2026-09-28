@@ -2,7 +2,7 @@
 
 ## Status
 
-planowany
+w trakcie
 
 ## Zakres rozdziału
 
@@ -14,11 +14,14 @@ Ten rozdział będzie zawierał podstawowe algorytmy wyszukiwania i sortowania.
 - Przygotować się do późniejszych lekcji praktycznych.
 - Wiedzieć, jakie tematy będą rozwijane w kolejnych materiałach.
 
+## Gotowe lekcje
+
+- [Sortowanie bąbelkowe krok po kroku](20-sortowanie-babelkowe.md) — lekcja, wizualizacja, ćwiczenia i program do pobrania.
+
 ## Planowane lekcje
 
 - wyszukiwanie liniowe
 - minimum i maksimum
-- sortowanie bąbelkowe bez optymalizacji
 - osobne, późniejsze optymalizacje sortowania bąbelkowego
 - sortowanie przez wybieranie
 - sortowanie przez wstawianie
@@ -29,4 +32,4 @@ Ten rozdział będzie zawierał podstawowe algorytmy wyszukiwania i sortowania.
 
 ## Informacja
 
-Pełne materiały zostaną dodane później. Na tym etapie rozdział zawiera plan i zakres pracy.
+Gotowa jest pierwsza lekcja o sortowaniu bąbelkowym. Pozostałe materiały są planowane; rozdział nie jest jeszcze ukończony.

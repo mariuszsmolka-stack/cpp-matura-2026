@@ -1,0 +1,49 @@
+.alg-viz {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 2px solid #526477;
+  border-radius: 8px;
+  background: #fff;
+  color: #172b3a;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.alg-viz [hidden] { display: none; }
+.alg-viz label { display: block; font-weight: 600; margin-bottom: .35rem; }
+.alg-viz input, .alg-viz select, .alg-viz button {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: 44px;
+  border: 2px solid #526477;
+  border-radius: 5px;
+  padding: .5rem .7rem;
+  font: inherit;
+  color: #172b3a;
+  background: #fff;
+}
+.alg-viz input { width: 100%; }
+.alg-viz button { cursor: pointer; background: #edf3fa; white-space: normal; }
+.alg-viz button:hover:not(:disabled) { background: #dbe8f7; }
+.alg-viz button:disabled { color: #52606c; background: #eee; border-color: #89939d; cursor: default; }
+.alg-viz :focus-visible { outline: 3px solid #005fcc; outline-offset: 3px; }
+.alg-viz-controls { display: flex; flex-wrap: wrap; gap: .6rem; margin: .8rem 0; }
+.alg-viz .alg-viz-cells { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; margin: 1rem 0; list-style: none; }
+.alg-viz-cell { flex: 0 1 100px; box-sizing: border-box; border: 2px solid #526477; border-radius: 5px; padding: .4rem; text-align: center; background: #f4f6f8; }
+.alg-viz-index, .alg-viz-value, .alg-viz-marker { display: block; }
+.alg-viz-index, .alg-viz-marker { font-size: .8rem; }
+.alg-viz-value { font-size: 1.5rem; font-weight: 700; }
+.alg-viz-marker { min-height: 2.5em; }
+.alg-viz-compared { border: 3px dashed #125596; background: #e5f1ff; }
+.alg-viz-swapped { border: 3px double #834400; background: #fff0d5; }
+.alg-viz-sorted { border: 3px solid #23673b; background: #e5f5e8; }
+.alg-viz-description { border-left: 4px solid #125596; padding: .6rem; background: #edf3fa; font-weight: 600; }
+.alg-viz-error { color: #9b2020; font-weight: 600; }
+.alg-viz-help { font-size: .9rem; }
+@media (max-width: 480px) {
+  .alg-viz { padding: .65rem; }
+  .alg-viz-controls button { flex: 1 1 120px; }
+  .alg-viz-cell { flex-basis: calc((100% - 1rem) / 3); min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .alg-viz, .alg-viz * { animation: none; transition: none; scroll-behavior: auto; }
+}
