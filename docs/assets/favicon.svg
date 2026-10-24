@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Kurs C++</title>
+  <rect width="64" height="64" rx="12" fill="#2879a8"/>
+  <path d="M28 21C24 16 16 15 11 20C4 26 4 38 11 44C16 49 24 48 28 43"
+        fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+  <path d="M38 24v12m-6-6h12m10-6v12m-6-6h12"
+        fill="none" stroke="#fff" stroke-width="4"/>
+</svg>
