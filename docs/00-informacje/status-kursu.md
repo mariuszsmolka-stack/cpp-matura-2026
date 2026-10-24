@@ -7,7 +7,7 @@ title: Status kursu
 
 ## Data sprawdzenia
 
-2026-09-28
+2026-10-24
 
 ## Podsumowanie
 
@@ -17,8 +17,9 @@ title: Status kursu
 - Nawigacja rozdziałów: OK
 - Ścieżka nawigacyjna: OK
 - Przyciski poprzedni/następny: OK
-- Rozdziały 00-18: OK
-- Favicon: świadomie pominięty
+- Strony wejściowe rozdziałów 00-18: dostępne
+- Favicon: dodany (ikona MS w pliku `docs/favicon.ico`)
+- Rozdziały 01-03: planowane, bez pełnych lekcji
 - Rozdział 04 - Debugger w Code::Blocks: gotowy
 - Liczba pełnych lekcji w rozdziale 04: 3
 - Rozdział 05 - Podstawy języka C++: gotowy
@@ -43,12 +44,15 @@ title: Status kursu
 - Rozdział 13 - Zbiory i kontenery asocjacyjne: gotowy
 - Rozdział 13 - lekcje obowiązkowe: 5
 - Rozdział 13 - lekcje nieobowiązkowe: 2
+- Rozdział 14 - Podstawowe algorytmy: w trakcie
+- Rozdział 14 - gotowe lekcje: 1 (sortowanie bąbelkowe z wizualizacją i programem do pobrania)
+- Rozdział 15 - Pliki tekstowe: planowany, bez pełnych lekcji
 - Rozdział 16 - Rekurencja i algorytmy maturalne: gotowy
 - Rozdział 16 - lekcje obowiązkowe: 9
 - Rozdział 16 - lekcje nieobowiązkowe: 1
-- Rozdział 14 - Podstawowe algorytmy: w trakcie
-- Rozdział 14 - gotowe lekcje: 1 (sortowanie bąbelkowe z wizualizacją i programem do pobrania)
-- Kontynuacja opracowania: 14 - Podstawowe algorytmy
+- Rozdziały 17-18: planowane, bez pełnych lekcji
+- Łącznie opracowane lekcje i materiały dodatkowe: 83 (76 podstawowych i 7 dodatkowych)
+- Kontynuacja opracowania: rozdział 14 - Podstawowe algorytmy, od wyszukiwania liniowego
 
 ## Szczegóły
 
@@ -69,7 +73,8 @@ title: Status kursu
 - OK - rozdział `11-dane-zlozone` zawiera wprowadzenie, 4 pełne lekcje podstawowe i 1 materiał nieobowiązkowy o tuple i rozpakowywaniu.
 - OK - rozdział `12-vector` zawiera wprowadzenie, 7 lekcji obowiązkowych i 1 materiał nieobowiązkowy o pojemności i iteratorach.
 - OK - rozdział `13-zbiory-i-kontenery` zawiera wprowadzenie, 5 lekcji obowiązkowych i 2 materiały nieobowiązkowe.
-- OK - favicon nie jest dodawany, ponieważ w repozytorium nie ma neutralnego pliku `favicon.ico`.
+- OK - ikona MS `docs/favicon.ico` jest podłączona we wspólnym szablonie z użyciem `relative_url`. Jest taka sama jak w pozostałych kursach.
 - OK - rozdział `16-rekurencja-i-algorytmy-maturalne` zawiera wprowadzenie, 9 lekcji obowiązkowych i 1 materiał nieobowiązkowy.
 - W TRAKCIE - rozdział `14-algorytmy-podstawowe` zawiera jedną gotową lekcję: [sortowanie bąbelkowe krok po kroku](../14-algorytmy-podstawowe/20-sortowanie-babelkowe.md). Pozostałe lekcje są planowane.
-- BRAK - pełne lekcje w rozdziałach `15` oraz `17-18` nie zostały jeszcze utworzone.
+- BRAK - pełne lekcje w rozdziałach `01-03`, `15` oraz `17-18` nie zostały jeszcze utworzone. Rozdziały zawierają tylko wprowadzenia z planem pracy.
+- Do liczby 83 nie wliczono wprowadzeń, planów, stron organizacyjnych ani starej strony z odsyłaczem do nowej lekcji o podglądzie zmiennych.
