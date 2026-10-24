@@ -1,8 +1,12 @@
 title: C++ - od podstaw do matury rozszerzonej
 description: Kurs programowania w C++ przygotowujący od podstaw do matury rozszerzonej z informatyki
+url: "https://mariuszsmolka-stack.github.io"
 baseurl: "/cpp-matura-2026"
 theme: jekyll-theme-slate
 markdown: kramdown
+
+plugins:
+  - jekyll-sitemap
 
 defaults:
   - scope:
