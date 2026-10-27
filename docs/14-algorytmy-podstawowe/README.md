@@ -21,6 +21,7 @@ Ten rozdział obejmuje podstawowe algorytmy wyszukiwania, sortowania i obliczani
 ## Tematy algorytmiczne
 
 - [Sumy prefiksowe]({{ '/14-algorytmy-podstawowe/sumy-prefiksowe/' | relative_url }}) - szybkie obliczanie sum spójnych fragmentów tablicy.
+- [Dwa wskaźniki]({{ '/14-algorytmy-podstawowe/dwa-wskazniki/' | relative_url }}) - szukanie pary o zadanej sumie i sprawdzanie palindromów.
 
 ## Planowane lekcje
 
@@ -36,4 +37,4 @@ Ten rozdział obejmuje podstawowe algorytmy wyszukiwania, sortowania i obliczani
 
 ## Informacja
 
-Gotowe są lekcja o sortowaniu bąbelkowym i wprowadzenie do sum prefiksowych. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.
+Gotowe są lekcja o sortowaniu bąbelkowym oraz wprowadzenia do sum prefiksowych i dwóch wskaźników. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.
