@@ -4,8 +4,7 @@
 {% assign next_url = nil %}
 {% assign found_current = false %}
 
-{% for section in site.data.navigation.sections %}
-  {% for item in section.lessons %}
+{% for item in navigation_items %}
     {% if found_current and next_url == nil %}
       {% assign next_title = item.title %}
       {% assign next_url = item.url %}
@@ -17,7 +16,6 @@
       {% assign previous_title = item.title %}
       {% assign previous_url = item.url %}
     {% endif %}
-  {% endfor %}
 {% endfor %}
 
 <nav class="lesson-nav" aria-label="Nawigacja lekcji">

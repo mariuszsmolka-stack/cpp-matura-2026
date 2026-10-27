@@ -240,6 +240,12 @@ sections:
         url: "14-algorytmy-podstawowe/README.md"
       - title: "Sortowanie bąbelkowe krok po kroku"
         url: "14-algorytmy-podstawowe/20-sortowanie-babelkowe.md"
+    topics:
+      - title: "Sumy prefiksowe"
+        url: "14-algorytmy-podstawowe/sumy-prefiksowe/README.md"
+        lessons:
+          - title: "Sumy prefiksowe - wprowadzenie"
+            url: "14-algorytmy-podstawowe/sumy-prefiksowe/01-wprowadzenie.md"
 
   - title: "15 - Pliki tekstowe"
     url: "15-pliki-tekstowe/README.md"

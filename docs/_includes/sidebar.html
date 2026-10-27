@@ -2,14 +2,9 @@
   {% for section in site.data.navigation.sections %}
     {% assign section_href = section.url | replace: 'index.md', '' | replace: 'README.md', '' | replace: '.md', '.html' | relative_url %}
     {% assign section_active = false %}
-    {% if page.path == section.url %}
+    {% if current_section.url == section.url %}
       {% assign section_active = true %}
     {% endif %}
-    {% for item in section.lessons %}
-      {% if page.path == item.url %}
-        {% assign section_active = true %}
-      {% endif %}
-    {% endfor %}
 
     <section class="course-sidebar__section{% if section_active %} is-open{% endif %}">
       <h2 class="course-sidebar__title">
@@ -22,6 +17,22 @@
           <li>
             <a class="course-sidebar__link{% if page.path == item.url %} is-active{% endif %}" href="{{ item_href }}">{{ item.title }}</a>
           </li>
+        {% endfor %}
+        {% for topic in section.topics %}
+          {% if topic.lessons.size > 0 %}
+            {% assign topic_href = topic.url | replace: 'index.md', '' | replace: 'README.md', '' | replace: '.md', '.html' | relative_url %}
+            <li>
+              <a class="course-sidebar__link{% if page.path == topic.url %} is-active{% endif %}" href="{{ topic_href }}"><strong>{{ topic.title }}</strong></a>
+              <ul aria-label="Lekcje tematu {{ topic.title | escape }}">
+                {% for item in topic.lessons %}
+                  {% assign item_href = item.url | replace: 'index.md', '' | replace: 'README.md', '' | replace: '.md', '.html' | relative_url %}
+                  <li>
+                    <a class="course-sidebar__link{% if page.path == item.url %} is-active{% endif %}" href="{{ item_href }}">{{ item.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endif %}
         {% endfor %}
       </ul>
     </section>

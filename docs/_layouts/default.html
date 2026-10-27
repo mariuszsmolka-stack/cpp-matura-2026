@@ -1,15 +1,7 @@
+{% include navigation-context.html %}
 {% assign computed_title = page.title %}
 {% if computed_title == nil or computed_title == '' %}
-  {% for section in site.data.navigation.sections %}
-    {% if page.path == section.url %}
-      {% assign computed_title = section.title %}
-    {% endif %}
-    {% for item in section.lessons %}
-      {% if page.path == item.url %}
-        {% assign computed_title = item.title %}
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
+  {% assign computed_title = current_item.title | default: current_section.title %}
 {% endif %}
 
 <!DOCTYPE html>

@@ -1,0 +1,36 @@
+{%- assign navigation_items = '' | split: '' -%}
+{%- assign current_section = nil -%}
+{%- assign current_topic = nil -%}
+{%- assign current_item = nil -%}
+
+{%- for section in site.data.navigation.sections -%}
+  {%- assign navigation_items = navigation_items | concat: section.lessons -%}
+  {%- if page.path == section.url -%}
+    {%- assign current_section = section -%}
+  {%- endif -%}
+  {%- for item in section.lessons -%}
+    {%- if page.path == item.url -%}
+      {%- assign current_section = section -%}
+      {%- assign current_item = item -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- for topic in section.topics -%}
+    {%- if topic.lessons.size > 0 -%}
+      {%- assign topic_entry = section.topics | where: 'url', topic.url -%}
+      {%- assign navigation_items = navigation_items | concat: topic_entry | concat: topic.lessons -%}
+      {%- if page.path == topic.url -%}
+        {%- assign current_section = section -%}
+        {%- assign current_topic = topic -%}
+        {%- assign current_item = topic -%}
+      {%- endif -%}
+      {%- for item in topic.lessons -%}
+        {%- if page.path == item.url -%}
+          {%- assign current_section = section -%}
+          {%- assign current_topic = topic -%}
+          {%- assign current_item = item -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}

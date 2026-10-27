@@ -6,7 +6,7 @@ w trakcie
 
 ## Zakres rozdziału
 
-Ten rozdział będzie zawierał podstawowe algorytmy wyszukiwania i sortowania.
+Ten rozdział obejmuje podstawowe algorytmy wyszukiwania, sortowania i obliczania sum fragmentów tablicy.
 
 ## Cele
 
@@ -16,7 +16,11 @@ Ten rozdział będzie zawierał podstawowe algorytmy wyszukiwania i sortowania.
 
 ## Gotowe lekcje
 
-- [Sortowanie bąbelkowe krok po kroku](20-sortowanie-babelkowe.md) — lekcja, wizualizacja, ćwiczenia i program do pobrania.
+- [Sortowanie bąbelkowe krok po kroku](20-sortowanie-babelkowe.md) - lekcja, wizualizacja, ćwiczenia i program do pobrania.
+
+## Tematy algorytmiczne
+
+- [Sumy prefiksowe]({{ '/14-algorytmy-podstawowe/sumy-prefiksowe/' | relative_url }}) - szybkie obliczanie sum spójnych fragmentów tablicy.
 
 ## Planowane lekcje
 
@@ -32,4 +36,4 @@ Ten rozdział będzie zawierał podstawowe algorytmy wyszukiwania i sortowania.
 
 ## Informacja
 
-Gotowa jest pierwsza lekcja o sortowaniu bąbelkowym. Pozostałe materiały są planowane; rozdział nie jest jeszcze ukończony.
+Gotowe są lekcja o sortowaniu bąbelkowym i wprowadzenie do sum prefiksowych. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.
