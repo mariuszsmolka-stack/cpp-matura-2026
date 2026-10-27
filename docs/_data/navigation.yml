@@ -315,6 +315,15 @@ sections:
         lessons:
           - title: "Algorytmy zachłanne - planowanie zajęć"
             url: "17-techniki-i-struktury-algorytmiczne/algorytmy-zachlanne/01-wprowadzenie.md"
+      - title: "Programowanie dynamiczne"
+        url: "17-techniki-i-struktury-algorytmiczne/programowanie-dynamiczne/README.md"
+        lessons:
+          - title: "Schody i zapamiętywanie wyników"
+            url: "17-techniki-i-struktury-algorytmiczne/programowanie-dynamiczne/01-schody.md"
+          - title: "Najmniejsza liczba monet"
+            url: "17-techniki-i-struktury-algorytmiczne/programowanie-dynamiczne/02-monety.md"
+          - title: "Najlepsza droga przez planszę"
+            url: "17-techniki-i-struktury-algorytmiczne/programowanie-dynamiczne/03-plansza.md"
 
   - title: "18 - Analiza i warsztat maturalny"
     url: "18-warsztat-maturalny/README.md"

@@ -17,11 +17,11 @@ Ten rozdział przedstawi ważne techniki rozwiązywania trudniejszych zadań.
 ## Dostępne podrozdziały
 
 - [Algorytmy zachłanne]({{ '/17-techniki-i-struktury-algorytmiczne/algorytmy-zachlanne/' | relative_url }}) - planowanie zajęć i wybór niekolidujących przedziałów.
+- [Programowanie dynamiczne]({{ '/17-techniki-i-struktury-algorytmiczne/programowanie-dynamiczne/' | relative_url }}) - schody, najmniejsza liczba monet i najlepsza droga przez planszę.
 
 ## Planowane lekcje
 
 - dziel i zwyciężaj
-- podstawy programowania dynamicznego
 - stos
 - kolejka
 - lista
@@ -31,4 +31,4 @@ Ten rozdział przedstawi ważne techniki rozwiązywania trudniejszych zadań.
 
 ## Informacja
 
-Gotowa jest lekcja o algorytmach zachłannych. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.
+Gotowe są lekcja o algorytmach zachłannych i trzy lekcje o programowaniu dynamicznym. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.
