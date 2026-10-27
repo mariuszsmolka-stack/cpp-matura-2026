@@ -5,8 +5,6 @@ title: Dwa wskaźniki - wprowadzenie
 
 # Dwa wskaźniki (Two Pointers) - lekcja krok po kroku
 
-**Zajęcia ZG**
-
 **Język:** C++
 
 **Poziom:** po poznaniu tablic, pętli i sum prefiksowych
@@ -289,7 +287,7 @@ Najpierw nazwij to, co wskazują oba indeksy. Potem ustal, czego dowiadujesz si�
 
 ### Zadanie: dwa pakiety zajęć
 
-Na zajęcia ZG przygotowano pakiety ćwiczeń. Ich ceny podano niemalejąco: `10, 20, 35, 50, 65, 80` zł. Wybierz dokładnie dwa różne pakiety za łącznie `85` zł. Wystarczy jedna para. Jeśli jej nie ma, zgłoś brak rozwiązania.
+Przygotowano pakiety ćwiczeń. Ich ceny podano niemalejąco: `10, 20, 35, 50, 65, 80` zł. Wybierz dokładnie dwa różne pakiety za łącznie `85` zł. Wystarczy jedna para. Jeśli jej nie ma, zgłoś brak rozwiązania.
 
 Zanim zaczniesz programować, ustal, czy trzeba sprawdzać każdą parę. Potrafisz uzasadnić ruch obu indeksów?
 
