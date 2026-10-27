@@ -335,6 +335,17 @@ sections:
             url: "17-techniki-i-struktury-algorytmiczne/meet-in-the-middle/03-zastosowania.md"
           - title: "Rozpoznawanie techniki"
             url: "17-techniki-i-struktury-algorytmiczne/meet-in-the-middle/04-rozpoznawanie.md"
+      - title: "Problem plecakowy 0/1"
+        url: "17-techniki-i-struktury-algorytmiczne/problem-plecakowy/README.md"
+        lessons:
+          - title: "Co zabrać do plecaka?"
+            url: "17-techniki-i-struktury-algorytmiczne/problem-plecakowy/01-intuicja.md"
+          - title: "Dlaczego zachłanność zawodzi?"
+            url: "17-techniki-i-struktury-algorytmiczne/problem-plecakowy/02-zachlannosc.md"
+          - title: "Tablica DP - od pomysłu do C++"
+            url: "17-techniki-i-struktury-algorytmiczne/problem-plecakowy/03-tablica-dp.md"
+          - title: "Jak rozpoznać problem plecakowy?"
+            url: "17-techniki-i-struktury-algorytmiczne/problem-plecakowy/04-rozpoznawanie.md"
 
   - title: "18 - Analiza i warsztat maturalny"
     url: "18-warsztat-maturalny/README.md"
