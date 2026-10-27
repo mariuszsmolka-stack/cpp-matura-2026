@@ -2,7 +2,7 @@
 
 ## Status
 
-planowany
+w trakcie opracowania
 
 ## Zakres rozdziału
 
@@ -14,10 +14,13 @@ Ten rozdział przedstawi ważne techniki rozwiązywania trudniejszych zadań.
 - Przygotować się do późniejszych lekcji praktycznych.
 - Wiedzieć, jakie tematy będą rozwijane w kolejnych materiałach.
 
+## Dostępne podrozdziały
+
+- [Algorytmy zachłanne]({{ '/17-techniki-i-struktury-algorytmiczne/algorytmy-zachlanne/' | relative_url }}) - planowanie zajęć i wybór niekolidujących przedziałów.
+
 ## Planowane lekcje
 
 - dziel i zwyciężaj
-- algorytmy zachłanne
 - podstawy programowania dynamicznego
 - stos
 - kolejka
@@ -28,4 +31,4 @@ Ten rozdział przedstawi ważne techniki rozwiązywania trudniejszych zadań.
 
 ## Informacja
 
-Pełne materiały zostaną dodane później. Na tym etapie rozdział zawiera plan i zakres pracy.
+Gotowa jest lekcja o algorytmach zachłannych. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.
