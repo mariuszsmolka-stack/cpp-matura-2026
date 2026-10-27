@@ -24,6 +24,7 @@ Ten rozdział obejmuje podstawowe algorytmy wyszukiwania, sortowania i obliczani
 - [Dwa wskaźniki]({{ '/14-algorytmy-podstawowe/dwa-wskazniki/' | relative_url }}) - szukanie pary o zadanej sumie i sprawdzanie palindromów.
 - [Przesuwające się okno]({{ '/14-algorytmy-podstawowe/przesuwajace-sie-okno/' | relative_url }}) - szybkie obliczenia na kolejnych, sąsiadujących elementach tablicy.
 - [Wyszukiwanie binarne]({{ '/14-algorytmy-podstawowe/wyszukiwanie-binarne/' | relative_url }}) - wyszukiwanie w uporządkowanej tablicy i szukanie najmniejszej wartości spełniającej warunek.
+- [Algorytm Kadane]({{ '/14-algorytmy-podstawowe/kadane/' | relative_url }}) - największa suma niepustego spójnego fragmentu tablicy.
 
 ## Planowane lekcje
 
@@ -38,4 +39,4 @@ Ten rozdział obejmuje podstawowe algorytmy wyszukiwania, sortowania i obliczani
 
 ## Informacja
 
-Gotowe są lekcja o sortowaniu bąbelkowym oraz wprowadzenia do sum prefiksowych, dwóch wskaźników, przesuwającego się okna i wyszukiwania binarnego. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.
+Gotowe są lekcja o sortowaniu bąbelkowym oraz wprowadzenia do sum prefiksowych, dwóch wskaźników, przesuwającego się okna, wyszukiwania binarnego i algorytmu Kadane. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.

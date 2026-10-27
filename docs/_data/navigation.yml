@@ -261,6 +261,11 @@ sections:
         lessons:
           - title: "Wyszukiwanie binarne - wprowadzenie"
             url: "14-algorytmy-podstawowe/wyszukiwanie-binarne/01-wprowadzenie.md"
+      - title: "Algorytm Kadane"
+        url: "14-algorytmy-podstawowe/kadane/README.md"
+        lessons:
+          - title: "Algorytm Kadane - wprowadzenie"
+            url: "14-algorytmy-podstawowe/kadane/01-wprowadzenie.md"
 
   - title: "15 - Pliki tekstowe"
     url: "15-pliki-tekstowe/README.md"
