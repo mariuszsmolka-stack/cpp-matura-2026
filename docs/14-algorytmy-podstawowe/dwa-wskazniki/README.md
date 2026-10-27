@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Dwa wskaźniki
+permalink: /14-algorytmy-podstawowe/dwa-wskazniki/
 ---
 
 # Dwa wskaźniki
