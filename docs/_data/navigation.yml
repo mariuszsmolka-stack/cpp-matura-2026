@@ -324,6 +324,17 @@ sections:
             url: "17-techniki-i-struktury-algorytmiczne/programowanie-dynamiczne/02-monety.md"
           - title: "Najlepsza droga przez planszę"
             url: "17-techniki-i-struktury-algorytmiczne/programowanie-dynamiczne/03-plansza.md"
+      - title: "Meet in the Middle"
+        url: "17-techniki-i-struktury-algorytmiczne/meet-in-the-middle/README.md"
+        lessons:
+          - title: "Podzbiory i ich sumy"
+            url: "17-techniki-i-struktury-algorytmiczne/meet-in-the-middle/01-podzbiory.md"
+          - title: "Dokładna suma"
+            url: "17-techniki-i-struktury-algorytmiczne/meet-in-the-middle/02-dokladna-suma.md"
+          - title: "Limit i liczba sposobów"
+            url: "17-techniki-i-struktury-algorytmiczne/meet-in-the-middle/03-zastosowania.md"
+          - title: "Rozpoznawanie techniki"
+            url: "17-techniki-i-struktury-algorytmiczne/meet-in-the-middle/04-rozpoznawanie.md"
 
   - title: "18 - Analiza i warsztat maturalny"
     url: "18-warsztat-maturalny/README.md"

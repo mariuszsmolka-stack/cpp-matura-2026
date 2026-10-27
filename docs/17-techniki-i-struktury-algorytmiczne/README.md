@@ -18,6 +18,7 @@ Ten rozdział przedstawi ważne techniki rozwiązywania trudniejszych zadań.
 
 - [Algorytmy zachłanne]({{ '/17-techniki-i-struktury-algorytmiczne/algorytmy-zachlanne/' | relative_url }}) - planowanie zajęć i wybór niekolidujących przedziałów.
 - [Programowanie dynamiczne]({{ '/17-techniki-i-struktury-algorytmiczne/programowanie-dynamiczne/' | relative_url }}) - schody, najmniejsza liczba monet i najlepsza droga przez planszę.
+- [Meet in the Middle]({{ '/17-techniki-i-struktury-algorytmiczne/meet-in-the-middle/' | relative_url }}) - sumy podzbiorów, dokładny cel, limit i rozpoznawanie techniki.
 
 ## Planowane lekcje
 
@@ -31,4 +32,4 @@ Ten rozdział przedstawi ważne techniki rozwiązywania trudniejszych zadań.
 
 ## Informacja
 
-Gotowe są lekcja o algorytmach zachłannych i trzy lekcje o programowaniu dynamicznym. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.
+Gotowe są lekcja o algorytmach zachłannych, trzy lekcje o programowaniu dynamicznym i cztery lekcje o technice Meet in the Middle. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.
