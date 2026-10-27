@@ -251,6 +251,11 @@ sections:
         lessons:
           - title: "Dwa wskaźniki - wprowadzenie"
             url: "14-algorytmy-podstawowe/dwa-wskazniki/01-wprowadzenie.md"
+      - title: "Przesuwające się okno"
+        url: "14-algorytmy-podstawowe/przesuwajace-sie-okno/README.md"
+        lessons:
+          - title: "Przesuwające się okno - wprowadzenie"
+            url: "14-algorytmy-podstawowe/przesuwajace-sie-okno/01-wprowadzenie.md"
 
   - title: "15 - Pliki tekstowe"
     url: "15-pliki-tekstowe/README.md"
