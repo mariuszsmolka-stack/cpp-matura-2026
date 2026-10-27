@@ -266,6 +266,11 @@ sections:
         lessons:
           - title: "Algorytm Kadane - wprowadzenie"
             url: "14-algorytmy-podstawowe/kadane/01-wprowadzenie.md"
+      - title: "Sito Eratostenesa"
+        url: "14-algorytmy-podstawowe/sito-eratostenesa/README.md"
+        lessons:
+          - title: "Sito Eratostenesa - wprowadzenie"
+            url: "14-algorytmy-podstawowe/sito-eratostenesa/01-wprowadzenie.md"
 
   - title: "15 - Pliki tekstowe"
     url: "15-pliki-tekstowe/README.md"
