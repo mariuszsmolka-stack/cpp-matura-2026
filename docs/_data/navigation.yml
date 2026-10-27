@@ -256,6 +256,11 @@ sections:
         lessons:
           - title: "Przesuwające się okno - wprowadzenie"
             url: "14-algorytmy-podstawowe/przesuwajace-sie-okno/01-wprowadzenie.md"
+      - title: "Wyszukiwanie binarne"
+        url: "14-algorytmy-podstawowe/wyszukiwanie-binarne/README.md"
+        lessons:
+          - title: "Wyszukiwanie binarne - wprowadzenie"
+            url: "14-algorytmy-podstawowe/wyszukiwanie-binarne/01-wprowadzenie.md"
 
   - title: "15 - Pliki tekstowe"
     url: "15-pliki-tekstowe/README.md"
