@@ -1,43 +1,68 @@
 ---
 layout: default
-title: Zadanie 01 - Odczyty z czujnika
+title: Zadanie 01 - Licznik rowerów
 ---
 
-# Zadanie 01 - Odczyty z czujnika
+# Zadanie 01 - Licznik rowerów
 
 ## Treść zadania
 
-Czujnik mierzył liczbę przejazdów rowerów w kolejnych dniach. Wyniki zapisano w tablicy.
+Przy ścieżce rowerowej zamontowano licznik, który każdego dnia rejestruje liczbę przejeżdżających rowerów.
 
-Otrzymasz kilka zapytań. Każde zapytanie wskazuje pierwszy i ostatni dzień pewnego okresu. Dla każdego zapytania oblicz łączną liczbę przejazdów w tym okresie.
+Wyniki pomiarów z siedmiu dni przedstawiono w tabeli:
 
-Uwzględnij **oba dni** podane w zapytaniu.
+| Dzień | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Liczba przejazdów | 3 | 1 | 4 | 1 | 5 | 9 | 2 |
 
-Dni są numerowane od **1**.
+Pracownik analizujący ruch rowerowy chce sprawdzić, ile łącznie przejazdów zarejestrowano w wybranych okresach.
+
+Może na przykład zapytać:
+
+1. Ile przejazdów zarejestrowano od dnia 2 do dnia 5?
+2. Ile przejazdów zarejestrowano przez wszystkie siedem dni?
+3. Ile przejazdów zarejestrowano tylko w dniu 4?
+
+Napisz program, który odpowiada na takie pytania.
+
+Program otrzymuje liczbę dni, liczbę przejazdów z każdego dnia oraz kolejne pytania.
+
+Każde pytanie określa pierwszy i ostatni dzień interesującego nas okresu.
+
+**Dla każdego pytania oblicz łączną liczbę przejazdów w podanym okresie.**
+
+W obliczeniach uwzględnij zarówno pierwszy, jak i ostatni dzień okresu.
+
+Dni numerowane są od 1.
 
 ## Dane wejściowe
 
-W pierwszym wierszu znajdują się dwie liczby całkowite `n` i `q`:
+W pierwszym wierszu znajdują się dwie liczby całkowite:
 
-- `n` - liczba dni,
-- `q` - liczba zapytań.
+- `n` - liczba dni, dla których zapisano wyniki;
+- `q` - liczba pytań.
 
-W drugim wierszu znajduje się `n` liczb całkowitych. Każda z nich oznacza liczbę przejazdów w kolejnym dniu.
+W drugim wierszu znajduje się `n` liczb całkowitych oznaczających liczbę przejazdów w kolejnych dniach.
 
-W następnych `q` wierszach znajdują się po dwie liczby `l` i `r`. Oznaczają one pierwszy i ostatni dzień okresu, dla którego należy obliczyć sumę.
+W następnych `q` wierszach znajdują się po dwie liczby całkowite:
+
+- `l` - pierwszy dzień okresu;
+- `r` - ostatni dzień okresu.
 
 ## Ograniczenia
 
-- `1 <= n <= 1000`,
-- `1 <= q <= 1000`,
-- `0 <= liczba przejazdów w dniu <= 1000`,
-- `1 <= l <= r <= n`.
+- `1 <= n <= 1000`
+- `1 <= q <= 1000`
+- `0 <= liczba przejazdów <= 1000`
+- `1 <= l <= r <= n`
 
 ## Dane wyjściowe
 
-Wypisz `q` wierszy. W każdym wierszu podaj jedną liczbę całkowitą - sumę przejazdów dla odpowiedniego zapytania, w takiej samej kolejności jak na wejściu.
+Dla każdego pytania wypisz w osobnym wierszu jedną liczbę całkowitą - łączną liczbę przejazdów w podanym okresie.
 
-## Przykładowe dane wejściowe
+Odpowiedzi wypisz w kolejności otrzymanych pytań.
+
+## Przykładowe wejście
 
 ```text
 7 3
@@ -47,7 +72,7 @@ Wypisz `q` wierszy. W każdym wierszu podaj jedną liczbę całkowitą - sumę p
 4 4
 ```
 
-## Prawidłowe dane wyjściowe
+## Przykładowe wyjście
 
 ```text
 11
@@ -57,15 +82,25 @@ Wypisz `q` wierszy. W każdym wierszu podaj jedną liczbę całkowitą - sumę p
 
 ## Wyjaśnienie przykładu
 
-W pierwszym zapytaniu bierzemy pod uwagę dni od 2 do 5, czyli wartości `1, 4, 1, 5`.
+Pierwszy wiersz `7 3` oznacza, że otrzymaliśmy wyniki z 7 dni oraz 3 pytania.
 
-Ich suma wynosi `11`.
+Drugi wiersz zawiera liczbę przejazdów w kolejnych dniach.
 
-Drugie zapytanie dotyczy wszystkich siedmiu dni, a trzecie tylko dnia czwartego.
+Pozostałe wiersze określają okresy, dla których należy obliczyć sumy.
 
-## Samodzielna implementacja w C++
+| Pytanie | Okres | Obliczenie | Wynik |
+| --- | --- | --- | ---: |
+| 1 | Dni od 2 do 5 | 1 + 4 + 1 + 5 | 11 |
+| 2 | Dni od 1 do 7 | 3 + 1 + 4 + 1 + 5 + 9 + 2 | 25 |
+| 3 | Tylko dzień 4 | 1 | 1 |
 
-Napisz program w C++, który wczyta dane i wypisze odpowiedzi na wszystkie zapytania.
+Program wypisuje trzy wyniki, każdy w osobnym wierszu.
+
+## Do wykonania
+
+Napisz program w C++, który wczyta dane i obliczy odpowiedzi na wszystkie pytania.
+
+Program musi działać dla dowolnych poprawnych danych spełniających podane ograniczenia.
 
 <details markdown="1">
 <summary>Omówienie problemu</summary>
