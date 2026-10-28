@@ -352,3 +352,9 @@ sections:
     lessons:
       - title: "Wprowadzenie"
         url: "18-warsztat-maturalny/README.md"
+    topics:
+      - title: "Zadania przekrojowe - rozpoznawanie algorytmów"
+        url: "18-warsztat-maturalny/zadania-przekrojowe/README.md"
+        lessons:
+          - title: "Zadanie 01 - Odczyty z czujnika"
+            url: "18-warsztat-maturalny/zadania-przekrojowe/01-odczyty-z-czujnika.md"

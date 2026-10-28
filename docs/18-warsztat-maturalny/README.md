@@ -2,7 +2,7 @@
 
 ## Status
 
-planowany
+w trakcie opracowania
 
 ## Zakres rozdziału
 
@@ -13,6 +13,10 @@ Ten rozdział będzie porządkował pracę nad zadaniami maturalnymi.
 - Zrozumieć najważniejsze pojęcia z tego rozdziału.
 - Przygotować się do późniejszych lekcji praktycznych.
 - Wiedzieć, jakie tematy będą rozwijane w kolejnych materiałach.
+
+## Dostępne podrozdziały
+
+- [Zadania przekrojowe - rozpoznawanie algorytmów]({{ '/18-warsztat-maturalny/zadania-przekrojowe/' | relative_url }}) - samodzielna analiza treści i rozwiązywanie zadań w C++.
 
 ## Planowane lekcje
 
@@ -31,4 +35,4 @@ Ten rozdział będzie porządkował pracę nad zadaniami maturalnymi.
 
 ## Informacja
 
-Pełne materiały zostaną dodane później. Na tym etapie rozdział zawiera plan i zakres pracy.
+Dostępne jest pierwsze zadanie przekrojowe. Zbiór będzie rozwijany o kolejne zadania. Pozostałe materiały są planowane. Rozdział nie jest jeszcze ukończony.
