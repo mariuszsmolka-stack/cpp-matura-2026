@@ -7,33 +7,19 @@ title: Zadanie 01 - Licznik rowerów
 
 ## Treść zadania
 
-Przy ścieżce rowerowej zamontowano licznik, który każdego dnia rejestruje liczbę przejeżdżających rowerów.
+Przy ścieżce rowerowej działa licznik rowerów. Każdego dnia zapisuje liczbę przejazdów.
 
-Wyniki pomiarów z siedmiu dni przedstawiono w tabeli:
+Tabela przedstawia przykładowe wyniki z siedmiu dni.
 
 | Dzień | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Liczba przejazdów | 3 | 1 | 4 | 1 | 5 | 9 | 2 |
 
-Pracownik analizujący ruch rowerowy chce sprawdzić, ile łącznie przejazdów zarejestrowano w wybranych okresach.
+## Polecenie
 
-Może na przykład zapytać:
+**Napisz program w C++, który dla każdego podanego przedziału dni obliczy łączną liczbę przejazdów rowerowych.**
 
-1. Ile przejazdów zarejestrowano od dnia 2 do dnia 5?
-2. Ile przejazdów zarejestrowano przez wszystkie siedem dni?
-3. Ile przejazdów zarejestrowano tylko w dniu 4?
-
-Napisz program, który odpowiada na takie pytania.
-
-Program otrzymuje liczbę dni, liczbę przejazdów z każdego dnia oraz kolejne pytania.
-
-Każde pytanie określa pierwszy i ostatni dzień interesującego nas okresu.
-
-**Dla każdego pytania oblicz łączną liczbę przejazdów w podanym okresie.**
-
-W obliczeniach uwzględnij zarówno pierwszy, jak i ostatni dzień okresu.
-
-Dni numerowane są od 1.
+Przedział obejmuje oba wskazane dni. Dni numerowane są od 1.
 
 ## Dane wejściowe
 
@@ -51,8 +37,8 @@ W następnych `q` wierszach znajdują się po dwie liczby całkowite:
 
 ## Ograniczenia
 
-- `1 <= n <= 1000`
-- `1 <= q <= 1000`
+- `1 <= n <= 100000`
+- `1 <= q <= 100000`
 - `0 <= liczba przejazdów <= 1000`
 - `1 <= l <= r <= n`
 
@@ -96,12 +82,6 @@ Pozostałe wiersze określają okresy, dla których należy obliczyć sumy.
 
 Program wypisuje trzy wyniki, każdy w osobnym wierszu.
 
-## Do wykonania
-
-Napisz program w C++, który wczyta dane i obliczy odpowiedzi na wszystkie pytania.
-
-Program musi działać dla dowolnych poprawnych danych spełniających podane ograniczenia.
-
 <details markdown="1">
 <summary>Omówienie problemu</summary>
 
@@ -144,6 +124,8 @@ Dla drugiego zapytania obliczamy `pref[7] - pref[0] = 25 - 0 = 25`. Dla trzecieg
 - Zwykła pętla sumująca każdy wskazany fragment: w najgorszym przypadku `O(n * q)`.
 - Przygotowanie prefiksów: `O(n)`, a odpowiedź na jedno zapytanie: `O(1)`. Łącznie `O(n + q)`.
 
+Dla `n = 100000` i `q = 100000` zwykłe sumowanie może wymagać `10000000000` dodawań. Tak będzie, jeśli każde pytanie obejmuje wszystkie dni. Przygotowanie tablicy wymaga wtedy 100000 dodawań, a odpowiedzi na wszystkie pytania - 100000 odejmowań. Ponowne sumowanie każdego okresu może więc być zbyt wolne.
+
 Dodatkowa tablica prefiksów zajmuje `O(n)` pamięci.
 
 ### Kiedy tego użyć?
@@ -152,13 +134,13 @@ Gdy zapytań o sumy przedziałów jest wiele, wartości tablicy się nie zmienia
 
 ### Kiedy wybrać coś innego?
 
-Przy pojedynczym zapytaniu zwykłe sumowanie też może wystarczyć. W granicach tego zadania metoda z pętlą może wykonać do miliona dodawań, więc nie jest wykluczona przez same ograniczenia. Wcześniejsze przygotowanie pozwala jednak nie powtarzać sumowania tych samych dni przy kolejnych pytaniach. Jeżeli odczyty zmieniałyby się między zapytaniami, przygotowana tablica wymagałaby aktualizacji. W tym zadaniu takich zmian nie ma.
+Przy pojedynczym zapytaniu zwykłe sumowanie też może wystarczyć. Wcześniejsze przygotowanie pozwala jednak nie powtarzać sumowania tych samych dni przy kolejnych pytaniach. Jeżeli odczyty zmieniałyby się między zapytaniami, przygotowana tablica wymagałaby aktualizacji. W tym zadaniu takich zmian nie ma.
 
 ### Typowe błędy
 
 - Odjęcie `pref[l]` zamiast `pref[l - 1]` => pominięcie pierwszego dnia okresu.
 - Pominięcie `pref[0] = 0` => błędny odczyt przy zapytaniu zaczynającym się od dnia 1.
-- Tablica z 1000 elementów zamiast 1001 => brak miejsca na indeks 1000.
+- Tablica ze 100000 elementów zamiast 100001 => brak miejsca na indeks 100000.
 - Zmiana kolejności odpowiedzi => niezgodność z kolejnością zapytań.
 
 </details>
@@ -174,7 +156,7 @@ int main() {
     int n, q;
     cin >> n >> q;
 
-    int pref[1001];
+    int pref[100001];
     pref[0] = 0;
 
     for (int i = 1; i <= n; i++) {
@@ -193,9 +175,9 @@ int main() {
 }
 ```
 
-Tablica `pref` ma 1001 elementów, ponieważ dopuszczamy maksymalnie 1000 dni oraz dodatkowy element `pref[0]`.
+Tablica `pref` ma 100001 elementów, ponieważ dopuszczamy maksymalnie 100000 dni oraz dodatkowy element `pref[0]`. Poprawne indeksy to `0..100000`.
 
-Dla przyjętych ograniczeń największa suma wynosi `1000 * 1000 = 1000000`. W rozwiązaniu zakładamy `int` o zakresie co najmniej do `2147483647`, jak w typowym środowisku z 32-bitowym `int`. Wynik i każda suma pośrednia mieszczą się wtedy w tym typie. Mniejszy, 16-bitowy `int` dopuszczany przez standard C++ nie wystarczyłby dla maksymalnych danych.
+Dla przyjętych ograniczeń największa suma wynosi `100000 * 1000 = 100000000`. W rozwiązaniu zakładamy `int` o zakresie co najmniej do `2147483647`, jak w typowym środowisku z 32-bitowym `int`. Wynik i każda suma pośrednia mieszczą się wtedy w tym typie. Mniejszy, 16-bitowy `int` dopuszczany przez standard C++ nie wystarczyłby dla maksymalnych danych.
 
 Pętla wczytująca zapisuje pozycje `1..n`, a pozycja 0 jest ustawiona wcześniej. Warunki `1 <= l <= r <= n` zapewniają poprawność indeksów `r` i `l - 1`. Program zakłada poprawne dane zgodne z treścią zadania.
 
