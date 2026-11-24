@@ -46,6 +46,10 @@ flowchart TD
 
 - [Pojemność i iteratory - materiał nieobowiązkowy](08-pojemnosc-i-iteratory-material-nieobowiazkowy.md)
 
+## Dodatkowe zadania praktyczne
+
+[Zbiór zadań z vector]({{ '/12-vector/zadania/' | relative_url }}) zawiera 15 zadań w trzech zestawach. Znajdziesz tam ukryte wskazówki, pełne rozwiązania i pliki danych do pobrania.
+
 ## Po rozdziale
 
 Po tym rozdziale potrafisz:

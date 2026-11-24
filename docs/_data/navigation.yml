@@ -212,6 +212,16 @@ sections:
         url: "12-vector/07-vector-dwuwymiarowy.md"
       - title: "Pojemność i iteratory - materiał nieobowiązkowy"
         url: "12-vector/08-pojemnosc-i-iteratory-material-nieobowiazkowy.md"
+    topics:
+      - title: "Zbiór zadań z vector"
+        url: "12-vector/zadania/README.md"
+        lessons:
+          - title: "Podstawy i indeksy - zadania 1-5"
+            url: "12-vector/zadania/01-podstawy-i-indeksy.md"
+          - title: "Przetwarzanie i zmiana danych - zadania 6-10"
+            url: "12-vector/zadania/02-przetwarzanie-i-zmiana-danych.md"
+          - title: "Zadania z plikami danych - zadania 11-15"
+            url: "12-vector/zadania/03-zadania-z-plikami-danych.md"
 
   - title: "13 - Zbiory i kontenery asocjacyjne"
     url: "13-zbiory-i-kontenery/README.md"

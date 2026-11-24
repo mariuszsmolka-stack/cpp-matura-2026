@@ -41,6 +41,7 @@ title: Status kursu
 - Rozdział 12 - vector: gotowy
 - Rozdział 12 - lekcje obowiązkowe: 7
 - Rozdział 12 - lekcje nieobowiązkowe: 1
+- Rozdział 12 - dodatkowy zbiór ćwiczeń: 3 zestawy, łącznie 15 zadań praktycznych z plikami danych
 - Rozdział 13 - Zbiory i kontenery asocjacyjne: gotowy
 - Rozdział 13 - lekcje obowiązkowe: 5
 - Rozdział 13 - lekcje nieobowiązkowe: 2
@@ -72,6 +73,7 @@ title: Status kursu
 - OK - rozdział `10-tablice` zawiera wprowadzenie, 8 pełnych lekcji podstawowych i 1 materiał nieobowiązkowy o tablicach dynamicznych.
 - OK - rozdział `11-dane-zlozone` zawiera wprowadzenie, 4 pełne lekcje podstawowe i 1 materiał nieobowiązkowy o tuple i rozpakowywaniu.
 - OK - rozdział `12-vector` zawiera wprowadzenie, 7 lekcji obowiązkowych i 1 materiał nieobowiązkowy o pojemności i iteratorach.
+- OK - [zbiór zadań z vector]({{ '/12-vector/zadania/' | relative_url }}) obejmuje 3 zestawy i 15 zadań. Jest osobnym zbiorem ćwiczeń, niewliczanym do liczby lekcji.
 - OK - rozdział `13-zbiory-i-kontenery` zawiera wprowadzenie, 5 lekcji obowiązkowych i 2 materiały nieobowiązkowe.
 - OK - ikona MS `docs/favicon.ico` jest podłączona we wspólnym szablonie z użyciem `relative_url`. Jest taka sama jak w pozostałych kursach.
 - OK - rozdział `16-rekurencja-i-algorytmy-maturalne` zawiera wprowadzenie, 9 lekcji obowiązkowych i 1 materiał nieobowiązkowy.
